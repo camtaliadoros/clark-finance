@@ -7,3 +7,60 @@
     text-wrap: balance;
   }
 }
+
+@font-face {
+  font-family: 'Source Sans Italic';
+  src: url('/fonts/SourceSans3-Italic-VariableFont_wght.ttf') format('truetype');
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Source Sans';
+  src: url('/fonts/SourceSans3-VariableFont_wght.ttf') format('truetype');
+  font-style: normal;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+a {
+  font-family: 'Source Sans';
+}
+
+a {
+  text-decoration: none;
+  position: relative;
+  color: black; /* Add your desired text color */
+}
+
+a::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  width: 100%;
+  height: 1.5px;
+  background-color: #232426;
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.2s;
+}
+
+a:hover::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+p {
+  font-size: 12px;
+}
+
+@media screen and (min-width: 768px) {
+  p {
+    font-size: 16px;
+  }
+}
