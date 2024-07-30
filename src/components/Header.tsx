@@ -17,22 +17,26 @@ export const Header = () => {
       <div className='flex space-x-8'>
         <div className='flex space-x-4'>
           <p className='font-bold text-mediumblue'>Get in touch</p>
-          <div className='flex items-center space-x-1'>
+          <a
+            className='flex items-center space-x-1'
+            href='mailto:info@clark.finance'
+          >
             <FontAwesomeIcon
               icon={faEnvelope}
               size={'sm'}
               className='text-base h-4'
             />
-            <a href='mailto:info@clark.finance'>info@clark.finance</a>
-          </div>
-          <div className='flex items-center space-x-1'>
+            <p>info@clark.finance</p>
+          </a>
+
+          <a href='tel:+442045182215' className='flex items-center space-x-1'>
             <FontAwesomeIcon
               icon={faPhone}
               size={'sm'}
               className='text-base h-4'
             />
-            <a href='tel:+442045182215'>02045 182 215</a>
-          </div>
+            <p>02045 182 215</p>
+          </a>
         </div>
         <div>
           <Menu />

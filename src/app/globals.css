@@ -37,22 +37,24 @@ a {
   color: black; /* Add your desired text color */
 }
 
-a::after {
-  content: '';
-  position: absolute;
-  left: 0;
-  bottom: -2px;
-  width: 100%;
-  height: 1.5px;
-  background-color: #232426;
-  transform: scaleX(0);
-  transform-origin: right;
-  transition: transform 0.2s;
-}
+@media screen and (min-width: 1024px) {
+  a::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -2px;
+    width: 100%;
+    height: 1.5px;
+    background-color: #232426;
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.2s;
+  }
 
-a:hover::after {
-  transform: scaleX(1);
-  transform-origin: left;
+  a:hover::after {
+    transform: scaleX(1);
+    transform-origin: left;
+  }
 }
 
 p {
