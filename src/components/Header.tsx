@@ -15,8 +15,8 @@ export const Header = () => {
         className='h-8 max-w-fit md:h-10 '
       />
       <div className='flex space-x-8'>
-        <div className='flex space-x-4'>
-          <p className='font-bold text-mediumblue'>Get in touch</p>
+        <div className='flex space-x-4 items-center'>
+          <p className='font-bold text-mediumblue mb-0'>Get in touch</p>
           <a
             className='flex items-center space-x-1'
             href='mailto:info@clark.finance'
@@ -26,7 +26,7 @@ export const Header = () => {
               size={'sm'}
               className='text-base h-4'
             />
-            <p>info@clark.finance</p>
+            <p className='hidden md:block'>info@clark.finance</p>
           </a>
 
           <a href='tel:+442045182215' className='flex items-center space-x-1'>
@@ -35,7 +35,7 @@ export const Header = () => {
               size={'sm'}
               className='text-base h-4'
             />
-            <p>02045 182 215</p>
+            <p className='hidden md:block'>02045 182 215</p>
           </a>
         </div>
         <div>
