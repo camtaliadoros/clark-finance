@@ -102,6 +102,10 @@ p {
   transition: 0.25s ease-in-out;
 }
 
+.nav-icon.open span {
+  background: #f8f9fa;
+}
+
 .nav-icon span:nth-child(1) {
   top: 0px;
 }
