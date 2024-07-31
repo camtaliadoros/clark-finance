@@ -17,8 +17,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang='en'>
-      <body className={`${inter.className} w-screen overflow-x-hidden`}>
+    <html lang='en' className='overflow-hidden'>
+      <body
+        className={`${inter.className} w-screen relative overflow-x-hidden`}
+      >
         <Header />
         <main className='bg-chalk'>{children}</main>
         <Footer />
