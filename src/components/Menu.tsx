@@ -11,7 +11,7 @@ export const Menu = () => {
     <>
       <MenuDrawer isOpen={open} />
       <button
-        className={`nav-icon relative ${open ? 'open' : null}`}
+        className={`nav-icon relative ${open ? 'open' : null} z-10`}
         onClick={() => setIsOpen((prevState) => !prevState)}
       >
         <span></span>
