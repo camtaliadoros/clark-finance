@@ -29,12 +29,44 @@ h6,
 p,
 a {
   font-family: 'Source Sans';
+  line-height: 1.2em;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: bold;
+}
+
+h5 {
+  font-size: 16px;
+  margin-bottom: 0.75rem;
+}
+
+p,
+a {
+  font-size: 14px;
+  margin: 0.25rem 0;
+}
+
+@media screen and (min-width: 768px) {
+  h5 {
+    font-size: 18px;
+  }
+
+  p,
+  a {
+    font-size: 16px;
+  }
 }
 
 a {
   text-decoration: none;
   position: relative;
-  color: black; /* Add your desired text color */
+  color: #232426;
 }
 
 @media screen and (min-width: 1024px) {
@@ -51,19 +83,13 @@ a {
     transition: transform 0.2s;
   }
 
+  a.text-chalk::after {
+    background-color: #f8f9fa;
+  }
+
   a:hover::after {
     transform: scaleX(1);
     transform-origin: left;
-  }
-}
-
-p {
-  font-size: 14px;
-}
-
-@media screen and (min-width: 768px) {
-  p {
-    font-size: 16px;
   }
 }
 

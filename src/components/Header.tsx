@@ -7,7 +7,7 @@ export const Header = () => {
   return (
     <div className='flex justify-between items-center  h-16 md:h-24 bg-chalk px-4 md:px-10 '>
       <Image
-        src='/clark-finance-logo.png'
+        src='/images/clark-finance-logo.png'
         height={42}
         width={132}
         alt='Clark Finance Logo'
