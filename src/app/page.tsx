@@ -1,17 +1,16 @@
-'use client';
-
-import { useEffect } from 'react';
-
-export default function Home() {
-  useEffect(() => {
-    const getData = async () => {
-      const response = await fetch('/api');
-      const data = await response.json();
-      console.log(data);
-    };
-
-    getData();
+async function fetchContent() {
+  const res = await fetch(`${process.env.HOST_URL}/api`, {
+    next: { revalidate: 10 },
   });
+  if (!res.ok) {
+    throw new Error('Failed to fetch data');
+  }
+  return res.json();
+}
 
+export default async function Home() {
+  const data = await fetchContent();
+
+  console.log(data);
   return <p>Home</p>;
 }

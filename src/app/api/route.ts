@@ -1,6 +1,6 @@
 export async function GET() {
   const response = await fetch(
-    `http://clark-finance.local/wp-json/wp/v2/pages?slug=home&_fields=acf`
+    `${process.env.WP_ROUTE}/pages?slug=home&_fields=acf`
   );
   const data = await response.json();
 
