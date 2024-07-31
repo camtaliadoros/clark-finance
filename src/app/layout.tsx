@@ -20,7 +20,7 @@ export default function RootLayout({
     <html lang='en'>
       <body className={`${inter.className} w-screen overflow-x-hidden`}>
         <Header />
-        {children}
+        <main className='bg-chalk'>{children}</main>
         <Footer />
       </body>
     </html>
