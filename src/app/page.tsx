@@ -1,16 +1,7 @@
-async function fetchContent() {
-  const res = await fetch(`${process.env.HOST_URL}/api`, {
-    next: { revalidate: 10 },
-  });
-  if (!res.ok) {
-    throw new Error('Failed to fetch data');
-  }
-  return res.json();
-}
+import { fetchContent } from '@/util/fetch';
 
 export default async function Home() {
-  const data = await fetchContent();
+  const data = await fetchContent({ contentType: 'pages', slug: 'home' });
 
-  console.log(data);
   return <p>Home</p>;
 }
