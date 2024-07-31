@@ -11,8 +11,8 @@ export const Header = () => {
         height={42}
         width={132}
         alt='Clark Finance Logo'
-        loading='lazy'
         className='h-8 max-w-fit md:h-10 '
+        priority={true}
       />
       <div className='flex space-x-8'>
         <div className='flex space-x-4 items-center'>
