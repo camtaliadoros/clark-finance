@@ -2,7 +2,7 @@ import Image from 'next/image';
 
 export const Footer = () => {
   return (
-    <div className='flex flex-col'>
+    <footer className='flex flex-col'>
       <div className='flex flex-col bg-mediumblue p-4 md:px-10 md:py-16'>
         <div className='flex flex-col space-y-8 md:grid md:grid-cols-3 md:space-y-0 mb-16'>
           <div className='space-y-8 md:w-4/5 lg:w-1/2'>
@@ -63,6 +63,6 @@ export const Footer = () => {
           reserved © 2024
         </p>
       </div>
-    </div>
+    </footer>
   );
 };

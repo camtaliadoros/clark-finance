@@ -3,6 +3,8 @@ import { Inter } from 'next/font/google';
 import './globals.css';
 import { Header } from '@/components/Header';
 import { Footer } from '@/components/Footer';
+import MenuDrawerContextProvider from './contexts/MenuContextProvider';
+import { MenuDrawer } from '@/components/MenuDrawer';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -17,14 +19,17 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang='en' className='overflow-x-hidden'>
-      <body
-        className={`${inter.className} w-screen relative overflow-x-hidden`}
-      >
-        <Header />
-        <main className='bg-chalk'>{children}</main>
-        <Footer />
-      </body>
-    </html>
+    <MenuDrawerContextProvider>
+      <html lang='en' className='overflow-x-hidden'>
+        <body
+          className={`${inter.className} w-screen relative overflow-x-hidden`}
+        >
+          <Header />
+          <MenuDrawer />
+          <main className='bg-chalk mt-20'>{children}</main>
+          <Footer />
+        </body>
+      </html>
+    </MenuDrawerContextProvider>
   );
 }

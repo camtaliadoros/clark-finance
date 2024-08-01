@@ -1,18 +1,17 @@
 'use client';
 
-import { useState } from 'react';
+import { MenuDrawerContext } from '@/app/contexts/MenuContextProvider';
+import { useContext } from 'react';
 import '../app/globals.css';
-import { MenuDrawer } from './MenuDrawer';
 
 export const Menu = () => {
-  const [open, setIsOpen] = useState(false);
+  const { isOpen, setIsOpen } = useContext(MenuDrawerContext);
 
   return (
     <>
-      <MenuDrawer isOpen={open} />
       <button
-        className={`nav-icon relative ${open ? 'open' : null} z-10`}
-        onClick={() => setIsOpen((prevState) => !prevState)}
+        className={`nav-icon relative ${isOpen ? 'open' : null} z-50`}
+        onClick={() => setIsOpen?.((prevState) => !prevState)}
       >
         <span></span>
         <span></span>
