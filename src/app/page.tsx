@@ -1,4 +1,5 @@
 import { HeroBanner } from '@/components/home/HeroBanner';
+import { ServiceCards } from '@/components/home/ServiceCards';
 import { fetchContent } from '@/util/fetch';
 
 export default async function Home() {
@@ -7,6 +8,7 @@ export default async function Home() {
   return (
     <>
       <HeroBanner />
+      <ServiceCards />
     </>
   );
 }

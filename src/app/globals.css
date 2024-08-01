@@ -98,14 +98,14 @@ a {
   }
 }
 
-a {
+a.link {
   text-decoration: none;
   position: relative;
   color: #232426;
 }
 
 @media screen and (min-width: 1024px) {
-  a::after {
+  a.link::after {
     content: '';
     position: absolute;
     left: 0;
@@ -118,11 +118,11 @@ a {
     transition: transform 0.2s;
   }
 
-  a.text-chalk::after {
+  a.link.text-chalk::after {
     background-color: #f8f9fa;
   }
 
-  a:hover::after {
+  a.link:hover::after {
     transform: scaleX(1);
     transform-origin: left;
   }

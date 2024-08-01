@@ -3,10 +3,14 @@ export async function GET(req: Request) {
   const type = searchParams.get('type');
   const slug = searchParams.get('slug');
 
-  const response = await fetch(
-    `${process.env.WP_ROUTE}/${type}?slug=${slug}&_fields=acf`
-  );
-  const data = await response.json();
+  try {
+    const response = await fetch(
+      `${process.env.WP_ROUTE}/${type}?slug=${slug}&_fields=acf`
+    );
+    const data = await response.json();
 
-  return Response.json(data);
+    return Response.json(data);
+  } catch (e) {
+    throw new Error('There was a problem retrieving the content: ' + e);
+  }
 }

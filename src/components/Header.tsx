@@ -18,7 +18,7 @@ export const Header = () => {
         <div className='flex space-x-4 items-center'>
           <p className='font-bold text-mediumblue mb-0'>Get in touch</p>
           <a
-            className='flex items-center space-x-1'
+            className='flex items-center space-x-1 link'
             href='mailto:info@clark.finance'
           >
             <FontAwesomeIcon
@@ -29,7 +29,10 @@ export const Header = () => {
             <p className='hidden md:block'>info@clark.finance</p>
           </a>
 
-          <a href='tel:+442045182215' className='flex items-center space-x-1'>
+          <a
+            href='tel:+442045182215'
+            className='flex items-center space-x-1 link'
+          >
             <FontAwesomeIcon
               icon={faPhone}
               size={'sm'}

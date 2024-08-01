@@ -5,9 +5,9 @@ type fetchContentParams = {
 
 export async function fetchContent({ contentType, slug }: fetchContentParams) {
   const res = await fetch(
-    `${process.env.HOST_URL}/api?type=${contentType}&slug=${slug}`,
+    `http://localhost:3000/api?type=${contentType}&slug=${slug}`,
     {
-      next: { revalidate: 10 },
+      cache: 'no-store',
     }
   );
   if (!res.ok) {

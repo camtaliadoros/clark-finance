@@ -27,6 +27,8 @@ const config: Config = {
         lightblue: '#59BFFF',
         mediumblue: '#1A8BD1',
         navy: '#001F3F',
+        lightgrey: '#F4F4F4',
+        bluegrey: '#3B5252',
       },
       fontFamily: {
         sourceSans: ['Source Sans', 'sans-serif'],
@@ -36,21 +38,8 @@ const config: Config = {
         'hero-image':
           "linear-gradient(180deg, rgba(0,31,63,0) 0%, rgba(0,31,63,0) 60%, rgba(0,31,63) 100%), linear-gradient(270deg, rgba(0,31,63,0.2) 0%, rgba(0,31,63,0.6) 80%,rgba(0,31,63,0.6) 100%), url('/images/home-banner.png')",
       },
-      // animation: {
-      //   'slide-bg': 'slide 1s linear',
-      // },
-      // keyframes: {
-      //   slide: {
-      //     '0%': {
-      //       transform: 'translateX(-100%)',
-      //     },
-      //     '100%': {
-      //       transform: 'translateX(0)',
-      //     },
-      //   },
-      // },
-      transitionProperty: {
-        left: 'transition: left 0.5s ease',
+      borderRadius: {
+        'br-120': '120px',
       },
     },
   },
