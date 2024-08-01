@@ -23,7 +23,7 @@ export const HeroBanner = async () => {
         <h2 className='text-chalk font-normal text-xl'>{content.subtitle}</h2>
         <hr className='border-chalk border-t-2 w-20' />
         <h1 className='text-chalk font-semibold text-4xl'>{content.title}</h1>
-        <div className='flex pt-9 space-x-6'>
+        <div className='flex flex-col w-2/3 md:flex-row pt-9 space-y-4 md:space-x-6'>
           <Button
             url={content.cta_1.url}
             title={content.cta_1.title}

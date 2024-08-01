@@ -13,7 +13,7 @@ export const Button = ({ colour, title, url }: ButtonProps) => {
     <div className='inline relative overflow-hidden group'>
       <div className='absolute w-full h-full bg-chalk -translate-x-full transition group-hover:translate-x-0'></div>
       <Link
-        className={`flex items-center px-6 py-4 text-${colour} border-chalk border-2 overflow-hidden bg-transparent transition relative ${
+        className={`flex items-center px-6 py-4  text-${colour} border-chalk border-2 overflow-hidden bg-transparent transition relative ${
           colour === 'chalk'
             ? 'group-hover:text-mediumblue'
             : 'group-hover:text-chalk'
