@@ -16,8 +16,8 @@ export const ServiceCard = ({
   order,
 }: ServiceCardProps) => {
   return (
-    <Link className='relative h-52' href={`services/${slug}`}>
-      <div className='bg-lightgrey relative px-4 py-6 h-full space-y-4 rounded-br-[120px] z-10'>
+    <Link className='relative h-52 group ' href={`services/${slug}`}>
+      <div className='bg-lightgrey1 relative px-4 py-6 h-full space-y-4 rounded-br-[120px] z-10 transition-all hover:bg-lightgrey2 hover:rounded-br-[140px] '>
         <h2 className='font-semibold text-xl h-1/3 w-2/3 leading-tight '>
           {title}
         </h2>

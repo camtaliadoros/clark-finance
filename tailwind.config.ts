@@ -27,7 +27,8 @@ const config: Config = {
         lightblue: '#59BFFF',
         mediumblue: '#1A8BD1',
         navy: '#001F3F',
-        lightgrey: '#F4F4F4',
+        lightgrey1: '#F4F4F4',
+        lightgrey2: '#F0F0F0',
         bluegrey: '#3B5252',
       },
       fontFamily: {
@@ -40,6 +41,7 @@ const config: Config = {
       },
       borderRadius: {
         'br-120': '120px',
+        'br-140': '140px',
       },
     },
   },
