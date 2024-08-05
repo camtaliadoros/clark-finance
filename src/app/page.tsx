@@ -2,6 +2,7 @@ import { ContactUs } from '@/components/home/ContactUs';
 import { HeroBanner } from '@/components/home/HeroBanner';
 import { ServiceCards } from '@/components/home/ServiceCards';
 import { Section } from '@/components/shared/Section';
+import { SectionTitle } from '@/components/shared/SectionTitle';
 import { fetchContent } from '@/util/fetch';
 import { ButtonContentFields } from '@/util/models';
 import Image from 'next/image';
@@ -58,9 +59,10 @@ export default async function Home() {
           />
         </div>
         <div className='w-1/2'>
-          <h2 className='text-chalk'>
-            {content.why_clark_finance_section_title}
-          </h2>
+          <SectionTitle
+            title={content.why_clark_finance_section_title}
+            colour='mediumblue'
+          />
         </div>
       </Section>
     </>
