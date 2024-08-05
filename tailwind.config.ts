@@ -29,6 +29,7 @@ const config: Config = {
         navy: '#001F3F',
         lightgrey1: '#F4F4F4',
         lightgrey2: '#F0F0F0',
+        mediumgrey: '#828282',
         bluegrey: '#3B5252',
       },
       fontFamily: {
