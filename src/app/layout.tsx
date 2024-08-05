@@ -28,7 +28,7 @@ export default function RootLayout({
           >
             <Header />
             <MenuDrawer />
-            <main className='bg-chalk mt-20 '>{children}</main>
+            <main className='bg-chalk mt-16 lg:mt-20 '>{children}</main>
             <Footer />
           </body>
         </html>

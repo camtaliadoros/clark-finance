@@ -6,9 +6,10 @@ type ButtonProps = {
   colour: string;
   title: string;
   url: string;
+  target: string;
 };
 
-export const Button = ({ colour, title, url }: ButtonProps) => {
+export const Button = ({ colour, title, url, target }: ButtonProps) => {
   return (
     <div className='inline relative overflow-hidden group'>
       <div

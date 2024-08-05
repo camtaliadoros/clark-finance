@@ -3,7 +3,11 @@
 import { useReCaptcha } from 'next-recaptcha-v3';
 import { useForm } from 'react-hook-form';
 
-export const ContactForm = () => {
+type ContactFormContent = {
+  title: string;
+};
+
+export const ContactForm = ({ title }: ContactFormContent) => {
   const {
     register,
     handleSubmit,
@@ -46,11 +50,10 @@ export const ContactForm = () => {
 
   return (
     <div className='w-2/3'>
-      <h3 className='text-2xl text-ash mb-8'>Contact Us</h3>
+      <h3 className='text-2xl text-ash mb-8'>{title}</h3>
       <form
         onSubmit={handleSubmit(async (data) => {
           const token = await executeRecaptcha('form_submit');
-          console.log(token);
         })}
         className='w-3/5'
       >
