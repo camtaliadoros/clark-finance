@@ -1,3 +1,4 @@
+import { Section } from '../shared/Section';
 import { ServiceCard } from './ServiceCard';
 
 type Service = {
@@ -31,17 +32,19 @@ export const ServiceCards = async () => {
   services.sort((a, b) => a.acf.homepage_order - b.acf.homepage_order);
 
   return (
-    <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3 m-4 -mt-32'>
-      {services.map((service) => (
-        <ServiceCard
-          key={service.acf.homepage_order}
-          title={service.acf.service_title}
-          excerpt={service.acf.service_excerpt}
-          link={service.link}
-          slug={service.slug}
-          order={service.acf.homepage_order}
-        />
-      ))}
-    </div>
+    <Section type='wide'>
+      <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3 -mt-32'>
+        {services.map((service) => (
+          <ServiceCard
+            key={service.acf.homepage_order}
+            title={service.acf.service_title}
+            excerpt={service.acf.service_excerpt}
+            link={service.link}
+            slug={service.slug}
+            order={service.acf.homepage_order}
+          />
+        ))}
+      </div>
+    </Section>
   );
 };
