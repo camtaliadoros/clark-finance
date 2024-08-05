@@ -12,7 +12,7 @@ export const ContactUs = ({ title, cta }: ContactUsContent) => {
   return (
     <Section
       type='narrow'
-      classes='bg-chequered-bg bg-cover bg-bottom lg:px-36 py-16 flex items-start'
+      classes='bg-chequered-bg bg-cover bg-bottom lg:px-36 py-28 flex items-start '
     >
       <ContactForm title={title} />
       <Button
