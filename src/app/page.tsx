@@ -1,8 +1,10 @@
 import { ContactUs } from '@/components/home/ContactUs';
 import { HeroBanner } from '@/components/home/HeroBanner';
 import { ServiceCards } from '@/components/home/ServiceCards';
+import { Section } from '@/components/shared/Section';
 import { fetchContent } from '@/util/fetch';
 import { ButtonContentFields } from '@/util/models';
+import Image from 'next/image';
 
 type HomeContent = {
   contact_section_title: string;
@@ -22,7 +24,7 @@ export default async function Home() {
     slug: 'home',
   });
 
-  const content = data[0].acf;
+  const content: HomeContent = data[0].acf;
 
   console.log(content);
 
@@ -39,6 +41,28 @@ export default async function Home() {
         title={content.contact_section_title}
         cta={content.book_appointment_label}
       />
+      <Section type='narrow' classes='bg-building-detail bg-cover flex gap-12'>
+        <div className='w-1/2 flex justify-end relative'>
+          <Image
+            src='/images/why-clark-finance-1.png'
+            alt='photo of a business meeting'
+            width={480}
+            height={304}
+          />
+          <Image
+            src='/images/why-clark-finance-2.png'
+            alt='documents being signed'
+            width={250}
+            height={240}
+            className='absolute top-44 left-0'
+          />
+        </div>
+        <div className='w-1/2'>
+          <h2 className='text-chalk'>
+            {content.why_clark_finance_section_title}
+          </h2>
+        </div>
+      </Section>
     </>
   );
 }

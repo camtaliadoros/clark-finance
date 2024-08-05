@@ -32,7 +32,7 @@ export const ServiceCards = async () => {
   services.sort((a, b) => a.acf.homepage_order - b.acf.homepage_order);
 
   return (
-    <Section type='wide'>
+    <Section type='wide' classes='py-0'>
       <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3 -mt-32'>
         {services.map((service) => (
           <ServiceCard
