@@ -6,7 +6,7 @@ type ButtonProps = {
   colour: string;
   title: string;
   url: string;
-  target: string;
+  target?: string;
 };
 
 export const Button = ({ colour, title, url, target }: ButtonProps) => {
@@ -22,6 +22,7 @@ export const Button = ({ colour, title, url, target }: ButtonProps) => {
             : 'group-hover:text-chalk'
         } `}
         href={url}
+        target={target}
       >
         {title}
         <FontAwesomeIcon

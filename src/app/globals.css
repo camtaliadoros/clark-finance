@@ -41,6 +41,14 @@ h6 {
   font-weight: bold;
 }
 
+h1 {
+  font-size: 36px;
+}
+
+h2 {
+  font-size: 20px;
+}
+
 h5 {
   font-size: 16px;
   margin-bottom: 0.75rem;
@@ -63,6 +71,25 @@ a {
   p,
   a {
     font-size: 16px;
+  }
+}
+
+@media screen and (min-width: 1536px) {
+  h1 {
+    font-size: 48px;
+  }
+
+  h2 {
+    font-size: 30px;
+  }
+
+  h5 {
+    font-size: 24px;
+  }
+
+  p,
+  a {
+    font-size: 18px;
   }
 }
 
