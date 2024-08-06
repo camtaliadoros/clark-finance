@@ -25,13 +25,17 @@ export const WhyClarkFinance = ({
   const liArray = listItems?.map((item) => item.replace(/<\/?li>/g, '').trim());
 
   return (
-    <Section type='narrow' classes='bg-building-detail bg-cover flex gap-12'>
-      <div className='w-1/2 flex justify-end relative'>
+    <Section
+      type='narrow'
+      classes='bg-building-detail bg-cover flex gap-12 py-40'
+    >
+      <div className='w-1/2 flex justify-end relative '>
         <Image
           src='/images/why-clark-finance-1.png'
           alt='photo of a business meeting'
           width={480}
           height={304}
+          className='h-fit'
         />
         <Image
           src='/images/why-clark-finance-2.png'
@@ -41,7 +45,7 @@ export const WhyClarkFinance = ({
           className='absolute top-44 left-0'
         />
       </div>
-      <div className='w-1/2 ml-16 flex flex-col items-start'>
+      <div className='w-1/2 ml-16 flex flex-col items-start '>
         <SectionTitle title={sectionTitle} colour='mediumblue' />
         <ul className='my-6 space-y-2'>
           {liArray?.map((item, i) => (

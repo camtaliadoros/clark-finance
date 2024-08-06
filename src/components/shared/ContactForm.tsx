@@ -49,36 +49,33 @@ export const ContactForm = ({ title }: ContactFormContent) => {
   ];
 
   return (
-    <div className='w-2/3'>
-      <h3 className='text-2xl text-ash mb-8'>{title}</h3>
-      <form
-        onSubmit={handleSubmit(async (data) => {
-          const token = await executeRecaptcha('form_submit');
-        })}
-        className='w-3/5'
-      >
-        <fieldset className='flex flex-col space-y-4  *:placeholder:text-mediumgrey *:placeholder:text-sm'>
-          {inputFields.map((field) => (
-            <div key={field.id} className='flex flex-col'>
-              <input
-                {...register(field.id, { required: field.requiredError })}
-                placeholder={field.placeholder}
-                type={field.type}
-                className='p-3'
-              />
-              {errors[field.id] && (
-                <p className='text-sm text-red pt-1'>
-                  {errors[field.id]?.message}
-                </p>
-              )}
-            </div>
-          ))}
+    <form
+      className='w-full'
+      onSubmit={handleSubmit(async (data) => {
+        const token = await executeRecaptcha('form_submit');
+      })}
+    >
+      <fieldset className='flex flex-col space-y-4  *:placeholder:text-mediumgrey *:placeholder:text-sm'>
+        {inputFields.map((field) => (
+          <div key={field.id} className='flex flex-col'>
+            <input
+              {...register(field.id, { required: field.requiredError })}
+              placeholder={field.placeholder}
+              type={field.type}
+              className='p-3'
+            />
+            {errors[field.id] && (
+              <p className='text-sm text-red pt-1'>
+                {errors[field.id]?.message}
+              </p>
+            )}
+          </div>
+        ))}
 
-          <button className='bg-mediumblue text-sm text-chalk hover:opacity-80 transition py-3 '>
-            Submit
-          </button>
-        </fieldset>
-      </form>
-    </div>
+        <button className='bg-mediumblue text-sm text-chalk hover:opacity-80 transition py-3 '>
+          Submit
+        </button>
+      </fieldset>
+    </form>
   );
 };
