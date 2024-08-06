@@ -1,6 +1,7 @@
 import { ContactUs } from '@/components/home/ContactUs';
 import { HeroBanner } from '@/components/home/HeroBanner';
 import { ServiceCards } from '@/components/home/ServiceCards';
+import { WhyClarkFinance } from '@/components/home/WhyClarkFinance';
 import { Section } from '@/components/shared/Section';
 import { SectionTitle } from '@/components/shared/SectionTitle';
 import { fetchContent } from '@/util/fetch';
@@ -42,29 +43,11 @@ export default async function Home() {
         title={content.contact_section_title}
         cta={content.book_appointment_label}
       />
-      <Section type='narrow' classes='bg-building-detail bg-cover flex gap-12'>
-        <div className='w-1/2 flex justify-end relative'>
-          <Image
-            src='/images/why-clark-finance-1.png'
-            alt='photo of a business meeting'
-            width={480}
-            height={304}
-          />
-          <Image
-            src='/images/why-clark-finance-2.png'
-            alt='documents being signed'
-            width={250}
-            height={240}
-            className='absolute top-44 left-0'
-          />
-        </div>
-        <div className='w-1/2'>
-          <SectionTitle
-            title={content.why_clark_finance_section_title}
-            colour='mediumblue'
-          />
-        </div>
-      </Section>
+      <WhyClarkFinance
+        sectionTitle={content.why_clark_finance_section_title}
+        bodyContent={content.about_us_content}
+        aboutUsButton={content.about_us_cta}
+      />
     </>
   );
 }
