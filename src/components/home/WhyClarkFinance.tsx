@@ -27,9 +27,9 @@ export const WhyClarkFinance = ({
   return (
     <Section
       type='narrow'
-      classes='bg-building-detail bg-cover flex gap-12 py-40'
+      classes='bg-building-detail bg-cover flex items-end gap-12 md:py-40 flex flex-col md:flex-row'
     >
-      <div className='w-1/2 flex justify-end relative '>
+      <div className='w-4/5 md:w-1/2 flex md:justify-end relative '>
         <Image
           src='/images/why-clark-finance-1.png'
           alt='photo of a business meeting'
@@ -42,10 +42,10 @@ export const WhyClarkFinance = ({
           alt='documents being signed'
           width={250}
           height={240}
-          className='absolute top-44 left-0'
+          className='absolute top-20 md:top-44 -left-12 md:left-0 w-1/2'
         />
       </div>
-      <div className='w-1/2 ml-16 flex flex-col items-start '>
+      <div className='w-full md:w-1/2 ml-16 flex flex-col items-start '>
         <SectionTitle title={sectionTitle} colour='mediumblue' />
         <ul className='my-6 space-y-2'>
           {liArray?.map((item, i) => (

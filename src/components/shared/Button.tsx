@@ -7,7 +7,7 @@ type ButtonProps = {
   title: string;
   url: string;
   target?: string;
-  classes: string;
+  classes?: string;
 };
 
 export const Button = ({
