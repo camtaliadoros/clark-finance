@@ -1,7 +1,7 @@
 type SectionProps = {
   type: string;
   children: React.ReactNode;
-  classes: string;
+  classes?: string;
 };
 
 export const Section = ({ children, type, classes }: SectionProps) => {

@@ -46,7 +46,12 @@ export const WhyClarkFinance = ({
         />
       </div>
       <div className='w-full md:w-1/2 ml-16 flex flex-col items-start '>
-        <SectionTitle title={sectionTitle} colour='mediumblue' />
+        <SectionTitle
+          title={sectionTitle}
+          lineColour='mediumblue'
+          textColour='chalk'
+          alignment='start'
+        />
         <ul className='my-6 space-y-2'>
           {liArray?.map((item, i) => (
             <li key={i} className='flex items-center space-x-2'>
