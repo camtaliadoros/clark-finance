@@ -18,7 +18,12 @@ export const Reviews = async () => {
 
   const reviews = reviewsData.result.reviews;
 
-  console.log(reviews);
+  const featuredReviews = [];
+
+  // Select 3 reviews at random
+  for (let i = 0; i < 3; i++) {
+    featuredReviews.push(reviews[Math.floor(Math.random() * reviews.length)]);
+  }
 
   return (
     <Section
