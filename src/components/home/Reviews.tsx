@@ -1,4 +1,5 @@
 import { Section } from '../shared/Section';
+import { SectionTitle } from '../shared/SectionTitle';
 import { ReviewCard } from './ReviewCard';
 
 async function fetchReviews() {
@@ -20,7 +21,7 @@ export const Reviews = async () => {
 
   const featuredReviews = [];
 
-  let indexes = [];
+  let indexes: number[] = [];
 
   while (indexes.length < 3) {
     // Choose an element index at random
@@ -40,11 +41,19 @@ export const Reviews = async () => {
   return (
     <Section
       type='narrow'
-      classes='bg-chequered-bg bg-cover bg-bottom flex flex-row gap-12 justify-between'
+      classes='bg-chequered-flipped bg-cover bg-bottom flex flex-col'
     >
-      {featuredReviews.map((review, i) => (
-        <ReviewCard key={i} content={review} />
-      ))}
+      <SectionTitle
+        title='Our Reviews'
+        lineColour='lightblue'
+        textColour='ash'
+        alignment='centred'
+      />
+      <div className='mt-24 flex gap-12 justify-between '>
+        {featuredReviews.map((review, i) => (
+          <ReviewCard key={i} content={review} />
+        ))}
+      </div>
     </Section>
   );
 };
