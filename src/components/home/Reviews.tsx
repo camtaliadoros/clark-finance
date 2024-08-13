@@ -1,5 +1,5 @@
-import { useEffect, useState } from 'react';
 import { Section } from '../shared/Section';
+import { ReviewCard } from './ReviewCard';
 
 async function fetchReviews() {
   const res = await fetch(`${process.env.HOST_URL}/api/reviews`, {
@@ -20,15 +20,31 @@ export const Reviews = async () => {
 
   const featuredReviews = [];
 
-  // Select 3 reviews at random
-  for (let i = 0; i < 3; i++) {
-    featuredReviews.push(reviews[Math.floor(Math.random() * reviews.length)]);
+  let indexes = [];
+
+  while (indexes.length < 3) {
+    // Choose an element index at random
+    const randomI = Math.floor(Math.random() * reviews.length);
+
+    // Check if index already been chosen
+    const iExists = indexes.find((i) => i === randomI);
+    if (!iExists) {
+      // Add index to indexes array
+      indexes.push(randomI);
+
+      // Add review to featured reviews array
+      featuredReviews.push(reviews[randomI]);
+    }
   }
 
   return (
     <Section
       type='narrow'
-      classes='bg-chequered-bg bg-cover bg-bottom'
-    ></Section>
+      classes='bg-chequered-bg bg-cover bg-bottom flex flex-row gap-12 justify-between'
+    >
+      {featuredReviews.map((review, i) => (
+        <ReviewCard key={i} content={review} />
+      ))}
+    </Section>
   );
 };
