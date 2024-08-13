@@ -1,6 +1,7 @@
 import { CaseStudiesSection } from '@/components/home/CaseStudiesSection';
 import { ContactUs } from '@/components/home/ContactUs';
 import { HeroBanner } from '@/components/home/HeroBanner';
+import { Reviews } from '@/components/home/Reviews';
 import { ServiceCards } from '@/components/home/ServiceCards';
 import { WhyClarkFinance } from '@/components/home/WhyClarkFinance';
 import { fetchContent } from '@/util/fetch';
@@ -45,6 +46,7 @@ export default async function Home() {
         aboutUsButton={content.about_us_cta}
       />
       <CaseStudiesSection />
+      <Reviews />
     </>
   );
 }
