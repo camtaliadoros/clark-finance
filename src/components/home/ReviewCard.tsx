@@ -1,3 +1,5 @@
+import { faStar } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Image from 'next/image';
 
 type ReviewCardProps = {
@@ -13,7 +15,7 @@ type ReviewContent = {
 };
 
 export const ReviewCard = ({ content }: ReviewCardProps) => {
-  console.log(content.profile_photo_url);
+  const ratingArr = [1, 2, 3, 4, 5];
 
   return (
     <div className='bg-white flex  flex-col w-1/3 drop-shadow-lg p-6 h-60'>
@@ -30,7 +32,24 @@ export const ReviewCard = ({ content }: ReviewCardProps) => {
         ) : null}
         <h5>{content.author_name}</h5>
       </div>
-      <div className='flex flex-col'>
+      <div className='flex flex-col gap-2'>
+        <div className='flex gap-2'>
+          <div className=' flex w-1/4'>
+            {ratingArr.map((el, i) => (
+              <FontAwesomeIcon
+                icon={faStar}
+                size='1x'
+                key={i}
+                className={`${
+                  i < content.rating ? 'text-yellow' : 'text-mediumgrey'
+                }`}
+              />
+            ))}
+          </div>
+          <p className='text-mediumgrey text-xs'>
+            {content.relative_time_description}
+          </p>
+        </div>
         <p className='text-ellipsis overflow-hidden'>{content.text}</p>
       </div>
     </div>
