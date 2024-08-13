@@ -41,7 +41,7 @@ export const Reviews = async () => {
   return (
     <Section
       type='narrow'
-      classes='bg-chequered-flipped bg-cover bg-bottom flex flex-col'
+      classes='bg-chequered-flipped bg-cover bg-top flex flex-col'
     >
       <SectionTitle
         title='Our Reviews'
