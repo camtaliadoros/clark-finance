@@ -3,6 +3,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Image from 'next/image';
 import { Menu } from './Menu';
 import Link from 'next/link';
+import { EmailWithIcon } from './shared/emailWithIcon';
+import { PhoneNumberWithIcon } from './shared/PhoneNumberWithIcon';
 
 export const Header = () => {
   return (
@@ -20,29 +22,8 @@ export const Header = () => {
       <div className='flex space-x-8'>
         <div className='flex space-x-4 items-center'>
           <p className='font-bold text-mediumblue mb-0'>Get in touch</p>
-          <a
-            className='flex items-center space-x-1 link'
-            href='mailto:info@clark.finance'
-          >
-            <FontAwesomeIcon
-              icon={faEnvelope}
-              size={'sm'}
-              className='text-base h-4'
-            />
-            <p className='hidden md:block'>info@clark.finance</p>
-          </a>
-
-          <a
-            href='tel:+442045182215'
-            className='flex items-center space-x-1 link'
-          >
-            <FontAwesomeIcon
-              icon={faPhone}
-              size={'sm'}
-              className='text-base h-4'
-            />
-            <p className='hidden md:block'>02045 182 215</p>
-          </a>
+          <EmailWithIcon />
+          <PhoneNumberWithIcon />
         </div>
         <div>
           <Menu />

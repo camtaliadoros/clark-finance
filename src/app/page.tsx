@@ -36,10 +36,7 @@ export default async function Home() {
         cta2={content.cta_2}
       />
       <ServiceCards />
-      <ContactUs
-        title={content.contact_section_title}
-        cta={content.book_appointment_label}
-      />
+      <ContactUs />
       <WhyClarkFinance
         sectionTitle={content.why_clark_finance_section_title}
         bodyContent={content.about_us_content}

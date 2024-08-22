@@ -32,7 +32,7 @@ export const ReviewCard = ({ content }: ReviewCardProps) => {
         ) : null}
         <h5>{content.author_name}</h5>
       </div>
-      <div className='flex flex-col gap-2'>
+      <div className='flex flex-col gap-2 h-full'>
         <div className='flex gap-2'>
           <div className=' flex w-1/4'>
             {ratingArr.map((el, i) => (
@@ -50,7 +50,7 @@ export const ReviewCard = ({ content }: ReviewCardProps) => {
             {content.relative_time_description}
           </p>
         </div>
-        <p className='text-ellipsis overflow-hidden'>{content.text}</p>
+        <p className='truncate h-full'>{content.text}</p>
       </div>
     </div>
   );

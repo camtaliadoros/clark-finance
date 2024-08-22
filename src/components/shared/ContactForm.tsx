@@ -3,11 +3,7 @@
 import { useReCaptcha } from 'next-recaptcha-v3';
 import { useForm } from 'react-hook-form';
 
-type ContactFormContent = {
-  title: string;
-};
-
-export const ContactForm = ({ title }: ContactFormContent) => {
+export const ContactForm = () => {
   const {
     register,
     handleSubmit,
