@@ -25,12 +25,14 @@ export default function RootLayout({
       <ReCaptchaProvider reCaptchaKey={process.env.NEXT_PUBLIC_RECAPTCHA_KEY}>
         <html lang='en' className='overflow-x-hidden'>
           <body
-            className={`${inter.className} w-screen relative overflow-x-hidden`}
+            className={`${inter.className} flex flex-col w-screen h-dvh overflow-hidden`}
           >
             <Header />
             <MenuDrawer />
-            <main className='bg-chalk mt-16 lg:mt-20 '>{children}</main>
-            <Footer />
+            <div className='overflow-y-auto'>
+              <main className='bg-chalk relative '>{children}</main>
+              <Footer />
+            </div>
           </body>
         </html>
       </ReCaptchaProvider>

@@ -8,7 +8,7 @@ import { PhoneNumberWithIcon } from './shared/PhoneNumberWithIcon';
 
 export const Header = () => {
   return (
-    <header className='flex justify-between items-center  h-16 md:h-24 bg-chalk px-4 md:px-10 drop-shadow-md fixed w-full z-50'>
+    <header className='flex justify-between items-center  h-16 md:h-24 bg-chalk px-4 md:px-10 drop-shadow-md shrink-0 w-full z-50'>
       <Link href='/'>
         <Image
           src='/images/clark-finance-logo.png'
