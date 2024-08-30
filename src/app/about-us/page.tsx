@@ -1,4 +1,5 @@
 import { WhyChooseUsCard } from '@/components/aboutUs/WhyChooseUsCard';
+import { ContactUs } from '@/components/home/ContactUs';
 import { Section } from '@/components/shared/Section';
 import { SectionTitle } from '@/components/shared/SectionTitle';
 import { convertWysywyg } from '@/util/utilFunctions';
@@ -116,6 +117,7 @@ export default async function AboutUs() {
           ))}
         </div>
       </Section>
+      <ContactUs />
     </>
   );
 }
