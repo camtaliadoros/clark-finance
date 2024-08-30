@@ -1,3 +1,4 @@
+import { Section } from '@/components/shared/Section';
 import { SectionTitle } from '@/components/shared/SectionTitle';
 
 type AboutUsPageContent = {
@@ -42,13 +43,17 @@ export default async function AboutUs() {
   const content: AboutUsPageContent = data[0].acf;
 
   return (
-    <Section>
+    <Section type='narrow'>
       <SectionTitle
         title={content.section_title}
         textColour='ash'
         lineColour='mediumblue'
         alignment='centred'
       />
+      <div className='flex'>
+        <div className='w-1/3'>image goes here</div>
+        <div className='w-2/3'>{content.about_us_content}</div>
+      </div>
     </Section>
   );
 }
