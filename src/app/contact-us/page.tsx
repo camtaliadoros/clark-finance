@@ -38,7 +38,6 @@ export default async function ContactUsPage() {
           className='text-chalk'
           dangerouslySetInnerHTML={{ __html: complaintsBody }}
         />
-        {/* <p className='text-chalk'>{content.complaints_body}</p> */}
       </Section>
     </>
   );

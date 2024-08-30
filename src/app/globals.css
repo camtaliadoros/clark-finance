@@ -59,6 +59,14 @@ a {
   font-size: 14px;
 }
 
+a {
+  text-decoration: underline;
+}
+
+a:hover {
+  text-decoration: none;
+}
+
 .bg-hero-image {
   height: 24rem;
 }
