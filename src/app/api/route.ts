@@ -1,12 +1,6 @@
-export async function GET(req: Request) {
-  const { searchParams } = new URL(req.url);
-  const type = searchParams.get('type');
-  const slug = searchParams.get('slug');
-
+export async function GET() {
   try {
-    const response = await fetch(
-      `${process.env.WP_ROUTE}/${type}?slug=${slug}&_fields=acf`
-    );
+    const response = await fetch(`${process.env.WP_ROUTE}/pages/7?_fields=acf`);
     const data = await response.json();
 
     return Response.json(data);

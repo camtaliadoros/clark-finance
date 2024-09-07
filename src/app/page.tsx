@@ -19,13 +19,48 @@ type HomeContent = {
   about_us_cta: ButtonContentFields;
 };
 
-export default async function Home() {
-  const data = await fetchContent({
-    contentType: 'pages',
-    slug: 'home',
+async function fetchHomePageContent() {
+  const res = await fetch(`${process.env.HOST_URL}/api`, {
+    // next: {
+    //   revalidate: 10,
+    // },
+    cache: 'no-store',
   });
+  if (!res.ok) {
+    throw new Error('Failed to fetch data');
+  }
+  return res.json();
+}
 
-  const content: HomeContent = data[0].acf;
+export default async function Home() {
+  const data = await fetchHomePageContent();
+
+  const content: HomeContent = data.acf;
+
+  const serverUsername = 'wordify';
+  const serverPassword = 'jrscibop';
+
+  const res = await fetch(
+    'https://clarkfinance.wordifysites.com/wp-json/jwt-auth/v1/token',
+    {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: 'Basic ' + btoa(`${serverUsername}:${serverPassword}`), // Server-level Basic Auth
+      },
+      body: JSON.stringify({
+        username: 'oyxrvdlw',
+        password: '5%sShMlneSYpk4Onvr9qRM9G',
+      }),
+    }
+  );
+
+  const text = await res.text();
+  console.log(text); // This will show the raw response content
+  // const response = await res.json();
+  // const token = response.token;
+
+  // console.log(token);
 
   return (
     <>

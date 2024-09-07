@@ -3,7 +3,6 @@
 import { ContactUs } from '@/components/home/ContactUs';
 import { Section } from '@/components/shared/Section';
 import { convertWysywyg } from '@/util/utilFunctions';
-import sanitizeHtml from 'sanitize-html';
 
 type ContactUsPageContent = {
   complaints_title: string;
@@ -25,7 +24,7 @@ async function fetchContactUsPageContent() {
 
 export default async function ContactUsPage() {
   const data = await fetchContactUsPageContent();
-  const content: ContactUsPageContent = data[0].acf;
+  const content: ContactUsPageContent = data.acf;
 
   const complaintsBody = convertWysywyg(content.complaints_body);
 

@@ -1,7 +1,7 @@
 export async function GET() {
   try {
     const response = await fetch(
-      `${process.env.WP_ROUTE}/pages?slug=about-us&_fields=acf`
+      `${process.env.WP_ROUTE}/pages/88?_fields=acf`
     );
     const data = await response.json();
 

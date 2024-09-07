@@ -59,7 +59,7 @@ async function fetchAboutUsPageContent() {
 export default async function AboutUs() {
   const data = await fetchAboutUsPageContent();
 
-  const content: AboutUsPageContent = data[0].acf;
+  const content: AboutUsPageContent = data.acf;
 
   const bodyContent = convertWysywyg(content.about_us_content);
 

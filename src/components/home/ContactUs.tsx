@@ -31,7 +31,7 @@ async function fetchContactUsContent() {
 export const ContactUs = async () => {
   const contactUsData = await fetchContactUsContent();
 
-  const content: ContactUsContent = contactUsData[0].acf;
+  const content: ContactUsContent = contactUsData.acf;
 
   return (
     <Section
