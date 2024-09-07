@@ -36,7 +36,7 @@ export default async function TermsAndConditions() {
         alignment='centred'
       />
       <div
-        className='text-ash'
+        className='text-ash text-center mx-36 my-12'
         dangerouslySetInnerHTML={{ __html: bodyContent }}
       ></div>
     </Section>

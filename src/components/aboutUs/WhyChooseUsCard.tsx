@@ -5,8 +5,6 @@ type WhyChooseUsCardProps = {
 };
 
 export const WhyChooseUsCard = ({ content }: WhyChooseUsCardProps) => {
-  console.log(content);
-
   return (
     <div className='grid grid-cols-5 w-96 bg-lightblue bg-opacity-25 rounded p-12 hover:bg-opacity-50 transition'>
       <div className=''>icon goes here</div>

@@ -37,31 +37,6 @@ export default async function Home() {
 
   const content: HomeContent = data.acf;
 
-  const serverUsername = 'wordify';
-  const serverPassword = 'jrscibop';
-
-  const res = await fetch(
-    'https://clarkfinance.wordifysites.com/wp-json/jwt-auth/v1/token',
-    {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: 'Basic ' + btoa(`${serverUsername}:${serverPassword}`), // Server-level Basic Auth
-      },
-      body: JSON.stringify({
-        username: 'oyxrvdlw',
-        password: '5%sShMlneSYpk4Onvr9qRM9G',
-      }),
-    }
-  );
-
-  const text = await res.text();
-  console.log(text); // This will show the raw response content
-  // const response = await res.json();
-  // const token = response.token;
-
-  // console.log(token);
-
   return (
     <>
       <HeroBanner
