@@ -7,8 +7,8 @@ type TcsPageContent = {
   content: string;
 };
 
-async function fetchTCsPageContent() {
-  const res = await fetch(`${process.env.HOST_URL}/terms-and-conditions/api`, {
+async function fetchPrivacyPolicyPageContent() {
+  const res = await fetch(`${process.env.HOST_URL}/privacy-policy/api`, {
     // next: {
     //   revalidate: 10,
     // },
@@ -20,8 +20,8 @@ async function fetchTCsPageContent() {
   return res.json();
 }
 
-export default async function TermsAndConditions() {
-  const data = await fetchTCsPageContent();
+export default async function PrivacyPolicy() {
+  const data = await fetchPrivacyPolicyPageContent();
 
   const content: TcsPageContent = data.acf;
 
