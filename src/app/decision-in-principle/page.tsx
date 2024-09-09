@@ -82,14 +82,14 @@ export default async function DecisionInPrinciplePage() {
         <h3 className='font-semibold text-center my-4 text-chalk'>
           {content.subheading}
         </h3>
-        <div className='flex justify-between items-center my-16 mb-48'>
+        <div className='flex flex-col md:flex-row md:justify-between md:items-center my-16  mb-24 md:mb-48 space-y-8'>
           <Button
             colour='chalk'
             title={content.apply_link.title}
             url={content.apply_link.url}
             target={content.apply_link.target}
           />
-          <div className='flex flex-col w-1/3 items-end space-y-4'>
+          <div className='flex flex-col md:w-1/3 md:items-end space-y-4'>
             <h4 className='text-chalk text-2xl text-right'>
               Speak to our Experts today to run through your application
             </h4>
@@ -108,11 +108,11 @@ export default async function DecisionInPrinciplePage() {
         </div>
       </Section>
       <Section type='narrow' classes='bg-navy flex justify-center'>
-        <div className='bg-chalk w-4/5 flex flex-col items-center space-y-8 p-16 -mt-64 rounded-md'>
-          <h2 className='font-semibold text-ash mb-12'>
+        <div className='bg-chalk flex flex-col items-center space-y-8 p-8 md:p-16 -mt-64 rounded-md w-full lg:w-4/5 '>
+          <h2 className='font-semibold text-ash mb-12 text-2xl md:text-4xl'>
             {content.docs_required_text}
           </h2>
-          <div className='flex flex-col justify-start space-y-8 w-4/5'>
+          <div className='flex flex-col justify-start space-y-8 lg:w-4/5'>
             {requiredDocumentsItems.map((item, i) => (
               <RequiredDocsItemCard content={item} key={i} />
             ))}
