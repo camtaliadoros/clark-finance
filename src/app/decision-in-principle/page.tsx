@@ -109,7 +109,7 @@ export default async function DecisionInPrinciplePage() {
       </Section>
       <Section type='narrow' classes='bg-navy flex justify-center'>
         <div className='bg-chalk w-4/5 flex flex-col items-center space-y-8 p-16 -mt-64 rounded-md'>
-          <h2 className='font-semibold text-ash'>
+          <h2 className='font-semibold text-ash mb-12'>
             {content.docs_required_text}
           </h2>
           <div className='flex flex-col justify-start space-y-8 w-4/5'>
