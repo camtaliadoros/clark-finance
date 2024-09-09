@@ -72,7 +72,10 @@ export default async function DecisionInPrinciplePage() {
 
   return (
     <>
-      <Section type='narrow' classes='bg-houses bg-cover bg-bottom'>
+      <Section
+        type='narrow'
+        classes='bg-houses bg-cover bg-bottom bg-fixed flex flex-col items-center'
+      >
         <SectionTitle
           title={content.page_title}
           textColour='chalk'
@@ -82,7 +85,7 @@ export default async function DecisionInPrinciplePage() {
         <h3 className='font-semibold text-center my-4 text-chalk'>
           {content.subheading}
         </h3>
-        <div className='flex flex-col md:flex-row md:justify-between md:items-center my-16  mb-24 md:mb-48 space-y-8'>
+        <div className='flex flex-col md:flex-row md:justify-between md:items-center my-16  mb-24 md:mb-32 space-y-8'>
           <Button
             colour='chalk'
             title={content.apply_link.title}
@@ -106,9 +109,8 @@ export default async function DecisionInPrinciplePage() {
             </Link>
           </div>
         </div>
-      </Section>
-      <Section type='narrow' classes='bg-navy flex justify-center'>
-        <div className='bg-chalk flex flex-col items-center space-y-8 p-8 md:p-16 -mt-64 rounded-md w-full lg:w-4/5 '>
+
+        <div className='bg-chalk flex flex-col items-center space-y-8 p-8 md:p-16  rounded-md w-full lg:w-4/5 '>
           <h2 className='font-semibold text-ash mb-12 text-2xl md:text-4xl'>
             {content.docs_required_text}
           </h2>
