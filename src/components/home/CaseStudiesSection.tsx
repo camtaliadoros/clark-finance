@@ -5,11 +5,14 @@ import { CaseStudyFeature } from '../shared/CaseStudyFeature';
 import { Button } from '../shared/Button';
 
 async function fetchAllCaseStudies() {
-  const res = await fetch(`${process.env.HOST_URL}/case-studies/api`, {
-    next: {
-      revalidate: 10,
-    },
-  });
+  const res = await fetch(
+    `${process.env.HOST_URL}/case-studies/api/fetchAllCaseStudies`,
+    {
+      next: {
+        revalidate: 10,
+      },
+    }
+  );
   if (!res.ok) {
     throw new Error('Failed to fetch data');
   }
