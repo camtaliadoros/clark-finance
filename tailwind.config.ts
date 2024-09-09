@@ -42,6 +42,8 @@ const config: Config = {
         'chequered-bg': "url('/images/chequered-bg.png')",
         'chequered-flipped': "url('/images/chequered-bg-flipped.png')",
         'building-detail': "url('/images/building-detail-bg.png')",
+        houses:
+          "linear-gradient(180deg, rgba(0,31,63,0) 0%, rgba(0,31,63,0) 60%, rgba(0,31,63) 100%), linear-gradient(270deg, rgba(0,31,63,0.2) 0%, rgba(0,31,63,0.6) 80%,rgba(0,31,63,0.6) 100%), url('/images/houses.png')",
       },
       borderRadius: {
         'br-120': '120px',

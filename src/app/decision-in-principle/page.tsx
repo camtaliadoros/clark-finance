@@ -1,6 +1,10 @@
+import { Button } from '@/components/shared/Button';
 import { Section } from '@/components/shared/Section';
 import { SectionTitle } from '@/components/shared/SectionTitle';
 import { ButtonContentFields } from '@/util/models';
+import { faPhone } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import Link from 'next/link';
 
 type DecisionInPrincipleContent = {
   page_title: string;
@@ -46,17 +50,39 @@ export default async function DecisionInPrinciplePage() {
 
   return (
     <>
-      <Section type='narrow'>
+      <Section type='narrow' classes='bg-houses bg-cover bg-bottom'>
         <SectionTitle
           title={content.page_title}
-          textColour='ash'
-          lineColour='mediumblue'
+          textColour='chalk'
+          lineColour='chalk'
           alignment='centred'
         />
+        <h3 className='font-semibold text-center my-4 text-chalk'>
+          {content.subheading}
+        </h3>
+        <div className='flex justify-between items-center my-16'>
+          <Button
+            colour='chalk'
+            title={content.apply_link.title}
+            url={content.apply_link.url}
+            target={content.apply_link.target}
+          />
+          <div className='flex flex-col w-1/3 items-end'>
+            <h4 className='text-chalk text-2xl text-right'>
+              Speak to our Experts today to run through your application
+            </h4>
+            <Link href='tel:+4420451​82215 flex' className='text-chalk flex'>
+              <FontAwesomeIcon
+                icon={faPhone}
+                size='xs'
+                className='text-chalk text-xs w-8 mr-2 hover:no-underline'
+              />
+              <p className='text-2xl'>0204 51​8 2215</p>
+            </Link>
+          </div>
+        </div>
       </Section>
-      <Section type='wide' classes='bg-chequered-bg flex'>
-        <h2>{content.subheading}</h2>
-      </Section>
+      <Section type='wide' classes='bg-chequered-bg flex'></Section>
     </>
   );
 }
