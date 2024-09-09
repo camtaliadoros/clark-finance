@@ -4,5 +4,16 @@ export async function GET() {
   );
   const data = await response.json();
 
-  return Response.json(data);
+  const contentRes = await fetch(
+    `${process.env.WP_ROUTE}/pages/203?_fields=acf`
+  );
+
+  const contentData = await contentRes.json();
+
+  const caseStudiesPageData = {
+    content: contentData,
+    caseStudiesData: data,
+  };
+
+  return Response.json(caseStudiesPageData);
 }

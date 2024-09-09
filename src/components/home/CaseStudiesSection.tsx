@@ -1,7 +1,7 @@
 import { CaseStudyFeatureTypes } from '@/util/models';
 import { Section } from '../shared/Section';
 import { SectionTitle } from '../shared/SectionTitle';
-import { CaseStudyFeature } from './CaseStudyFeature';
+import { CaseStudyFeature } from '../shared/CaseStudyFeature';
 import { Button } from '../shared/Button';
 
 async function fetchAllCaseStudies() {
