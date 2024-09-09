@@ -8,7 +8,7 @@ type RequiredDocsCardProps = {
 
 export const RequiredDocsItemCard = ({ content }: RequiredDocsCardProps) => {
   return (
-    <div className='flex justify-between items-center bg-lightblue bg-opacity-15 rounded-md p-4'>
+    <div className='flex justify-between items-center h-12'>
       <div className='flex items-center space-x-2'>
         <Image
           src='/images/check.png'
@@ -16,7 +16,7 @@ export const RequiredDocsItemCard = ({ content }: RequiredDocsCardProps) => {
           height={15}
           alt='check icon'
         />
-        <h3 className='text-center font-medium text-lg'>
+        <h3 className='text-center font-medium text-lg text-ash'>
           {content.required_doc_title}
         </h3>
       </div>

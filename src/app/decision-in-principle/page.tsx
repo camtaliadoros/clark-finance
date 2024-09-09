@@ -1,7 +1,5 @@
-import {
-  RequiredDocsItem,
-  RequiredDocsItemCard,
-} from '@/components/decisionInPrinciple/RequiredDocsCard';
+import { RequiredDocsItemCard } from '@/components/decisionInPrinciple/RequiredDocsCard';
+import { ContactUs } from '@/components/home/ContactUs';
 import { Button } from '@/components/shared/Button';
 import { Section } from '@/components/shared/Section';
 import { SectionTitle } from '@/components/shared/SectionTitle';
@@ -84,7 +82,7 @@ export default async function DecisionInPrinciplePage() {
         <h3 className='font-semibold text-center my-4 text-chalk'>
           {content.subheading}
         </h3>
-        <div className='flex justify-between items-center my-16'>
+        <div className='flex justify-between items-center my-16 mb-48'>
           <Button
             colour='chalk'
             title={content.apply_link.title}
@@ -109,17 +107,19 @@ export default async function DecisionInPrinciplePage() {
           </div>
         </div>
       </Section>
-      <Section
-        type='narrow'
-        classes='bg-chequered-bg bg-cover bg-bottom flex flex-col items-center space-y-8'
-      >
-        <h2 className='font-semibold text-ash'>{content.docs_required_text}</h2>
-        <div className='flex flex-col justify-start w-2/3 space-y-8 '>
-          {requiredDocumentsItems.map((item, i) => (
-            <RequiredDocsItemCard content={item} key={i} />
-          ))}
+      <Section type='narrow' classes='bg-navy flex justify-center'>
+        <div className='bg-chalk w-4/5 flex flex-col items-center space-y-8 p-16 -mt-64 rounded-md'>
+          <h2 className='font-semibold text-ash'>
+            {content.docs_required_text}
+          </h2>
+          <div className='flex flex-col justify-start space-y-8 w-4/5'>
+            {requiredDocumentsItems.map((item, i) => (
+              <RequiredDocsItemCard content={item} key={i} />
+            ))}
+          </div>
         </div>
       </Section>
+      <ContactUs />
     </>
   );
 }
