@@ -9,7 +9,7 @@ type RequiredDocsCardProps = {
 export const RequiredDocsItemCard = ({ content }: RequiredDocsCardProps) => {
   return (
     <div className='flex justify-center md:justify-between md:items-center md:h-12 flex-col md:flex-row w-full'>
-      <div className='flex flex-row items-center space-x-2 justify-start w-full'>
+      <div className='flex flex-row items-center space-x-2 justify-start w-full md:w-auto'>
         <Image
           src='/images/check.png'
           width={15}
