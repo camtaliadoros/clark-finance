@@ -44,7 +44,7 @@ export default async function CreditSearchPage() {
       />
       <h3 className='font-semibold text-center my-4'>{content.subheading}</h3>
       <div
-        className='w-2/3 my-16'
+        className='md:w-2/3 my-16'
         dangerouslySetInnerHTML={{ __html: bodyContent }}
       />
       <Button
