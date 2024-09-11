@@ -1,6 +1,6 @@
 'use client';
 
-import { MenuDrawerContext } from '@/app/contexts/MenuContextProvider';
+import { MenuDrawerContext } from '@/contexts/MenuContextProvider';
 import { useContext } from 'react';
 
 export const MenuDrawer = () => {

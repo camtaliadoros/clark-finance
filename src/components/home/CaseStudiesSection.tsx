@@ -1,16 +1,17 @@
-import { CaseStudyFeatureTypes } from '@/util/models';
+import { CaseStudyContent, CaseStudyFeatureTypes } from '@/util/models';
+import { Button } from '../shared/Button';
+import { CaseStudyFeature } from '../shared/CaseStudyFeature';
 import { Section } from '../shared/Section';
 import { SectionTitle } from '../shared/SectionTitle';
-import { CaseStudyFeature } from '../shared/CaseStudyFeature';
-import { Button } from '../shared/Button';
 
 async function fetchAllCaseStudies() {
   const res = await fetch(
     `${process.env.HOST_URL}/case-studies/api/fetchAllCaseStudies`,
     {
-      next: {
-        revalidate: 10,
-      },
+      // next: {
+      //   revalidate: 10,
+      // },
+      cache: 'no-store',
     }
   );
   if (!res.ok) {
@@ -24,7 +25,7 @@ export const CaseStudiesSection = async ({
 }: {
   bgColour: string;
 }) => {
-  const caseStudiesData = await fetchAllCaseStudies();
+  const caseStudiesData: CaseStudyFeatureTypes[] = await fetchAllCaseStudies();
 
   const featuredContent = caseStudiesData.slice(0, 3);
 

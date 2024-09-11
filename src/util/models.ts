@@ -10,11 +10,26 @@ export type CaseStudyFeatureTypes = {
   acf: CaseStudyContent;
 };
 
-export type CaseStudyContent = {
+export type CaseStudyFeatureContent = {
   case_study_title: string;
   loan_value: string;
   location: string;
   case_study_excerpt: string;
-  case_study_article: string;
-  case_study_featured_image: string;
+  featured_image: number;
+};
+
+export type ImageType = {
+  source_url: string;
+  alt_text: string | null;
+};
+
+export type CaseStudyContent = {
+  case_study_title: string;
+  case_study_excerpt: string;
+  loan_value: string;
+  location: string;
+  the_requirement: string;
+  the_interesting_stuff: string;
+  how_we_helped: string;
+  featured_image: number;
 };

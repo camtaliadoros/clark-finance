@@ -2,21 +2,11 @@ import { CaseStudiesSection } from '@/components/home/CaseStudiesSection';
 import { Button } from '@/components/shared/Button';
 import { PageLinkCard } from '@/components/shared/PageLinkCard';
 import { Section } from '@/components/shared/Section';
+import { CaseStudyContent } from '@/util/models';
 import { convertWysywyg } from '@/util/utilFunctions';
 
 type CaseStudyParams = {
   slug: string;
-};
-
-type CaseStudyContent = {
-  case_study_title: string;
-  case_study_featured_image: string;
-  case_study_excerpt: string;
-  loan_value: string;
-  location: string;
-  the_requirement: string;
-  the_interesting_stuff: string;
-  how_we_helped: string;
 };
 
 const fetchCaseStudy = async (slug: string) => {
@@ -72,6 +62,12 @@ export default async function CaseStudyDetailPage({
         classes='flex flex-col lg:grid lg:grid-cols-3 gap-16'
       >
         <div className='space-y-12 col-span-2'>
+          <div
+            className='h-24'
+            style={{
+              backgroundImage: `url(${content.featured_image})`,
+            }}
+          ></div>
           <h1 className='text-ash'>{content.case_study_title}</h1>
           <div className='space-y-6'>
             <h2 className='text-ash font-semibold text-xl'>

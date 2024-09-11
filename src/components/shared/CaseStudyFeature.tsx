@@ -1,24 +1,45 @@
-import { CaseStudyContent, CaseStudyFeatureTypes } from '@/util/models';
+import { CaseStudyFeatureContent, ImageType } from '@/util/models';
 import Link from 'next/link';
 
 type CaseStudyFeatureProps = {
   slug: string;
-  content: CaseStudyContent;
+  content: CaseStudyFeatureContent;
   colourScheme: string;
 };
 
-export const CaseStudyFeature = ({
+const fetchFeaturedImage = async (imageId: number) => {
+  const res = await fetch(
+    `${process.env.HOST_URL}/api/fetchImage?id=${imageId}`,
+    {
+      // next: {
+      //   revalidate: 10,
+      // },
+      cache: 'no-store',
+    }
+  );
+  if (!res.ok) {
+    throw new Error('Failed to fetch data');
+  }
+  return res.json();
+};
+
+export const CaseStudyFeature = async ({
   slug,
   content,
   colourScheme,
 }: CaseStudyFeatureProps) => {
+  const image: ImageType = await fetchFeaturedImage(content.featured_image);
+
   return (
     <div className='justify-self-center space-y-4'>
       <Link
         className='flex relative w-56 h-56 group'
         href={`case-studies/${slug}`}
       >
-        <div className='w-full h-full bg-bluegrey relative rounded-br-[120px] z-10 transition-all group-hover:opacity-90 group-hover:rounded-br-[140px]'></div>
+        <div
+          className='bg-cover bg-center w-full h-full relative rounded-br-[120px] z-10 transition-all group-hover:opacity-90 group-hover:rounded-br-[140px]'
+          style={{ backgroundImage: `url(${image.source_url})` }}
+        ></div>
         <div
           className={`absolute top-0 left-0 bg-lightblue
           } h-full w-full flex justify-end items-end `}
