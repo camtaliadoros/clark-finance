@@ -43,6 +43,7 @@ h6 {
 
 h1 {
   font-size: 36px;
+  color: ##32426;
 }
 
 h2 {
@@ -52,16 +53,19 @@ h2 {
 
 h3 {
   font-size: 24px;
+  color: #232426;
 }
 
 h5 {
   font-size: 16px;
   margin-bottom: 0.75rem;
+  color: #232426;
 }
 
 p,
 a {
   font-size: 14px;
+  color: #232426;
 }
 
 a {

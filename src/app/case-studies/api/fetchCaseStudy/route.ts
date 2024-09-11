@@ -5,7 +5,7 @@ export async function GET(req: NextRequest) {
   const slug = searchParams.get('slug');
 
   const response = await fetch(
-    `${process.env.WP_ROUTE}/case-study?slug=${slug}&_fields=acf,slug,link`
+    `${process.env.WP_ROUTE}/case-study?slug=${slug}&_fields=acf`
   );
   const data = await response.json();
 
