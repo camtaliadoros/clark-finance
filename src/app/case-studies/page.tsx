@@ -47,7 +47,7 @@ export default async function CaseStudiesHome() {
   return (
     <Section
       type='narrow'
-      classes='bg-chequered-bg bg-cover bg-bottom space-y-16'
+      classes='bg-chequered-bg bg-cover bg-fixed bg-bottom space-y-16'
     >
       <SectionTitle
         title={pageContent.page_title}

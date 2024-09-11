@@ -33,7 +33,7 @@ export const ServiceCards = async () => {
 
   return (
     <Section type='wide' classes='py-0'>
-      <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3 -mt-56'>
+      <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3'>
         {services.map((service) => (
           <ServiceCard
             key={service.acf.homepage_order}
