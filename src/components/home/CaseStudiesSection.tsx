@@ -19,20 +19,24 @@ async function fetchAllCaseStudies() {
   return res.json();
 }
 
-export const CaseStudiesSection = async () => {
+export const CaseStudiesSection = async ({
+  bgColour,
+}: {
+  bgColour: string;
+}) => {
   const caseStudiesData = await fetchAllCaseStudies();
 
   const featuredContent = caseStudiesData.slice(0, 3);
 
   return (
     <Section
-      type='narrow'
-      classes='bg-chalk space-y-20 flex flex-col items-center '
+      type='wide'
+      classes={`${bgColour} space-y-20 flex flex-col items-center`}
     >
       <SectionTitle
         title='Case Studies'
         lineColour='lightblue'
-        textColour='ash'
+        textColour={`${bgColour === 'dark' ? 'ash' : 'chalk'}`}
         alignment='centred'
       />
       <div className='flex flex-col items-center  space-y-12 md:space-y-0 md:grid md:grid-cols-2 md:grid-rows-1 lg:grid-cols-3 md:items-start w-full'>
@@ -41,11 +45,12 @@ export const CaseStudiesSection = async () => {
             key={content.slug}
             slug={content.slug}
             content={content.acf}
+            colourScheme={`${bgColour === 'light' ? 'dark' : 'light'}`}
           />
         ))}
       </div>
       <Button
-        colour='mediumblue'
+        colour={`${bgColour === 'light' ? 'mediumblue' : 'chalk'}`}
         title='View all case studies'
         url='/case-studies'
         classes='w-fit'

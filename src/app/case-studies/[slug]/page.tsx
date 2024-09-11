@@ -98,9 +98,7 @@ export default async function CaseStudyDetailPage({
           <PageLinkCard type='contactUs' />
         </div>
       </Section>
-      <Section type='wide'>
-        <CaseStudiesSection />
-      </Section>
+      <CaseStudiesSection bgColour='bg-navy' />
     </>
   );
 }
