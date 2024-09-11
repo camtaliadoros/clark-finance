@@ -67,7 +67,10 @@ export default async function CaseStudyDetailPage({
 
   return (
     <>
-      <Section type='narrow' classes='grid grid-cols-3 gap-16'>
+      <Section
+        type='narrow'
+        classes='flex flex-col lg:grid lg:grid-cols-3 gap-16'
+      >
         <div className='space-y-12 col-span-2'>
           <h1 className='text-ash'>{content.case_study_title}</h1>
           <div className='space-y-6'>
@@ -93,7 +96,7 @@ export default async function CaseStudyDetailPage({
             <div dangerouslySetInnerHTML={{ __html: howWeHelpedContent }} />
           </div>
         </div>
-        <div className='space-y-16'>
+        <div className='gap-16 flex flex-col md:flex-row lg:flex-col'>
           <PageLinkCard type='services' />
           <PageLinkCard type='contactUs' />
         </div>

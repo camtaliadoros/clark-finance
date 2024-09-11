@@ -53,7 +53,7 @@ export const PageLinkCard = ({ type }: PageLinkCardProps) => {
   const content: CardContentType = linkCardsContent[type];
 
   return (
-    <div className='bg-mediumblue flex flex-col items-center py-12 px-16 space-y-8 rounded-md'>
+    <div className='bg-mediumblue flex flex-col justify-between items-center py-8 px-12 lg:py-12 lg:px-16 space-y-8 rounded-md'>
       <h3 className='text-chalk'>{content.title}</h3>
       <p className='text-chalk'>{content.content}</p>
       <Button
