@@ -3,3 +3,19 @@ export const convertWysywyg = (rawContent: string) => {
 
   return convertedContent;
 };
+
+export const fetchFeaturedImage = async (imageId: number) => {
+  const res = await fetch(
+    `${process.env.HOST_URL}/api/fetchImage?id=${imageId}`,
+    {
+      // next: {
+      //   revalidate: 10,
+      // },
+      cache: 'no-store',
+    }
+  );
+  if (!res.ok) {
+    throw new Error('Failed to fetch data');
+  }
+  return res.json();
+};

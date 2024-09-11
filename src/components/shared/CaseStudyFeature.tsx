@@ -1,26 +1,11 @@
 import { CaseStudyFeatureContent, ImageType } from '@/util/models';
+import { fetchFeaturedImage } from '@/util/utilFunctions';
 import Link from 'next/link';
 
 type CaseStudyFeatureProps = {
   slug: string;
   content: CaseStudyFeatureContent;
   colourScheme: string;
-};
-
-const fetchFeaturedImage = async (imageId: number) => {
-  const res = await fetch(
-    `${process.env.HOST_URL}/api/fetchImage?id=${imageId}`,
-    {
-      // next: {
-      //   revalidate: 10,
-      // },
-      cache: 'no-store',
-    }
-  );
-  if (!res.ok) {
-    throw new Error('Failed to fetch data');
-  }
-  return res.json();
 };
 
 export const CaseStudyFeature = async ({
@@ -34,7 +19,7 @@ export const CaseStudyFeature = async ({
     <div className='justify-self-center space-y-4'>
       <Link
         className='flex relative w-56 h-56 group'
-        href={`case-studies/${slug}`}
+        href={`/case-studies/${slug}`}
       >
         <div
           className='bg-cover bg-center w-full h-full relative rounded-br-[120px] z-10 transition-all group-hover:opacity-90 group-hover:rounded-br-[140px]'
