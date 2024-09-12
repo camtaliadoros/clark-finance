@@ -33,3 +33,10 @@ export type CaseStudyContent = {
   how_we_helped: string;
   featured_image: number;
 };
+
+export type ArticleContentType = {
+  title: string;
+  headline: string;
+  article_body: string;
+  featured_image: number;
+};

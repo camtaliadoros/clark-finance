@@ -1,6 +1,7 @@
 import { CaseStudyFeatureContent, ImageType } from '@/util/models';
 import { fetchFeaturedImage } from '@/util/utilFunctions';
 import Link from 'next/link';
+import { ClickableImage } from './ClickableImage';
 
 type CaseStudyFeatureProps = {
   slug: string;
@@ -17,22 +18,7 @@ export const CaseStudyFeature = async ({
 
   return (
     <div className='justify-self-center space-y-4'>
-      <Link
-        className='flex relative w-56 h-56 group'
-        href={`/case-studies/${slug}`}
-      >
-        <div
-          className='bg-cover bg-center w-full h-full relative rounded-br-[120px] z-10 transition-all group-hover:opacity-90 group-hover:rounded-br-[140px]'
-          style={{ backgroundImage: `url(${image.source_url})` }}
-        ></div>
-        <div
-          className={`absolute top-0 left-0 bg-lightblue
-          } h-full w-full flex justify-end items-end `}
-        >
-          <p className='font-bold m-2 text-chalk text-sm leading-none'>MORE</p>
-        </div>
-      </Link>
-
+      <ClickableImage slug={slug} imageUrl={image.source_url} />
       <div className='flex flex-col justify-start space-y-6 w-56'>
         <div className='space-y-1 '>
           <h6
