@@ -65,7 +65,7 @@ export default async function CaseStudiesHome() {
               key={content.slug}
               slug={content.slug}
               content={content.acf}
-              colourScheme='light'
+              colourScheme='dark'
             />
           ))}
         </FeaturedCardsWrapper>
