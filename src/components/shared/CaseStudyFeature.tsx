@@ -37,21 +37,21 @@ export const CaseStudyFeature = async ({
         <div className='space-y-1 '>
           <h6
             className={`${
-              colourScheme === 'light' ? 'text-chalk' : 'text-ash'
+              colourScheme === 'light' ? 'text-ash' : 'text-chalk'
             } text-font-normal text-base`}
           >
             {content.loan_value}
           </h6>
           <h4
             className={`${
-              colourScheme === 'light' ? 'text-chalk' : 'text-ash'
+              colourScheme === 'light' ? 'text-ash' : 'text-chalk'
             } text-xl`}
           >
             {content.case_study_title}
           </h4>
           <h6
             className={`${
-              colourScheme === 'light' ? 'text-chalk' : 'text-ash'
+              colourScheme === 'light' ? 'text-ash' : 'text-chalk'
             } font-normal text-base`}
           >
             {content.location}
@@ -59,7 +59,7 @@ export const CaseStudyFeature = async ({
         </div>
         <p
           className={`${
-            colourScheme === 'light' ? 'text-chalk' : 'text-ash'
+            colourScheme === 'light' ? 'text-ash' : 'text-chalk'
           } leading-normal`}
         >
           {content.case_study_excerpt}
