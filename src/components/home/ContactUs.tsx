@@ -16,6 +16,10 @@ type BookAppointmentContent = {
   target?: string;
 };
 
+type ContactUsProps = {
+  colourScheme: string;
+};
+
 async function fetchContactUsContent() {
   const res = await fetch(`${process.env.HOST_URL}/contact-us/api`, {
     next: {
@@ -28,7 +32,7 @@ async function fetchContactUsContent() {
   return res.json();
 }
 
-export const ContactUs = async () => {
+export const ContactUs = async ({ colourScheme }: ContactUsProps) => {
   const contactUsData = await fetchContactUsContent();
 
   const content: ContactUsContent = contactUsData.acf;
@@ -36,26 +40,28 @@ export const ContactUs = async () => {
   return (
     <Section
       type='narrow'
-      classes='bg-chequered-bg bg-cover bg-bottom space-y-12'
+      classes={`${
+        colourScheme === 'light' ? 'bg-chequered-bg' : 'bg-building-detail'
+      } bg-cover bg-bottom space-y-12`}
     >
       <SectionTitle
         title={content.contact_section_title}
-        textColour='ash'
-        lineColour='lightblue'
+        textColour={colourScheme === 'light' ? 'ash' : 'chalk'}
+        lineColour={colourScheme === 'light' ? 'mediumblue' : 'chalk'}
         alignment='centred'
       />
       <div className='flex flex-col md:grid md:grid-cols-2 items-start space-y-12 md:space-y-0 gap-12'>
         <ContactForm />
-        <div className='flex flex-col items-start gap-6'>
+        <div className='flex flex-col items-start gap-6 '>
           <Button
             title={content.book_appointment_label.title}
-            colour='mediumblue'
+            colour={colourScheme === 'light' ? 'mediumblue' : 'chalk'}
             url={content.book_appointment_label.url}
             target={content.book_appointment_label.target}
             classes='w-full md:w-fit md:justify-self-center'
           />
-          <EmailWithIcon />
-          <PhoneNumberWithIcon />
+          <EmailWithIcon colour='light' />
+          <PhoneNumberWithIcon colour='light' />
         </div>
       </div>
     </Section>

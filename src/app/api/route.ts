@@ -1,6 +1,9 @@
 export async function GET() {
   try {
-    const response = await fetch(`${process.env.WP_ROUTE}/pages/7?_fields=acf`);
+    console.log('@@@%^@%@%&@%^&@%');
+    const response = await fetch(
+      `${process.env.WP_ROUTE}/pages/215?_fields=acf`
+    );
     const data = await response.json();
 
     return Response.json(data);

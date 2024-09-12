@@ -1,7 +1,11 @@
 import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-export const EmailWithIcon = () => {
+type EmailWithIconProps = {
+  colour: string;
+};
+
+export const EmailWithIcon = ({ colour }: EmailWithIconProps) => {
   return (
     <a
       className='inline-flex items-center space-x-1 link'
@@ -10,9 +14,17 @@ export const EmailWithIcon = () => {
       <FontAwesomeIcon
         icon={faEnvelope}
         size={'sm'}
-        className='text-base h-4'
+        className={`${
+          colour === 'light' ? 'text-chalk' : 'text-ash'
+        } text-base h-4`}
       />
-      <p className='hidden md:block'>info@clark.finance</p>
+      <p
+        className={`${
+          colour === 'light' ? 'text-chalk' : 'text-ash'
+        } hidden md:block`}
+      >
+        info@clark.finance
+      </p>
     </a>
   );
 };

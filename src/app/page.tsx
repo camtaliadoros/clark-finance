@@ -26,7 +26,10 @@ async function fetchHomePageContent() {
     // },
     cache: 'no-store',
   });
+  console.log('res!!!');
   if (!res.ok) {
+    const a = await res.json();
+    console.log(a);
     throw new Error('Failed to fetch data');
   }
   return res.json();
