@@ -1,6 +1,5 @@
-import { CaseStudiesSection } from '@/components/home/CaseStudiesSection';
+import { ArticleWrapper } from '@/components/shared/ArticleWrapper';
 import { Button } from '@/components/shared/Button';
-import { PageLinkCard } from '@/components/shared/PageLinkCard';
 import { Section } from '@/components/shared/Section';
 import { CaseStudyContent, ImageType } from '@/util/models';
 import { convertWysywyg, fetchFeaturedImage } from '@/util/utilFunctions';
@@ -57,53 +56,32 @@ export default async function CaseStudyDetailPage({
   }
 
   return (
-    <>
-      <div
-        className=' relative flex justify-center items-center bg-cover bg-fixed bg-center'
-        style={{
-          backgroundImage: `url(${image.source_url})`,
-        }}
-      >
-        <div className='absolute inset-0 bg-navy opacity-50'></div>
-        <h1 className='relative text-chalk my-48 z-10'>
-          {content.case_study_title}
-        </h1>
+    <ArticleWrapper
+      imageUrl={image.source_url}
+      title={content.case_study_title}
+      pageLinkCard1='services'
+      pageLinkCard2='contactUs'
+    >
+      <div className='space-y-6'>
+        <h2 className='text-ash font-semibold text-xl'>
+          Loan Value: {content.loan_value}
+        </h2>
+        <h2 className='text-ash font-semibold text-xl'>
+          Location: {content.location}
+        </h2>
       </div>
-      <Section type='narrow' classes=''>
-        <div className='flex flex-col lg:grid lg:grid-cols-3 gap-16'>
-          <div className=' space-y-12 col-span-2'>
-            <div className='space-y-6'>
-              <h2 className='text-ash font-semibold text-xl'>
-                Loan Value: {content.loan_value}
-              </h2>
-              <h2 className='text-ash font-semibold text-xl'>
-                Location: {content.location}
-              </h2>
-            </div>
-            <div className='space-y-4'>
-              <h3 className='text-xl font-semibold'>The Requirement</h3>
-              <div
-                dangerouslySetInnerHTML={{ __html: theRequirementContent }}
-              />
-            </div>
-            <div className='space-y-4'>
-              <h3 className='text-xl font-semibold'>The Interesting Stuff</h3>
-              <div
-                dangerouslySetInnerHTML={{ __html: theInterestingStuffContent }}
-              />
-            </div>
-            <div className='space-y-4'>
-              <h3 className='text-xl font-semibold'>How We Helped</h3>
-              <div dangerouslySetInnerHTML={{ __html: howWeHelpedContent }} />
-            </div>
-          </div>
-          <div className='gap-16 flex flex-col md:flex-row lg:flex-col'>
-            <PageLinkCard type='services' />
-            <PageLinkCard type='contactUs' />
-          </div>
-        </div>
-      </Section>
-      <CaseStudiesSection bgColour='bg-navy' />
-    </>
+      <div className='space-y-4'>
+        <h3 className='text-xl font-semibold'>The Requirement</h3>
+        <div dangerouslySetInnerHTML={{ __html: theRequirementContent }} />
+      </div>
+      <div className='space-y-4'>
+        <h3 className='text-xl font-semibold'>The Interesting Stuff</h3>
+        <div dangerouslySetInnerHTML={{ __html: theInterestingStuffContent }} />
+      </div>
+      <div className='space-y-4'>
+        <h3 className='text-xl font-semibold'>How We Helped</h3>
+        <div dangerouslySetInnerHTML={{ __html: howWeHelpedContent }} />
+      </div>
+    </ArticleWrapper>
   );
 }

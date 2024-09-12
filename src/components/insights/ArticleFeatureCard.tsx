@@ -17,7 +17,10 @@ export const ArticleFeatureCard = async ({
 
   return (
     <div className='flex flex-col items-center '>
-      <ClickableImage slug={articleData.slug} imageUrl={image.source_url} />
+      <ClickableImage
+        slug={`/insights/${articleData.slug}`}
+        imageUrl={image.source_url}
+      />
       <FeaturedCardsContentWrapper>
         <div>
           <h2 className='font-semibold text-ash text-2xl'>

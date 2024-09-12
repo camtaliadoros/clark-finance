@@ -12,12 +12,15 @@ export type ArticleDataType = {
 };
 
 const fetchAllArticles = async () => {
-  const res = await fetch(`${process.env.HOST_URL}/insights/api`, {
-    //   next: {
-    //     revalidate: 10,
-    //   },
-    cache: 'no-store',
-  });
+  const res = await fetch(
+    `${process.env.HOST_URL}/insights/api/fetchAllArticles`,
+    {
+      //   next: {
+      //     revalidate: 10,
+      //   },
+      cache: 'no-store',
+    }
+  );
   if (!res.ok) {
     throw new Error('Failed to fetch data');
   }

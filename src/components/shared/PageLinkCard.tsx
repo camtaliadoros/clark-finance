@@ -20,6 +20,7 @@ type LinkCardsContentType = {
   services: CardContentType;
   caseStudies: CardContentType;
   contactUs: CardContentType;
+  insights: CardContentType;
 };
 
 const linkCardsContent: LinkCardsContentType = {
@@ -45,6 +46,14 @@ const linkCardsContent: LinkCardsContentType = {
     button: {
       title: 'Get in touch',
       url: '/contact-us',
+    },
+  },
+  insights: {
+    title: 'Insights',
+    content: 'Read the latest news and insights from our team',
+    button: {
+      title: 'View Insights',
+      url: '/insights',
     },
   },
 };

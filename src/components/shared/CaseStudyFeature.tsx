@@ -19,7 +19,10 @@ export const CaseStudyFeature = async ({
 
   return (
     <div className='justify-self-center space-y-4'>
-      <ClickableImage slug={slug} imageUrl={image.source_url} />
+      <ClickableImage
+        slug={`/case-studies/${slug}`}
+        imageUrl={image.source_url}
+      />
       <FeaturedCardsContentWrapper>
         <div className='space-y-1 '>
           <h6
