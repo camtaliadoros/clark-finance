@@ -2,6 +2,7 @@ import { CaseStudyFeatureContent, ImageType } from '@/util/models';
 import { fetchFeaturedImage } from '@/util/utilFunctions';
 import Link from 'next/link';
 import { ClickableImage } from './ClickableImage';
+import { FeaturedCardsContentWrapper } from './FeaturedCardsContentWrapper';
 
 type CaseStudyFeatureProps = {
   slug: string;
@@ -19,7 +20,7 @@ export const CaseStudyFeature = async ({
   return (
     <div className='justify-self-center space-y-4'>
       <ClickableImage slug={slug} imageUrl={image.source_url} />
-      <div className='flex flex-col justify-start space-y-6 w-56'>
+      <FeaturedCardsContentWrapper>
         <div className='space-y-1 '>
           <h6
             className={`${
@@ -50,7 +51,7 @@ export const CaseStudyFeature = async ({
         >
           {content.case_study_excerpt}
         </p>
-      </div>
+      </FeaturedCardsContentWrapper>
     </div>
   );
 };

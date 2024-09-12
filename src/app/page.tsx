@@ -26,10 +26,10 @@ async function fetchHomePageContent() {
     // },
     cache: 'no-store',
   });
-  console.log('res!!!');
+
   if (!res.ok) {
     const a = await res.json();
-    console.log(a);
+
     throw new Error('Failed to fetch data');
   }
   return res.json();
@@ -49,7 +49,7 @@ export default async function Home() {
         cta2={content.cta_2}
       />
       <ServiceCards />
-      <ContactUs />
+      <ContactUs colourScheme='light' />
       <WhyClarkFinance
         sectionTitle={content.why_clark_finance_section_title}
         bodyContent={content.about_us_content}

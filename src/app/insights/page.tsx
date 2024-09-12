@@ -1,5 +1,8 @@
+import { ContactUs } from '@/components/home/ContactUs';
 import { ArticleFeatureCard } from '@/components/insights/ArticleFeatureCard';
+import { FeaturedCardsWrapper } from '@/components/shared/FeaturedCardsWrapper';
 import { Section } from '@/components/shared/Section';
+import { SectionTitle } from '@/components/shared/SectionTitle';
 import { ArticleContentType } from '@/util/models';
 
 export type ArticleDataType = {
@@ -24,13 +27,25 @@ const fetchAllArticles = async () => {
 export default async function InsightsPage() {
   const data: ArticleDataType[] = await fetchAllArticles();
 
-  console.log(data);
-
   return (
-    <Section type='narrow'>
-      {data.map((articleData, i) => (
-        <ArticleFeatureCard articleData={articleData} key={i} />
-      ))}
-    </Section>
+    <>
+      <Section
+        type='narrow'
+        classes='flex flex-col items-center justify-center bg-chequered-bg bg-cover bg-bottom bg-fixed'
+      >
+        <SectionTitle
+          title='Insights'
+          lineColour='mediumblue'
+          textColour='ash'
+          alignment='centred'
+        />
+        <FeaturedCardsWrapper>
+          {data.map((articleData, i) => (
+            <ArticleFeatureCard articleData={articleData} key={i} />
+          ))}
+        </FeaturedCardsWrapper>
+      </Section>
+      <ContactUs colourScheme='dark' />
+    </>
   );
 }

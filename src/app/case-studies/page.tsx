@@ -1,5 +1,6 @@
 import { ContactUs } from '@/components/home/ContactUs';
 import { CaseStudyFeature } from '@/components/shared/CaseStudyFeature';
+import { FeaturedCardsWrapper } from '@/components/shared/FeaturedCardsWrapper';
 import { Section } from '@/components/shared/Section';
 import { SectionTitle } from '@/components/shared/SectionTitle';
 import { CaseStudyFeatureTypes } from '@/util/models';
@@ -57,7 +58,8 @@ export default async function CaseStudiesHome() {
           lineColour='mediumblue'
           alignment='centred'
         />
-        <div className='flex flex-col items-center  space-y-12 md:space-y-0 md:grid md:grid-cols-2 md:grid-rows-1 lg:grid-cols-3 md:items-start w-full'>
+
+        <FeaturedCardsWrapper>
           {caseStudies.map((content: CaseStudyFeatureTypes) => (
             <CaseStudyFeature
               key={content.slug}
@@ -66,7 +68,7 @@ export default async function CaseStudiesHome() {
               colourScheme='light'
             />
           ))}
-        </div>
+        </FeaturedCardsWrapper>
       </Section>
 
       <ContactUs colourScheme='dark' />
