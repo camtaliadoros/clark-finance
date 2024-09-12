@@ -13,9 +13,10 @@ async function fetchAllCaseStudies() {
   const res = await fetch(
     `${process.env.HOST_URL}/case-studies/api/fetchAllCaseStudies`,
     {
-      next: {
-        revalidate: 10,
-      },
+      // next: {
+      //   revalidate: 10,
+      // },
+      cache: 'no-store',
     }
   );
   if (!res.ok) {

@@ -1,19 +1,16 @@
-import { ArticleDataType } from '@/app/insights/page';
+import { ArticleDataType } from '@/app/news/page';
 import { ArticleFeatureCard } from '../insights/ArticleFeatureCard';
 import { Button } from '../shared/Button';
 import { Section } from '../shared/Section';
 import { SectionTitle } from '../shared/SectionTitle';
 
 async function fetchAllArticles() {
-  const res = await fetch(
-    `${process.env.HOST_URL}/insights/api/fetchAllArticles`,
-    {
-      // next: {
-      //   revalidate: 10,
-      // },
-      cache: 'no-store',
-    }
-  );
+  const res = await fetch(`${process.env.HOST_URL}/news/api/fetchAllArticles`, {
+    // next: {
+    //   revalidate: 10,
+    // },
+    cache: 'no-store',
+  });
   if (!res.ok) {
     throw new Error('Failed to fetch data');
   }
@@ -54,7 +51,7 @@ export const FeaturedArticlesSection = async ({
       <Button
         colour={`${bgColour === 'light' ? 'mediumblue' : 'chalk'}`}
         title='View all articles'
-        url='/insights'
+        url='/news'
         classes='w-fit'
       />
     </Section>

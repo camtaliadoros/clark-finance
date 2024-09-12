@@ -13,7 +13,7 @@ export type ArticleDataType = {
 
 const fetchAllArticles = async () => {
   const res = await fetch(
-    `${process.env.HOST_URL}/insights/api/fetchAllArticles`,
+    `${process.env.HOST_URL}/articles/api/fetchAllArticles`,
     {
       //   next: {
       //     revalidate: 10,
@@ -26,6 +26,19 @@ const fetchAllArticles = async () => {
   }
   return res.json();
 };
+
+async function fetchPageContent() {
+  const res = await fetch(`${process.env.HOST_URL}/news/api/fetchPageContent`, {
+    // next: {
+    //   revalidate: 10,
+    // },
+    cache: 'no-store',
+  });
+  if (!res.ok) {
+    throw new Error('Failed to fetch data');
+  }
+  return res.json();
+}
 
 export default async function InsightsPage() {
   const data: ArticleDataType[] = await fetchAllArticles();
@@ -44,7 +57,11 @@ export default async function InsightsPage() {
         />
         <FeaturedCardsWrapper>
           {data.map((articleData, i) => (
-            <ArticleFeatureCard articleData={articleData} key={i} />
+            <ArticleFeatureCard
+              articleData={articleData}
+              key={i}
+              colourScheme='light'
+            />
           ))}
         </FeaturedCardsWrapper>
       </Section>

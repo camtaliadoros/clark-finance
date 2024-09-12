@@ -1,8 +1,8 @@
-import { ArticleContentType, ImageType } from '@/util/models';
-import { ClickableImage } from '../shared/ClickableImage';
-import { ArticleDataType } from '@/app/insights/page';
+import { ImageType } from '@/util/models';
 import { fetchFeaturedImage } from '@/util/utilFunctions';
+import { ClickableImage } from '../shared/ClickableImage';
 import { FeaturedCardsContentWrapper } from '../shared/FeaturedCardsContentWrapper';
+import { ArticleDataType } from '@/app/news/page';
 
 type ArticleFeatureCardProps = {
   articleData: ArticleDataType;
@@ -20,7 +20,7 @@ export const ArticleFeatureCard = async ({
   return (
     <div className='flex flex-col items-center '>
       <ClickableImage
-        slug={`/insights/${articleData.slug}`}
+        slug={`/news/${articleData.slug}`}
         imageUrl={image.source_url}
       />
       <FeaturedCardsContentWrapper>
