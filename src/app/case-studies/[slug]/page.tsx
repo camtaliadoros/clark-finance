@@ -1,3 +1,4 @@
+import { CaseStudiesSection } from '@/components/home/CaseStudiesSection';
 import { ArticleWrapper } from '@/components/shared/ArticleWrapper';
 import { Button } from '@/components/shared/Button';
 import { Section } from '@/components/shared/Section';
@@ -56,32 +57,37 @@ export default async function CaseStudyDetailPage({
   }
 
   return (
-    <ArticleWrapper
-      imageUrl={image.source_url}
-      title={content.case_study_title}
-      pageLinkCard1='services'
-      pageLinkCard2='contactUs'
-    >
-      <div className='space-y-6'>
-        <h2 className='text-ash font-semibold text-xl'>
-          Loan Value: {content.loan_value}
-        </h2>
-        <h2 className='text-ash font-semibold text-xl'>
-          Location: {content.location}
-        </h2>
-      </div>
-      <div className='space-y-4'>
-        <h3 className='text-xl font-semibold'>The Requirement</h3>
-        <div dangerouslySetInnerHTML={{ __html: theRequirementContent }} />
-      </div>
-      <div className='space-y-4'>
-        <h3 className='text-xl font-semibold'>The Interesting Stuff</h3>
-        <div dangerouslySetInnerHTML={{ __html: theInterestingStuffContent }} />
-      </div>
-      <div className='space-y-4'>
-        <h3 className='text-xl font-semibold'>How We Helped</h3>
-        <div dangerouslySetInnerHTML={{ __html: howWeHelpedContent }} />
-      </div>
-    </ArticleWrapper>
+    <>
+      <ArticleWrapper
+        imageUrl={image.source_url}
+        title={content.case_study_title}
+        pageLinkCard1='services'
+        pageLinkCard2='contactUs'
+      >
+        <div className='space-y-6'>
+          <h2 className='text-ash font-semibold text-xl'>
+            Loan Value: {content.loan_value}
+          </h2>
+          <h2 className='text-ash font-semibold text-xl'>
+            Location: {content.location}
+          </h2>
+        </div>
+        <div className='space-y-4'>
+          <h3 className='text-xl font-semibold'>The Requirement</h3>
+          <div dangerouslySetInnerHTML={{ __html: theRequirementContent }} />
+        </div>
+        <div className='space-y-4'>
+          <h3 className='text-xl font-semibold'>The Interesting Stuff</h3>
+          <div
+            dangerouslySetInnerHTML={{ __html: theInterestingStuffContent }}
+          />
+        </div>
+        <div className='space-y-4'>
+          <h3 className='text-xl font-semibold'>How We Helped</h3>
+          <div dangerouslySetInnerHTML={{ __html: howWeHelpedContent }} />
+        </div>
+      </ArticleWrapper>
+      <CaseStudiesSection bgColour='bg-navy' />
+    </>
   );
 }

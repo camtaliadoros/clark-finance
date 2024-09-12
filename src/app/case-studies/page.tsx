@@ -70,7 +70,6 @@ export default async function CaseStudiesHome() {
           ))}
         </FeaturedCardsWrapper>
       </Section>
-
       <ContactUs colourScheme='dark' />
     </>
   );

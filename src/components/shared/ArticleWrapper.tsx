@@ -37,7 +37,6 @@ export const ArticleWrapper = ({
           </div>
         </div>
       </Section>
-      <CaseStudiesSection bgColour='bg-navy' />
     </>
   );
 };
