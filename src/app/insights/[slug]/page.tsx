@@ -1,5 +1,6 @@
 import { ArticleWrapper } from '@/components/shared/ArticleWrapper';
 import { Button } from '@/components/shared/Button';
+import { FeaturedArticlesSection } from '@/components/shared/FeaturedArticlesSection';
 import { Section } from '@/components/shared/Section';
 import { ArticleContentType, ImageType } from '@/util/models';
 import { convertWysywyg, fetchFeaturedImage } from '@/util/utilFunctions';
@@ -66,17 +67,22 @@ export default async function ArticlePage({
   }
 
   return (
-    <ArticleWrapper
-      title={content.acf.title}
-      imageUrl={image.source_url}
-      pageLinkCard1='contactUs'
-      pageLinkCard2='services'
-    >
-      <h5 className='font-normal text-mediumgrey text-base'>{formatedDate}</h5>
-      <h2 className='text-ash text-2xl font-semibold'>
-        {content.acf.headline}
-      </h2>
-      <div dangerouslySetInnerHTML={{ __html: contentBody }} />
-    </ArticleWrapper>
+    <>
+      <ArticleWrapper
+        title={content.acf.title}
+        imageUrl={image.source_url}
+        pageLinkCard1='contactUs'
+        pageLinkCard2='services'
+      >
+        <h5 className='font-normal text-mediumgrey text-base'>
+          {formatedDate}
+        </h5>
+        <h2 className='text-ash text-2xl font-semibold'>
+          {content.acf.headline}
+        </h2>
+        <div dangerouslySetInnerHTML={{ __html: contentBody }} />
+      </ArticleWrapper>
+      <FeaturedArticlesSection bgColour='dark' />
+    </>
   );
 }

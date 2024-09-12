@@ -1,4 +1,3 @@
-import { CaseStudiesSection } from '../home/CaseStudiesSection';
 import { PageLinkCard } from './PageLinkCard';
 import { Section } from './Section';
 

@@ -87,7 +87,7 @@ export default async function CaseStudyDetailPage({
           <div dangerouslySetInnerHTML={{ __html: howWeHelpedContent }} />
         </div>
       </ArticleWrapper>
-      <CaseStudiesSection bgColour='bg-navy' />
+      <CaseStudiesSection bgColour='dark' />
     </>
   );
 }
