@@ -1,6 +1,7 @@
 import { RequiredDocsItemCard } from '@/components/decisionInPrinciple/RequiredDocsCard';
 import { ContactUs } from '@/components/home/ContactUs';
 import { Button } from '@/components/shared/Button';
+import { PhoneNumberWithIcon } from '@/components/shared/PhoneNumberWithIcon';
 import { Section } from '@/components/shared/Section';
 import { SectionTitle } from '@/components/shared/SectionTitle';
 import { ButtonContentFields } from '@/util/models';
@@ -96,17 +97,7 @@ export default async function DecisionInPrinciplePage() {
             <h4 className='text-chalk text-2xl text-right'>
               Speak to our Experts today to run through your application
             </h4>
-            <Link
-              href='tel:+4420451​82215 flex'
-              className='text-chalk flex items-center'
-            >
-              <FontAwesomeIcon
-                icon={faPhone}
-                size='xs'
-                className='text-chalk text-xs w-6 h-6 mr-2 hover:no-underline'
-              />
-              <p className='text-2xl'>0204 51​8 2215</p>
-            </Link>
+            <PhoneNumberWithIcon colour='light' />
           </div>
         </div>
 
