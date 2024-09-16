@@ -1,8 +1,8 @@
 import { ArticleDataType } from '@/app/news/page';
 import { ArticleFeatureCard } from '../insights/ArticleFeatureCard';
-import { Button } from '../shared/Button';
-import { Section } from '../shared/Section';
-import { SectionTitle } from '../shared/SectionTitle';
+import { Button } from './Button';
+import { Section } from './Section';
+import { SectionTitle } from './SectionTitle';
 
 async function fetchAllArticles() {
   const res = await fetch(`${process.env.HOST_URL}/news/api/fetchAllArticles`, {

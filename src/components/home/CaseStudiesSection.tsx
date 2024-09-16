@@ -31,7 +31,7 @@ export const CaseStudiesSection = async ({
 
   return (
     <Section
-      type='wide'
+      type='narrow'
       classes={`${bgColour} space-y-2 flex flex-col items-center`}
     >
       <SectionTitle

@@ -17,6 +17,14 @@ export const ArticleFeatureCard = async ({
     articleData.acf.featured_image
   );
 
+  const date = new Date(articleData.date);
+
+  const formatedDate = date.toLocaleDateString('en-GB', {
+    day: 'numeric',
+    month: 'long',
+    year: 'numeric',
+  });
+
   return (
     <div className='flex flex-col items-center '>
       <ClickableImage
@@ -37,7 +45,7 @@ export const ArticleFeatureCard = async ({
               colourScheme === 'light' ? 'text-chalk' : 'text-mediumgrey'
             } font-normal text-base`}
           >
-            {articleData.date}
+            {formatedDate}
           </h5>
         </div>
         <p
