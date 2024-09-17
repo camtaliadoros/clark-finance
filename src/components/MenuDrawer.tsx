@@ -33,7 +33,7 @@ export const MenuDrawer = () => {
 
   return (
     <div
-      className={`bg-mediumblue w-full h-full absolute top-0 left-0 opacity-90 transition z-30 flex flex-col items-center justify-center space-y-8 ${
+      className={`bg-mediumblue w-full h-full absolute top-0 left-0 opacity-95 transition z-30 flex flex-col items-center justify-center space-y-8 ${
         isOpen ? null : 'translate-x-full'
       }`}
     >
