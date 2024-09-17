@@ -1,6 +1,7 @@
 import { Page } from '@/util/models';
 import { fetchMenuItems } from '@/util/utilFunctions';
 import Image from 'next/image';
+import Link from 'next/link';
 
 export const Footer = async () => {
   const data: Page[] = await fetchMenuItems();
@@ -40,6 +41,17 @@ export const Footer = async () => {
             <p className='text-chalk text-sm'>
               Clark Finance, Bedford Heights, Brickhill Drive, Bedford MK41 7PH
             </p>
+          </div>
+          <div className='flex flex-col space-y-4'>
+            {footerMenuPages.map((page) => (
+              <Link
+                className='text-chalk text-sm font-semibold no-underline hover:opacity-80 transition'
+                href={`/${page.slug}`}
+                key={page.id}
+              >
+                {page.acf.page_title}
+              </Link>
+            ))}
           </div>
         </div>
         <div className='space-y-6'>

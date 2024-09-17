@@ -5,7 +5,7 @@ import { SectionTitle } from '@/components/shared/SectionTitle';
 import { convertWysywyg } from '@/util/utilFunctions';
 
 type AboutUsPageContent = {
-  section_title: string;
+  page_title: string;
   about_us_content: string;
   about_us_image: number;
   why_choose_us_title: string;
@@ -88,7 +88,7 @@ export default async function AboutUs() {
     <>
       <Section type='narrow'>
         <SectionTitle
-          title={content.section_title}
+          title={content.page_title}
           textColour='ash'
           lineColour='mediumblue'
           alignment='centred'
@@ -117,7 +117,7 @@ export default async function AboutUs() {
           ))}
         </div>
       </Section>
-      <ContactUs />
+      <ContactUs colourScheme='light' />
     </>
   );
 }
