@@ -2,7 +2,9 @@ import { WhyChooseUsCard } from '@/components/aboutUs/WhyChooseUsCard';
 import { ContactUs } from '@/components/home/ContactUs';
 import { Section } from '@/components/shared/Section';
 import { SectionTitle } from '@/components/shared/SectionTitle';
-import { convertWysywyg } from '@/util/utilFunctions';
+import { ImageType } from '@/util/models';
+import { convertWysywyg, fetchFeaturedImage } from '@/util/utilFunctions';
+import Image from 'next/image';
 
 type AboutUsPageContent = {
   page_title: string;
@@ -63,6 +65,10 @@ export default async function AboutUs() {
 
   const bodyContent = convertWysywyg(content.about_us_content);
 
+  const featuredImage: ImageType = await fetchFeaturedImage(
+    content.about_us_image
+  );
+
   // Organise 'Why Choose Us' Items into an array
 
   const whyChooseUsItems: WhyChooseUsItem[] = [];
@@ -93,8 +99,14 @@ export default async function AboutUs() {
           lineColour='mediumblue'
           alignment='centred'
         />
-        <div className='flex my-16'>
-          <div className='w-1/3'>image goes here</div>
+        <div className='flex m-24 gap-24'>
+          <Image
+            src={featuredImage.source_url}
+            alt={featuredImage.alt_text}
+            className='w-1/3'
+            width={350}
+            height={200}
+          />
           <div
             className='w-2/3 text-sm'
             dangerouslySetInnerHTML={{ __html: bodyContent }}
