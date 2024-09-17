@@ -6,9 +6,13 @@ import Link from 'next/link';
 export const Footer = async () => {
   const data: Page[] = await fetchMenuItems();
 
-  const footerMenuPages = data.filter(
-    (page) => page.acf.menu_location === 'Footer Menu'
+  const footerMenuPages = data.filter((page) =>
+    page.acf.menu_location.includes('Footer Menu')
   );
+
+  const sortedPages = footerMenuPages.sort((a, b) => {
+    return a.acf.menu_position - b.acf.menu_position;
+  });
 
   return (
     <footer className='flex flex-col relative z-10'>
@@ -43,7 +47,7 @@ export const Footer = async () => {
             </p>
           </div>
           <div className='flex flex-col space-y-4'>
-            {footerMenuPages.map((page) => (
+            {sortedPages.map((page) => (
               <Link
                 className='text-chalk text-sm font-semibold no-underline hover:opacity-80 transition'
                 href={`/${page.slug}`}

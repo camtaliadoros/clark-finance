@@ -13,10 +13,15 @@ export const MenuDrawer = () => {
   useEffect(() => {
     const fetchData = async () => {
       const data: Page[] = await fetchMenuItems();
-      const mainMenuPages = data.filter(
-        (page) => page.acf.menu_location === 'Main Menu'
+      const mainMenuPages = data.filter((page) =>
+        page.acf.menu_location.includes('Main Menu')
       );
-      setMenuPages(mainMenuPages);
+
+      const sortedPages = mainMenuPages.sort((a, b) => {
+        return a.acf.menu_position - b.acf.menu_position;
+      });
+
+      setMenuPages(sortedPages);
     };
 
     fetchData();
@@ -24,14 +29,14 @@ export const MenuDrawer = () => {
 
   return (
     <div
-      className={`bg-mediumblue w-full h-full absolute top-0 left-0 opacity-90 transition z-30 flex flex-col items-center justify-center ${
+      className={`bg-mediumblue w-full h-full absolute top-0 left-0 opacity-90 transition z-30 flex flex-col items-center justify-center space-y-8 ${
         isOpen ? null : 'translate-x-full'
       }`}
     >
       {menuPages?.map((page) => (
         <Link
           href={`/${page.slug}`}
-          className='text-chalk relative z-40'
+          className='text-chalk text-2xl font-semibold no-underline hover:opacity-75 transition'
           key={page.id}
         >
           {page.acf.page_title}
