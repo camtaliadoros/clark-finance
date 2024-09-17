@@ -4,14 +4,14 @@ import { MenuDrawerContext } from '@/contexts/MenuContextProvider';
 import { Page } from '@/util/models';
 import { fetchMenuItems } from '@/util/utilFunctions';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import { useContext, useEffect, useState } from 'react';
 
 export const MenuDrawer = () => {
   const { isOpen } = useContext(MenuDrawerContext);
   const [menuPages, setMenuPages] = useState<Page[]>();
 
-  const router = useRouter();
+  const pathname = usePathname();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -29,6 +29,8 @@ export const MenuDrawer = () => {
     fetchData();
   }, []);
 
+  console.log('pathname is ' + pathname);
+
   return (
     <div
       className={`bg-mediumblue w-full h-full absolute top-0 left-0 opacity-90 transition z-30 flex flex-col items-center justify-center space-y-8 ${
@@ -38,7 +40,11 @@ export const MenuDrawer = () => {
       {menuPages?.map((page) => (
         <Link
           href={`/${page.slug}`}
-          className='text-chalk text-2xl font-semibold no-underline hover:opacity-75 transition'
+          className={`text-chalk text-2xl font-semibold no-underline hover:opacity-75 transition ${
+            pathname === `/${page.slug}`
+              ? 'text-yellow cursor-pointer pointer-events-none'
+              : null
+          }`}
           key={page.id}
         >
           {page.acf.page_title}
