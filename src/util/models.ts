@@ -40,3 +40,9 @@ export type ArticleContentType = {
   article_body: string;
   featured_image: number;
 };
+
+export type Page = {
+  id: number;
+  slug: string;
+  acf: Record<string, any>;
+};

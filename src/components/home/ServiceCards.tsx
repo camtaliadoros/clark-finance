@@ -14,7 +14,7 @@ type ServiceAcfFields = {
 };
 
 async function fetchAllServices() {
-  const res = await fetch(`${process.env.HOST_URL}/services/api`, {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_HOST_URL}/services/api`, {
     next: {
       revalidate: 10,
     },

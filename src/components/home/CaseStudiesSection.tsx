@@ -6,7 +6,7 @@ import { SectionTitle } from '../shared/SectionTitle';
 
 async function fetchAllCaseStudies() {
   const res = await fetch(
-    `${process.env.HOST_URL}/case-studies/api/fetchAllCaseStudies`,
+    `${process.env.NEXT_PUBLIC_HOST_URL}/case-studies/api/fetchAllCaseStudies`,
     {
       // next: {
       //   revalidate: 10,

@@ -8,12 +8,15 @@ type TcsPageContent = {
 };
 
 async function fetchPrivacyPolicyPageContent() {
-  const res = await fetch(`${process.env.HOST_URL}/privacy-policy/api`, {
-    // next: {
-    //   revalidate: 10,
-    // },
-    cache: 'no-store',
-  });
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_HOST_URL}/privacy-policy/api`,
+    {
+      // next: {
+      //   revalidate: 10,
+      // },
+      cache: 'no-store',
+    }
+  );
   if (!res.ok) {
     throw new Error('Failed to fetch data');
   }

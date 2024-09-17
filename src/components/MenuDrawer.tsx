@@ -1,29 +1,10 @@
 'use client';
 
 import { MenuDrawerContext } from '@/contexts/MenuContextProvider';
+import { Page } from '@/util/models';
+import { fetchMenuItems } from '@/util/utilFunctions';
 import Link from 'next/link';
 import { useContext, useEffect, useState } from 'react';
-
-type Page = {
-  id: number;
-  slug: string;
-  acf: Record<string, any>;
-};
-
-const fetchMenuItems = async () => {
-  const url = `/api/fetchPages`;
-
-  const res = await fetch(url, {
-    //   next: {
-    //     revalidate: 10,
-    //   },
-    cache: 'no-store',
-  });
-  if (!res.ok) {
-    throw new Error('Failed to fetch data');
-  }
-  return res.json();
-};
 
 export const MenuDrawer = () => {
   const { isOpen } = useContext(MenuDrawerContext);
@@ -40,8 +21,6 @@ export const MenuDrawer = () => {
 
     fetchData();
   }, []);
-
-  console.log(menuPages);
 
   return (
     <div

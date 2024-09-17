@@ -16,7 +16,7 @@ type ArticleParams = {
 
 const fetchArticle = async (slug: string) => {
   const res = await fetch(
-    `${process.env.HOST_URL}/news/api/fetchArticle?slug=${slug}`,
+    `${process.env.NEXT_PUBLIC_HOST_URL}/news/api/fetchArticle?slug=${slug}`,
     {
       next: {
         revalidate: 10,

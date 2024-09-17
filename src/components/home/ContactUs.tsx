@@ -17,15 +17,18 @@ type BookAppointmentContent = {
 };
 
 type ContactUsProps = {
-  colourScheme: string;
+  colourScheme: 'light' | 'dark';
 };
 
 async function fetchContactUsContent() {
-  const res = await fetch(`${process.env.HOST_URL}/contact-us/api`, {
-    next: {
-      revalidate: 10,
-    },
-  });
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_HOST_URL}/contact-us/api`,
+    {
+      next: {
+        revalidate: 10,
+      },
+    }
+  );
   if (!res.ok) {
     throw new Error('Failed to fetch data');
   }
@@ -60,8 +63,13 @@ export const ContactUs = async ({ colourScheme }: ContactUsProps) => {
             target={content.book_appointment_label.target}
             classes='w-full md:w-fit md:justify-self-center'
           />
-          <EmailWithIcon colour='light' />
-          <PhoneNumberWithIcon colour='light' />
+          <EmailWithIcon
+            colour={`${colourScheme === 'light' ? 'dark' : 'light'}`}
+          />
+          <PhoneNumberWithIcon
+            colour={`${colourScheme === 'light' ? 'dark' : 'light'}`}
+            size='sm'
+          />
         </div>
       </div>
     </Section>

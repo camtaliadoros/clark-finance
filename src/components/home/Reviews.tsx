@@ -3,7 +3,7 @@ import { SectionTitle } from '../shared/SectionTitle';
 import { ReviewCard } from './ReviewCard';
 
 async function fetchReviews() {
-  const res = await fetch(`${process.env.HOST_URL}/api/reviews`, {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_HOST_URL}/api/reviews`, {
     next: {
       revalidate: 10,
     },

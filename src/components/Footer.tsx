@@ -1,6 +1,14 @@
+import { Page } from '@/util/models';
+import { fetchMenuItems } from '@/util/utilFunctions';
 import Image from 'next/image';
 
-export const Footer = () => {
+export const Footer = async () => {
+  const data: Page[] = await fetchMenuItems();
+
+  const footerMenuPages = data.filter(
+    (page) => page.acf.menu_location === 'Footer Menu'
+  );
+
   return (
     <footer className='flex flex-col relative z-10'>
       <div className='flex flex-col bg-mediumblue p-4 md:px-10 md:py-16'>

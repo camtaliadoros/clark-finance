@@ -11,7 +11,7 @@ type CaseStudiesPageContent = {
 
 async function fetchAllCaseStudies() {
   const res = await fetch(
-    `${process.env.HOST_URL}/case-studies/api/fetchAllCaseStudies`,
+    `${process.env.NEXT_PUBLIC_HOST_URL}/case-studies/api/fetchAllCaseStudies`,
     {
       // next: {
       //   revalidate: 10,
@@ -27,7 +27,7 @@ async function fetchAllCaseStudies() {
 
 async function fetchPageContent() {
   const res = await fetch(
-    `${process.env.HOST_URL}/case-studies/api/fetchPageContent`,
+    `${process.env.NEXT_PUBLIC_HOST_URL}/case-studies/api/fetchPageContent`,
     {
       next: {
         revalidate: 10,
