@@ -4,8 +4,11 @@ import './globals.css';
 import { Header } from '@/components/Header';
 import { Footer } from '@/components/Footer';
 import MenuDrawerContextProvider from '../contexts/MenuContextProvider';
-import { MenuDrawer } from '@/components/MenuDrawer';
+
 import { ReCaptchaProvider } from 'next-recaptcha-v3';
+import { MenuDrawer } from '../components/MenuDrawer';
+import { Suspense } from 'react';
+import { NavigationEvents } from '@/components/NavigationEvents';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -33,6 +36,9 @@ export default function RootLayout({
               <main className='bg-chalk relative '>{children}</main>
               <Footer />
             </div>
+            <Suspense fallback={null}>
+              <NavigationEvents />
+            </Suspense>
           </body>
         </html>
       </ReCaptchaProvider>

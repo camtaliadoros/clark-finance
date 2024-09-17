@@ -4,11 +4,14 @@ import { MenuDrawerContext } from '@/contexts/MenuContextProvider';
 import { Page } from '@/util/models';
 import { fetchMenuItems } from '@/util/utilFunctions';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { useContext, useEffect, useState } from 'react';
 
 export const MenuDrawer = () => {
   const { isOpen } = useContext(MenuDrawerContext);
   const [menuPages, setMenuPages] = useState<Page[]>();
+
+  const router = useRouter();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -20,7 +23,6 @@ export const MenuDrawer = () => {
       const sortedPages = mainMenuPages.sort((a, b) => {
         return a.acf.menu_position - b.acf.menu_position;
       });
-
       setMenuPages(sortedPages);
     };
 
