@@ -116,6 +116,10 @@ a.link {
   color: #232426;
 }
 
+.text-chalk a {
+  color: #f8f9fa;
+}
+
 @media screen and (min-width: 1024px) {
   a.link::after {
     content: '';

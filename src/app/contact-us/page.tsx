@@ -35,9 +35,9 @@ export default async function ContactUsPage() {
     <>
       <ContactUs colourScheme='light' />
       <Section type='narrow' classes='flex flex-col gap-8 bg-building-detail'>
-        <h2 className='text-chalk'>{content.complaints_title}</h2>
+        <h2 className='text-chalk text-xl'>{content.complaints_title}</h2>
         <div
-          className='text-chalk'
+          className='text-chalk text-sm'
           dangerouslySetInnerHTML={{ __html: complaintsBody }}
         />
       </Section>
