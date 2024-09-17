@@ -33,7 +33,7 @@ export default async function ContactUsPage() {
 
   return (
     <>
-      <ContactUs />
+      <ContactUs colourScheme='light' />
       <Section type='narrow' classes='flex flex-col gap-8 bg-building-detail'>
         <h2 className='text-chalk'>{content.complaints_title}</h2>
         <div
