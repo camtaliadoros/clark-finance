@@ -13,7 +13,7 @@ export const SectionTitle = ({
 }: SectionTitleProps) => {
   return (
     <div
-      className={`flex flex-col space-y-3 mb-32 ${
+      className={`flex flex-col space-y-3 mb-12 md:mb-24 lg:mb-32 ${
         alignment === 'centred' ? 'items-center' : 'items-start'
       }`}
     >
