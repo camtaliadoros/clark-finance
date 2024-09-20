@@ -99,16 +99,16 @@ export default async function AboutUs() {
           lineColour='mediumblue'
           alignment='centred'
         />
-        <div className='flex m-24 gap-24'>
+        <div className='flex flex-col items-center lg:m-24 gap-12 md:gap-24 md:flex-row '>
           <Image
             src={featuredImage.source_url}
             alt={featuredImage.alt_text}
-            className='w-1/3'
+            className='md:w-1/3'
             width={350}
             height={200}
           />
           <div
-            className='w-2/3 text-sm'
+            className='md:w-2/3 text-sm'
             dangerouslySetInnerHTML={{ __html: bodyContent }}
           ></div>
         </div>
