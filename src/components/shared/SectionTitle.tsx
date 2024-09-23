@@ -1,8 +1,8 @@
 type SectionTitleProps = {
   title: string;
-  textColour: string;
-  lineColour: string;
-  alignment: string;
+  textColour: 'ash' | 'chalk';
+  lineColour: 'chalk' | 'mediumblue';
+  alignment: 'centred' | 'start' | 'end';
   classes?: string;
 };
 

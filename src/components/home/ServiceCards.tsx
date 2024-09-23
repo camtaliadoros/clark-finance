@@ -1,6 +1,10 @@
 import { Section } from '../shared/Section';
 import { ServiceCard } from './ServiceCard';
 
+type PageProps = {
+  classes: string;
+};
+
 type Service = {
   slug: string;
   link: string;
@@ -25,14 +29,14 @@ async function fetchAllServices() {
   return res.json();
 }
 
-export const ServiceCards = async () => {
+export const ServiceCards = async ({ classes }: PageProps) => {
   const services: Service[] = await fetchAllServices();
 
   // Order services by priority
   services.sort((a, b) => a.acf.homepage_order - b.acf.homepage_order);
 
   return (
-    <Section type='wide' classes='py-0'>
+    <Section type='wide' classes={`${classes} bg-transparent py-0`}>
       <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3'>
         {services.map((service) => (
           <ServiceCard
