@@ -58,6 +58,7 @@ export default async function CaseStudiesHome() {
           textColour='ash'
           lineColour='mediumblue'
           alignment='centred'
+          classes='mb-12 md:mb-18 lg:mb-24'
         />
 
         <FeaturedCardsWrapper>

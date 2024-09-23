@@ -51,6 +51,7 @@ export const WhyClarkFinance = ({
           lineColour='mediumblue'
           textColour='chalk'
           alignment='start'
+          classes='mb-8'
         />
         <ul className='my-6 space-y-2'>
           {liArray?.map((item, i) => (

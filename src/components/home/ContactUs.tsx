@@ -52,6 +52,7 @@ export const ContactUs = async ({ colourScheme }: ContactUsProps) => {
         textColour={colourScheme === 'light' ? 'ash' : 'chalk'}
         lineColour={colourScheme === 'light' ? 'mediumblue' : 'chalk'}
         alignment='centred'
+        classes='mb-8 md:mb-12 lg:mb-18'
       />
       <div className='flex flex-col md:grid md:grid-cols-2 items-start space-y-12 md:space-y-0 gap-12'>
         <ContactForm />

@@ -39,6 +39,7 @@ export const CaseStudiesSection = async ({
         lineColour='lightblue'
         textColour={`${bgColour === 'bg-navy' ? 'chalk' : 'ash'}`}
         alignment='centred'
+        classes='mb-12 md:mb-18 lg:mb-24'
       />
       <div className='flex flex-col items-center  space-y-12 md:space-y-0 md:grid md:grid-cols-2 md:grid-rows-1 lg:grid-cols-3 md:items-start w-full'>
         {featuredContent.map((content: CaseStudyFeatureTypes) => (

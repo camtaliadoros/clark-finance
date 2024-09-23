@@ -57,6 +57,7 @@ export default async function InsightsPage() {
           lineColour='mediumblue'
           textColour='ash'
           alignment='centred'
+          classes='mb-12 md:mb-18 lg:mb-24'
         />
         <FeaturedCardsWrapper>
           {data.map((articleData, i) => (

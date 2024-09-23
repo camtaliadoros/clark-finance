@@ -119,6 +119,7 @@ export default async function AboutUs() {
           textColour='chalk'
           lineColour='chalk'
           alignment='centred'
+          classes='mb-0'
         />
         <h4 className='text-chalk my-4 text-center text-lg font-semibold'>
           {content.why_choose_us_subheading}

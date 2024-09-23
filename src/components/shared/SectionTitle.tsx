@@ -3,6 +3,7 @@ type SectionTitleProps = {
   textColour: string;
   lineColour: string;
   alignment: string;
+  classes?: string;
 };
 
 export const SectionTitle = ({
@@ -10,12 +11,13 @@ export const SectionTitle = ({
   lineColour,
   textColour,
   alignment,
+  classes,
 }: SectionTitleProps) => {
   return (
     <div
-      className={`flex flex-col space-y-3 mb-12 md:mb-24 lg:mb-32 ${
+      className={` ${classes} flex flex-col space-y-3 ${
         alignment === 'centred' ? 'items-center' : 'items-start'
-      }`}
+      } `}
     >
       <h2
         className={`${alignment === 'centred' ? 'text-4xl' : 'text-2xl'} ${
