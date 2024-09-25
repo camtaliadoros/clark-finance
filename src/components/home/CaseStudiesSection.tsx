@@ -23,7 +23,7 @@ async function fetchAllCaseStudies() {
 export const CaseStudiesSection = async ({
   bgColour,
 }: {
-  bgColour: string;
+  bgColour: 'dark' | 'light';
 }) => {
   const caseStudiesData: CaseStudyFeatureTypes[] = await fetchAllCaseStudies();
 
@@ -32,12 +32,14 @@ export const CaseStudiesSection = async ({
   return (
     <Section
       type='narrow'
-      classes={`${bgColour} space-y-2 flex flex-col items-center`}
+      classes={`${
+        bgColour === 'dark' ? 'bg-building-detail' : 'bg-chalk'
+      } bg-cover space-y-2 flex flex-col items-center`}
     >
       <SectionTitle
         title='Case Studies'
         lineColour='lightblue'
-        textColour={`${bgColour === 'bg-navy' ? 'chalk' : 'ash'}`}
+        textColour={`${bgColour === 'dark' ? 'chalk' : 'ash'}`}
         alignment='centred'
         classes='mb-12 md:mb-18 lg:mb-24'
       />
