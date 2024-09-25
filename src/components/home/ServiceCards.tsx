@@ -36,8 +36,8 @@ export const ServiceCards = async ({ classes }: PageProps) => {
   services.sort((a, b) => a.acf.homepage_order - b.acf.homepage_order);
 
   return (
-    <Section type='wide' classes={`${classes} bg-transparent py-0`}>
-      <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3'>
+    <Section type='wide' classes={`${classes}  py-0`}>
+      <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3 -mt-40'>
         {services.map((service) => (
           <ServiceCard
             key={service.acf.homepage_order}

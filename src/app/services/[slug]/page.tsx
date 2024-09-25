@@ -13,19 +13,25 @@ type Params = {
 };
 
 type PageContent = {
-  title: string;
-  content: string;
-  image: number;
-  image_position: string;
-  available: boolean;
+  image_text_block_2_title: string;
+  image_text_block_2_content: string;
+  image_text_block_2_image?: number | null;
+  image_text_block_2_image_position: string;
+  image_text_block_3_title: string;
+  image_text_block_3_content: string;
+  image_text_block_3_image?: number | null;
+  image_text_block_3_image_position: string;
+  image_text_block_1_title: string;
+  image_text_block_1_content: string;
+  image_text_block_1_image?: number | null;
+  image_text_block_1_image_position: string;
   menu_location: string[];
   menu_position: number;
   page_title: string;
   subheading: string;
   service_title: string;
-  service_excerpt: string;
-  homepage_order: number;
-  text_block: string;
+  text_block_1: string;
+  text_block_2: string;
 };
 
 const fetchPageContent = async (slug: string) => {
@@ -44,16 +50,60 @@ const fetchPageContent = async (slug: string) => {
   }
   return res.json();
 };
+
 export default async function Service({ params }: PageProps) {
   const data = await fetchPageContent(params.slug);
 
   const content: PageContent = data[0].acf;
 
+  let image: ImageType = null;
+  if (content.image_text_block_1_image) {
+    image = await fetchFeaturedImage(content.image_text_block_1_image);
+  }
+
   console.log(content);
 
-  const image1: ImageType = await fetchFeaturedImage(content.image);
+  const text = convertWysywyg(content.image_text_block_1_content);
 
-  const textBlock1 = convertWysywyg(content.content);
+  const imageUrls = {};
+
+  // // Loop?
+  // if (content.image_text_block_1_image) {
+  //   const image: ImageType = await fetchFeaturedImage(
+  //     content.image_text_block_1_image
+  //   );
+  //   imageUrls[1] = image;
+  // }
+
+  // if (content.image_text_block_2_image) {
+  //   const image: ImageType = await fetchFeaturedImage(
+  //     content.image_text_block_2_image
+  //   );
+  //   imageUrls[2] = image;
+  // }
+
+  // if (content.image_text_block_3_image) {
+  //   const image: ImageType = await fetchFeaturedImage(
+  //     content.image_text_block_3_image
+  //   );
+  //   imageUrls[3] = image;
+  // }
+
+  // const textBlocks = {};
+  // if (content.image_text_block_1_content) {
+  //   const text = convertWysywyg(content.image_text_block_1_content);
+  //   textBlocks[1] = text;
+  // }
+
+  // if (content.image_text_block_2_content) {
+  //   const text = convertWysywyg(content.image_text_block_2_content);
+  //   textBlocks[2] = text;
+  // }
+
+  // if (content.image_text_block_3_content) {
+  //   const text = convertWysywyg(content.image_text_block_3_content);
+  //   textBlocks[3] = text;
+  // }
 
   return (
     <>
@@ -70,11 +120,10 @@ export default async function Service({ params }: PageProps) {
         </h2>
       </Section>
       <Section type='narrow flex flex-col md:flex-row'>
-        <Image src={image1.source_url} alt='' className='w-1/2' />
-        <div
-          className='w-1/2'
-          dangerouslySetInnerHTML={{ __html: textBlock1 }}
-        />
+        {image.source_url && (
+          <Image src={image.source_url} alt='' className='w-1/2' />
+        )}
+        <div className='w-1/2' dangerouslySetInnerHTML={{ __html: text }} />
       </Section>
     </>
   );
