@@ -4,6 +4,9 @@ import { FeaturedCardsWrapper } from '@/components/shared/FeaturedCardsWrapper';
 import { Section } from '@/components/shared/Section';
 import { SectionTitle } from '@/components/shared/SectionTitle';
 import { ArticleContentType } from '@/util/models';
+import { fetchCaseStudiesByPage } from '../case-studies/page';
+import { ArticleListing } from '@/components/shared/ArticleListing';
+import { Pagination } from '@/components/shared/Pagination';
 
 export type ArticleDataType = {
   date: string;
@@ -11,9 +14,9 @@ export type ArticleDataType = {
   acf: ArticleContentType;
 };
 
-const fetchAllArticles = async () => {
+export const fetchArticlesByPage = async (pageNumber: number) => {
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_HOST_URL}/news/api/fetchAllArticles`,
+    `${process.env.NEXT_PUBLIC_HOST_URL}/news/api/fetchAllArticles?page=${pageNumber}`,
     {
       //   next: {
       //     revalidate: 10,
@@ -43,8 +46,20 @@ async function fetchPageContent() {
   return res.json();
 }
 
-export default async function InsightsPage() {
-  const data: ArticleDataType[] = await fetchAllArticles();
+export default async function InsightsPage({
+  searchParams,
+}: {
+  searchParams?: {
+    page?: string;
+  };
+}) {
+  const content = await fetchPageContent();
+
+  const currentPage = Number(searchParams?.page) || 1;
+
+  const data = await fetchArticlesByPage(currentPage);
+
+  const numberOfPages: number = data.totalPages;
 
   return (
     <>
@@ -59,15 +74,8 @@ export default async function InsightsPage() {
           alignment='centred'
           classes='mb-12 md:mb-18 lg:mb-24'
         />
-        <FeaturedCardsWrapper>
-          {data.map((articleData, i) => (
-            <ArticleFeatureCard
-              articleData={articleData}
-              key={i}
-              colourScheme='dark'
-            />
-          ))}
-        </FeaturedCardsWrapper>
+        <ArticleListing currentPage={currentPage} type='news' />
+        <Pagination totalPages={numberOfPages} />
       </Section>
       <ContactUs colourScheme='dark' />
     </>

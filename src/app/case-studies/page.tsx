@@ -3,7 +3,6 @@ import { ArticleListing } from '@/components/shared/ArticleListing';
 import { Pagination } from '@/components/shared/Pagination';
 import { Section } from '@/components/shared/Section';
 import { SectionTitle } from '@/components/shared/SectionTitle';
-import { CaseStudyFeatureTypes } from '@/util/models';
 
 type CaseStudiesPageContent = {
   page_title: string;
@@ -70,7 +69,7 @@ export default async function CaseStudiesHome({
           classes='mb-12 md:mb-18 lg:mb-24'
         />
 
-        <ArticleListing currentPage={currentPage} />
+        <ArticleListing currentPage={currentPage} type='case studies' />
         <Pagination totalPages={numberOfPages} />
       </Section>
       <ContactUs colourScheme='dark' />
