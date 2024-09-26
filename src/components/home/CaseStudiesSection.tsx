@@ -38,7 +38,7 @@ export const CaseStudiesSection = async ({
     >
       <SectionTitle
         title='Case Studies'
-        lineColour='lightblue'
+        lineColour='mediumblue'
         textColour={`${bgColour === 'dark' ? 'chalk' : 'ash'}`}
         alignment='centred'
         classes='mb-12 md:mb-18 lg:mb-24'
