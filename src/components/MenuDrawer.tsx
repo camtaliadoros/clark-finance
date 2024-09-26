@@ -29,8 +29,6 @@ export const MenuDrawer = () => {
     fetchData();
   }, []);
 
-  console.log('pathname is ' + pathname);
-
   return (
     <div
       className={`bg-mediumblue w-full h-full absolute top-0 left-0 opacity-95 transition z-30 flex flex-col items-center justify-center space-y-8 ${

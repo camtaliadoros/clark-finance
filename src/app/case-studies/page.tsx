@@ -1,6 +1,6 @@
 import { ContactUs } from '@/components/home/ContactUs';
-import { CaseStudyFeature } from '@/components/shared/CaseStudyFeature';
-import { FeaturedCardsWrapper } from '@/components/shared/FeaturedCardsWrapper';
+import { ArticleListing } from '@/components/shared/ArticleListing';
+import { Pagination } from '@/components/shared/Pagination';
 import { Section } from '@/components/shared/Section';
 import { SectionTitle } from '@/components/shared/SectionTitle';
 import { CaseStudyFeatureTypes } from '@/util/models';
@@ -9,14 +9,13 @@ type CaseStudiesPageContent = {
   page_title: string;
 };
 
-async function fetchAllCaseStudies() {
+export async function fetchCaseStudiesByPage(pageNumber: number) {
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_HOST_URL}/case-studies/api/fetchAllCaseStudies`,
+    `${process.env.NEXT_PUBLIC_HOST_URL}/case-studies/api/fetchAllCaseStudies?page=${pageNumber}`,
     {
-      // next: {
-      //   revalidate: 10,
-      // },
-      cache: 'no-store',
+      next: {
+        revalidate: 10,
+      },
     }
   );
   if (!res.ok) {
@@ -40,8 +39,18 @@ async function fetchPageContent() {
   return res.json();
 }
 
-export default async function CaseStudiesHome() {
-  const caseStudies: CaseStudyFeatureTypes[] = await fetchAllCaseStudies();
+export default async function CaseStudiesHome({
+  searchParams,
+}: {
+  searchParams?: {
+    page?: string;
+  };
+}) {
+  const currentPage = Number(searchParams?.page) || 1;
+
+  const data = await fetchCaseStudiesByPage(currentPage);
+
+  const numberOfPages: number = data.totalPages;
 
   const content = await fetchPageContent();
 
@@ -51,7 +60,7 @@ export default async function CaseStudiesHome() {
     <>
       <Section
         type='narrow'
-        classes='bg-chequered-bg bg-cover bg-fixed bg-bottom space-y-16'
+        classes='bg-chequered-bg bg-cover bg-fixed bg-bottom space-y-16 flex flex-col items-center'
       >
         <SectionTitle
           title={pageContent.page_title}
@@ -61,16 +70,8 @@ export default async function CaseStudiesHome() {
           classes='mb-12 md:mb-18 lg:mb-24'
         />
 
-        <FeaturedCardsWrapper>
-          {caseStudies.map((content: CaseStudyFeatureTypes) => (
-            <CaseStudyFeature
-              key={content.slug}
-              slug={content.slug}
-              content={content.acf}
-              colourScheme='dark'
-            />
-          ))}
-        </FeaturedCardsWrapper>
+        <ArticleListing currentPage={currentPage} />
+        <Pagination totalPages={numberOfPages} />
       </Section>
       <ContactUs colourScheme='dark' />
     </>

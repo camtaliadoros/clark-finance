@@ -8,10 +8,9 @@ export const fetchFeaturedImage = async (imageId: number) => {
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_HOST_URL}/api/fetchImage?id=${imageId}`,
     {
-      // next: {
-      //   revalidate: 10,
-      // },
-      cache: 'no-store',
+      next: {
+        revalidate: 10,
+      },
     }
   );
   if (!res.ok) {
@@ -24,10 +23,9 @@ export const fetchMenuItems = async () => {
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_HOST_URL}/api/fetchPages`,
     {
-      //   next: {
-      //     revalidate: 10,
-      //   },
-      cache: 'no-store',
+      next: {
+        revalidate: 10,
+      },
     }
   );
   if (!res.ok) {
