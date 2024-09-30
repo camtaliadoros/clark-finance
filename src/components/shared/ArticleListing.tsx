@@ -17,7 +17,7 @@ export const ArticleListing = async ({
   let articles;
 
   if (type === 'case studies') {
-    const res = await fetchCaseStudiesByPage(currentPage);
+    const res = await fetchCaseStudiesByPage(currentPage, 6);
     articles = res.pageData;
 
     return (
@@ -35,8 +35,6 @@ export const ArticleListing = async ({
   } else if (type === 'news') {
     const res = await fetchArticlesByPage(currentPage);
     articles = res.pageData;
-
-    console.log(articles);
 
     return (
       <FeaturedCardsWrapper>
