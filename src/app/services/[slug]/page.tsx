@@ -32,6 +32,8 @@ type PageContent = {
   service_title: string;
   text_block_1: string;
   text_block_2: string;
+  page_title_background_image: number;
+  homepage_order: number;
 };
 
 const fetchPageContent = async (slug: string) => {
@@ -56,14 +58,9 @@ export default async function Service({ params }: PageProps) {
 
   const content: PageContent = data[0].acf;
 
-  let image: ImageType = null;
-  if (content.image_text_block_1_image) {
-    image = await fetchFeaturedImage(content.image_text_block_1_image);
-  }
-  let image2: ImageType = null;
-  if (content.image_text_block_2_image) {
-    image2 = await fetchFeaturedImage(content.image_text_block_2_image);
-  }
+  const bgImage: ImageType = await fetchFeaturedImage(
+    content.page_title_background_image
+  );
 
   const text = convertWysywyg(content.image_text_block_1_content);
 
@@ -109,18 +106,37 @@ export default async function Service({ params }: PageProps) {
 
   return (
     <>
-      <Section type='narrow'>
-        <SectionTitle
-          title={content.page_title}
-          lineColour='mediumblue'
-          textColour='ash'
-          alignment='centred'
-          classes='mb-4'
-        />
-        <h2 className='text-center font-semibold text-xl text-ash'>
-          {content.subheading}
-        </h2>
-      </Section>
+      <div
+        className='relative flex px-24 items-center bg-cover bg-center '
+        style={{
+          backgroundImage: `url(${bgImage.source_url})`,
+        }}
+      >
+        <div
+          className={`absolute inset-0 ${
+            {
+              1: 'bg-green',
+              2: 'bg-yellow',
+              3: 'bg-orange',
+              4: 'bg-purple',
+              5: 'bg-magenta',
+              6: 'bg-navy',
+              7: 'bg-red',
+              8: 'bg-bluegrey',
+            }[content.homepage_order]
+          } bg-opacity-30`}
+        ></div>
+
+        <div className='flex flex-col bg-black bg-opacity-50 backdrop-blur h-full py-24 px-8 w-1/2 '>
+          <h1 className='text-chalk'>{content.page_title}</h1>
+
+          <h2 className='font-semibold text-xl text-chalk'>
+            {content.subheading}
+          </h2>
+        </div>
+      </div>
+      <div className=''></div>
+
       {/* <Section type='narrow flex flex-col md:flex-row'>
         {image.source_url && (
           <Image src={image.source_url} alt='' className='w-1/2' />
