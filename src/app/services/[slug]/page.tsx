@@ -34,6 +34,7 @@ type PageContent = {
   text_block_2: string;
   page_title_background_image: number;
   homepage_order: number;
+  why_clark_finance: string;
 };
 
 const fetchPageContent = async (slug: string) => {
@@ -63,6 +64,14 @@ export default async function Service({ params }: PageProps) {
   );
 
   const text = convertWysywyg(content.image_text_block_1_content);
+
+  const whyClarkFinanceText = convertWysywyg(content.why_clark_finance);
+
+  let image;
+
+  if (content.image_text_block_1_image) {
+    image = await fetchFeaturedImage(content.image_text_block_1_image);
+  }
 
   const imageUrls = {};
 
@@ -104,10 +113,12 @@ export default async function Service({ params }: PageProps) {
   //   textBlocks[3] = text;
   // }
 
+  console.log(content);
+
   return (
     <>
       <div
-        className='relative flex px-24 items-center bg-cover bg-center '
+        className='relative flex px-24 items-center bg-cover bg-center bg-fixed'
         style={{
           backgroundImage: `url(${bgImage.source_url})`,
         }}
@@ -124,7 +135,7 @@ export default async function Service({ params }: PageProps) {
               7: 'bg-red',
               8: 'bg-bluegrey',
             }[content.homepage_order]
-          } bg-opacity-30`}
+          } bg-opacity-50`}
         ></div>
 
         <div className='flex flex-col bg-black bg-opacity-50 backdrop-blur h-full py-24 px-8 w-1/2 '>
@@ -133,16 +144,36 @@ export default async function Service({ params }: PageProps) {
           <h2 className='font-semibold text-xl text-chalk'>
             {content.subheading}
           </h2>
+          <div
+            className='text-chalk'
+            dangerouslySetInnerHTML={{ __html: whyClarkFinanceText }}
+          />
         </div>
       </div>
       <div className=''></div>
 
-      {/* <Section type='narrow flex flex-col md:flex-row'>
+      <Section classes='narrow flex flex-col md:flex-row gap-16' type='narrow'>
         {image.source_url && (
-          <Image src={image.source_url} alt='' className='w-1/2' />
+          <Image
+            src={image.source_url}
+            alt=''
+            className='w-1/2'
+            width={500}
+            height={500}
+          />
         )}
-        <div className='w-1/2' dangerouslySetInnerHTML={{ __html: text }} />
-      </Section> */}
+        <div className='flex flex-col w-1/2 space-y-8'>
+          {content.image_text_block_1_title && (
+            <h2 className='font-semibold'>
+              {content.image_text_block_1_title}
+            </h2>
+          )}
+          <div
+            className='text-ash'
+            dangerouslySetInnerHTML={{ __html: text }}
+          />
+        </div>
+      </Section>
     </>
   );
 }
