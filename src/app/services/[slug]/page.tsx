@@ -60,8 +60,10 @@ export default async function Service({ params }: PageProps) {
   if (content.image_text_block_1_image) {
     image = await fetchFeaturedImage(content.image_text_block_1_image);
   }
-
-  console.log(content);
+  let image2: ImageType = null;
+  if (content.image_text_block_2_image) {
+    image2 = await fetchFeaturedImage(content.image_text_block_2_image);
+  }
 
   const text = convertWysywyg(content.image_text_block_1_content);
 
@@ -119,12 +121,12 @@ export default async function Service({ params }: PageProps) {
           {content.subheading}
         </h2>
       </Section>
-      <Section type='narrow flex flex-col md:flex-row'>
+      {/* <Section type='narrow flex flex-col md:flex-row'>
         {image.source_url && (
           <Image src={image.source_url} alt='' className='w-1/2' />
         )}
         <div className='w-1/2' dangerouslySetInnerHTML={{ __html: text }} />
-      </Section>
+      </Section> */}
     </>
   );
 }
