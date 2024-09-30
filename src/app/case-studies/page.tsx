@@ -8,9 +8,12 @@ type CaseStudiesPageContent = {
   page_title: string;
 };
 
-export async function fetchCaseStudiesByPage(pageNumber: number) {
+export async function fetchCaseStudiesByPage(
+  pageNumber: number,
+  items: number
+) {
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_HOST_URL}/case-studies/api/fetchAllCaseStudies?page=${pageNumber}`,
+    `${process.env.NEXT_PUBLIC_HOST_URL}/case-studies/api/fetchAllCaseStudies?page=${pageNumber}&items=${items}`,
     {
       next: {
         revalidate: 10,
@@ -47,7 +50,7 @@ export default async function CaseStudiesHome({
 }) {
   const currentPage = Number(searchParams?.page) || 1;
 
-  const data = await fetchCaseStudiesByPage(currentPage);
+  const data = await fetchCaseStudiesByPage(currentPage, 6);
 
   const numberOfPages: number = data.totalPages;
 

@@ -6,7 +6,7 @@ import { SectionTitle } from '../shared/SectionTitle';
 
 async function fetchAllCaseStudies() {
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_HOST_URL}/case-studies/api/fetchAllCaseStudies`,
+    `${process.env.NEXT_PUBLIC_HOST_URL}/case-studies/api/fetchAllCaseStudies?page=1&items=3`,
     {
       // next: {
       //   revalidate: 10,
@@ -25,9 +25,9 @@ export const CaseStudiesSection = async ({
 }: {
   bgColour: 'dark' | 'light';
 }) => {
-  const caseStudiesData: CaseStudyFeatureTypes[] = await fetchAllCaseStudies();
+  const caseStudiesData = await fetchAllCaseStudies();
 
-  const featuredContent = caseStudiesData.slice(0, 3);
+  const featuredContent: CaseStudyFeatureTypes[] = caseStudiesData.pageData;
 
   return (
     <Section

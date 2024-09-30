@@ -3,7 +3,7 @@ import { NextRequest } from 'next/server';
 export async function GET(req: NextRequest) {
   const { searchParams } = new URL(req.url);
   const currentPage = searchParams.get('page');
-  const itemsPerPage = 6;
+  const itemsPerPage = searchParams.get('items');
 
   const response = await fetch(
     `${process.env.WP_ROUTE}/case-study?page=${currentPage}&per_page=${itemsPerPage}&_fields=acf,slug,link`
