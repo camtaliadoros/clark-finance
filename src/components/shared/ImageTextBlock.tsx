@@ -19,21 +19,25 @@ export const ImageTextBlock = async ({
   const imageData: ImageType = await fetchFeaturedImage(image);
   const sanitisedText = convertWysywyg(text);
 
-  let textImageBlock1;
-
   return (
     <div
-      className={`flex gap-16 w-full ${
-        position === 'Right' ? 'flex-row-reverse' : 'flex-row'
+      className={`flex flex-col lg:flex-row gap-16 w-full ${
+        position === 'Right' ? 'lg:flex-row-reverse' : 'flex-row'
       }`}
     >
-      <Image src={imageData.source_url} alt='' width={500} height={500} />
+      <Image
+        src={imageData.source_url}
+        alt=''
+        width={500}
+        height={500}
+        className='w-full lg:w-1/2'
+      />
 
-      <div className='flex flex-col w-1/2 space-y-8'>
+      <div className='flex flex-col lg:w-1/2 space-y-8'>
         {title && (
           <h2
             className={`${
-              position === 'Right' ? 'text-right' : 'text-left'
+              position === 'Right' ? 'lg:text-right' : 'text-left'
             } font-semibold'`}
           >
             {title}
@@ -41,7 +45,7 @@ export const ImageTextBlock = async ({
         )}
         <div
           className={`${
-            position === 'Right' ? 'text-right' : 'text-left'
+            position === 'Right' ? 'lg:text-right' : 'text-left'
           } 'text-ash'`}
           dangerouslySetInnerHTML={{ __html: sanitisedText }}
         />

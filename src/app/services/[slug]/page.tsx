@@ -78,7 +78,7 @@ export default async function Service({ params }: PageProps) {
   return (
     <>
       <div
-        className='relative flex px-24 items-center bg-cover bg-center bg-fixed'
+        className='relative flex md:px-24 items-center bg-cover bg-center bg-fixed'
         style={{
           backgroundImage: `url(${bgImage.source_url})`,
         }}
@@ -98,7 +98,7 @@ export default async function Service({ params }: PageProps) {
           } bg-opacity-50`}
         ></div>
 
-        <div className='flex flex-col bg-black bg-opacity-50 backdrop-blur h-full py-24 px-8 w-1/2 '>
+        <div className='flex flex-col bg-black bg-opacity-50 backdrop-blur h-full py-24 px-8 w-full lg:w-1/2 '>
           <h1 className='text-chalk'>{content.page_title}</h1>
 
           <h2 className='font-semibold text-xl text-chalk'>
@@ -123,7 +123,7 @@ export default async function Service({ params }: PageProps) {
 
         {textBlock1 && (
           <div
-            className='text-ash w-1/2 text-center'
+            className='text-ash lg:w-1/2 lg:text-center'
             dangerouslySetInnerHTML={{ __html: textBlock1 }}
           />
         )}
@@ -137,7 +137,7 @@ export default async function Service({ params }: PageProps) {
         )}
         {textBlock2 && (
           <div
-            className='text-ash w-1/2 text-center'
+            className='text-ash lg:w-1/2 lg:text-center'
             dangerouslySetInnerHTML={{ __html: textBlock2 }}
           />
         )}
