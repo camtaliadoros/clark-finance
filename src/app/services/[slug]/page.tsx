@@ -1,5 +1,5 @@
+import { ImageTextBlock } from '@/components/shared/ImageTextBlock';
 import { Section } from '@/components/shared/Section';
-import { SectionTitle } from '@/components/shared/SectionTitle';
 import { ImageType } from '@/util/models';
 import { convertWysywyg, fetchFeaturedImage } from '@/util/utilFunctions';
 import Image from 'next/image';
@@ -63,57 +63,17 @@ export default async function Service({ params }: PageProps) {
     content.page_title_background_image
   );
 
-  const text = convertWysywyg(content.image_text_block_1_content);
-
   const whyClarkFinanceText = convertWysywyg(content.why_clark_finance);
 
-  let image;
-
-  if (content.image_text_block_1_image) {
-    image = await fetchFeaturedImage(content.image_text_block_1_image);
+  let textBlock1;
+  if (content.text_block_1) {
+    textBlock1 = convertWysywyg(content.text_block_1);
   }
 
-  const imageUrls = {};
-
-  // // Loop?
-  // if (content.image_text_block_1_image) {
-  //   const image: ImageType = await fetchFeaturedImage(
-  //     content.image_text_block_1_image
-  //   );
-  //   imageUrls[1] = image;
-  // }
-
-  // if (content.image_text_block_2_image) {
-  //   const image: ImageType = await fetchFeaturedImage(
-  //     content.image_text_block_2_image
-  //   );
-  //   imageUrls[2] = image;
-  // }
-
-  // if (content.image_text_block_3_image) {
-  //   const image: ImageType = await fetchFeaturedImage(
-  //     content.image_text_block_3_image
-  //   );
-  //   imageUrls[3] = image;
-  // }
-
-  // const textBlocks = {};
-  // if (content.image_text_block_1_content) {
-  //   const text = convertWysywyg(content.image_text_block_1_content);
-  //   textBlocks[1] = text;
-  // }
-
-  // if (content.image_text_block_2_content) {
-  //   const text = convertWysywyg(content.image_text_block_2_content);
-  //   textBlocks[2] = text;
-  // }
-
-  // if (content.image_text_block_3_content) {
-  //   const text = convertWysywyg(content.image_text_block_3_content);
-  //   textBlocks[3] = text;
-  // }
-
-  console.log(content);
+  let textBlock2;
+  if (content.text_block_2) {
+    textBlock2 = convertWysywyg(content.text_block_2);
+  }
 
   return (
     <>
@@ -124,7 +84,7 @@ export default async function Service({ params }: PageProps) {
         }}
       >
         <div
-          className={`absolute inset-0 ${
+          className={`absolute inset-0  ${
             {
               1: 'bg-green',
               2: 'bg-yellow',
@@ -151,28 +111,44 @@ export default async function Service({ params }: PageProps) {
         </div>
       </div>
       <div className=''></div>
-
-      <Section classes='narrow flex flex-col md:flex-row gap-16' type='narrow'>
-        {image.source_url && (
-          <Image
-            src={image.source_url}
-            alt=''
-            className='w-1/2'
-            width={500}
-            height={500}
+      <Section classes='flex flex-col items-center gap-32' type='narrow'>
+        {content.image_text_block_1_image && (
+          <ImageTextBlock
+            image={content.image_text_block_1_image}
+            title={content.image_text_block_1_title}
+            text={content.image_text_block_1_content}
+            position={content.image_text_block_1_image_position}
           />
         )}
-        <div className='flex flex-col w-1/2 space-y-8'>
-          {content.image_text_block_1_title && (
-            <h2 className='font-semibold'>
-              {content.image_text_block_1_title}
-            </h2>
-          )}
+
+        {textBlock1 && (
           <div
-            className='text-ash'
-            dangerouslySetInnerHTML={{ __html: text }}
+            className='text-ash w-1/2 text-center'
+            dangerouslySetInnerHTML={{ __html: textBlock1 }}
           />
-        </div>
+        )}
+        {content.image_text_block_2_image && (
+          <ImageTextBlock
+            image={content.image_text_block_2_image}
+            title={content.image_text_block_2_title}
+            text={content.image_text_block_2_content}
+            position={content.image_text_block_2_image_position}
+          />
+        )}
+        {textBlock2 && (
+          <div
+            className='text-ash w-1/2 text-center'
+            dangerouslySetInnerHTML={{ __html: textBlock2 }}
+          />
+        )}
+        {content.image_text_block_3_image && (
+          <ImageTextBlock
+            image={content.image_text_block_3_image}
+            title={content.image_text_block_3_title}
+            text={content.image_text_block_3_content}
+            position={content.image_text_block_3_image_position}
+          />
+        )}
       </Section>
     </>
   );
