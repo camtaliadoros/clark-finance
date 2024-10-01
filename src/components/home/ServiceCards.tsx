@@ -2,7 +2,7 @@ import { Section } from '../shared/Section';
 import { ServiceCard } from './ServiceCard';
 
 type PageProps = {
-  classes: string;
+  classes?: string;
 };
 
 type Service = {

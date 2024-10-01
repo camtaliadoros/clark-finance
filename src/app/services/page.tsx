@@ -33,9 +33,9 @@ export default async function Services() {
 
   return (
     <>
-      <Section
-        type='wide'
-        classes='space-y-4 mb-0 pb-0 bg-hero-image bg-top bg-cover'
+      <div
+        className='space-y-4 mb-0 pb-0 bg-hero-image bg-top bg-cover bg-fixed flex flex-col items-center justify-center'
+        style={{ height: '32rem' }}
       >
         <SectionTitle
           title={content.page_title}
@@ -46,9 +46,9 @@ export default async function Services() {
         <h2 className='text-center text-xl font-semibold text-chalk'>
           {content.subheading}
         </h2>
-      </Section>
+      </div>
 
-      <ServiceCards classes='-mt-44' />
+      <ServiceCards />
     </>
   );
 }
