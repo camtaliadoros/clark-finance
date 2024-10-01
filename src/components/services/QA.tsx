@@ -1,6 +1,8 @@
 'use client';
 
 import { convertWysywyg } from '@/util/utilFunctions';
+import { faChevronDown, faChevronUp } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useRef, useState } from 'react';
 
 type QAProps = {
@@ -21,14 +23,24 @@ export const QA = ({ question, answer }: QAProps) => {
 
   return (
     <div>
-      <button className='flex w-full' onClick={handleClick}>
-        <h5 className='text-chalk text-left font-semibold border-b py-2 border-chalk w-full'>
+      <button
+        className='flex w-full border-b py-4 border-chalk items-center space-x-6'
+        onClick={handleClick}
+      >
+        <h5 className='text-chalk text-left font-semibold  w-full mb-0'>
           {question}
         </h5>
+        <FontAwesomeIcon
+          icon={faChevronDown}
+          size='sm'
+          className={`text-chalk text-base ${
+            isOpen ? 'rotate-180' : 'rotate-0'
+          } transition duration-300`}
+        />
       </button>
       <div
         className={` bg-mediumblue rounded-sm bg-opacity-20 overflow-hidden  
-        transition-all duration-500`}
+        transition-all duration-300`}
         ref={contentRef}
         style={{
           maxHeight: isOpen ? `${contentRef.current?.scrollHeight}px` : '0px',
