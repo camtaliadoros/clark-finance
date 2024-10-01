@@ -39,7 +39,7 @@ export const QA = ({ question, answer }: QAProps) => {
         />
       </button>
       <div
-        className={` bg-mediumblue rounded-sm bg-opacity-20 overflow-hidden  
+        className={` bg-lightblue rounded-sm bg-opacity-20 overflow-hidden  
         transition-all duration-300`}
         ref={contentRef}
         style={{

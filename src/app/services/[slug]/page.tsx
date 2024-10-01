@@ -1,6 +1,8 @@
+import { ContactUs } from '@/components/home/ContactUs';
 import { QAWrapper } from '@/components/services/QAWrapper';
 import { ImageTextBlock } from '@/components/shared/ImageTextBlock';
 import { Section } from '@/components/shared/Section';
+import { SectionTitle } from '@/components/shared/SectionTitle';
 import { ImageType, ServicePageContent } from '@/util/models';
 import { convertWysywyg, fetchFeaturedImage } from '@/util/utilFunctions';
 
@@ -49,6 +51,8 @@ export default async function Service({ params }: PageProps) {
   if (content.text_block_2) {
     textBlock2 = convertWysywyg(content.text_block_2);
   }
+
+  const lendersContent = convertWysywyg(content.lenders);
 
   return (
     <>
@@ -127,6 +131,22 @@ export default async function Service({ params }: PageProps) {
       </Section>
 
       <QAWrapper pageContent={content} />
+      <Section
+        type='narrow'
+        classes='bg-chequered-bg bg-cover bg-bottom flex flex-col items-center gap-16'
+      >
+        <SectionTitle
+          title='Lenders we work with'
+          textColour='ash'
+          lineColour='mediumblue'
+          alignment='centred'
+        />
+        <div
+          className='flex flex-row flex-wrap gap-8 justify-center'
+          dangerouslySetInnerHTML={{ __html: lendersContent }}
+        />
+      </Section>
+      <ContactUs colourScheme='dark' />
     </>
   );
 }

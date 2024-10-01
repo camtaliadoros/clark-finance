@@ -1,6 +1,7 @@
 import { ServicePageContent } from '@/util/models';
 import { Section } from '../shared/Section';
 import { QA } from './QA';
+import { SectionTitle } from '../shared/SectionTitle';
 
 type QAProps = {
   pageContent: ServicePageContent;
@@ -61,11 +62,14 @@ export const QAWrapper = ({ pageContent }: QAProps) => {
   return (
     <Section
       type='wide'
-      classes='bg-navy flex flex-col items-center space-y-16'
+      classes='bg-mediumblue flex flex-col items-center space-y-16'
     >
-      <h3 className='text-chalk font-semibold'>
-        Your guide to {pageContent.service_title}
-      </h3>
+      <SectionTitle
+        title={`Your guide to ${pageContent.service_title}`}
+        textColour='chalk'
+        lineColour='chalk'
+        alignment='centred'
+      />
 
       <div className='w-full md:w-2/3 lg:w-1/2 space-y-2'>
         {orderedQA.map((qa) => (

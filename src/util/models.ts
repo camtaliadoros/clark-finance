@@ -60,6 +60,7 @@ export type ServicePageContent = {
   q9?: string;
   a10?: string;
   q10?: string;
+  lenders: string;
 };
 
 export type CaseStudyFeatureContent = {
