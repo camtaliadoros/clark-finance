@@ -1,10 +1,14 @@
 import { ContactUs } from '@/components/home/ContactUs';
 import { QAWrapper } from '@/components/services/QAWrapper';
+import { Button } from '@/components/shared/Button';
 import { ImageTextBlock } from '@/components/shared/ImageTextBlock';
 import { Section } from '@/components/shared/Section';
 import { SectionTitle } from '@/components/shared/SectionTitle';
 import { ImageType, ServicePageContent } from '@/util/models';
 import { convertWysywyg, fetchFeaturedImage } from '@/util/utilFunctions';
+import { faArrowAltCircleDown } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import Link from 'next/link';
 
 type PageProps = {
   params: Params;
@@ -77,19 +81,71 @@ export default async function Service({ params }: PageProps) {
           } bg-opacity-50`}
         ></div>
 
-        <div className='flex flex-col bg-black bg-opacity-50 backdrop-blur h-full py-24 px-8 w-full lg:w-1/2 '>
-          <h1 className='text-chalk'>{content.page_title}</h1>
+        <div className='flex flex-col bg-black bg-opacity-50 backdrop-blur h-full py-24 px-8 w-full lg:w-1/2 gap-8 '>
+          <div className='flex flex-col'>
+            <h1 className='text-chalk'>{content.page_title}</h1>
 
-          <h2 className='font-semibold text-xl text-chalk'>
-            {content.subheading}
-          </h2>
-          <div
-            className='text-chalk'
-            dangerouslySetInnerHTML={{ __html: whyClarkFinanceText }}
-          />
+            <h2 className='font-semibold text-xl text-chalk'>
+              {content.subheading}
+            </h2>
+            <div
+              className='text-chalk'
+              dangerouslySetInnerHTML={{ __html: whyClarkFinanceText }}
+            />
+          </div>
+          <div className='flex gap-8'>
+            <Button url='#contact-us' title='Get in touch' colour='chalk' />
+          </div>
         </div>
       </div>
-      <div className=''></div>
+      <div className='flex w-screen md:w-fit'>
+        {content.q1 && (
+          <Link
+            className={`flex gap-2 items-center py-2 px-4 no-underline border-r border-chalk w-full min-w-fit ${
+              {
+                1: 'bg-green',
+                2: 'bg-yellow',
+                3: 'bg-orange',
+                4: 'bg-purple',
+                5: 'bg-magenta',
+                6: 'bg-navy',
+                7: 'bg-red',
+                8: 'bg-bluegrey',
+              }[content.homepage_order]
+            } hover:bg-opacity-80 transition text-chalk font-semibold text-sm`}
+            href='#qa'
+          >
+            View our mortgage guide
+            <FontAwesomeIcon
+              icon={faArrowAltCircleDown}
+              className='text-base'
+            />
+          </Link>
+        )}
+        {lendersContent && (
+          <Link
+            href='#lenders'
+            className={`flex gap-2 items-center py-2 px-4 no-underline border-r border-chalk w-full min-w-fit ${
+              {
+                1: 'bg-green',
+                2: 'bg-yellow',
+                3: 'bg-orange',
+                4: 'bg-purple',
+                5: 'bg-magenta',
+                6: 'bg-navy',
+                7: 'bg-red',
+                8: 'bg-bluegrey',
+              }[content.homepage_order]
+            } hover:bg-opacity-80 transition text-chalk font-semibold text-sm`}
+          >
+            View our lenders
+            <FontAwesomeIcon
+              icon={faArrowAltCircleDown}
+              className='text-base'
+            />
+          </Link>
+        )}
+      </div>
       <Section classes='flex flex-col items-center gap-32' type='narrow'>
         {content.image_text_block_1_image && (
           <ImageTextBlock
@@ -130,22 +186,25 @@ export default async function Service({ params }: PageProps) {
         )}
       </Section>
 
-      <QAWrapper pageContent={content} />
-      <Section
-        type='narrow'
-        classes='bg-chequered-bg bg-cover bg-bottom flex flex-col items-center gap-16'
-      >
-        <SectionTitle
-          title='Lenders we work with'
-          textColour='ash'
-          lineColour='mediumblue'
-          alignment='centred'
-        />
-        <div
-          className='flex flex-row flex-wrap gap-8 justify-center'
-          dangerouslySetInnerHTML={{ __html: lendersContent }}
-        />
-      </Section>
+      {content.q1 && <QAWrapper pageContent={content} />}
+      {lendersContent && (
+        <Section
+          type='narrow'
+          classes='bg-chequered-bg bg-cover bg-bottom flex flex-col items-center gap-16'
+        >
+          <SectionTitle
+            title='Lenders we work with'
+            textColour='ash'
+            lineColour='mediumblue'
+            alignment='centred'
+          />
+          <div
+            id='lenders'
+            className='flex flex-row flex-wrap gap-8 justify-center'
+            dangerouslySetInnerHTML={{ __html: lendersContent }}
+          />
+        </Section>
+      )}
       <ContactUs colourScheme='dark' />
     </>
   );

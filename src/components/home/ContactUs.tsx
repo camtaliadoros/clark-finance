@@ -54,7 +54,10 @@ export const ContactUs = async ({ colourScheme }: ContactUsProps) => {
         alignment='centred'
         classes='mb-8 md:mb-12 lg:mb-18'
       />
-      <div className='flex flex-col md:grid md:grid-cols-2 items-start space-y-12 md:space-y-0 gap-12'>
+      <div
+        id='contact-us'
+        className='flex flex-col md:grid md:grid-cols-2 items-start space-y-12 md:space-y-0 gap-12'
+      >
         <ContactForm />
         <div className='flex flex-col items-start gap-6 '>
           <Button

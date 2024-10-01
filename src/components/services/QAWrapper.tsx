@@ -71,7 +71,7 @@ export const QAWrapper = ({ pageContent }: QAProps) => {
         alignment='centred'
       />
 
-      <div className='w-full md:w-2/3 lg:w-1/2 space-y-2'>
+      <div id='qa' className='w-full md:w-2/3 lg:w-1/2 space-y-2'>
         {orderedQA.map((qa) => (
           <QA question={qa.q} answer={qa.a} key={qa.order} />
         ))}
