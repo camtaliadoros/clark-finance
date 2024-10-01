@@ -1,8 +1,8 @@
+import { QAWrapper } from '@/components/services/QAWrapper';
 import { ImageTextBlock } from '@/components/shared/ImageTextBlock';
 import { Section } from '@/components/shared/Section';
-import { ImageType } from '@/util/models';
+import { ImageType, ServicePageContent } from '@/util/models';
 import { convertWysywyg, fetchFeaturedImage } from '@/util/utilFunctions';
-import Image from 'next/image';
 
 type PageProps = {
   params: Params;
@@ -10,31 +10,6 @@ type PageProps = {
 
 type Params = {
   slug: string;
-};
-
-type PageContent = {
-  image_text_block_2_title: string;
-  image_text_block_2_content: string;
-  image_text_block_2_image?: number | null;
-  image_text_block_2_image_position: string;
-  image_text_block_3_title: string;
-  image_text_block_3_content: string;
-  image_text_block_3_image?: number | null;
-  image_text_block_3_image_position: string;
-  image_text_block_1_title: string;
-  image_text_block_1_content: string;
-  image_text_block_1_image?: number | null;
-  image_text_block_1_image_position: string;
-  menu_location: string[];
-  menu_position: number;
-  page_title: string;
-  subheading: string;
-  service_title: string;
-  text_block_1: string;
-  text_block_2: string;
-  page_title_background_image: number;
-  homepage_order: number;
-  why_clark_finance: string;
 };
 
 const fetchPageContent = async (slug: string) => {
@@ -57,7 +32,7 @@ const fetchPageContent = async (slug: string) => {
 export default async function Service({ params }: PageProps) {
   const data = await fetchPageContent(params.slug);
 
-  const content: PageContent = data[0].acf;
+  const content: ServicePageContent = data[0].acf;
 
   const bgImage: ImageType = await fetchFeaturedImage(
     content.page_title_background_image
@@ -150,6 +125,8 @@ export default async function Service({ params }: PageProps) {
           />
         )}
       </Section>
+
+      <QAWrapper pageContent={content} />
     </>
   );
 }

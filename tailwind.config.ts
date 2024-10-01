@@ -49,6 +49,9 @@ const config: Config = {
         'br-120': '120px',
         'br-140': '140px',
       },
+      transitionProperty: {
+        'max-height': 'max-height',
+      },
     },
   },
   plugins: [],
