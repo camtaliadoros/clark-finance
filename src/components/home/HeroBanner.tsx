@@ -16,14 +16,11 @@ export const HeroBanner = async ({
 }: HeroBannerContent) => {
   return (
     <>
-      <div className='fixed w-full'>
+      <div className='w-full'>
         <div
-          className='bg-hero-image bg-cover bg-center z-0  flex flex-col justify-center'
+          className='bg-hero-image bg-cover bg-center bg-fixed z-0  flex flex-col justify-center px-12 md:px-18 lg:px-24 2xl:px-60 space-y-1'
           style={{ height: '32rem' }}
-        ></div>
-      </div>
-      <div className='flex flex-col justify-center' style={{ height: '32rem' }}>
-        <div className='relative z-10 flex flex-col justify-center px-12 md:px-18 lg:px-24 2xl:px-60 space-y-1'>
+        >
           <h2 className='text-chalk font-normal'>{subtitle}</h2>
           <hr className='border-chalk border-t-2 w-20' />
           <h1 className='text-chalk font-semibold '>{title}</h1>
