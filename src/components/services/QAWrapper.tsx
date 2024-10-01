@@ -67,7 +67,7 @@ export const QAWrapper = ({ pageContent }: QAProps) => {
         Your guide to {pageContent.service_title}
       </h3>
 
-      <div className='w-1/2 space-y-2'>
+      <div className='w-full md:w-2/3 lg:w-1/2 space-y-2'>
         {orderedQA.map((qa) => (
           <QA question={qa.q} answer={qa.a} key={qa.order} />
         ))}
