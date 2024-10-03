@@ -1,4 +1,4 @@
-import { CaseStudyContent, CaseStudyFeatureTypes } from '@/util/models';
+import { CaseStudyFeatureTypes } from '@/util/models';
 import { Button } from '../shared/Button';
 import { CaseStudyFeature } from '../shared/CaseStudyFeature';
 import { Section } from '../shared/Section';
@@ -14,6 +14,7 @@ async function fetchAllCaseStudies() {
       cache: 'no-store',
     }
   );
+
   if (!res.ok) {
     throw new Error('Failed to fetch data');
   }

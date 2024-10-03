@@ -45,11 +45,11 @@ export const Reviews = async () => {
     >
       <SectionTitle
         title='Our Reviews'
-        lineColour='lightblue'
+        lineColour='mediumblue'
         textColour='ash'
         alignment='centred'
       />
-      <div className='mt-24 flex gap-12 justify-between '>
+      <div className='mt-24 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 '>
         {featuredReviews.map((review, i) => (
           <ReviewCard key={i} content={review} />
         ))}

@@ -18,7 +18,7 @@ export const ReviewCard = ({ content }: ReviewCardProps) => {
   const ratingArr = [1, 2, 3, 4, 5];
 
   return (
-    <div className='bg-white flex  flex-col w-1/3 drop-shadow-lg p-6 h-60'>
+    <div className='bg-white flex flex-col drop-shadow-lg p-6 h-60'>
       <div className='flex gap-2'>
         {content.profile_photo_url ? (
           <Image
