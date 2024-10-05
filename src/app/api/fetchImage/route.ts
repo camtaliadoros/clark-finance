@@ -4,9 +4,17 @@ export async function GET(req: NextRequest) {
   const { searchParams } = new URL(req.url);
   const imageId = searchParams.get('id');
 
+  const encodedCredentials = btoa(`wordify:xkchirst`);
+
   try {
     const response = await fetch(
-      `${process.env.WP_ROUTE}/media/${imageId}?_fields=source_url,alt_text,id`
+      `${process.env.WP_ROUTE}/media/${imageId}?_fields=source_url,alt_text,id`,
+      {
+        headers: {
+          Authorization: `Basic ${encodedCredentials}`,
+          'Content-Type': 'application/json',
+        },
+      }
     );
     const data = await response.json();
 

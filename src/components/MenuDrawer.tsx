@@ -1,29 +1,57 @@
 'use client';
 
 import { MenuDrawerContext } from '@/contexts/MenuContextProvider';
-import { Page } from '@/util/models';
+import { Page, Service, ServicePageContent } from '@/util/models';
 import { fetchMenuItems } from '@/util/utilFunctions';
 import Link from 'next/link';
-import { usePathname, useRouter } from 'next/navigation';
+import { usePathname } from 'next/navigation';
 import { useContext, useEffect, useState } from 'react';
+
+type MenuItems = {
+  mainPages: Page[];
+  servicePages: Service[];
+};
 
 export const MenuDrawer = () => {
   const { isOpen } = useContext(MenuDrawerContext);
-  const [menuPages, setMenuPages] = useState<Page[]>();
+  const [menuPages, setMenuPages] = useState<MenuItems>();
 
   const pathname = usePathname();
 
   useEffect(() => {
     const fetchData = async () => {
       const data: Page[] = await fetchMenuItems();
+
       const mainMenuPages = data.filter((page) =>
         page.acf.menu_location.includes('Main Menu')
       );
 
-      const sortedPages = mainMenuPages.sort((a, b) => {
+      const sortedPages = mainMenuPages.toSorted((a, b) => {
         return a.acf.menu_position - b.acf.menu_position;
       });
-      setMenuPages(sortedPages);
+
+      // const servicePagesData = await fetch(
+      //   `${process.env.NEXT_PUBLIC_HOST_URL}/services/api/fetchAllServices`,
+      //   {
+      //     // next: {
+      //     //   revalidate: 10,
+      //     // },
+      //     cache: 'no-store',
+      //   }
+      // );
+
+      // const servicePages: Service[] = await servicePagesData.json();
+
+      // const sortedServices = servicePages.toSorted((a, b) => {
+      //   return a.acf.homepage_order - b.acf.homepage_order;
+      // });
+
+      const menuItems = {
+        mainPages: sortedPages,
+        servicePages: [],
+      };
+
+      setMenuPages(menuItems);
     };
 
     fetchData();
@@ -35,7 +63,7 @@ export const MenuDrawer = () => {
         isOpen ? null : 'translate-x-full'
       }`}
     >
-      {menuPages?.map((page) => (
+      {menuPages?.mainPages.map((page, i) => (
         <Link
           href={`/${page.slug}`}
           className={`text-chalk text-2xl font-semibold no-underline hover:opacity-75 transition ${
@@ -47,7 +75,7 @@ export const MenuDrawer = () => {
         >
           {page.acf.page_title}
         </Link>
-      ))}{' '}
+      ))}
     </div>
   );
 };

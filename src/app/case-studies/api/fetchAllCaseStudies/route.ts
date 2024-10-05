@@ -5,9 +5,18 @@ export async function GET(req: NextRequest) {
   const currentPage = searchParams.get('page');
   const itemsPerPage = searchParams.get('items');
 
+  const encodedCredentials = btoa(`wordify:xkchirst`);
+
   const response = await fetch(
-    `${process.env.WP_ROUTE}/case-study?page=${currentPage}&per_page=${itemsPerPage}&_fields=acf,slug,link`
+    `${process.env.WP_ROUTE}/case-study?page=${currentPage}&per_page=${itemsPerPage}&_fields=acf,slug,link`,
+    {
+      headers: {
+        Authorization: `Basic ${encodedCredentials}`,
+        'Content-Type': 'application/json',
+      },
+    }
   );
+
   const data = await response.json();
 
   const totalPages = response.headers.get('X-WP-TotalPages');

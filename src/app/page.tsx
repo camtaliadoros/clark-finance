@@ -4,7 +4,6 @@ import { HeroBanner } from '@/components/home/HeroBanner';
 import { Reviews } from '@/components/home/Reviews';
 import { ServiceCards } from '@/components/home/ServiceCards';
 import { WhyClarkFinance } from '@/components/home/WhyClarkFinance';
-import { fetchContent } from '@/util/fetch';
 import { ButtonContentFields } from '@/util/models';
 
 type HomeContent = {
@@ -28,8 +27,6 @@ async function fetchHomePageContent() {
   });
 
   if (!res.ok) {
-    const a = await res.json();
-
     throw new Error('Failed to fetch data');
   }
   return res.json();

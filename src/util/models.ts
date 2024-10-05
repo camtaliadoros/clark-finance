@@ -97,5 +97,6 @@ export type ArticleContentType = {
 export type Page = {
   id: number;
   slug: string;
+  parent: number;
   acf: Record<string, any>;
 };
