@@ -50,7 +50,7 @@ export const ReviewCard = ({ content }: ReviewCardProps) => {
             {content.relative_time_description}
           </p>
         </div>
-        <p className='truncate h-full'>{content.text}</p>
+        <p className='overflow-y-hidden line-clamp-6'>{content.text}</p>
       </div>
     </div>
   );
