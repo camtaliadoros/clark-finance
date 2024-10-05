@@ -4,9 +4,14 @@ import { Button } from './Button';
 import { Section } from './Section';
 import { SectionTitle } from './SectionTitle';
 
+type Response = {
+  pageData: ArticleDataType[];
+  totalPages: number;
+};
+
 async function fetchAllArticles() {
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_HOST_URL}/news/api/fetchAllArticles`,
+    `${process.env.NEXT_PUBLIC_HOST_URL}/news/api/fetchAllArticles?page=1&per_page=6`,
     {
       // next: {
       //   revalidate: 10,
@@ -25,9 +30,9 @@ export const FeaturedArticlesSection = async ({
 }: {
   bgColour: string;
 }) => {
-  const data: ArticleDataType[] = await fetchAllArticles();
+  const data: Response = await fetchAllArticles();
 
-  const featuredContent = data.slice(0, 3);
+  const featuredContent = data.pageData;
 
   return (
     <Section
@@ -38,7 +43,7 @@ export const FeaturedArticlesSection = async ({
     >
       <SectionTitle
         title='Insights'
-        lineColour='lightblue'
+        lineColour='mediumblue'
         textColour={`${bgColour === 'dark' ? 'chalk' : 'ash'}`}
         alignment='centred'
       />

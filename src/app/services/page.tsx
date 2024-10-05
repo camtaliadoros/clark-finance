@@ -34,8 +34,8 @@ export default async function Services() {
   return (
     <>
       <div
-        className='space-y-4 mb-0 pb-0 bg-hero-image bg-top bg-cover bg-fixed flex flex-col items-center justify-center'
-        style={{ height: '32rem' }}
+        className='space-y-4 mb-0 pb-0 bg-hero-image bg-top bg-cover bg-fixed flex flex-col items-center py-32'
+        style={{ height: '24rem' }}
       >
         <SectionTitle
           title={content.page_title}

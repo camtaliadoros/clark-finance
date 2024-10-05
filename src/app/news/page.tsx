@@ -16,7 +16,7 @@ export type ArticleDataType = {
 
 export const fetchArticlesByPage = async (pageNumber: number) => {
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_HOST_URL}/news/api/fetchAllArticles?page=${pageNumber}`,
+    `${process.env.NEXT_PUBLIC_HOST_URL}/news/api/fetchAllArticles?page=${pageNumber}&per_page=6`,
     {
       //   next: {
       //     revalidate: 10,
