@@ -27,7 +27,8 @@ h4,
 h5,
 h6,
 p,
-a {
+a,
+button {
   font-family: 'Source Sans';
   line-height: 1.2em;
 }

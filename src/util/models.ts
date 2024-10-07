@@ -13,6 +13,7 @@ export type CaseStudyFeatureTypes = {
 export type Service = {
   slug: string;
   link: string;
+  parent: number;
   acf: ServicePageContent;
 };
 
@@ -33,11 +34,9 @@ export type ServicePageContent = {
   image_text_block_3_image_position: 'Left' | 'Right';
   page_title: string;
   subheading: string;
-  service_title: string;
-  service_excerpt: string;
+  service_card: ServiceCard;
   text_block_1: string;
   text_block_2: string;
-  homepage_order: number;
   page_title_background_image: number;
   why_clark_finance: string;
   a1?: string;
@@ -61,6 +60,12 @@ export type ServicePageContent = {
   a10?: string;
   q10?: string;
   lenders: string;
+};
+
+export type ServiceCard = {
+  service_title: string;
+  service_excerpt: string;
+  homepage_order: number;
 };
 
 export type CaseStudyFeatureContent = {
