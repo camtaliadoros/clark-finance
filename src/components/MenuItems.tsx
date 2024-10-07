@@ -5,7 +5,7 @@ import { faChevronDown } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { useRef, useState } from 'react';
+import { ElementRef, useRef, useState } from 'react';
 import { SubMenu } from './SubMenu';
 
 type MenuItemProps = {
@@ -16,8 +16,6 @@ export const MenuItem = ({ pageData }: MenuItemProps) => {
   const [submenuIsOpen, setSubmenuIsOpen] = useState(false);
 
   const pathname = usePathname();
-
-  const contentRef = useRef(null);
 
   const handleClick = () => {
     setSubmenuIsOpen((prevState) => !prevState);
@@ -42,20 +40,7 @@ export const MenuItem = ({ pageData }: MenuItemProps) => {
             icon={faChevronDown}
           />
         </button>
-        {submenuIsOpen && (
-          <div
-            className='bg-navy bg-opacity-50 w-full flex flex-col items-center justify-center py-8 overflow-hidden transition-all duration-1000'
-            ref={contentRef}
-            style={{
-              maxHeight: submenuIsOpen
-                ? `${contentRef.current?.scrollHeight}px`
-                : '0px',
-              opacity: submenuIsOpen ? 1 : 0,
-            }}
-          >
-            <SubMenu isOpen={submenuIsOpen} />
-          </div>
-        )}
+        {submenuIsOpen && <SubMenu />}
       </>
     );
   } else {

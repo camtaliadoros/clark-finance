@@ -11,7 +11,7 @@ export const SubMenu = () => {
   const pathname = usePathname();
 
   return (
-    <>
+    <div className='bg-navy bg-opacity-50 w-full flex flex-col items-center justify-center py-8 overflow-hidden transition-all duration-1000'>
       {menuItems.servicePages.map((page) => (
         <Link
           href={`/services/${page.slug}`}
@@ -25,6 +25,6 @@ export const SubMenu = () => {
           {page.acf.page_title}
         </Link>
       ))}
-    </>
+    </div>
   );
 };

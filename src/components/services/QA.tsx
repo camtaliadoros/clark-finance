@@ -3,7 +3,7 @@
 import { convertWysywyg } from '@/util/utilFunctions';
 import { faChevronDown } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { useRef, useState } from 'react';
+import { ElementRef, useRef, useState } from 'react';
 
 type QAProps = {
   question: string;
@@ -13,7 +13,7 @@ type QAProps = {
 export const QA = ({ question, answer }: QAProps) => {
   const [isOpen, setIsOpen] = useState(false);
 
-  const contentRef = useRef(null);
+  const contentRef = useRef<ElementRef<'div'>>(null);
 
   const sanitisedContent = convertWysywyg(answer);
 
