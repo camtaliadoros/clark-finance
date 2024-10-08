@@ -3,6 +3,7 @@ import { Section } from '../shared/Section';
 import { SectionTitle } from '../shared/SectionTitle';
 import { ButtonContentFields } from '@/util/models';
 import { Button } from '../shared/Button';
+import { sanitiseURL } from '@/util/utilFunctions';
 
 type WhyClarkFinanceContent = {
   sectionTitle: string;
@@ -23,6 +24,9 @@ export const WhyClarkFinance = ({
 
   // Remove the <li> tags and clean up the content
   const liArray = listItems?.map((item) => item.replace(/<\/?li>/g, '').trim());
+
+  // Sanitise URLs
+  const sanitisedURL = sanitiseURL(aboutUsButton.url);
 
   return (
     <Section
@@ -66,11 +70,7 @@ export const WhyClarkFinance = ({
             </li>
           ))}
         </ul>
-        <Button
-          colour='chalk'
-          title={aboutUsButton.title}
-          url={aboutUsButton.url}
-        />
+        <Button colour='chalk' title={aboutUsButton.title} url={sanitisedURL} />
       </div>
     </Section>
   );

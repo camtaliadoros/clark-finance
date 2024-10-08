@@ -35,3 +35,7 @@ export const fetchMenuItems = async () => {
   }
   return res.json();
 };
+
+export const sanitiseURL = (url: string) => {
+  return url.replace('https://clarkfinance.wordifysites.com', '');
+};
