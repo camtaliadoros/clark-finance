@@ -6,16 +6,20 @@ export async function GET(req: NextRequest) {
   const { searchParams } = new URL(req.url);
   const slug = searchParams.get('slug');
 
-  const response = await fetch(
-    `${process.env.WP_ROUTE}/article?slug=${slug}&_fields=acf,date`,
-    {
-      headers: {
-        Authorization: `Basic ${encodedCredentials}`,
-        'Content-Type': 'application/json',
-      },
-    }
-  );
-  const data = await response.json();
+  try {
+    const response = await fetch(
+      `${process.env.WP_ROUTE}/article?slug=${slug}&_fields=acf,date`,
+      {
+        headers: {
+          Authorization: `Basic ${encodedCredentials}`,
+          'Content-Type': 'application/json',
+        },
+      }
+    );
+    const data = await response.json();
 
-  return Response.json(data);
+    return Response.json(data);
+  } catch (e) {
+    throw new Error('There was a problem retrieving the content: ' + e);
+  }
 }
