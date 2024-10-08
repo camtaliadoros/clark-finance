@@ -5,7 +5,7 @@ export async function GET(req: NextRequest) {
   const currentPage = searchParams.get('page');
   const itemsPerPage = searchParams.get('items');
 
-  const encodedCredentials = btoa(`wordify:xkchirst`);
+  const encodedCredentials = btoa(`${process.env.WP_CREDENTIALS}`);
 
   const response = await fetch(
     `${process.env.WP_ROUTE}/case-study?page=${currentPage}&per_page=${itemsPerPage}&_fields=acf,slug,link`,

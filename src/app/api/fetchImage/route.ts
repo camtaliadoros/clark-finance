@@ -4,7 +4,7 @@ export async function GET(req: NextRequest) {
   const { searchParams } = new URL(req.url);
   const imageId = searchParams.get('id');
 
-  const encodedCredentials = btoa(`wordify:xkchirst`);
+  const encodedCredentials = btoa(`${process.env.WP_CREDENTIALS}`);
 
   try {
     const response = await fetch(

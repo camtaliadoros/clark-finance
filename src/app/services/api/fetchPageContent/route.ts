@@ -1,5 +1,5 @@
 export async function GET() {
-  const encodedCredentials = btoa(`wordify:xkchirst`);
+  const encodedCredentials = btoa(`${process.env.WP_CREDENTIALS}`);
 
   try {
     const response = await fetch(

@@ -1,5 +1,5 @@
 export async function GET() {
-  const encodedCredentials = btoa(`wordify:xkchirst`);
+  const encodedCredentials = btoa(`${process.env.WP_CREDENTIALS}`);
 
   const response = await fetch(`${process.env.WP_ROUTE}/pages/74?_fields=acf`, {
     headers: {
