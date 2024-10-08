@@ -8,8 +8,8 @@ const nextConfig = {
         port: '',
       },
       {
-        protocol: 'http',
-        hostname: 'clark-finance.local',
+        protocol: 'https',
+        hostname: 'clarkfinance.wordifysites.com',
         port: '',
       },
     ],

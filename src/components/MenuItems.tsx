@@ -15,6 +15,8 @@ type MenuItemProps = {
 export const MenuItem = ({ pageData }: MenuItemProps) => {
   const [submenuIsOpen, setSubmenuIsOpen] = useState(false);
 
+  const contentRef = useRef<ElementRef<'div'>>(null);
+
   const pathname = usePathname();
 
   const handleClick = () => {
@@ -40,7 +42,19 @@ export const MenuItem = ({ pageData }: MenuItemProps) => {
             icon={faChevronDown}
           />
         </button>
-        {submenuIsOpen && <SubMenu />}
+
+        <div
+          className='bg-navy bg-opacity-50 w-full flex flex-col items-center justify-center py-8 overflow-hidden transition-all duration-1000'
+          ref={contentRef}
+          style={{
+            height: submenuIsOpen
+              ? `${contentRef.current?.scrollHeight}px`
+              : '0px',
+            opacity: submenuIsOpen ? 1 : 0,
+          }}
+        >
+          <SubMenu />
+        </div>
       </>
     );
   } else {
