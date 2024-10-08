@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Image from 'next/image';
 import { Menu } from './Menu';
 import Link from 'next/link';
-import { EmailWithIcon } from './shared/emailWithIcon';
+import { EmailWithIcon } from './shared/EmailWithIcon';
 import { PhoneNumberWithIcon } from './shared/PhoneNumberWithIcon';
 
 export const Header = () => {

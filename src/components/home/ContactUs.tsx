@@ -1,6 +1,6 @@
 import { Button } from '../shared/Button';
 import { ContactForm } from '../shared/ContactForm';
-import { EmailWithIcon } from '../shared/emailWithIcon';
+import { EmailWithIcon } from '../shared/EmailWithIcon';
 import { PhoneNumberWithIcon } from '../shared/PhoneNumberWithIcon';
 import { Section } from '../shared/Section';
 import { SectionTitle } from '../shared/SectionTitle';
