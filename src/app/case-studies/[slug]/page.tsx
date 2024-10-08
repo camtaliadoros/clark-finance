@@ -13,9 +13,10 @@ const fetchCaseStudy = async (slug: string) => {
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_HOST_URL}/case-studies/api/fetchCaseStudy?slug=${slug}`,
     {
-      next: {
-        revalidate: 10,
-      },
+      // next: {
+      //   revalidate: 10,
+      // },
+      cache: 'no-store',
     }
   );
   if (!res.ok) {

@@ -24,9 +24,10 @@ async function fetchContactUsContent() {
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_HOST_URL}/contact-us/api`,
     {
-      next: {
-        revalidate: 10,
-      },
+      // next: {
+      //   revalidate: 10,
+      // },
+      cache: 'no-store',
     }
   );
   if (!res.ok) {

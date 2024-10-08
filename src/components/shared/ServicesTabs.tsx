@@ -27,8 +27,8 @@ export const ServicesTabs = async ({ activePageSlug }: ServiceTabsProps) => {
 
   const filteredServices = services.map((service) => {
     return {
-      title: service.acf.service_title,
-      order: service.acf.homepage_order,
+      title: service.acf.service_card.service_title,
+      order: service.acf.service_card.homepage_order,
       link: service.link,
       slug: service.slug,
     };
