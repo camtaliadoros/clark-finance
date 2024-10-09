@@ -11,10 +11,9 @@ async function fetchPageContent() {
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_HOST_URL}/services/api/fetchPageContent`,
     {
-      // next: {
-      //   revalidate: 10,
-      // },
-      cache: 'no-store',
+      next: {
+        revalidate: 10,
+      },
     }
   );
 

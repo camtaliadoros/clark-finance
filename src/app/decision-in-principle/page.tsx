@@ -42,10 +42,9 @@ async function fetchDecisionInPrinciplePageContent() {
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_HOST_URL}/decision-in-principle/api`,
     {
-      // next: {
-      //   revalidate: 10,
-      // },
-      cache: 'no-store',
+      next: {
+        revalidate: 10,
+      },
     }
   );
   if (!res.ok) {

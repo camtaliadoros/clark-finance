@@ -13,10 +13,9 @@ async function fetchAllArticles() {
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_HOST_URL}/news/api/fetchAllArticles?page=1&per_page=6`,
     {
-      // next: {
-      //   revalidate: 10,
-      // },
-      cache: 'no-store',
+      next: {
+        revalidate: 10,
+      },
     }
   );
   if (!res.ok) {

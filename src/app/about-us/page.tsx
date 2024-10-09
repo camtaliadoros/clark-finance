@@ -47,10 +47,9 @@ export type WhyChooseUsItem = {
 
 async function fetchAboutUsPageContent() {
   const res = await fetch(`${process.env.NEXT_PUBLIC_HOST_URL}/about-us/api`, {
-    // next: {
-    //   revalidate: 10,
-    // },
-    cache: 'no-store',
+    next: {
+      revalidate: 10,
+    },
   });
   if (!res.ok) {
     throw new Error('Failed to fetch data');

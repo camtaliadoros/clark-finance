@@ -9,7 +9,6 @@ export async function GET() {
           Authorization: `Basic ${encodedCredentials}`,
           'Content-Type': 'application/json',
         },
-        cache: 'no-store',
       }
     );
     const data = await response.json();
