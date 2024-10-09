@@ -36,7 +36,7 @@ export const ServicesTabs = async ({ activePageSlug }: ServiceTabsProps) => {
   filteredServices.sort((a, b) => a.order - b.order);
 
   return (
-    <div className='hidden md:flex flex-row justify-between gap-0'>
+    <div className='hidden md:flex flex-row gap-0 bg-chalk shadow-inner'>
       {filteredServices.map((service) => (
         <ServiceTab
           service={service}
