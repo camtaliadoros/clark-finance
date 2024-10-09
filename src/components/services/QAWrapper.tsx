@@ -76,7 +76,8 @@ export const QAWrapper = ({ pageContent }: QAProps) => {
   }
 
   // Sort qa array in ascending order
-  const orderedQA = qaArr.toSorted((a, b) => {
+
+  qaArr.sort((a, b) => {
     return a.order - b.order;
   });
 
@@ -94,7 +95,7 @@ export const QAWrapper = ({ pageContent }: QAProps) => {
       />
 
       <div id='qa' className='w-full md:w-2/3 lg:w-1/2 space-y-2'>
-        {orderedQA.map((qa) => (
+        {qaArr.map((qa) => (
           <QA question={qa.q} answer={qa.a} key={qa.order} />
         ))}
       </div>

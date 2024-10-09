@@ -60,6 +60,36 @@ export type ServicePageContent = {
   a10?: string;
   q10?: string;
   lenders: string;
+  benefits_block_is_available: boolean;
+  benefits_block: BenefitsBlock;
+};
+
+export type BenefitsBlock = {
+  icon_1: number;
+  title_1: string;
+  text_1: string;
+  icon_2: number;
+  title_2: string;
+  text_2: string;
+  icon_3: number;
+  title_3: string;
+  text_3: string;
+  icon_4: number;
+  title_4: string;
+  text_4: string;
+  icon_5: number;
+  title_5: string;
+  text_5: string;
+  icon_6: number;
+  title_6: string;
+  text_6: string;
+};
+
+export type BenefitItem = {
+  icon: number;
+  title: string | undefined;
+  description: string | undefined;
+  note?: string | null;
 };
 
 export type ServiceCard = {

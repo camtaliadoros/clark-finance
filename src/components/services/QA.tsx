@@ -48,7 +48,7 @@ export const QA = ({ question, answer }: QAProps) => {
         }}
       >
         <div
-          className='text-chalk m-8 text-sm'
+          className='text-chalk m-8 text-sm [&>p]:text-chalk '
           dangerouslySetInnerHTML={{ __html: sanitisedContent }}
         />
       </div>

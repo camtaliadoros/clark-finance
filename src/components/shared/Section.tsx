@@ -13,9 +13,9 @@ export const Section = ({
 }: SectionProps) => {
   return (
     <section
-      className={`${classes} ${
+      className={` ${
         type === 'wide' ? 'px-4 2xl:px-60' : ' px-8 md:px-16 lg:px-36 2xl:px-96'
-      } py-28  relative z-10 bg-chalk`}
+      } py-28  relative z-10 bg-chalk ${classes}`}
       id={sectionId}
     >
       {children}

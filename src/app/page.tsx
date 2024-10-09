@@ -20,9 +20,10 @@ type HomeContent = {
 
 async function fetchHomePageContent() {
   const res = await fetch(`${process.env.NEXT_PUBLIC_HOST_URL}/api`, {
-    next: {
-      revalidate: 10,
-    },
+    // next: {
+    //   revalidate: 10,
+    // },
+    cache: 'no-store',
   });
 
   if (!res.ok) {

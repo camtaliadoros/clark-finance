@@ -21,7 +21,7 @@ export const ImageTextBlock = async ({
 
   return (
     <div
-      className={`flex flex-col lg:flex-row gap-16 w-full ${
+      className={`flex flex-col lg:flex-row gap-16 w-full px-48 ${
         position === 'Right' ? 'lg:flex-row-reverse' : 'flex-row'
       }`}
     >

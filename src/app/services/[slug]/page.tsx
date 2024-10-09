@@ -1,10 +1,16 @@
 import { ContactUs } from '@/components/home/ContactUs';
 import { QAWrapper } from '@/components/services/QAWrapper';
+import { BenefitCard } from '@/components/shared/BenefitCard';
 import { Button } from '@/components/shared/Button';
 import { ImageTextBlock } from '@/components/shared/ImageTextBlock';
 import { Section } from '@/components/shared/Section';
 import { SectionTitle } from '@/components/shared/SectionTitle';
-import { ImageType, ServicePageContent } from '@/util/models';
+import {
+  BenefitItem,
+  BenefitsBlock,
+  ImageType,
+  ServicePageContent,
+} from '@/util/models';
 import { convertWysywyg, fetchFeaturedImage } from '@/util/utilFunctions';
 import { faArrowAltCircleDown } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -22,9 +28,10 @@ const fetchPageContent = async (slug: string) => {
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_HOST_URL}/services/api/fetchServicePageContent?slug=${slug}`,
     {
-      next: {
-        revalidate: 10,
-      },
+      // next: {
+      //   revalidate: 10,
+      // },
+      cache: 'no-store',
     }
   );
 
@@ -56,6 +63,21 @@ export default async function Service({ params }: PageProps) {
   }
 
   const lendersContent = convertWysywyg(content.lenders);
+
+  const benefitsArr: BenefitItem[] = [];
+
+  for (let i = 1; i <= 6; i++) {
+    const iconKey = `icon_${i}` as keyof BenefitsBlock;
+    const titleKey = `title_${i}` as keyof BenefitsBlock;
+    const textKey = `text_${i}` as keyof BenefitsBlock;
+
+    const item: BenefitItem = {
+      icon: content.benefits_block[iconKey] as number,
+      title: content.benefits_block[titleKey] as string,
+      description: content.benefits_block[textKey] as string,
+    };
+    benefitsArr.push(item);
+  }
 
   return (
     <>
@@ -145,7 +167,7 @@ export default async function Service({ params }: PageProps) {
           </Link>
         )}
       </div>
-      <Section classes='flex flex-col items-center gap-32' type='narrow'>
+      <Section classes='flex flex-col items-center gap-8' type='wide'>
         {content.image_text_block_1_image && (
           <ImageTextBlock
             image={content.image_text_block_1_image}
@@ -153,6 +175,14 @@ export default async function Service({ params }: PageProps) {
             text={content.image_text_block_1_content}
             position={content.image_text_block_1_image_position}
           />
+        )}
+
+        {content.benefits_block_is_available && (
+          <div className='bg-chequered-bg bg-cover bg-bottom flex flex-wrap justify-center gap-12 pb-24'>
+            {benefitsArr.map((content, i) => (
+              <BenefitCard content={content} key={i} colourScheme='light' />
+            ))}
+          </div>
         )}
 
         {textBlock1 && (

@@ -6,7 +6,10 @@ import Link from 'next/link';
 export const Footer = async () => {
   const data: Page[] = await fetchMenuItems();
 
-  const footerMenuPages = data.filter((page) =>
+  // Isolate parents pages
+  const parentPages = data.filter((page) => page.parent === 0);
+
+  const footerMenuPages = parentPages.filter((page) =>
     page.acf.menu_location.includes('Footer Menu')
   );
 

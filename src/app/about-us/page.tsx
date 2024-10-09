@@ -1,8 +1,8 @@
-import { WhyChooseUsCard } from '@/components/aboutUs/WhyChooseUsCard';
 import { ContactUs } from '@/components/home/ContactUs';
+import { BenefitCard } from '@/components/shared/BenefitCard';
 import { Section } from '@/components/shared/Section';
 import { SectionTitle } from '@/components/shared/SectionTitle';
-import { ImageType } from '@/util/models';
+import { BenefitItem, ImageType } from '@/util/models';
 import { convertWysywyg, fetchFeaturedImage } from '@/util/utilFunctions';
 import Image from 'next/image';
 
@@ -38,13 +38,6 @@ type AboutUsPageContent = {
   why_choose_us_item_note_6: string | null;
 };
 
-export type WhyChooseUsItem = {
-  why_choose_us_item_icon: string | number | null;
-  why_choose_us_item_title: string;
-  why_choose_us_item_description: string;
-  why_choose_us_item_note: string | null;
-};
-
 async function fetchAboutUsPageContent() {
   const res = await fetch(`${process.env.NEXT_PUBLIC_HOST_URL}/about-us/api`, {
     next: {
@@ -70,7 +63,7 @@ export default async function AboutUs() {
 
   // Organise 'Why Choose Us' Items into an array
 
-  const whyChooseUsItems: WhyChooseUsItem[] = [];
+  const whyChooseUsItems: BenefitItem[] = [];
 
   for (let i = 1; i <= 6; i++) {
     const iconKey = `why_choose_us_item_icon_${i}` as keyof AboutUsPageContent;
@@ -80,11 +73,11 @@ export default async function AboutUs() {
       `why_choose_us_item_description_${i}` as keyof AboutUsPageContent;
     const noteKey = `why_choose_us_item_note_${i}` as keyof AboutUsPageContent;
 
-    const item: WhyChooseUsItem = {
-      why_choose_us_item_icon: content[iconKey] as string | null,
-      why_choose_us_item_title: content[titleKey] as string,
-      why_choose_us_item_description: content[descriptionKey] as string,
-      why_choose_us_item_note: content[noteKey] as string | null,
+    const item: BenefitItem = {
+      icon: content[iconKey] as string | null,
+      title: content[titleKey] as string,
+      description: content[descriptionKey] as string,
+      note: content[noteKey] as string | null,
     };
     whyChooseUsItems.push(item);
   }
@@ -125,7 +118,7 @@ export default async function AboutUs() {
         </h4>
         <div className='flex flex-wrap justify-center gap-12 my-12'>
           {whyChooseUsItems.map((content, i) => (
-            <WhyChooseUsCard content={content} key={i} />
+            <BenefitCard content={content} key={i} />
           ))}
         </div>
       </Section>
