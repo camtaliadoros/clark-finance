@@ -27,6 +27,7 @@ export const BenefitCard = async ({
         width={120}
         height={120}
         className={`${colourScheme === 'light' ? '' : 'filter invert'}`}
+        unoptimized
       />
       <div className='col-span-4 flex flex-col'>
         <h5

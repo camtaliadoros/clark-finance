@@ -1,6 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
+    domains: ['clarkfinance.wordifysites.com'],
     remotePatterns: [
       {
         protocol: 'https',

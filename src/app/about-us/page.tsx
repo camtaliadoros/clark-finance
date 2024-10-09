@@ -99,7 +99,9 @@ export default async function AboutUs() {
             className='md:w-1/3'
             width={350}
             height={200}
+            unoptimized
           />
+
           <div
             className='md:w-2/3 text-sm'
             dangerouslySetInnerHTML={{ __html: bodyContent }}
