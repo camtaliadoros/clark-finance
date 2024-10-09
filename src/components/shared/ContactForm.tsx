@@ -62,7 +62,9 @@ export const ContactForm = () => {
             />
             {errors[field.id] && (
               <p className='text-sm text-red pt-1'>
-                {errors[field.id]?.message}
+                {errors[field.id]?.message
+                  ? String(errors[field.id]?.message)
+                  : ''}
               </p>
             )}
           </div>
