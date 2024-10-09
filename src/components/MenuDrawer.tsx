@@ -7,11 +7,10 @@ import { useContext, useEffect } from 'react';
 import { MenuItem } from './MenuItems';
 
 export const MenuDrawer = () => {
-  const { isOpen } = useContext(MenuDrawerContext);
-
-  const { menuItems, setMenuItems } = useContext(MenuDrawerContext);
+  const { isOpen, menuItems, setMenuItems } = useContext(MenuDrawerContext);
 
   useEffect(() => {
+    console.log('something else');
     const fetchData = async () => {
       const data: Page[] = await fetchMenuItems();
 
@@ -21,6 +20,8 @@ export const MenuDrawer = () => {
 
       const parentPages = mainMenuPages.filter((page) => page.parent === 0);
       const subPages = mainMenuPages.filter((page) => page.parent !== 0);
+
+      console.log(parentPages);
 
       const sortedParentPages = parentPages.toSorted((a, b) => {
         return a.acf.menu_position - b.acf.menu_position;
@@ -43,7 +44,7 @@ export const MenuDrawer = () => {
 
   return (
     <div
-      className={`bg-mediumblue w-full h-full absolute top-0 left-0 opacity-95 transition z-30 flex flex-col items-center justify-start py-48 space-y-8 ${
+      className={`bg-mediumblue w-full h-full absolute top-0 left-0 opacity-95 transition z-30 flex flex-col items-center justify-start pt-48 ${
         isOpen ? null : 'translate-x-full'
       }`}
     >

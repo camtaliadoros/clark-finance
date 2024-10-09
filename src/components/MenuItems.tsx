@@ -15,8 +15,6 @@ type MenuItemProps = {
 export const MenuItem = ({ pageData }: MenuItemProps) => {
   const [submenuIsOpen, setSubmenuIsOpen] = useState(false);
 
-  const contentRef = useRef<ElementRef<'div'>>(null);
-
   const pathname = usePathname();
 
   const handleClick = () => {
@@ -28,7 +26,7 @@ export const MenuItem = ({ pageData }: MenuItemProps) => {
       <>
         <button
           onClick={handleClick}
-          className={`flex gap-2 items-center text-chalk text-2xl font-semibold no-underline hover:opacity-75 transition ${
+          className={`flex gap-2 items-center text-chalk text-2xl font-semibold no-underline hover:opacity-75 transition py-4 ${
             pathname === `/${pageData.slug}`
               ? 'text-yellow cursor-pointer pointer-events-none'
               : null
@@ -44,12 +42,11 @@ export const MenuItem = ({ pageData }: MenuItemProps) => {
         </button>
 
         <div
-          className='bg-navy bg-opacity-50 w-full flex flex-col items-center justify-center py-8 overflow-hidden transition-all duration-1000'
-          ref={contentRef}
+          className={`bg-navy bg-opacity-50 w-full flex flex-col items-center justify-center overflow-hidden transition-all duration-300 ${
+            submenuIsOpen && 'py-2'
+          }`}
           style={{
-            height: submenuIsOpen
-              ? `${contentRef.current?.scrollHeight}px`
-              : '0px',
+            maxHeight: submenuIsOpen ? '100%' : '0px',
             opacity: submenuIsOpen ? 1 : 0,
           }}
         >
@@ -61,7 +58,7 @@ export const MenuItem = ({ pageData }: MenuItemProps) => {
     return (
       <Link
         href={`/${pageData.slug}`}
-        className={`text-chalk text-2xl font-semibold no-underline hover:opacity-75 transition ${
+        className={`text-chalk text-2xl font-semibold no-underline hover:opacity-75 transition py-4 ${
           pathname === `/${pageData.slug}`
             ? 'text-yellow cursor-pointer pointer-events-none'
             : null
