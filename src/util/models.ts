@@ -78,7 +78,7 @@ export type CaseStudyFeatureContent = {
 
 export type ImageType = {
   source_url: string;
-  alt_text: string | null;
+  alt_text: string;
 };
 
 export type CaseStudyContent = {
