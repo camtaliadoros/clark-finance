@@ -77,7 +77,7 @@ export default async function Service({ params }: PageProps) {
               6: 'bg-navy',
               7: 'bg-red',
               8: 'bg-bluegrey',
-            }[content.homepage_order]
+            }[content.service_card.homepage_order]
           } bg-opacity-50`}
         ></div>
 
@@ -111,7 +111,7 @@ export default async function Service({ params }: PageProps) {
                 6: 'bg-navy',
                 7: 'bg-red',
                 8: 'bg-bluegrey',
-              }[content.homepage_order]
+              }[content.service_card.homepage_order]
             } hover:bg-opacity-80 transition text-chalk font-semibold text-sm`}
             href='#qa'
           >
@@ -135,7 +135,7 @@ export default async function Service({ params }: PageProps) {
                 6: 'bg-navy',
                 7: 'bg-red',
                 8: 'bg-bluegrey',
-              }[content.homepage_order]
+              }[content.service_card.homepage_order]
             } hover:bg-opacity-80 transition text-chalk font-semibold text-sm`}
           >
             View our lenders

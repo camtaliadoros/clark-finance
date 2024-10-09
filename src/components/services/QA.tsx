@@ -6,8 +6,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { ElementRef, useRef, useState } from 'react';
 
 type QAProps = {
-  question: string;
-  answer: string;
+  question: string | undefined;
+  answer: string | undefined;
 };
 
 export const QA = ({ question, answer }: QAProps) => {
@@ -15,7 +15,7 @@ export const QA = ({ question, answer }: QAProps) => {
 
   const contentRef = useRef<ElementRef<'div'>>(null);
 
-  const sanitisedContent = convertWysywyg(answer);
+  const sanitisedContent = answer ? convertWysywyg(answer) : '';
 
   const handleClick = () => {
     setIsOpen((prevState) => !prevState);

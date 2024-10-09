@@ -7,16 +7,33 @@ type QAProps = {
   pageContent: ServicePageContent;
 };
 
-type QAContent = {
-  order: number;
-  q: string;
-  a: string;
+type QAData = {
+  q1?: string | undefined;
+  a1?: string | undefined;
+  q2?: string | undefined;
+  a2?: string | undefined;
+  q3?: string | undefined;
+  a3?: string | undefined;
+  q4?: string | undefined;
+  a4?: string | undefined;
+  q5?: string | undefined;
+  a5?: string | undefined;
+  q6?: string | undefined;
+  a6?: string | undefined;
+  q7?: string | undefined;
+  a7?: string | undefined;
+  q8?: string | undefined;
+  a8?: string | undefined;
+  q9?: string | undefined;
+  a9?: string | undefined;
+  q10?: string | undefined;
+  a10?: string | undefined;
 };
 
 export const QAWrapper = ({ pageContent }: QAProps) => {
   // Isolate q&a content into array
 
-  const data = {
+  const data: QAData = {
     q1: pageContent.q1,
     a1: pageContent.a1,
     q2: pageContent.q2,
@@ -39,23 +56,27 @@ export const QAWrapper = ({ pageContent }: QAProps) => {
     a10: pageContent.a10,
   };
 
-  const qaArr: QAContent[] = [];
+  const qaArr: Array<{
+    order: number;
+    q: string | undefined;
+    a: string | undefined;
+  }> = [];
 
   // Loop through the keys of the object in pairs
-  for (let i = 1; i <= Object.keys(data).length / 2; i++) {
-    const obj = {};
-
-    if (data[`q${i}`]) {
-      obj['order'] = i;
-      obj[`q`] = data[`q${i}`];
-      obj[`a`] = data[`a${i}`];
+  for (let i = 1; i <= 10; i++) {
+    if (data[`q${i}` as keyof QAData]) {
+      const obj = {
+        order: i,
+        q: data[`q${i}` as keyof QAData],
+        a: data[`a${i}` as keyof QAData],
+      };
 
       qaArr.push(obj);
     }
   }
 
   // Sort qa array in ascending order
-  const orderedQA: QAContent[] = qaArr.sort((a, b) => {
+  const orderedQA = qaArr.toSorted((a, b) => {
     return a.order - b.order;
   });
 
@@ -63,9 +84,10 @@ export const QAWrapper = ({ pageContent }: QAProps) => {
     <Section
       type='wide'
       classes='bg-mediumblue flex flex-col items-center space-y-16'
+      sectionId='#qa'
     >
       <SectionTitle
-        title={`Your guide to ${pageContent.service_title}`}
+        title={`Your guide to ${pageContent.page_title}`}
         textColour='chalk'
         lineColour='chalk'
         alignment='centred'
