@@ -40,9 +40,10 @@ type AboutUsPageContent = {
 
 async function fetchAboutUsPageContent() {
   const res = await fetch(`${process.env.NEXT_PUBLIC_HOST_URL}/about-us/api`, {
-    next: {
-      revalidate: 10,
-    },
+    // next: {
+    //   revalidate: 10,
+    // },
+    cache: 'no-store',
   });
   if (!res.ok) {
     throw new Error('Failed to fetch data');
@@ -74,7 +75,7 @@ export default async function AboutUs() {
     const noteKey = `why_choose_us_item_note_${i}` as keyof AboutUsPageContent;
 
     const item: BenefitItem = {
-      icon: content[iconKey] as string | null,
+      icon: content[iconKey] as number,
       title: content[titleKey] as string,
       description: content[descriptionKey] as string,
       note: content[noteKey] as string | null,
@@ -118,7 +119,7 @@ export default async function AboutUs() {
         </h4>
         <div className='flex flex-wrap justify-center gap-12 my-12'>
           {whyChooseUsItems.map((content, i) => (
-            <BenefitCard content={content} key={i} />
+            <BenefitCard content={content} key={i} colourScheme='dark' />
           ))}
         </div>
       </Section>
