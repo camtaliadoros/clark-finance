@@ -11,7 +11,7 @@ export function NavigationEvents() {
 
   useEffect(() => {
     setIsOpen?.(false);
-  }, [pathname]);
+  }, [pathname, setIsOpen]);
 
   return <></>;
 }

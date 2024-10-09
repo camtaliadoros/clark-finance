@@ -39,7 +39,7 @@ export const MenuDrawer = () => {
     };
 
     fetchData();
-  }, []);
+  }, [setMenuItems]);
 
   return (
     <div

@@ -39,7 +39,11 @@ export const ServicesTabs = async ({ activePageSlug }: ServiceTabsProps) => {
   return (
     <div className='hidden md:flex flex-row justify-between gap-0'>
       {filteredServices.map((service) => (
-        <ServiceTab service={service} activePageSlug={activePageSlug} />
+        <ServiceTab
+          service={service}
+          activePageSlug={activePageSlug}
+          key={service.slug}
+        />
       ))}
     </div>
   );
