@@ -1,7 +1,21 @@
 export async function GET() {
-  const response = await fetch(`${process.env.WP_ROUTE}/pages/154?_fields=acf`);
+  const encodedCredentials = btoa(`${process.env.WP_CREDENTIALS}`);
 
-  const data = await response.json();
+  try {
+    const response = await fetch(
+      `${process.env.WP_ROUTE}/pages/154?_fields=acf`,
+      {
+        headers: {
+          Authorization: `Basic ${encodedCredentials}`,
+          'Content-Type': 'application/json',
+        },
+      }
+    );
 
-  return Response.json(data);
+    const data = await response.json();
+
+    return Response.json(data);
+  } catch (e) {
+    throw new Error('There was a problem retrieving the content: ' + e);
+  }
 }

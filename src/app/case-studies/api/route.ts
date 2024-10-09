@@ -1,19 +1,37 @@
 export async function GET() {
-  const response = await fetch(
-    `${process.env.WP_ROUTE}/case-study?_fields=acf,slug,link`
-  );
-  const data = await response.json();
+  const encodedCredentials = btoa(`${process.env.WP_CREDENTIALS}`);
 
-  const contentRes = await fetch(
-    `${process.env.WP_ROUTE}/pages/203?_fields=acf`
-  );
+  try {
+    const response = await fetch(
+      `${process.env.WP_ROUTE}/case-study?_fields=acf,slug,link`,
+      {
+        headers: {
+          Authorization: `Basic ${encodedCredentials}`,
+          'Content-Type': 'application/json',
+        },
+      }
+    );
+    const data = await response.json();
 
-  const contentData = await contentRes.json();
+    const contentRes = await fetch(
+      `${process.env.WP_ROUTE}/pages/203?_fields=acf`,
+      {
+        headers: {
+          Authorization: `Basic ${encodedCredentials}`,
+          'Content-Type': 'application/json',
+        },
+      }
+    );
 
-  const caseStudiesPageData = {
-    content: contentData,
-    caseStudiesData: data,
-  };
+    const contentData = await contentRes.json();
 
-  return Response.json(caseStudiesPageData);
+    const caseStudiesPageData = {
+      content: contentData,
+      caseStudiesData: data,
+    };
+
+    return Response.json(caseStudiesPageData);
+  } catch (e) {
+    throw new Error('There was a problem retrieving the content: ' + e);
+  }
 }
