@@ -13,8 +13,6 @@ export const MenuDrawer = () => {
     const fetchData = async () => {
       const data: Page[] = await fetchMenuItems();
 
-      console.log('again');
-
       const mainMenuPages = data.filter((page) =>
         page.acf.menu_location.includes('Main Menu')
       );
@@ -44,7 +42,7 @@ export const MenuDrawer = () => {
 
   return (
     <div
-      className={`bg-mediumblue w-full h-full absolute top-0 left-0 opacity-95 transition z-30 flex flex-col items-center justify-start pt-48 ${
+      className={`bg-mediumblue w-full h-full absolute  top-0 left-0 opacity-95 transition z-30 flex flex-col items-center justify-start pt-48 overflow-y-auto ${
         isOpen ? null : 'translate-x-full'
       }`}
     >

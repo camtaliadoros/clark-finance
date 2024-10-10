@@ -42,7 +42,7 @@ export const MenuItem = ({ pageData }: MenuItemProps) => {
         </button>
 
         <div
-          className={`bg-navy bg-opacity-50 w-full flex flex-col items-center justify-center overflow-hidden transition-all duration-300 ${
+          className={`bg-navy shrink-0 bg-opacity-50 w-full flex flex-col items-center justify-center overflow-hidden transition-all duration-300 ${
             submenuIsOpen && 'py-2'
           }`}
           style={{
