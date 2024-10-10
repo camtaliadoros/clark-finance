@@ -16,7 +16,7 @@ export const RequiredDocsItemCard = ({ content }: RequiredDocsCardProps) => {
           height={15}
           alt='check icon'
         />
-        <h3 className='font-medium text-lg text-ash'>
+        <h3 className='font-medium text-lg text-ash m-0'>
           {content.required_doc_title}
         </h3>
       </div>

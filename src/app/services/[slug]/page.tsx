@@ -178,7 +178,7 @@ export default async function Service({ params }: PageProps) {
         )}
 
         {content.benefits_block_is_available && (
-          <div className='bg-chequered-bg bg-cover  bg-bottom flex flex-wrap justify-center gap-12 pb-24'>
+          <div className='bg-chequered-bg bg-cover  bg-bottom flex flex-wrap justify-center gap-12 pb-24 p-1 md:p-0'>
             {benefitsArr.map((content, i) => (
               <BenefitCard content={content} key={i} colourScheme='light' />
             ))}

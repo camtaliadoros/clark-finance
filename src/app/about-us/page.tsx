@@ -91,6 +91,7 @@ export default async function AboutUs() {
           textColour='ash'
           lineColour='mediumblue'
           alignment='centred'
+          classes='mb-16'
         />
         <div className='flex flex-col items-center lg:m-24 gap-12 md:gap-24 md:flex-row '>
           <Image

@@ -15,7 +15,7 @@ export const BenefitCard = async ({
 
   return (
     <div
-      className={`grid grid-cols-5 w-96 ${
+      className={`grid grid-cols-5 w-full md:w-96 ${
         colourScheme === 'light'
           ? 'bg-lightgrey2'
           : 'bg-lightblue bg-opacity-25'

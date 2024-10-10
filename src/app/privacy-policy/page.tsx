@@ -11,9 +11,10 @@ async function fetchPrivacyPolicyPageContent() {
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_HOST_URL}/privacy-policy/api`,
     {
-      next: {
-        revalidate: 10,
-      },
+      // next: {
+      //   revalidate: 10,
+      // },
+      cache: 'no-store',
     }
   );
   if (!res.ok) {
@@ -38,7 +39,7 @@ export default async function PrivacyPolicy() {
         alignment='centred'
       />
       <div
-        className='text-ash text-center mx-36 my-12'
+        className='text-ash text-center md:mx-20 lg:mx-36 my-12'
         dangerouslySetInnerHTML={{ __html: bodyContent }}
       ></div>
     </Section>
