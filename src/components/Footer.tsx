@@ -76,11 +76,11 @@ export const Footer = async () => {
             to the UK regulatory regime and is therefore primarily targeted at
             consumers based in the UK. There will be a fee for mortgage advice,
             the precise amount will depend upon your circumstances but we
-            estimate that it will be £699
+            estimate that it will be £699.
           </p>
           <p className='text-sm font-bold text-chalk'>
             Your property may be repossessed if you do not keep up repayments on
-            your mortgage 
+            your mortgage.
           </p>
         </div>
       </div>

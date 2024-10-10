@@ -18,8 +18,9 @@ export const MenuDrawer = () => {
         page.acf.menu_location.includes('Main Menu')
       );
 
-      const parentPages = mainMenuPages.filter((page) => page.parent === 0);
-      const subPages = mainMenuPages.filter((page) => page.parent !== 0);
+      const menuPages = mainMenuPages.filter((page) => page.slug !== 'home');
+      const parentPages = menuPages.filter((page) => page.parent === 0);
+      const subPages = menuPages.filter((page) => page.parent !== 0);
 
       console.log(parentPages);
 
