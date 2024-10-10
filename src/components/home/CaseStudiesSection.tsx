@@ -34,14 +34,13 @@ export const CaseStudiesSection = async ({
       type='narrow'
       classes={`${
         bgColour === 'dark' ? 'bg-building-detail' : 'bg-chalk'
-      } bg-cover space-y-2 flex flex-col items-center`}
+      } bg-cover space-y-16 flex flex-col items-center`}
     >
       <SectionTitle
         title='Case Studies'
         lineColour='mediumblue'
         textColour={`${bgColour === 'dark' ? 'chalk' : 'ash'}`}
         alignment='centred'
-        classes='mb-12 md:mb-18 lg:mb-24'
       />
       <div className='flex flex-col items-center  space-y-12 md:space-y-0 md:grid md:grid-cols-2 md:grid-rows-1 lg:grid-cols-3 md:items-start w-full'>
         {featuredContent.map((content: CaseStudyFeatureTypes) => (
