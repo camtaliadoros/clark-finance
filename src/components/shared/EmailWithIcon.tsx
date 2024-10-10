@@ -3,9 +3,10 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 type EmailWithIconProps = {
   colour: string;
+  hideOnMobile: boolean;
 };
 
-export const EmailWithIcon = ({ colour }: EmailWithIconProps) => {
+export const EmailWithIcon = ({ colour, hideOnMobile }: EmailWithIconProps) => {
   return (
     <a
       className='inline-flex items-center space-x-1 link'
@@ -19,9 +20,9 @@ export const EmailWithIcon = ({ colour }: EmailWithIconProps) => {
         } text-base h-4`}
       />
       <p
-        className={`${
-          colour === 'light' ? 'text-chalk' : 'text-ash'
-        } hidden md:block`}
+        className={`${colour === 'light' ? 'text-chalk' : 'text-ash'} ${
+          hideOnMobile ? 'hidden' : 'block'
+        }  md:block`}
       >
         info@clark.finance
       </p>

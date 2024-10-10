@@ -69,10 +69,12 @@ export const ContactUs = async ({ colourScheme }: ContactUsProps) => {
           />
           <EmailWithIcon
             colour={`${colourScheme === 'light' ? 'dark' : 'light'}`}
+            hideOnMobile={false}
           />
           <PhoneNumberWithIcon
             colour={`${colourScheme === 'light' ? 'dark' : 'light'}`}
             size='sm'
+            hideOnMobile={false}
           />
         </div>
       </div>

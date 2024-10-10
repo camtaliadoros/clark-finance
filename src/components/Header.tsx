@@ -22,8 +22,8 @@ export const Header = () => {
       <div className='flex space-x-8'>
         <div className='flex space-x-4 items-center'>
           <p className='font-bold text-mediumblue mb-0'>Get in touch</p>
-          <EmailWithIcon colour='dark' />
-          <PhoneNumberWithIcon colour='dark' size='sm' />
+          <EmailWithIcon colour='dark' hideOnMobile={true} />
+          <PhoneNumberWithIcon colour='dark' size='sm' hideOnMobile={true} />
         </div>
         <div>
           <Menu />
