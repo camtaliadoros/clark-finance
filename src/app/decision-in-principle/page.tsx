@@ -99,7 +99,11 @@ export default async function DecisionInPrinciplePage() {
             <h4 className='text-chalk text-2xl text-right'>
               Speak to our Experts today to run through your application
             </h4>
-            <PhoneNumberWithIcon colour='light' size='lg' />
+            <PhoneNumberWithIcon
+              colour='light'
+              size='lg'
+              hideOnMobile={false}
+            />
           </div>
         </div>
 
