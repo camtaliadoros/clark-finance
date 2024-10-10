@@ -54,6 +54,7 @@ export const ServiceTab = ({ service, activePageSlug }: ServiceTabProps) => {
         }[service.order]
       } hover:text-chalk transition`}
       href={service.slug}
+      prefetch={true}
     >
       {service.title}
     </Link>

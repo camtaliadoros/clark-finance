@@ -64,6 +64,7 @@ export const MenuItem = ({ pageData }: MenuItemProps) => {
             : null
         }`}
         key={pageData.id}
+        prefetch={true}
       >
         {pageData.acf.page_title}
       </Link>

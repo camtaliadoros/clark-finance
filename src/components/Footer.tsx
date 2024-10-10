@@ -52,6 +52,7 @@ export const Footer = async () => {
           <div className='flex flex-col space-y-4'>
             {sortedPages.map((page) => (
               <Link
+                prefetch={true}
                 className='text-chalk text-sm font-semibold no-underline hover:opacity-80 transition'
                 href={`/${page.slug}`}
                 key={page.id}

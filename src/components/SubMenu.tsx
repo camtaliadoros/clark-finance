@@ -28,6 +28,7 @@ export const SubMenu = () => {
               : null
           }`}
           key={page.id}
+          prefetch={true}
         >
           {page.acf.page_title}
         </Link>

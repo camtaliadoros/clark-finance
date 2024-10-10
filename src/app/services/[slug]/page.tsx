@@ -122,6 +122,7 @@ export default async function Service({ params }: PageProps) {
       <div className='flex w-screen md:w-fit'>
         {content.q1 && (
           <Link
+            prefetch={true}
             className={`flex gap-2 items-center py-2 px-4 no-underline border-r border-chalk w-full min-w-fit ${
               {
                 1: 'bg-green',
@@ -145,6 +146,7 @@ export default async function Service({ params }: PageProps) {
         )}
         {lendersContent && (
           <Link
+            prefetch={true}
             href='#lenders'
             className={`flex gap-2 items-center py-2 px-4 no-underline border-r border-chalk w-full min-w-fit ${
               {

@@ -34,6 +34,7 @@ export const Button = ({
         } `}
         href={url}
         target={target}
+        prefetch={true}
       >
         {title}
         <FontAwesomeIcon

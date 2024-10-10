@@ -19,6 +19,7 @@ export const ServiceCard = ({
     <Link
       className='relative h-52 group no-underline'
       href={`services/${slug}`}
+      prefetch={true}
     >
       <div className='bg-lightgrey1 relative px-4 py-6 h-full space-y-4 rounded-br-[120px] z-10 transition-all group-hover:bg-lightgrey2 group-hover:rounded-br-[140px] '>
         <h2 className='font-semibold text-lg h-1/3 w-4/5 leading-tight '>
