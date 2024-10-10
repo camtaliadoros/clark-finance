@@ -14,7 +14,7 @@ export const ClickableImage = ({ slug, imageUrl }: ClickableImageProps) => {
     >
       <div
         className='bg-cover bg-center w-full h-full relative rounded-br-[120px] z-10 transition-all group-hover:opacity-90 group-hover:rounded-br-[140px]'
-        style={{ backgroundImage: `url(${imageUrl})` }}
+        style={imageUrl ? { backgroundImage: `url(${imageUrl})` } : undefined}
       ></div>
       <div
         className={`absolute top-0 left-0 bg-lightblue

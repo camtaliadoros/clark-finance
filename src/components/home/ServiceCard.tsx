@@ -15,6 +15,7 @@ export const ServiceCard = ({
   link,
   order,
 }: ServiceCardProps) => {
+  console.log(slug);
   return (
     <Link
       className='relative h-52 group no-underline'

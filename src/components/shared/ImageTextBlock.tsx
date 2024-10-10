@@ -19,8 +19,6 @@ export const ImageTextBlock = async ({
   const imageData: ImageType = await fetchFeaturedImage(image);
   const sanitisedText = convertWysywyg(text);
 
-  console.log(sanitisedText);
-
   return (
     <div
       className={`flex flex-col lg:flex-row gap-16 w-full lg:px-48 items-start ${

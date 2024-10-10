@@ -13,6 +13,8 @@ export const MenuDrawer = () => {
     const fetchData = async () => {
       const data: Page[] = await fetchMenuItems();
 
+      console.log('again');
+
       const mainMenuPages = data.filter((page) =>
         page.acf.menu_location.includes('Main Menu')
       );
