@@ -33,8 +33,8 @@ export const ReviewCard = ({ content }: ReviewCardProps) => {
         <h5>{content.author_name}</h5>
       </div>
       <div className='flex flex-col gap-2 h-full'>
-        <div className='flex gap-2 space-x-3 items-center'>
-          <div className=' flex w-1/4'>
+        <div className='flex gap-2 items-center'>
+          <div className=' flex'>
             {ratingArr.map((el, i) => (
               <FontAwesomeIcon
                 icon={faStar}
