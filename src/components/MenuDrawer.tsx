@@ -10,7 +10,6 @@ export const MenuDrawer = () => {
   const { isOpen, menuItems, setMenuItems } = useContext(MenuDrawerContext);
 
   useEffect(() => {
-    console.log('something else');
     const fetchData = async () => {
       const data: Page[] = await fetchMenuItems();
 
@@ -21,8 +20,6 @@ export const MenuDrawer = () => {
       const menuPages = mainMenuPages.filter((page) => page.slug !== 'home');
       const parentPages = menuPages.filter((page) => page.parent === 0);
       const subPages = menuPages.filter((page) => page.parent !== 0);
-
-      console.log(parentPages);
 
       const sortedParentPages = parentPages.toSorted((a, b) => {
         return a.acf.menu_position - b.acf.menu_position;

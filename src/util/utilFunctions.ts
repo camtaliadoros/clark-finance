@@ -1,7 +1,12 @@
 export const convertWysywyg = (rawContent: string) => {
   const convertedContent = rawContent.replace(/(?:\r\n|\r|\n)/g, '<br />');
 
-  return convertedContent;
+  const covertedLinks = convertedContent.replace(
+    'https://clarkfinance.wordifysites.com',
+    ''
+  );
+
+  return covertedLinks;
 };
 
 export const fetchFeaturedImage = async (imageId: number) => {

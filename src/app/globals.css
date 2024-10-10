@@ -73,6 +73,11 @@ a {
   text-decoration: underline;
 }
 
+li {
+  list-style: disc inside;
+  margin-bottom: 0.25em;
+}
+
 a:hover {
   text-decoration: none;
 }
