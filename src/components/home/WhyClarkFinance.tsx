@@ -31,25 +31,25 @@ export const WhyClarkFinance = ({
   return (
     <Section
       type='narrow'
-      classes='bg-building-detail bg-cover flex items-end gap-12 md:py-40 flex flex-col md:flex-row'
+      classes='bg-building-detail bg-cover flex items-start gap-12 md:py-40 flex flex-col md:flex-row'
     >
-      <div className='w-4/5 md:w-1/2 flex md:justify-end relative '>
+      <div className='w-full md:w-1/2 flex flex-col md:flex-row md:justify-end justify-start items-end md:items-start relative gap-16'>
         <Image
           src='/images/why-clark-finance-1.png'
           alt='photo of a business meeting'
           width={480}
           height={304}
-          className='h-fit'
+          className='h-fit w-3/4'
         />
         <Image
           src='/images/why-clark-finance-2.png'
           alt='documents being signed'
           width={250}
           height={240}
-          className='absolute top-20 md:top-44 -left-12 md:left-0 w-1/2'
+          className='absolute top-24 md:top-20 lg:top-24 xl:top-52 right-44 md:right-36 lg:right-44 xl:right-72 w-1/2 lg:w-36 xl:w-64'
         />
       </div>
-      <div className='w-full md:w-1/2 ml-16 flex flex-col items-start '>
+      <div className='w-full mt-28 md:mt-0 md:w-1/2 flex flex-col items-start '>
         <SectionTitle
           title={sectionTitle}
           lineColour='mediumblue'
