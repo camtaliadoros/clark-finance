@@ -13,7 +13,7 @@ export const PhoneNumberWithIcon = ({
   hideOnMobile,
 }: PhoneNumberWithIconProps) => {
   return (
-    <a href='tel:+442045182215' className='flex items-center space-x-1 link'>
+    <a href='tel:+442045182215' className='flex items-center space-x-1 link '>
       <FontAwesomeIcon
         icon={faPhone}
         size={'sm'}
@@ -22,7 +22,7 @@ export const PhoneNumberWithIcon = ({
         } h-4`}
       />
       <p
-        className={`${colour === 'light' ? 'text-chalk' : 'text-ash'} ${
+        className={`mb-0 ${colour === 'light' ? 'text-chalk' : 'text-ash'} ${
           hideOnMobile ? 'hidden' : 'block'
         } md:block ${size === 'sm' ? 'text-base' : 'text-2xl'}`}
       >

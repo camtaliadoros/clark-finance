@@ -9,7 +9,7 @@ type EmailWithIconProps = {
 export const EmailWithIcon = ({ colour, hideOnMobile }: EmailWithIconProps) => {
   return (
     <a
-      className='inline-flex items-center space-x-1 link'
+      className='inline-flex items-center space-x-1 link mb-0'
       href='mailto:info@clark.finance'
     >
       <FontAwesomeIcon
@@ -20,7 +20,7 @@ export const EmailWithIcon = ({ colour, hideOnMobile }: EmailWithIconProps) => {
         } text-base h-4`}
       />
       <p
-        className={`${colour === 'light' ? 'text-chalk' : 'text-ash'} ${
+        className={`mb-0 ${colour === 'light' ? 'text-chalk' : 'text-ash'} ${
           hideOnMobile ? 'hidden' : 'block'
         }  md:block`}
       >

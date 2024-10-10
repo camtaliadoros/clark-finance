@@ -67,6 +67,13 @@ p,
 a {
   font-size: 14px;
   color: #232426;
+}
+
+p {
+  margin-bottom: 0.5em;
+}
+
+p > a {
   margin-bottom: 0.5em;
 }
 
