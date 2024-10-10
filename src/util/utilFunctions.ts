@@ -1,7 +1,7 @@
 export const convertWysywyg = (rawContent: string) => {
-  const convertedContent = rawContent.replace(/(?:\r\n|\r|\n)/g, '<br />');
+  // const convertedContent = rawContent.replace(/(?:\r\n|\r|\n)/g, '<br />');
 
-  const covertedLinks = convertedContent.replace(
+  const covertedLinks = rawContent.replace(
     'https://clarkfinance.wordifysites.com',
     ''
   );

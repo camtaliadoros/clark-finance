@@ -67,6 +67,7 @@ p,
 a {
   font-size: 14px;
   color: #232426;
+  margin-bottom: 0.5em;
 }
 
 a {
@@ -75,7 +76,7 @@ a {
 
 li {
   list-style: disc inside;
-  margin-bottom: 0.25em;
+  margin-bottom: 0.5em;
 }
 
 a:hover {

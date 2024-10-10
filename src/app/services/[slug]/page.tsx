@@ -104,7 +104,7 @@ export default async function Service({ params }: PageProps) {
 
         <div className='flex flex-col bg-black bg-opacity-50 backdrop-blur h-full py-24 px-8 w-full lg:w-1/2 gap-8 '>
           <div className='flex flex-col'>
-            <h1 className='text-chalk'>{content.page_title}</h1>
+            <h1 className='text-chalk mb-8'>{content.page_title}</h1>
 
             <h2 className='font-semibold text-xl text-chalk'>
               {content.subheading}
