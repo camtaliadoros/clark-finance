@@ -23,7 +23,11 @@ export const Button = ({
         className={`absolute w-full h-full bg-${colour} -translate-x-full transition group-hover:translate-x-0`}
       ></div>
       <Link
-        className={`flex items-center justify-center px-6 py-4 text-${colour} border-${colour} border-2 overflow-hidden bg-transparent transition no-underline relative ${
+        className={`flex items-center justify-center px-6 py-4 ${
+          colour === 'chalk'
+            ? 'text-chalk border-chalk'
+            : 'text-mediumblue border-mediumblue'
+        } border-2 overflow-hidden bg-transparent transition no-underline relative ${
           colour === 'chalk'
             ? 'group-hover:text-mediumblue'
             : 'group-hover:text-chalk'
