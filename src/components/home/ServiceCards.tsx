@@ -17,7 +17,7 @@ async function fetchAllServices() {
     `${process.env.NEXT_PUBLIC_HOST_URL}/services/api/fetchAllServices`,
     {
       // next: {
-      //   revalidate: 10,
+      //   revalidate: 86400,
       // },
       cache: 'no-store',
     }

@@ -12,7 +12,7 @@ async function fetchPrivacyPolicyPageContent() {
     `${process.env.NEXT_PUBLIC_HOST_URL}/privacy-policy/api`,
     {
       // next: {
-      //   revalidate: 10,
+      //   revalidate: 86400,
       // },
       cache: 'no-store',
     }

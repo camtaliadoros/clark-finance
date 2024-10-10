@@ -19,7 +19,7 @@ const fetchArticle = async (slug: string) => {
     `${process.env.NEXT_PUBLIC_HOST_URL}/news/api/fetchArticle?slug=${slug}`,
     {
       next: {
-        revalidate: 10,
+        revalidate: 86400,
       },
     }
   );

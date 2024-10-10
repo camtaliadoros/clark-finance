@@ -16,7 +16,7 @@ export async function fetchCaseStudiesByPage(
     `${process.env.NEXT_PUBLIC_HOST_URL}/case-studies/api/fetchAllCaseStudies?page=${pageNumber}&items=${items}`,
     {
       next: {
-        revalidate: 10,
+        revalidate: 86400,
       },
     }
   );
@@ -31,7 +31,7 @@ async function fetchPageContent() {
     `${process.env.NEXT_PUBLIC_HOST_URL}/case-studies/api/fetchPageContent`,
     {
       next: {
-        revalidate: 10,
+        revalidate: 86400,
       },
     }
   );

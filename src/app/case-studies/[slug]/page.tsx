@@ -14,7 +14,7 @@ const fetchCaseStudy = async (slug: string) => {
     `${process.env.NEXT_PUBLIC_HOST_URL}/case-studies/api/fetchCaseStudy?slug=${slug}`,
     {
       next: {
-        revalidate: 10,
+        revalidate: 86400,
       },
     }
   );

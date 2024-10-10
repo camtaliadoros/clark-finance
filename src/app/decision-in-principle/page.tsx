@@ -43,7 +43,7 @@ async function fetchDecisionInPrinciplePageContent() {
     `${process.env.NEXT_PUBLIC_HOST_URL}/decision-in-principle/api`,
     {
       next: {
-        revalidate: 10,
+        revalidate: 86400,
       },
     }
   );

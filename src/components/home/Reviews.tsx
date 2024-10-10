@@ -5,7 +5,7 @@ import { ReviewCard } from './ReviewCard';
 async function fetchReviews() {
   const res = await fetch(`${process.env.NEXT_PUBLIC_HOST_URL}/api/reviews`, {
     next: {
-      revalidate: 10,
+      revalidate: 86400,
     },
   });
   if (!res.ok) {

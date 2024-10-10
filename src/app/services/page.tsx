@@ -12,7 +12,7 @@ async function fetchPageContent() {
     `${process.env.NEXT_PUBLIC_HOST_URL}/services/api/fetchPageContent`,
     {
       next: {
-        revalidate: 10,
+        revalidate: 86400,
       },
     }
   );

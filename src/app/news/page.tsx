@@ -19,7 +19,7 @@ export const fetchArticlesByPage = async (pageNumber: number) => {
     `${process.env.NEXT_PUBLIC_HOST_URL}/news/api/fetchAllArticles?page=${pageNumber}&per_page=6`,
     {
       next: {
-        revalidate: 10,
+        revalidate: 86400,
       },
     }
   );
@@ -34,7 +34,7 @@ async function fetchPageContent() {
     `${process.env.NEXT_PUBLIC_HOST_URL}/news/api/fetchPageContent`,
     {
       next: {
-        revalidate: 10,
+        revalidate: 86400,
       },
     }
   );

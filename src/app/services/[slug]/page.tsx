@@ -29,7 +29,7 @@ const fetchPageContent = async (slug: string) => {
     `${process.env.NEXT_PUBLIC_HOST_URL}/services/api/fetchServicePageContent?slug=${slug}`,
     {
       // next: {
-      //   revalidate: 10,
+      //   revalidate: 86400,
       // },
       cache: 'no-store',
     }

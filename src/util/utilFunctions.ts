@@ -14,7 +14,7 @@ export const fetchFeaturedImage = async (imageId: number) => {
     `${process.env.NEXT_PUBLIC_HOST_URL}/api/fetchImage?id=${imageId}`,
     {
       next: {
-        revalidate: 10,
+        revalidate: 86400,
       },
     }
   );
@@ -29,7 +29,7 @@ export const fetchMenuItems = async () => {
     `${process.env.NEXT_PUBLIC_HOST_URL}/api/fetchPages`,
     {
       // next: {
-      //   revalidate: 10,
+      //   revalidate: 86400,
       // },
       cache: 'no-store',
     }

@@ -25,7 +25,7 @@ async function fetchContactUsContent() {
     `${process.env.NEXT_PUBLIC_HOST_URL}/contact-us/api`,
     {
       next: {
-        revalidate: 10,
+        revalidate: 86400,
       },
     }
   );

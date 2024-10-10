@@ -12,7 +12,7 @@ async function fetchTCsPageContent() {
     `${process.env.NEXT_PUBLIC_HOST_URL}/terms-and-conditions/api`,
     {
       next: {
-        revalidate: 10,
+        revalidate: 86400,
       },
     }
   );
