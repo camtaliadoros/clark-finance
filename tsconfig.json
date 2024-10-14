@@ -26,7 +26,8 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
-    "src/components/services/QA.Wrappertsx"
+    "src/components/services/QA.Wrappertsx",
+    "src/app/contact-us/api/create-lead"
   ],
   "exclude": ["node_modules"]
 }

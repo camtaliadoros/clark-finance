@@ -1,14 +1,22 @@
 'use client';
 
 import { useReCaptcha } from 'next-recaptcha-v3';
-import { useForm } from 'react-hook-form';
+import { SubmitHandler, useForm } from 'react-hook-form';
+
+type FormValues = {
+  firstName: string;
+  lastName: string;
+  email: string;
+  phoneNumber: string;
+  message: string;
+};
 
 export const ContactForm = () => {
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm();
+  } = useForm<FormValues>();
 
   const { executeRecaptcha } = useReCaptcha();
 
@@ -44,13 +52,30 @@ export const ContactForm = () => {
     },
   ];
 
+  const onSubmit: SubmitHandler<FormValues> = async (data, e) => {
+    e?.preventDefault();
+
+    //review
+    const token = await executeRecaptcha('form_submit');
+
+    const response = await fetch('contact-us/api/create-lead', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    });
+
+    const resJson = await response.json();
+    if (resJson.error) {
+      alert('Error: ' + resJson.error);
+    } else {
+      alert('Lead created successfully!');
+    }
+  };
+
   return (
-    <form
-      className='w-full'
-      onSubmit={handleSubmit(async (data) => {
-        const token = await executeRecaptcha('form_submit');
-      })}
-    >
+    <form className='w-full' onSubmit={handleSubmit(onSubmit)}>
       <fieldset className='flex flex-col space-y-4  *:placeholder:text-mediumgrey *:placeholder:text-sm'>
         {inputFields.map((field) => (
           <div key={field.id} className='flex flex-col'>
