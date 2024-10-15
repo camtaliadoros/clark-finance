@@ -8,7 +8,7 @@ type ClickableImageProps = {
 export const ClickableImage = ({ slug, imageUrl }: ClickableImageProps) => {
   return (
     <Link
-      className='flex relative w-56 h-56 group mb-8'
+      className='flex relative w-56 h-56 2xl:w-96 2xl:h-96 group mb-8'
       href={slug}
       prefetch={true}
     >

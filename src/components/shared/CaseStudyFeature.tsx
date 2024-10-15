@@ -24,25 +24,25 @@ export const CaseStudyFeature = async ({
         imageUrl={image.source_url}
       />
       <FeaturedCardsContentWrapper>
-        <div className='space-y-1 '>
+        <div className='space-y-1 2xl:space-y-4 '>
           <h6
             className={`${
               colourScheme === 'light' ? 'text-chalk' : 'text-ash'
-            } text-font-normal text-base`}
+            } font-normal text-base 2xl:text-2xl`}
           >
             {content.loan_value}
           </h6>
           <h4
             className={`${
               colourScheme === 'light' ? 'text-chalk' : 'text-ash'
-            } text-xl`}
+            } text-xl 2xl:text-3xl`}
           >
             {content.case_study_title}
           </h4>
           <h6
             className={`${
               colourScheme === 'light' ? 'text-chalk' : 'text-ash'
-            } font-normal text-base`}
+            } font-normal text-base 2xl:text-2xl`}
           >
             {content.location}
           </h6>
