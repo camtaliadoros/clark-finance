@@ -8,7 +8,7 @@ export async function GET(req: NextRequest) {
 
   try {
     const response = await fetch(
-      `${process.env.WP_ROUTE}/article?slug=${slug}&_fields=acf,date`,
+      `${process.env.WP_ROUTE}/article?slug=${slug}&_fields=acf.title,acf.headline,acf.article_body,acf.featured_image,date`,
       {
         headers: {
           Authorization: `Basic ${encodedCredentials}`,
