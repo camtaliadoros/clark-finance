@@ -48,6 +48,7 @@ const config: Config = {
       borderRadius: {
         'br-120': '120px',
         'br-140': '140px',
+        'br-180': '180px',
       },
       transitionProperty: {
         'max-height': 'max-height',

@@ -36,14 +36,14 @@ export const ArticleFeatureCard = async ({
           <h2
             className={`${
               colourScheme === 'light' ? 'text-chalk' : 'text-ash'
-            } font-semibold  text-xl`}
+            } font-semibold  text-xl 2xl:text-3xl`}
           >
             {articleData.acf.title}
           </h2>
           <h5
             className={`${
               colourScheme === 'light' ? 'text-chalk' : 'text-mediumgrey'
-            } font-normal text-base`}
+            } font-normal text-base 2xl:text-xl`}
           >
             {formatedDate}
           </h5>
