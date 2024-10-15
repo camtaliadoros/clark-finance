@@ -15,11 +15,11 @@ export const BenefitCard = async ({
 
   return (
     <div
-      className={`grid grid-cols-5 w-full md:w-96 ${
+      className={`grid grid-cols-5 w-full ${
         colourScheme === 'light'
           ? 'bg-lightgrey2'
           : 'bg-lightblue bg-opacity-25'
-      } rounded-sm p-12 gap-8`}
+      } rounded-sm p-6 lg:p-12 gap-2 lg:gap-8`}
     >
       <Image
         src={image.source_url}
@@ -33,7 +33,7 @@ export const BenefitCard = async ({
         <h5
           className={`${
             colourScheme === 'light' ? 'text-ash' : 'text-chalk'
-          } font-semibold text-2xl`}
+          } font-semibold text-2xl 2xl:text-3xl`}
         >
           {content.title}
         </h5>
@@ -47,7 +47,7 @@ export const BenefitCard = async ({
           </p>
           {content.note && (
             <p
-              className={`text-xs ${
+              className={`text-xs 2xl:text-base ${
                 colourScheme === 'light' ? 'text-ash' : 'text-chalk'
               }`}
             >

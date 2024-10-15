@@ -104,7 +104,7 @@ export default async function AboutUs() {
           />
 
           <div
-            className='md:w-2/3 text-sm'
+            className='md:w-2/3 text-sm 2xl:text-xl'
             dangerouslySetInnerHTML={{ __html: bodyContent }}
           ></div>
         </div>
@@ -117,10 +117,10 @@ export default async function AboutUs() {
           alignment='centred'
           classes='mb-0'
         />
-        <h4 className='text-chalk my-4 text-center text-lg font-semibold'>
+        <h4 className='text-chalk my-4 text-center text-lg 2xl:text-2xl font-semibold'>
           {content.why_choose_us_subheading}
         </h4>
-        <div className='flex flex-wrap justify-center gap-12 my-12'>
+        <div className='grid grid-cols-2 md:grid-cols-3 justify-center gap-12 '>
           {whyChooseUsItems.map((content, i) => (
             <BenefitCard content={content} key={i} colourScheme='dark' />
           ))}
