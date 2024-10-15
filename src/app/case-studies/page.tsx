@@ -37,7 +37,6 @@ export default async function CaseStudiesHome({
   const content = await fetchPageContent();
 
   const pageContent: CaseStudiesPageContent = content.acf;
-  console.log(pageContent);
 
   return (
     <>

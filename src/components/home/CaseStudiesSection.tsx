@@ -8,9 +8,10 @@ async function fetchAllCaseStudies() {
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_HOST_URL}/case-studies/api/fetchAllCaseStudies?page=1&items=3`,
     {
-      next: {
-        revalidate: 86400,
-      },
+      // next: {
+      //   revalidate: 86400,
+      // },
+      cache: 'no-store',
     }
   );
 
