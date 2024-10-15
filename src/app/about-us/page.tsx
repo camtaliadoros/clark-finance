@@ -109,7 +109,7 @@ export default async function AboutUs() {
           ></div>
         </div>
       </Section>
-      <Section type='wide' classes='bg-building-detail'>
+      <Section type='wide' classes='bg-building-detail bg-cover'>
         <SectionTitle
           title={content.why_choose_us_title}
           textColour='chalk'
@@ -117,7 +117,7 @@ export default async function AboutUs() {
           alignment='centred'
           classes='mb-0'
         />
-        <h4 className='text-chalk my-4 text-center text-lg 2xl:text-2xl font-semibold'>
+        <h4 className='text-chalk my-4 2xl:my-12 text-center text-lg 2xl:text-2xl font-semibold'>
           {content.why_choose_us_subheading}
         </h4>
         <div className='grid grid-cols-2 md:grid-cols-3 justify-center gap-12 '>
