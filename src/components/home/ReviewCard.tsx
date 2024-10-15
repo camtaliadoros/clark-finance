@@ -27,7 +27,7 @@ export const ReviewCard = ({ content }: ReviewCardProps) => {
             src={content.profile_photo_url}
             alt='review author profile photo'
             placeholder='empty'
-            className='rounded w-6 h-6'
+            className='rounded w-6 h-6 2xl:h-10 2xl:w-10'
           />
         ) : null}
         <h5>{content.author_name}</h5>
