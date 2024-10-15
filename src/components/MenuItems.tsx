@@ -26,7 +26,7 @@ export const MenuItem = ({ pageData }: MenuItemProps) => {
       <>
         <button
           onClick={handleClick}
-          className={`flex gap-2 items-center text-chalk text-2xl font-semibold no-underline hover:opacity-75 transition py-4 ${
+          className={`flex gap-2 items-center text-chalk text-2xl 2xl:text-3xl font-semibold no-underline hover:opacity-75 transition py-4 ${
             pathname === `/${pageData.slug}`
               ? 'text-yellow cursor-pointer pointer-events-none'
               : null
@@ -58,7 +58,7 @@ export const MenuItem = ({ pageData }: MenuItemProps) => {
     return (
       <Link
         href={`/${pageData.slug}`}
-        className={`text-chalk text-2xl font-semibold no-underline hover:opacity-75 transition py-4 ${
+        className={`text-chalk text-2xl 2xl:text-3xl font-semibold no-underline hover:opacity-75 transition py-4 ${
           pathname === `/${pageData.slug}`
             ? 'text-yellow cursor-pointer pointer-events-none'
             : null

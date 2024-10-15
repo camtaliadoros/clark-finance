@@ -22,7 +22,7 @@ export const SubMenu = () => {
       {sortedItems.map((page) => (
         <Link
           href={`/services/${page.slug}`}
-          className={`text-chalk text-xl font-semibold no-underline hover:opacity-75 transition py-1 ${
+          className={`text-chalk text-xl 2xl:text-2xl font-semibold no-underline hover:opacity-75 transition py-1 ${
             pathname === `/services/${page.slug}`
               ? 'text-yellow cursor-pointer pointer-events-none'
               : null
