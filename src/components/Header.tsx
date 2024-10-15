@@ -1,8 +1,6 @@
-import { faEnvelope, faPhone } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Image from 'next/image';
-import { Menu } from './Menu';
 import Link from 'next/link';
+import { Menu } from './Menu';
 import { EmailWithIcon } from './shared/EmailWithIcon';
 import { PhoneNumberWithIcon } from './shared/PhoneNumberWithIcon';
 
@@ -15,7 +13,7 @@ export const Header = () => {
           height={42}
           width={132}
           alt='Clark Finance Logo'
-          className='h-8 max-w-fit md:h-10 '
+          className='h-8 2xl:h-16 max-w-fit w-full md:h-10 '
           priority={true}
         />
       </Link>

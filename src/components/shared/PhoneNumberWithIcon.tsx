@@ -24,7 +24,7 @@ export const PhoneNumberWithIcon = ({
       <p
         className={`mb-0 ${colour === 'light' ? 'text-chalk' : 'text-ash'} ${
           hideOnMobile ? 'hidden' : 'block'
-        } md:block ${size === 'sm' ? 'text-base' : 'text-2xl'}`}
+        } md:block`}
       >
         02045 182 215
       </p>
