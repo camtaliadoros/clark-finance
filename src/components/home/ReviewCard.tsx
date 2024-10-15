@@ -18,7 +18,7 @@ export const ReviewCard = ({ content }: ReviewCardProps) => {
   const ratingArr = [1, 2, 3, 4, 5];
 
   return (
-    <div className='bg-white flex flex-col drop-shadow-lg p-6 h-60'>
+    <div className='bg-white flex flex-col drop-shadow-lg p-6 2xl:p-8 h-60 2xl:h-80'>
       <div className='flex gap-2'>
         {content.profile_photo_url ? (
           <Image
@@ -42,11 +42,11 @@ export const ReviewCard = ({ content }: ReviewCardProps) => {
                 key={i}
                 className={`${
                   i < content.rating ? 'text-yellow' : 'text-mediumgrey'
-                }`}
+                } 2xl:text-xl`}
               />
             ))}
           </div>
-          <p className='text-mediumgrey text-xs'>
+          <p className='text-mediumgrey text-xs 2xl:text-lg mb-0'>
             {content.relative_time_description}
           </p>
         </div>
