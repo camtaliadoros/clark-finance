@@ -18,7 +18,7 @@ export const HeroBanner = async ({
     <>
       <div className='w-full'>
         <div
-          className='bg-hero-image bg-cover bg-center bg-fixed z-0  flex flex-col justify-center px-4 md:px-12 md:px-18 lg:px-24 2xl:px-60 space-y-1'
+          className='bg-hero-image bg-bottom md:bg-center 2xl:bg-bottpm 2xl:bg-contain bg-cover bg-fixed z-0  flex flex-col justify-center px-4 md:px-12 md:px-18 lg:px-24 2xl:px-60 space-y-1'
           style={{ height: '32rem' }}
         >
           <h2 className='text-chalk font-normal'>{subtitle}</h2>
