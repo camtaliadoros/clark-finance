@@ -13,9 +13,10 @@ async function fetchPageContent() {
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_HOST_URL}/case-studies/api/fetchPageContent`,
     {
-      next: {
-        revalidate: 86400,
-      },
+      // next: {
+      //   revalidate: 86400,
+      // },
+      cache: 'no-store',
     }
   );
   if (!res.ok) {
@@ -36,6 +37,7 @@ export default async function CaseStudiesHome({
   const content = await fetchPageContent();
 
   const pageContent: CaseStudiesPageContent = content.acf;
+  console.log(pageContent);
 
   return (
     <>
