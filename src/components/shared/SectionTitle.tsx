@@ -1,5 +1,6 @@
 type SectionTitleProps = {
   title: string | undefined;
+  subheading?: string | undefined;
   textColour: 'ash' | 'chalk';
   lineColour: 'chalk' | 'mediumblue';
   alignment: 'centred' | 'start' | 'end';
@@ -11,6 +12,7 @@ export const SectionTitle = ({
   lineColour,
   textColour,
   alignment,
+  subheading,
   classes,
 }: SectionTitleProps) => {
   return (
@@ -29,6 +31,7 @@ export const SectionTitle = ({
         {title}
       </h2>
       <hr className={`border-${lineColour} border-t-2 w-20`} />
+      {subheading && <h3>{subheading}</h3>}
     </div>
   );
 };

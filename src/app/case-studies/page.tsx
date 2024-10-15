@@ -6,6 +6,7 @@ import { SectionTitle } from '@/components/shared/SectionTitle';
 
 type CaseStudiesPageContent = {
   page_title: string;
+  subheading: string | undefined;
 };
 
 export async function fetchCaseStudiesByPage(
@@ -66,6 +67,7 @@ export default async function CaseStudiesHome({
       >
         <SectionTitle
           title={pageContent.page_title}
+          subheading={pageContent.subheading}
           textColour='ash'
           lineColour='mediumblue'
           alignment='centred'

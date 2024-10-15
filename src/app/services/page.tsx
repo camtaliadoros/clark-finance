@@ -41,10 +41,8 @@ export default async function Services() {
           lineColour='chalk'
           textColour='chalk'
           alignment='centred'
+          subheading={content.subheading}
         />
-        <h2 className='text-center text-xl font-semibold text-chalk'>
-          {content.subheading}
-        </h2>
       </div>
 
       <ServiceCards />

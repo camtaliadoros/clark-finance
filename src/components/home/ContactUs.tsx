@@ -41,8 +41,6 @@ export const ContactUs = async ({ colourScheme }: ContactUsProps) => {
 
   const content: ContactUsContent = contactUsData.acf;
 
-  console.log(content.book_appointment_label);
-
   return (
     <Section
       type='narrow'

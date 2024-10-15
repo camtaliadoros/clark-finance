@@ -43,8 +43,8 @@ export default async function CreditSearchPage() {
         textColour='ash'
         lineColour='mediumblue'
         alignment='centred'
+        subheading={content.subheading}
       />
-      <h3 className='font-semibold text-center my-4'>{content.subheading}</h3>
       <div
         className='md:w-2/3 my-16'
         dangerouslySetInnerHTML={{ __html: bodyContent }}

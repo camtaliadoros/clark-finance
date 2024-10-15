@@ -84,10 +84,8 @@ export default async function DecisionInPrinciplePage() {
           textColour='chalk'
           lineColour='chalk'
           alignment='centred'
+          subheading={content.subheading}
         />
-        <h3 className='font-semibold text-center my-4 text-chalk'>
-          {content.subheading}
-        </h3>
         <div className='flex flex-col md:flex-row md:justify-between md:items-center my-16  mb-24 md:mb-32 space-y-8'>
           <Button
             colour='chalk'

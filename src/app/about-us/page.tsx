@@ -8,6 +8,7 @@ import Image from 'next/image';
 
 type AboutUsPageContent = {
   page_title: string;
+  subheading: string;
   about_us_content: string;
   about_us_image: number;
   why_choose_us_title: string;
@@ -88,6 +89,7 @@ export default async function AboutUs() {
       <Section type='narrow'>
         <SectionTitle
           title={content.page_title}
+          subheading={content.subheading}
           textColour='ash'
           lineColour='mediumblue'
           alignment='centred'

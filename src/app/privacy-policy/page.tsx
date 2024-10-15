@@ -4,6 +4,7 @@ import { convertWysywyg } from '@/util/utilFunctions';
 
 type TcsPageContent = {
   page_title: string;
+  subheading: string | undefined;
   content: string;
 };
 
@@ -37,6 +38,7 @@ export default async function PrivacyPolicy() {
         lineColour='mediumblue'
         textColour='ash'
         alignment='centred'
+        subheading={content.subheading}
       />
       <div
         className='text-ash text-center md:mx-20 lg:mx-36 my-12'

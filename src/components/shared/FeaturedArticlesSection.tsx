@@ -1,5 +1,5 @@
-import { ArticleDataType } from '@/app/news/page';
 import { ArticleFeatureCard } from '../insights/ArticleFeatureCard';
+import { ArticleDataType } from './ArticleListing';
 import { Button } from './Button';
 import { Section } from './Section';
 import { SectionTitle } from './SectionTitle';
