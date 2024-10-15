@@ -8,7 +8,7 @@ export async function GET(req: NextRequest) {
   const itemsPerPage = searchParams.get('per_page');
 
   const response = await fetch(
-    `${process.env.WP_ROUTE}/article?page=${currentPage}&per_page=${itemsPerPage}&_fields=acf,date,slug`,
+    `${process.env.WP_ROUTE}/article?page=${currentPage}&per_page=${itemsPerPage}&_fields=acf.title,acf.headline,acf.featured_image,date,slug`,
     {
       headers: {
         Authorization: `Basic ${encodedCredentials}`,

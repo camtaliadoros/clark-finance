@@ -11,7 +11,7 @@ type Response = {
 
 async function fetchAllArticles() {
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_HOST_URL}/news/api/fetchAllArticles?page=1&per_page=6`,
+    `${process.env.NEXT_PUBLIC_HOST_URL}/news/api/fetchAllArticles?page=1&per_page=3`,
     {
       next: {
         revalidate: 86400,

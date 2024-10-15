@@ -2,7 +2,7 @@ import { ImageType } from '@/util/models';
 import { fetchFeaturedImage } from '@/util/utilFunctions';
 import { ClickableImage } from '../shared/ClickableImage';
 import { FeaturedCardsContentWrapper } from '../shared/FeaturedCardsContentWrapper';
-import { ArticleDataType } from '@/app/news/page';
+import { ArticleDataType } from '../shared/ArticleListing';
 
 type ArticleFeatureCardProps = {
   articleData: ArticleDataType;

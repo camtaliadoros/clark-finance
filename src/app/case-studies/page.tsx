@@ -9,24 +9,6 @@ type CaseStudiesPageContent = {
   subheading: string | undefined;
 };
 
-export async function fetchCaseStudiesByPage(
-  pageNumber: number,
-  items: number
-) {
-  const res = await fetch(
-    `${process.env.NEXT_PUBLIC_HOST_URL}/case-studies/api/fetchAllCaseStudies?page=${pageNumber}&items=${items}`,
-    {
-      next: {
-        revalidate: 86400,
-      },
-    }
-  );
-  if (!res.ok) {
-    throw new Error('Failed to fetch data');
-  }
-  return res.json();
-}
-
 async function fetchPageContent() {
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_HOST_URL}/case-studies/api/fetchPageContent`,
@@ -51,10 +33,6 @@ export default async function CaseStudiesHome({
 }) {
   const currentPage = Number(searchParams?.page) || 1;
 
-  const data = await fetchCaseStudiesByPage(currentPage, 6);
-
-  const numberOfPages: number = data.totalPages;
-
   const content = await fetchPageContent();
 
   const pageContent: CaseStudiesPageContent = content.acf;
@@ -75,7 +53,6 @@ export default async function CaseStudiesHome({
         />
 
         <ArticleListing currentPage={currentPage} type='case studies' />
-        <Pagination totalPages={numberOfPages} />
       </Section>
       <ContactUs colourScheme='dark' />
     </>
