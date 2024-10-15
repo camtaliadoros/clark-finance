@@ -13,7 +13,10 @@ import { NavigationEvents } from '@/components/NavigationEvents';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: 'Clark Finance',
+  title: {
+    template: '%s | Clark Finance',
+    default: 'Clark Finance',
+  },
   description: 'Mortgage & Loan Specialists',
 };
 
