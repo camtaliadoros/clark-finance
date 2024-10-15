@@ -22,11 +22,12 @@ type ContactUsProps = {
 
 async function fetchContactUsContent() {
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_HOST_URL}/contact-us/api`,
+    `${process.env.NEXT_PUBLIC_HOST_URL}/contact-us/api/fetchContactUsFormSection`,
     {
-      next: {
-        revalidate: 86400,
-      },
+      // next: {
+      //   revalidate: 86400,
+      // },
+      cache: 'no-store',
     }
   );
   if (!res.ok) {
@@ -39,6 +40,8 @@ export const ContactUs = async ({ colourScheme }: ContactUsProps) => {
   const contactUsData = await fetchContactUsContent();
 
   const content: ContactUsContent = contactUsData.acf;
+
+  console.log(content.book_appointment_label);
 
   return (
     <Section

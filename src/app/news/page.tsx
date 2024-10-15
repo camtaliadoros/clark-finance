@@ -1,12 +1,9 @@
 import { ContactUs } from '@/components/home/ContactUs';
-import { ArticleFeatureCard } from '@/components/insights/ArticleFeatureCard';
-import { FeaturedCardsWrapper } from '@/components/shared/FeaturedCardsWrapper';
+import { ArticleListing } from '@/components/shared/ArticleListing';
+import { Pagination } from '@/components/shared/Pagination';
 import { Section } from '@/components/shared/Section';
 import { SectionTitle } from '@/components/shared/SectionTitle';
 import { ArticleContentType } from '@/util/models';
-import { fetchCaseStudiesByPage } from '../case-studies/page';
-import { ArticleListing } from '@/components/shared/ArticleListing';
-import { Pagination } from '@/components/shared/Pagination';
 
 export type ArticleDataType = {
   date: string;
