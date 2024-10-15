@@ -110,11 +110,11 @@ export default async function Service({ params }: PageProps) {
               {content.subheading}
             </h2>
             <div
-              className='text-chalk'
+              className='text-chalk 2xl:text-xl'
               dangerouslySetInnerHTML={{ __html: whyClarkFinanceText }}
             />
           </div>
-          <div className='flex gap-8'>
+          <div className='flex gap-8 '>
             <Button url='#contact-us' title='Get in touch' colour='chalk' />
           </div>
         </div>
@@ -123,7 +123,7 @@ export default async function Service({ params }: PageProps) {
         {content.q1 && (
           <Link
             prefetch={true}
-            className={`flex gap-2 items-center py-2 px-4 no-underline border-r border-chalk w-full min-w-fit ${
+            className={`flex gap-2 items-center py-2 px-4  no-underline border-r border-chalk w-full min-w-fit ${
               {
                 1: 'bg-green',
                 2: 'bg-yellow',
@@ -134,7 +134,7 @@ export default async function Service({ params }: PageProps) {
                 7: 'bg-red',
                 8: 'bg-bluegrey',
               }[content.service_card.homepage_order]
-            } hover:bg-opacity-80 transition text-chalk font-semibold text-sm`}
+            } hover:bg-opacity-80 transition text-chalk font-semibold text-sm 2xl:text-lg`}
             href='#qa'
           >
             View our mortgage guide
@@ -159,7 +159,7 @@ export default async function Service({ params }: PageProps) {
                 7: 'bg-red',
                 8: 'bg-bluegrey',
               }[content.service_card.homepage_order]
-            } hover:bg-opacity-80 transition text-chalk font-semibold text-sm`}
+            } hover:bg-opacity-80 transition text-chalk font-semibold text-sm 2xl:text-lg`}
           >
             View our lenders
             <FontAwesomeIcon

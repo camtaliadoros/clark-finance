@@ -65,26 +65,37 @@ export default async function CaseStudyDetailPage({
         pageLinkCard2='contactUs'
       >
         <div className='space-y-6'>
-          <h2 className='text-ash font-semibold text-xl'>
+          <h2 className='text-ash font-semibold text-xl 2xl:text-3xl'>
             Loan Value: {content.loan_value}
           </h2>
-          <h2 className='text-ash font-semibold text-xl'>
+          <h2 className='text-ash font-semibold text-xl 2xl:text-3xl'>
             Location: {content.location}
           </h2>
         </div>
         <div className='space-y-4'>
-          <h3 className='text-xl font-semibold'>The Requirement</h3>
-          <div dangerouslySetInnerHTML={{ __html: theRequirementContent }} />
-        </div>
-        <div className='space-y-4'>
-          <h3 className='text-xl font-semibold'>The Interesting Stuff</h3>
+          <h3 className='text-xl font-semibold 2xl:text-3xl'>
+            The Requirement
+          </h3>
           <div
-            dangerouslySetInnerHTML={{ __html: theInterestingStuffContent }}
+            dangerouslySetInnerHTML={{ __html: theRequirementContent }}
+            className='2xl:text-2xl'
           />
         </div>
         <div className='space-y-4'>
-          <h3 className='text-xl font-semibold'>How We Helped</h3>
-          <div dangerouslySetInnerHTML={{ __html: howWeHelpedContent }} />
+          <h3 className='text-xl  2xl:text-3xl font-semibold'>
+            The Interesting Stuff
+          </h3>
+          <div
+            dangerouslySetInnerHTML={{ __html: theInterestingStuffContent }}
+            className='2xl:text-2xl'
+          />
+        </div>
+        <div className='space-y-4'>
+          <h3 className='text-xl font-semibold 2xl:text-3xl'>How We Helped</h3>
+          <div
+            dangerouslySetInnerHTML={{ __html: howWeHelpedContent }}
+            className='2xl:text-2xl'
+          />
         </div>
       </ArticleWrapper>
       <CaseStudiesSection bgColour='dark' />

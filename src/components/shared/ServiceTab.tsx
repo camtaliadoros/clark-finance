@@ -15,7 +15,7 @@ type ServiceTabData = {
 export const ServiceTab = ({ service, activePageSlug }: ServiceTabProps) => {
   return (
     <Link
-      className={`px-4 py-2 text-center text-sm font-semibold ${
+      className={`px-4 py-2 text-center text-sm 2xl:text-xl font-semibold ${
         activePageSlug === service.slug ? 'text-chalk' : 'text-ash'
       } no-underline border-b-2 ${
         activePageSlug === service.slug
