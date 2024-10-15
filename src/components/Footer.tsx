@@ -28,24 +28,27 @@ export const Footer = async () => {
               width={132}
               alt='Clark Finance Logo'
               loading='lazy'
-              className='h-8 max-w-fit md:h-10 '
+              className='h-8 2xl:h-16 max-w-fit md:h-10 w-full '
             />
-            <p className='text-sm text-chalk'>
+            <p className='text-sm text-chalk 2xl:text-lg'>
               Registered in England and Wales No: 13224940
             </p>
           </div>
           <div className='flex flex-col md:w-4/5 lg:w-1/2 space-y-3'>
             <h5 className='text-chalk'>Contact Us</h5>
-            <a href='tel:+442045182215' className='text-chalk text-sm w-fit'>
+            <a
+              href='tel:+442045182215'
+              className='text-chalk text-sm w-fit 2xl:text-lg'
+            >
               0204 518 2215
             </a>
             <a
               href='mailto:info@clark.finance'
-              className='text-chalk text-sm w-fit'
+              className='text-chalk text-sm 2xl:text-lg w-fit'
             >
               info@clark.finance
             </a>
-            <p className='text-chalk text-sm'>
+            <p className='text-chalk text-sm 2xl:text-lg'>
               Clark Finance, Bedford Heights, Brickhill Drive, Bedford MK41 7PH
             </p>
           </div>
@@ -53,7 +56,7 @@ export const Footer = async () => {
             {sortedPages.map((page) => (
               <Link
                 prefetch={true}
-                className='text-chalk text-sm font-semibold no-underline hover:opacity-80 transition'
+                className='text-chalk text-sm 2xl:text-lg font-semibold no-underline hover:opacity-80 transition'
                 href={`/${page.slug}`}
                 key={page.id}
               >
@@ -63,7 +66,7 @@ export const Footer = async () => {
           </div>
         </div>
         <div className='space-y-6'>
-          <p className='text-sm text-chalk'>
+          <p className='text-sm text-chalk 2xl:text-lg'>
             Clark Finance Ltd is an Appointed Representative of Connect IFA
             Limited 441505 which is Authorised and Regulated by the Financial
             Conduct Authority and is entered on the Financial Services Register
@@ -72,14 +75,14 @@ export const Footer = async () => {
             regulate Business Buy to Let Mortgages and Commercial Mortgages to
             Limited Companies.
           </p>
-          <p className='text-sm text-chalk'>
+          <p className='text-sm text-chalk 2xl:text-lg'>
             The guidance and/or advice contained within this website is subject
             to the UK regulatory regime and is therefore primarily targeted at
             consumers based in the UK. There will be a fee for mortgage advice,
             the precise amount will depend upon your circumstances but we
             estimate that it will be £699.
           </p>
-          <p className='text-sm font-bold text-chalk'>
+          <p className='text-sm font-bold text-chalk 2xl:text-lg'>
             Your property may be repossessed if you do not keep up repayments on
             your mortgage.
           </p>
