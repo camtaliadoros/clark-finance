@@ -66,7 +66,7 @@ export const WhyClarkFinance = ({
                 height={15}
                 alt='check icon'
               />
-              <p className='text-chalk text-lg'>{item}</p>
+              <p className='text-chalk text-lg mb-0'>{item}</p>
             </li>
           ))}
         </ul>
