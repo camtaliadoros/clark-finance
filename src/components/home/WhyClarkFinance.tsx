@@ -31,7 +31,7 @@ export const WhyClarkFinance = ({
   return (
     <Section
       type='narrow'
-      classes='bg-building-detail bg-cover flex items-start gap-12 md:py-40 flex flex-col md:flex-row'
+      classes='bg-building-detail bg-cover flex items-start gap-12 md:py-40 flex flex-col md:flex-row '
     >
       <div className='w-full md:w-1/2 flex flex-col md:flex-row md:justify-end justify-start items-end md:items-start relative gap-16'>
         <Image
@@ -49,7 +49,7 @@ export const WhyClarkFinance = ({
           className='absolute top-24 md:top-20 lg:top-24 xl:top-52 right-44 md:right-36 lg:right-44 xl:right-72 w-1/2 lg:w-36 xl:w-64'
         />
       </div>
-      <div className='w-full mt-28 md:mt-0 md:w-1/2 flex flex-col items-start '>
+      <div className='w-full mt-28 md:mt-0 md:w-1/2 flex flex-col items-start 2xl:space-y-8'>
         <SectionTitle
           title={sectionTitle}
           lineColour='mediumblue'
@@ -66,7 +66,7 @@ export const WhyClarkFinance = ({
                 height={15}
                 alt='check icon'
               />
-              <p className='text-chalk text-lg mb-0'>{item}</p>
+              <p className='text-chalk text-lg 2xl:text-xl mb-0'>{item}</p>
             </li>
           ))}
         </ul>
