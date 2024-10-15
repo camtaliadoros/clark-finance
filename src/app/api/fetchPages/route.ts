@@ -3,7 +3,7 @@ export async function GET() {
 
   try {
     const response = await fetch(
-      `${process.env.WP_ROUTE}/pages?per_page=30&_fields=slug,id,acf,parent`,
+      `${process.env.WP_ROUTE}/pages?per_page=30&_fields=slug,id,acf.menu_location,acf.menu_position,acf.service_card.homepage_order,acf.page_title,parent`,
       {
         headers: {
           Authorization: `Basic ${encodedCredentials}`,

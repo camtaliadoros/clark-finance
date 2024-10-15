@@ -1,17 +1,34 @@
 'use client';
 
 import { MenuDrawerContext } from '@/contexts/MenuContextProvider';
-import { Page } from '@/util/models';
 import { fetchMenuItems } from '@/util/utilFunctions';
 import { useContext, useEffect } from 'react';
 import { MenuItem } from './MenuItems';
+
+type MenuItem = {
+  slug: string;
+  parent: number;
+  id: number;
+  acf: MenuLocation;
+};
+
+type MenuLocation = {
+  menu_location: string[];
+  menu_position: number;
+  service_card: SubMenuOrder;
+  page_title: string;
+};
+
+type SubMenuOrder = {
+  homepage_order: number;
+};
 
 export const MenuDrawer = () => {
   const { isOpen, menuItems, setMenuItems } = useContext(MenuDrawerContext);
 
   useEffect(() => {
     const fetchData = async () => {
-      const data: Page[] = await fetchMenuItems();
+      const data: MenuItem[] = await fetchMenuItems();
 
       const mainMenuPages = data.filter((page) =>
         page.acf.menu_location.includes('Main Menu')
@@ -26,7 +43,9 @@ export const MenuDrawer = () => {
       });
 
       const sortedSubPages = subPages.toSorted((a, b) => {
-        return a.acf.menu_position - b.acf.menu_position;
+        return (
+          a.acf.service_card.homepage_order - b.acf.service_card.homepage_order
+        );
       });
 
       const menuItems = {
