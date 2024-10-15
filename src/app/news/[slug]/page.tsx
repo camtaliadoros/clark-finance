@@ -74,13 +74,16 @@ export default async function ArticlePage({
         pageLinkCard1='contactUs'
         pageLinkCard2='services'
       >
-        <h5 className='font-normal text-mediumgrey text-base'>
+        <h5 className='font-normal text-mediumgrey text-base 2xl:text-xl'>
           {formatedDate}
         </h5>
-        <h2 className='text-ash text-2xl font-semibold'>
+        <h2 className='text-ash text-2xl 2xl:text-3xl font-semibold'>
           {content.acf.headline}
         </h2>
-        <div dangerouslySetInnerHTML={{ __html: contentBody }} />
+        <div
+          dangerouslySetInnerHTML={{ __html: contentBody }}
+          className='2xl:text-2xl'
+        />
       </ArticleWrapper>
       <FeaturedArticlesSection bgColour='dark' />
     </>
