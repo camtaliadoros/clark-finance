@@ -68,8 +68,6 @@ export async function generateMetadata({
 
   const metadata: YoastHeadJson = res[0].yoast_head_json;
 
-  console.log(metadata);
-
   const title = metadata.title;
   const description = metadata.schema['@graph'].find(
     (item: GraphItem) => item['@type'] === 'WebSite'
