@@ -1,9 +1,14 @@
-export async function GET() {
+import { NextRequest } from 'next/server';
+
+export async function GET(req: NextRequest) {
   const encodedCredentials = btoa(`${process.env.WP_CREDENTIALS}`);
+
+  const { searchParams } = new URL(req.url);
+  const slug = searchParams.get('slug');
 
   try {
     const response = await fetch(
-      `${process.env.WP_ROUTE}/pages/7?_fields=acf`,
+      `${process.env.WP_ROUTE}/article?slug=${slug}&_fields=yoast_head_json`,
       {
         headers: {
           Authorization: `Basic ${encodedCredentials}`,

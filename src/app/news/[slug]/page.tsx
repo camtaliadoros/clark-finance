@@ -2,8 +2,18 @@ import { ArticleWrapper } from '@/components/shared/ArticleWrapper';
 import { Button } from '@/components/shared/Button';
 import { FeaturedArticlesSection } from '@/components/shared/FeaturedArticlesSection';
 import { Section } from '@/components/shared/Section';
-import { ArticleContentType, ImageType } from '@/util/models';
-import { convertWysywyg, fetchFeaturedImage } from '@/util/utilFunctions';
+import {
+  ArticleContentType,
+  GraphItem,
+  ImageType,
+  YoastHeadJson,
+} from '@/util/models';
+import {
+  convertWysywyg,
+  fetchFeaturedImage,
+  replaceWpURL,
+} from '@/util/utilFunctions';
+import { Metadata } from 'next';
 
 type ArticleData = {
   date: string;
@@ -12,6 +22,10 @@ type ArticleData = {
 
 type ArticleParams = {
   slug: string;
+};
+
+type MetadataProps = {
+  params: { slug: string };
 };
 
 const fetchArticle = async (slug: string) => {
@@ -28,6 +42,94 @@ const fetchArticle = async (slug: string) => {
   }
   return res.json();
 };
+
+const fetchArticleMetadata = async (slug: string) => {
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_HOST_URL}/news/api/fetchArticleMetadata?slug=${slug}`,
+    {
+      // next: {
+      //   revalidate: 86400,
+      // },
+      cache: 'no-store',
+    }
+  );
+  if (!res.ok) {
+    throw new Error('Failed to fetch data');
+  }
+  return res.json();
+};
+
+export async function generateMetadata({
+  params,
+}: MetadataProps): Promise<Metadata> {
+  const slug = params.slug;
+
+  const res = await fetchArticleMetadata(slug);
+
+  const metadata: YoastHeadJson = res[0].yoast_head_json;
+
+  console.log(metadata);
+
+  const title = metadata.title;
+  const description = metadata.schema['@graph'].find(
+    (item: GraphItem) => item['@type'] === 'WebSite'
+  )?.description;
+  const canonical = replaceWpURL(metadata.canonical);
+  const robots = metadata.robots;
+  const ogTitle = metadata.og_title;
+  const ogUrl = replaceWpURL(metadata.og_url);
+  const ogSiteName = metadata.og_site_name;
+  const ogLocale = metadata.og_locale;
+  const twitterCard = metadata.twitter_card;
+  const logo = metadata.schema['@graph'].find(
+    (item: GraphItem) => item['@type'] === 'Organization'
+  )?.logo;
+  const imagePreviewType = robots['max-image-preview'].replace(
+    'max-image-preview:',
+    ''
+  ) as 'none' | 'standard' | 'large' | undefined;
+
+  return {
+    title: title,
+    description: description,
+    robots: {
+      index: robots.index === 'index',
+      follow: robots.follow === 'follow',
+      'max-snippet': Number(robots['max-snippet'].replace('max-snippet:', '')),
+      'max-image-preview': imagePreviewType,
+      'max-video-preview': Number(
+        robots['max-video-preview'].replace('max-video-preview:', '')
+      ),
+    },
+    openGraph: {
+      type: 'website',
+      title: ogTitle,
+      url: ogUrl,
+      siteName: ogSiteName,
+      locale: ogLocale,
+      images: [
+        {
+          url:
+            logo?.url ||
+            'https://clarkfinance.wordifysites.com/wp-content/uploads/2024/10/Clark-Finance-Logo-High-Quality.png',
+          width: logo?.width,
+          height: logo?.height,
+          alt: 'Clark Finance',
+        },
+      ],
+    },
+    twitter: {
+      card: twitterCard,
+      title: ogTitle,
+      description: description,
+      images:
+        'https://clarkfinance.wordifysites.com/wp-content/uploads/2024/10/Clark-Finance-Logo-High-Quality.png',
+    },
+    alternates: {
+      canonical: canonical,
+    },
+  };
+}
 
 export default async function ArticlePage({
   params,
