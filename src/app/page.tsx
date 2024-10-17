@@ -6,7 +6,7 @@ import { ServiceCards } from '@/components/home/ServiceCards';
 import { WhyClarkFinance } from '@/components/home/WhyClarkFinance';
 import { ButtonContentFields, GraphItem, YoastHeadJson } from '@/util/models';
 import { fetchPageMetadata, replaceWpURL } from '@/util/utilFunctions';
-import { Metadata, ResolvingMetadata } from 'next/types';
+import { Metadata } from 'next/types';
 
 type HomeContent = {
   contact_section_title: string;

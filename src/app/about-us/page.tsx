@@ -63,9 +63,7 @@ async function fetchAboutUsPageContent() {
   return res.json();
 }
 
-export async function generateMetadata(
-  parent: ResolvingMetadata
-): Promise<Metadata> {
+export async function generateMetadata(): Promise<Metadata> {
   const res = await fetchPageMetadata(88);
 
   const metadata: YoastHeadJson = res.yoast_head_json;
