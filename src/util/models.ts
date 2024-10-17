@@ -173,3 +173,7 @@ export type MetaLogo = {
   height: number;
   caption: string;
 };
+
+export type MetadataProps = {
+  params: { slug: string };
+};

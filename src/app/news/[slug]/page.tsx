@@ -6,6 +6,7 @@ import {
   ArticleContentType,
   GraphItem,
   ImageType,
+  MetadataProps,
   YoastHeadJson,
 } from '@/util/models';
 import {
@@ -22,10 +23,6 @@ type ArticleData = {
 
 type ArticleParams = {
   slug: string;
-};
-
-type MetadataProps = {
-  params: { slug: string };
 };
 
 const fetchArticle = async (slug: string) => {

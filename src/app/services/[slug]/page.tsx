@@ -10,6 +10,7 @@ import {
   BenefitsBlock,
   GraphItem,
   ImageType,
+  MetadataProps,
   ServicePageContent,
   YoastHeadJson,
 } from '@/util/models';
@@ -29,10 +30,6 @@ type PageProps = {
 
 type Params = {
   slug: string;
-};
-
-type MetadataProps = {
-  params: { slug: string };
 };
 
 const fetchPageContent = async (slug: string) => {
@@ -77,8 +74,6 @@ export async function generateMetadata({
   const res = await fetchServiceMetadata(slug);
 
   const metadata: YoastHeadJson = res[0].yoast_head_json;
-
-  console.log(metadata);
 
   const title = metadata.title;
   const description = metadata.schema['@graph'].find(
