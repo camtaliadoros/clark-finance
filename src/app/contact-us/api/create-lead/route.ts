@@ -4,22 +4,25 @@ import { promises as fs } from 'fs';
 export async function POST(req: NextRequest) {
   const { firstName, lastName, email, phoneNumber, message } = await req.json();
 
-  const tokenData = JSON.parse(await fs.readFile('./tokens.json', 'utf8'));
-  let { access_token, refresh_token } = tokenData;
+  require('dotenv').config(); // Load environment variables from .env file
+  const fs = require('fs').promises;
+
+  let accessToken = process.env.ZOHO_ACCESS_TOKEN;
 
   // Function to refresh token if expired
   const refreshAccessToken = async () => {
     const clientId = process.env.ZOHO_CLIENT_ID;
     const clientSecret = process.env.ZOHO_CLIENT_SECRET;
+    const refreshToken = process.env.ZOHO_REFRESH_TOKEN;
 
     const body = new URLSearchParams({
       grant_type: 'refresh_token',
       client_id: clientId || '',
       client_secret: clientSecret || '',
-      refresh_token: refresh_token || '',
+      refresh_token: refreshToken || '',
     });
 
-    const tokenUrl = 'https://accounts.zoho.com/oauth/v2/token';
+    const tokenUrl = 'https://accounts.zoho.eu/oauth/v2/token';
     const tokenResponse = await fetch(tokenUrl, {
       method: 'POST',
       body,
@@ -29,24 +32,19 @@ export async function POST(req: NextRequest) {
     });
 
     const tokenData = await tokenResponse.json();
+
     if (tokenData.error) {
       throw new Error(tokenData.error);
     }
 
     // Update stored tokens
-    await fs.writeFile(
-      './tokens.json',
-      JSON.stringify({
-        access_token: tokenData.access_token,
-        refresh_token, // Keep the old refresh token
-      })
-    );
+    await updateEnv('ZOHO_ACCESS_TOKEN', tokenData.access_token); // Update the access token
 
     return tokenData.access_token;
   };
 
   try {
-    const zohoApiUrl = 'https://www.zohoapis.com/crm/v2/Leads';
+    const zohoApiUrl = 'https://www.zohoapis.com/crm/v3/Leads';
     const leadData = {
       data: [
         {
@@ -54,7 +52,6 @@ export async function POST(req: NextRequest) {
           Last_Name: lastName,
           Email: email,
           Phone: phoneNumber,
-          Message: message,
         },
       ],
     };
@@ -62,31 +59,34 @@ export async function POST(req: NextRequest) {
     const response = await fetch(zohoApiUrl, {
       method: 'POST',
       headers: {
-        Authorization: `Zoho-oauthtoken ${access_token}`,
+        Authorization: `Zoho-oauthtoken ${accessToken}`,
         'Content-Type': 'application/json',
       },
+
       body: JSON.stringify(leadData),
     });
 
     // If access token is expired, refresh it and retry
     if (response.status === 401) {
-      access_token = await refreshAccessToken();
+      accessToken = await refreshAccessToken();
 
       // Retry the request with the new access token
       const retryResponse = await fetch(zohoApiUrl, {
         method: 'POST',
         headers: {
-          Authorization: `Zoho-oauthtoken ${access_token}`,
+          Authorization: `Zoho-oauthtoken ${accessToken}`,
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(leadData),
       });
 
       const retryData = await retryResponse.json();
+
       return NextResponse.json(retryData, { status: 200 });
     }
 
     const data = await response.json();
+
     return NextResponse.json(data, { status: 200 });
   } catch (error) {
     return NextResponse.json(
@@ -94,4 +94,18 @@ export async function POST(req: NextRequest) {
       { status: 500 }
     );
   }
+}
+
+async function updateEnv(key: string, value: string) {
+  const envPath = './.env'; // Path to your .env file
+  const data = await fs.readFile(envPath, 'utf8');
+
+  // Update the value for the given key
+  const newData = data.replace(
+    new RegExp(`^${key}=.*`, 'm'),
+    `${key}=${value}`
+  );
+
+  // Write the updated content back to .env
+  await fs.writeFile(envPath, newData, 'utf8');
 }

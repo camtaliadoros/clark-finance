@@ -40,7 +40,7 @@ export const ContactForm = () => {
       type: 'email',
     },
     {
-      id: 'phoneNumer',
+      id: 'phoneNumber',
       requiredError: 'This field is required.',
       placeholder: 'Phone Number',
       type: 'tel',
@@ -58,13 +58,16 @@ export const ContactForm = () => {
     //review
     const token = await executeRecaptcha('form_submit');
 
-    const response = await fetch('contact-us/api/create-lead', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(data),
-    });
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_HOST_URL}/contact-us/api/create-lead`,
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      }
+    );
 
     const resJson = await response.json();
     if (resJson.error) {

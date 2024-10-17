@@ -135,3 +135,41 @@ export type Page = {
   parent: number;
   acf: Record<string, any>;
 };
+
+export type YoastHeadJson = {
+  title: string;
+  robots: Robots;
+  canonical: string;
+  og_locale: string;
+  og_type: string;
+  og_title: string;
+  og_url: string;
+  og_site_name: string;
+  twitter_card: 'summary' | 'summary_large_image' | 'player' | 'app';
+  schema: Schema;
+};
+
+export type Robots = {
+  index: string;
+  follow: string;
+  'max-snippet': string;
+  'max-image-preview': string;
+  'max-video-preview': string;
+};
+
+export type Schema = {
+  '@graph': GraphItem[];
+};
+
+export type GraphItem = {
+  '@type': string;
+  description?: string;
+  logo?: MetaLogo;
+};
+
+export type MetaLogo = {
+  url: string;
+  width: number;
+  height: number;
+  caption: string;
+};

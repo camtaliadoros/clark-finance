@@ -43,3 +43,26 @@ export const fetchMenuItems = async () => {
 export const sanitiseURL = (url: string) => {
   return url.replace('https://clarkfinance.wordifysites.com', '');
 };
+
+export const replaceWpURL = (url: string) => {
+  return url.replace(
+    'https://clarkfinance.wordifysites.com',
+    `${process.env.NEXT_PUBLIC_HOST_URL}`
+  );
+};
+
+export const fetchPageMetadata = async (id: number) => {
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_HOST_URL}/api/fetchMetadata?id=${id}`,
+    {
+      // next: {
+      //   revalidate: 86400,
+      // },
+      cache: 'no-store',
+    }
+  );
+  if (!res.ok) {
+    throw new Error('Failed to fetch data');
+  }
+  return res.json();
+};

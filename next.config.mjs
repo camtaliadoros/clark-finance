@@ -11,6 +11,7 @@ const nextConfig = {
         protocol: 'https',
         hostname: 'clarkfinance.wordifysites.com',
         port: '',
+        pathname: '/**',
       },
     ],
   },
