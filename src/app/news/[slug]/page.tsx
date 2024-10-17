@@ -44,10 +44,9 @@ const fetchArticleMetadata = async (slug: string) => {
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_HOST_URL}/news/api/fetchArticleMetadata?slug=${slug}`,
     {
-      // next: {
-      //   revalidate: 86400,
-      // },
-      cache: 'no-store',
+      next: {
+        revalidate: 86400,
+      },
     }
   );
   if (!res.ok) {

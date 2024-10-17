@@ -16,10 +16,9 @@ async function fetchAllServices() {
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_HOST_URL}/services/api/fetchServiceCards`,
     {
-      // next: {
-      //   revalidate: 86400,
-      // },
-      cache: 'no-store',
+      next: {
+        revalidate: 86400,
+      },
     }
   );
   if (!res.ok) {

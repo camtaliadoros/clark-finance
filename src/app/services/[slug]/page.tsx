@@ -36,10 +36,9 @@ const fetchPageContent = async (slug: string) => {
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_HOST_URL}/services/api/fetchServicePageContent?slug=${slug}`,
     {
-      // next: {
-      //   revalidate: 86400,
-      // },
-      cache: 'no-store',
+      next: {
+        revalidate: 86400,
+      },
     }
   );
 
@@ -54,10 +53,9 @@ const fetchServiceMetadata = async (slug: string) => {
     `${process.env.NEXT_PUBLIC_HOST_URL}/services/api/fetchServiceMetadata?slug=${slug}`,
 
     {
-      // next: {
-      //   revalidate: 86400,
-      // },
-      cache: 'no-store',
+      next: {
+        revalidate: 86400,
+      },
     }
   );
   if (!res.ok) {
