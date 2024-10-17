@@ -4,7 +4,7 @@ import { Section } from '@/components/shared/Section';
 import { SectionTitle } from '@/components/shared/SectionTitle';
 import { GraphItem, YoastHeadJson } from '@/util/models';
 import { fetchPageMetadata, replaceWpURL } from '@/util/utilFunctions';
-import { Metadata, ResolvingMetadata } from 'next';
+import { Metadata } from 'next';
 
 type CaseStudiesPageContent = {
   page_title: string;
@@ -27,9 +27,7 @@ async function fetchPageContent() {
   return res.json();
 }
 
-export async function generateMetadata(
-  parent: ResolvingMetadata
-): Promise<Metadata> {
+export async function generateMetadata(): Promise<Metadata> {
   const res = await fetchPageMetadata(203);
 
   const metadata: YoastHeadJson = res.yoast_head_json;

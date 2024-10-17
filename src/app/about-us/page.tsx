@@ -14,7 +14,7 @@ import {
   fetchPageMetadata,
   replaceWpURL,
 } from '@/util/utilFunctions';
-import { Metadata, ResolvingMetadata } from 'next';
+import { Metadata } from 'next';
 import Image from 'next/image';
 
 type AboutUsPageContent = {

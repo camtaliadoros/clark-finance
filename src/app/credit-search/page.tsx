@@ -7,7 +7,7 @@ import {
   fetchPageMetadata,
   replaceWpURL,
 } from '@/util/utilFunctions';
-import { Metadata, ResolvingMetadata } from 'next';
+import { Metadata } from 'next';
 
 type CreditSearchContent = {
   button: ButtonContentFields;
@@ -31,9 +31,7 @@ async function fetchCreditSearchContent() {
   return res.json();
 }
 
-export async function generateMetadata(
-  parent: ResolvingMetadata
-): Promise<Metadata> {
+export async function generateMetadata(): Promise<Metadata> {
   const res = await fetchPageMetadata(182);
 
   const metadata: YoastHeadJson = res.yoast_head_json;

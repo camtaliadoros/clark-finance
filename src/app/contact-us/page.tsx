@@ -8,7 +8,7 @@ import {
   fetchPageMetadata,
   replaceWpURL,
 } from '@/util/utilFunctions';
-import { Metadata, ResolvingMetadata } from 'next';
+import { Metadata } from 'next';
 
 type ContactUsPageContent = {
   complaints_title: string;
@@ -30,9 +30,7 @@ async function fetchContactUsPageContent() {
   return res.json();
 }
 
-export async function generateMetadata(
-  parent: ResolvingMetadata
-): Promise<Metadata> {
+export async function generateMetadata(): Promise<Metadata> {
   const res = await fetchPageMetadata(74);
 
   const metadata: YoastHeadJson = res.yoast_head_json;
