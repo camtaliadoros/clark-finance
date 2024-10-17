@@ -11,6 +11,15 @@ type FormValues = {
   message: string;
 };
 
+type FieldId = 'message' | 'firstName' | 'lastName' | 'email' | 'phoneNumber';
+
+interface InputField {
+  id: FieldId;
+  placeholder: string;
+  type: string;
+  requiredError?: string;
+}
+
 export const ContactForm = () => {
   const {
     register,
@@ -20,7 +29,7 @@ export const ContactForm = () => {
 
   const { executeRecaptcha } = useReCaptcha();
 
-  const inputFields = [
+  const inputFields: InputField[] = [
     {
       id: 'firstName',
       requiredError: 'This field is required.',
