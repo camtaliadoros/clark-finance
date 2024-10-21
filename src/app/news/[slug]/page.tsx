@@ -6,7 +6,6 @@ import {
   ArticleContentType,
   GraphItem,
   ImageType,
-  MetadataProps,
   YoastHeadJson,
 } from '@/util/models';
 import {
@@ -45,9 +44,24 @@ const fetchArticleMetadata = async (slug: string) => {
   return res.json();
 };
 
+// `generateStaticParams` is used for generating static paths in the new app directory
+export async function generateStaticParams() {
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_HOST_URL}/news/api/fetchAllArticleSlugs`
+  );
+  const data = await res.json();
+
+  return data.map((article: { slug: string }) => ({
+    slug: article.slug,
+  }));
+}
+
+// This function replaces getStaticProps and fetches data directly in the component
 export async function generateMetadata({
   params,
-}: MetadataProps): Promise<Metadata> {
+}: {
+  params: ArticleParams;
+}): Promise<Metadata> {
   const slug = params.slug;
 
   const res = await fetchArticleMetadata(slug);
@@ -74,8 +88,8 @@ export async function generateMetadata({
   ) as 'none' | 'standard' | 'large' | undefined;
 
   return {
-    title: title,
-    description: description,
+    title,
+    description,
     robots: {
       index: robots.index === 'index',
       follow: robots.follow === 'follow',
@@ -105,35 +119,24 @@ export async function generateMetadata({
     twitter: {
       card: twitterCard,
       title: ogTitle,
-      description: description,
+      description,
       images:
         'https://clarkfinance.wordifysites.com/wp-content/uploads/2024/10/Clark-Finance-Logo-High-Quality.png',
     },
     alternates: {
-      canonical: canonical,
+      canonical,
     },
   };
 }
 
-export async function getStaticPaths() {
-  // Fetch all article slugs
-  const res = await fetch(
-    `${process.env.NEXT_PUBLIC_HOST_URL}/news/api/fetchAllArticleSlugs`
-  );
-  const data = await res.json();
+export default async function ArticlePage({
+  params,
+}: {
+  params: ArticleParams;
+}) {
+  const { slug } = params;
 
-  const paths = data.map((article: { slug: string }) => ({
-    params: { slug: article.slug },
-  }));
-
-  return {
-    paths,
-    fallback: 'blocking', // Wait until the new article is built before serving it
-  };
-}
-
-export async function getStaticProps({ params }: { params: ArticleParams }) {
-  const data = await fetchArticle(params.slug);
+  const data = await fetchArticle(slug);
   const content: ArticleData = data[0];
 
   const image: ImageType = await fetchFeaturedImage(content.acf.featured_image);
@@ -146,28 +149,6 @@ export async function getStaticProps({ params }: { params: ArticleParams }) {
     year: 'numeric',
   });
 
-  return {
-    props: {
-      content,
-      contentBody,
-      image,
-      formatedDate,
-    },
-    revalidate: 86400, // Revalidate every 24 hours
-  };
-}
-
-export default function ArticlePage({
-  content,
-  contentBody,
-  image,
-  formatedDate,
-}: {
-  content: ArticleData;
-  contentBody: string;
-  image: ImageType;
-  formatedDate: string;
-}) {
   if (!content) {
     return (
       <Section
