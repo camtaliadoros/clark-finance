@@ -1,8 +1,7 @@
 import { ServiceCards } from '@/components/home/ServiceCards';
-import { Section } from '@/components/shared/Section';
 import { SectionTitle } from '@/components/shared/SectionTitle';
 import { GraphItem, YoastHeadJson } from '@/util/models';
-import { fetchPageMetadata, replaceWpURL } from '@/util/utilFunctions';
+import { replaceWpURL } from '@/util/utilFunctions';
 import { Metadata } from 'next';
 
 type ServicesPageContent = {
@@ -14,9 +13,10 @@ async function fetchPageContent() {
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_HOST_URL}/services/api/fetchPageContent`,
     {
-      next: {
-        revalidate: 86400,
-      },
+      // next: {
+      //   revalidate: 86400,
+      // },
+      cache: 'no-store',
     }
   );
 
