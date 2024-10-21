@@ -19,9 +19,10 @@ async function fetchContactUsPageContent() {
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_HOST_URL}/contact-us/api`,
     {
-      next: {
-        revalidate: 86400,
-      },
+      // next: {
+      //   revalidate: 86400,
+      // },
+      cache: 'no-store',
     }
   );
   if (!res.ok) {
@@ -31,11 +32,11 @@ async function fetchContactUsPageContent() {
 }
 
 export async function generateMetadata(): Promise<Metadata> {
-  const res = await fetchPageMetadata(74);
+  const res = await fetch(`${process.env.NEXT_PUBLIC_HOST_URL}/contact-us/api`);
 
-  const metadata: YoastHeadJson = res.yoast_head_json;
+  const data = await res.json();
 
-  // console.log(metadata);
+  const metadata: YoastHeadJson = data.yoast_head_json;
 
   const title = metadata.title;
   const description = metadata.schema['@graph'].find(
