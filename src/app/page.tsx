@@ -34,9 +34,11 @@ async function fetchHomePageContent() {
 }
 
 export async function generateMetadata(): Promise<Metadata> {
-  const res = await fetchPageMetadata(7);
+  const res = await fetch(`${process.env.NEXT_PUBLIC_HOST_URL}/api`);
 
-  const metadata: YoastHeadJson = res.yoast_head_json;
+  const data = await res.json();
+
+  const metadata: YoastHeadJson = data.yoast_head_json;
 
   const title = metadata.title;
   const description = metadata.schema['@graph'].find(
