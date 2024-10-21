@@ -51,6 +51,7 @@ export const replaceWpURL = (url: string) => {
 };
 
 export const fetchPageMetadata = async (id: number) => {
+  console.log('about to call*************');
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_HOST_URL}/api/fetchMetadata?id=${id}`,
     {

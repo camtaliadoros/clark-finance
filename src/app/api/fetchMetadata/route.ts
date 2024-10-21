@@ -1,6 +1,8 @@
 import { NextRequest } from 'next/server';
 
 export async function GET(req: NextRequest) {
+  console.log('calling fetchmetadatra: !!!!!!!');
+
   const encodedCredentials = btoa(`${process.env.WP_CREDENTIALS}`);
   const { searchParams } = new URL(req.url);
   const pageId = searchParams.get('id');
