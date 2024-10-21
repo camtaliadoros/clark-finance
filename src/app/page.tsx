@@ -5,7 +5,7 @@ import { Reviews } from '@/components/home/Reviews';
 import { ServiceCards } from '@/components/home/ServiceCards';
 import { WhyClarkFinance } from '@/components/home/WhyClarkFinance';
 import { ButtonContentFields, GraphItem, YoastHeadJson } from '@/util/models';
-import { fetchPageMetadata, replaceWpURL } from '@/util/utilFunctions';
+import { replaceWpURL } from '@/util/utilFunctions';
 import { Metadata } from 'next/types';
 
 type HomeContent = {
