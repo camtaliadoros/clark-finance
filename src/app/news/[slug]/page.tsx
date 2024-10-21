@@ -27,30 +27,20 @@ type ArticleParams = {
 
 const fetchArticle = async (slug: string) => {
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_HOST_URL}/news/api/fetchArticle?slug=${slug}`,
-    {
-      next: {
-        revalidate: 86400,
-      },
-    }
+    `${process.env.NEXT_PUBLIC_HOST_URL}/news/api/fetchArticle?slug=${slug}`
   );
   if (!res.ok) {
-    throw new Error('Failed to fetch data');
+    throw new Error('Failed to fetch article data');
   }
   return res.json();
 };
 
 const fetchArticleMetadata = async (slug: string) => {
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_HOST_URL}/news/api/fetchArticleMetadata?slug=${slug}`,
-    {
-      next: {
-        revalidate: 86400,
-      },
-    }
+    `${process.env.NEXT_PUBLIC_HOST_URL}/news/api/fetchArticleMetadata?slug=${slug}`
   );
   if (!res.ok) {
-    throw new Error('Failed to fetch data');
+    throw new Error('Failed to fetch article metadata');
   }
   return res.json();
 };
@@ -125,27 +115,59 @@ export async function generateMetadata({
   };
 }
 
-export default async function ArticlePage({
-  params,
-}: {
-  params: ArticleParams;
-}) {
-  const data = await fetchArticle(params.slug);
+export async function getStaticPaths() {
+  // Fetch all article slugs
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_HOST_URL}/news/api/fetchAllArticleSlugs`
+  );
+  const data = await res.json();
 
+  const paths = data.map((article: { slug: string }) => ({
+    params: { slug: article.slug },
+  }));
+
+  return {
+    paths,
+    fallback: 'blocking', // Wait until the new article is built before serving it
+  };
+}
+
+export async function getStaticProps({ params }: { params: ArticleParams }) {
+  const data = await fetchArticle(params.slug);
   const content: ArticleData = data[0];
 
   const image: ImageType = await fetchFeaturedImage(content.acf.featured_image);
-
   const contentBody = convertWysywyg(content.acf.article_body);
 
   const date = new Date(content.date);
-
   const formatedDate = date.toLocaleDateString('en-GB', {
     day: 'numeric',
     month: 'long',
     year: 'numeric',
   });
 
+  return {
+    props: {
+      content,
+      contentBody,
+      image,
+      formatedDate,
+    },
+    revalidate: 86400, // Revalidate every 24 hours
+  };
+}
+
+export default function ArticlePage({
+  content,
+  contentBody,
+  image,
+  formatedDate,
+}: {
+  content: ArticleData;
+  contentBody: string;
+  image: ImageType;
+  formatedDate: string;
+}) {
   if (!content) {
     return (
       <Section
@@ -155,7 +177,7 @@ export default async function ArticlePage({
         <h2 className='text-ash'>This page does not exist</h2>
         <Button
           title='View other case studies'
-          url={'/case-studies'}
+          url='/case-studies'
           colour='mediumblue'
         />
       </Section>
