@@ -17,6 +17,10 @@ export async function GET(req: NextRequest) {
     );
     const data = await response.json();
 
+    console.log('data: !!!!!!!');
+    console.log(data);
+    console.log('data: !!!!!!!');
+
     return Response.json(data);
   } catch (e) {
     throw new Error('There was a problem retrieving the content: ' + e);
