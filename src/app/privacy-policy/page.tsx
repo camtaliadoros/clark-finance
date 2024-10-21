@@ -30,7 +30,7 @@ async function fetchPrivacyPolicyPageContent() {
 }
 
 export async function generateMetadata(): Promise<Metadata> {
-  const res = await fetchPageMetadata(148);
+  const res = await fetchPrivacyPolicyPageContent();
 
   const metadata: YoastHeadJson = res.yoast_head_json;
 

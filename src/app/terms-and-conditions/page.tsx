@@ -14,8 +14,24 @@ type TcsPageContent = {
   content: string;
 };
 
+async function fetchTCsPageContent() {
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_HOST_URL}/terms-and-conditions/api`,
+    {
+      // next: {
+      //   revalidate: 86400,
+      // },
+      cache: 'no-store',
+    }
+  );
+  if (!res.ok) {
+    throw new Error('Failed to fetch data');
+  }
+  return res.json();
+}
+
 export async function generateMetadata(): Promise<Metadata> {
-  const res = await fetchPageMetadata(131);
+  const res = await fetchTCsPageContent();
 
   const metadata: YoastHeadJson = res.yoast_head_json;
 
@@ -78,21 +94,6 @@ export async function generateMetadata(): Promise<Metadata> {
       canonical: canonical,
     },
   };
-}
-
-async function fetchTCsPageContent() {
-  const res = await fetch(
-    `${process.env.NEXT_PUBLIC_HOST_URL}/terms-and-conditions/api`,
-    {
-      next: {
-        revalidate: 86400,
-      },
-    }
-  );
-  if (!res.ok) {
-    throw new Error('Failed to fetch data');
-  }
-  return res.json();
 }
 
 export default async function TermsAndConditions() {

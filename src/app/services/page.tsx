@@ -31,7 +31,7 @@ async function fetchPageContent() {
 }
 
 export async function generateMetadata(): Promise<Metadata> {
-  const res = await fetchPageMetadata(249);
+  const res = await fetchPageContent();
 
   const metadata: YoastHeadJson = res.yoast_head_json;
 

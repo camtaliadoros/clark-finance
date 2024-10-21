@@ -41,9 +41,10 @@ async function fetchDecisionInPrinciplePageContent() {
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_HOST_URL}/decision-in-principle/api`,
     {
-      next: {
-        revalidate: 86400,
-      },
+      // next: {
+      //   revalidate: 86400,
+      // },
+      cache: 'no-store',
     }
   );
   if (!res.ok) {
@@ -53,7 +54,7 @@ async function fetchDecisionInPrinciplePageContent() {
 }
 
 export async function generateMetadata(): Promise<Metadata> {
-  const res = await fetchPageMetadata(154);
+  const res = await fetchDecisionInPrinciplePageContent();
 
   const metadata: YoastHeadJson = res.yoast_head_json;
 

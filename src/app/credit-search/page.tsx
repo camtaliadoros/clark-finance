@@ -20,9 +20,10 @@ async function fetchCreditSearchContent() {
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_HOST_URL}/credit-search/api`,
     {
-      next: {
-        revalidate: 86400,
-      },
+      // next: {
+      //   revalidate: 86400,
+      // },
+      cache: 'no-store',
     }
   );
   if (!res.ok) {
@@ -32,7 +33,7 @@ async function fetchCreditSearchContent() {
 }
 
 export async function generateMetadata(): Promise<Metadata> {
-  const res = await fetchPageMetadata(182);
+  const res = await fetchCreditSearchContent();
 
   const metadata: YoastHeadJson = res.yoast_head_json;
 
