@@ -35,7 +35,7 @@ export async function generateMetadata(): Promise<Metadata> {
 
   const metadata: YoastHeadJson = res.yoast_head_json;
 
-  console.log(metadata);
+  // console.log(metadata);
 
   const title = metadata.title;
   const description = metadata.schema['@graph'].find(

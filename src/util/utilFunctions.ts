@@ -60,7 +60,9 @@ export const fetchPageMetadata = async (id: number) => {
     }
   );
   if (!res.ok) {
+    console.log('*************');
     console.log(JSON.stringify(res));
+    console.log('*************');
     throw new Error('Failed to fetch data');
   }
   return res.json();
