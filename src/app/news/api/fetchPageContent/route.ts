@@ -2,7 +2,7 @@ export async function GET() {
   const encodedCredentials = btoa(`${process.env.WP_CREDENTIALS}`);
 
   const response = await fetch(
-    `${process.env.WP_ROUTE}/pages/229?_fields=acf.page_title,acf.subheading`,
+    `${process.env.WP_ROUTE}/pages/229?_fields=acf.page_title,acf.subheading,yoast_head_json`,
     {
       headers: {
         Authorization: `Basic ${encodedCredentials}`,
