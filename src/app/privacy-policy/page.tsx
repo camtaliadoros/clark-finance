@@ -14,9 +14,10 @@ async function fetchPrivacyPolicyPageContent() {
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_HOST_URL}/privacy-policy/api`,
     {
-      next: {
-        revalidate: 86400,
-      },
+      // next: {
+      //   revalidate: 86400,
+      // },
+      cache: 'no-store',
     }
   );
   if (!res.ok) {
