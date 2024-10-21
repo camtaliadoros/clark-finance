@@ -3,11 +3,7 @@
 import { ContactUs } from '@/components/home/ContactUs';
 import { Section } from '@/components/shared/Section';
 import { GraphItem, YoastHeadJson } from '@/util/models';
-import {
-  convertWysywyg,
-  fetchPageMetadata,
-  replaceWpURL,
-} from '@/util/utilFunctions';
+import { convertWysywyg, replaceWpURL } from '@/util/utilFunctions';
 import { Metadata } from 'next';
 
 type ContactUsPageContent = {

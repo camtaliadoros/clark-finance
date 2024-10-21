@@ -5,7 +5,7 @@ import { PhoneNumberWithIcon } from '@/components/shared/PhoneNumberWithIcon';
 import { Section } from '@/components/shared/Section';
 import { SectionTitle } from '@/components/shared/SectionTitle';
 import { ButtonContentFields, GraphItem, YoastHeadJson } from '@/util/models';
-import { fetchPageMetadata, replaceWpURL } from '@/util/utilFunctions';
+import { replaceWpURL } from '@/util/utilFunctions';
 import { Metadata } from 'next';
 
 type DecisionInPrincipleContent = {

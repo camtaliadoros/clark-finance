@@ -2,11 +2,7 @@ import { Button } from '@/components/shared/Button';
 import { Section } from '@/components/shared/Section';
 import { SectionTitle } from '@/components/shared/SectionTitle';
 import { ButtonContentFields, GraphItem, YoastHeadJson } from '@/util/models';
-import {
-  convertWysywyg,
-  fetchPageMetadata,
-  replaceWpURL,
-} from '@/util/utilFunctions';
+import { convertWysywyg, replaceWpURL } from '@/util/utilFunctions';
 import { Metadata } from 'next';
 
 type CreditSearchContent = {

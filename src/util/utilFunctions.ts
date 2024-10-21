@@ -49,22 +49,3 @@ export const replaceWpURL = (url: string) => {
     `${process.env.NEXT_PUBLIC_HOST_URL}`
   );
 };
-
-export const fetchPageMetadata = async (id: number) => {
-  console.log('about to call*************');
-  const res = await fetch(
-    `${process.env.NEXT_PUBLIC_HOST_URL}/api/fetchMetadata?id=${id}`,
-    {
-      next: {
-        revalidate: 86400,
-      },
-    }
-  );
-  if (!res.ok) {
-    console.log('*************');
-    console.log(JSON.stringify(res));
-    console.log('*************');
-    throw new Error('Failed to fetch data');
-  }
-  return res.json();
-};

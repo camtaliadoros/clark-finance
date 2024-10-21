@@ -11,7 +11,6 @@ import {
 import {
   convertWysywyg,
   fetchFeaturedImage,
-  fetchPageMetadata,
   replaceWpURL,
 } from '@/util/utilFunctions';
 import { Metadata } from 'next';

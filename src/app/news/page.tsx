@@ -1,10 +1,9 @@
 import { ContactUs } from '@/components/home/ContactUs';
 import { ArticleListing } from '@/components/shared/ArticleListing';
-import { Pagination } from '@/components/shared/Pagination';
 import { Section } from '@/components/shared/Section';
 import { SectionTitle } from '@/components/shared/SectionTitle';
-import { ArticleContentType, GraphItem, YoastHeadJson } from '@/util/models';
-import { fetchPageMetadata, replaceWpURL } from '@/util/utilFunctions';
+import { GraphItem, YoastHeadJson } from '@/util/models';
+import { replaceWpURL } from '@/util/utilFunctions';
 import { Metadata } from 'next';
 
 type PageContent = {
