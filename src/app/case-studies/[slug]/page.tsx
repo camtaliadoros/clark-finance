@@ -120,6 +120,26 @@ export async function generateMetadata({
   };
 }
 
+export async function generateStaticParams() {
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_HOST_URL}/case-studies/api/fetchAllCaseStudiesSlugs`,
+    {
+      // next: { revalidate: 86400 },
+      cache: 'no-store',
+    }
+  );
+
+  if (!res.ok) {
+    throw new Error(`Failed to fetch slugs, received status: ${res.status}`);
+  }
+
+  const data = await res.json();
+
+  return data.map((article: { slug: string }) => ({
+    slug: article.slug,
+  }));
+}
+
 export default async function CaseStudyDetailPage({
   params,
 }: {
