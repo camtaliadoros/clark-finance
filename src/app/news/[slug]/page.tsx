@@ -56,29 +56,29 @@ const fetchArticleMetadata = async (slug: string) => {
   return res.json();
 };
 
-export async function generateStaticParams() {
-  const encodedCredentials = btoa(`${process.env.WP_CREDENTIALS}`);
+// export async function generateStaticParams() {
+//   const encodedCredentials = btoa(`${process.env.WP_CREDENTIALS}`);
 
-  try {
-    const response = await fetch(
-      `${process.env.WP_ROUTE}/article?_fields=slug`,
-      {
-        headers: {
-          Authorization: `Basic ${encodedCredentials}`,
-          'Content-Type': 'application/json',
-        },
-      }
-    );
+//   try {
+//     const response = await fetch(
+//       `${process.env.WP_ROUTE}/article?_fields=slug`,
+//       {
+//         headers: {
+//           Authorization: `Basic ${encodedCredentials}`,
+//           'Content-Type': 'application/json',
+//         },
+//       }
+//     );
 
-    const data = await response.json();
+//     const data = await response.json();
 
-    return data.map((article: { slug: string }) => ({
-      slug: article.slug,
-    }));
-  } catch (e) {
-    console.log(e);
-  }
-}
+//     return data.map((article: { slug: string }) => ({
+//       slug: article.slug,
+//     }));
+//   } catch (e) {
+//     console.log(e);
+//   }
+// }
 
 export async function generateMetadata({
   params,

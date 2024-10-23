@@ -134,29 +134,29 @@ export async function generateMetadata({
   };
 }
 
-export async function generateStaticParams() {
-  const encodedCredentials = btoa(`${process.env.WP_CREDENTIALS}`);
+// export async function generateStaticParams() {
+//   const encodedCredentials = btoa(`${process.env.WP_CREDENTIALS}`);
 
-  try {
-    const response = await fetch(
-      `${process.env.WP_ROUTE}/pages?parent=249&_fields=slug`,
-      {
-        headers: {
-          Authorization: `Basic ${encodedCredentials}`,
-          'Content-Type': 'application/json',
-        },
-      }
-    );
+//   try {
+//     const response = await fetch(
+//       `${process.env.WP_ROUTE}/pages?parent=249&_fields=slug`,
+//       {
+//         headers: {
+//           Authorization: `Basic ${encodedCredentials}`,
+//           'Content-Type': 'application/json',
+//         },
+//       }
+//     );
 
-    const data = await response.json();
+//     const data = await response.json();
 
-    return data.map((article: { slug: string }) => ({
-      slug: article.slug,
-    }));
-  } catch (e) {
-    throw new Error('There was a problem retrieving the content: ' + e);
-  }
-}
+//     return data.map((article: { slug: string }) => ({
+//       slug: article.slug,
+//     }));
+//   } catch (e) {
+//     throw new Error('There was a problem retrieving the content: ' + e);
+//   }
+// }
 
 export default async function Service({ params }: PageProps) {
   const data = await fetchPageContent(params.slug);
