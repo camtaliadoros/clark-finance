@@ -1,14 +1,15 @@
+import { Footer } from '@/components/Footer';
+import { Header } from '@/components/Header';
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
-import './globals.css';
-import { Header } from '@/components/Header';
-import { Footer } from '@/components/Footer';
 import MenuDrawerContextProvider from '../contexts/MenuContextProvider';
+import './globals.css';
 
-import { ReCaptchaProvider } from 'next-recaptcha-v3';
-import { MenuDrawer } from '../components/MenuDrawer';
-import { Suspense } from 'react';
 import { NavigationEvents } from '@/components/NavigationEvents';
+import { Suspense } from 'react';
+import { GoogleReCaptchaProvider } from 'react-google-recaptcha-v3';
+import { MenuDrawer } from '../components/MenuDrawer';
+import React, { createContext } from 'react';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -26,24 +27,22 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <MenuDrawerContextProvider>
-      <ReCaptchaProvider reCaptchaKey={process.env.NEXT_PUBLIC_RECAPTCHA_KEY}>
-        <html lang='en' className='overflow-x-hidden'>
-          <body
-            className={`${inter.className} flex flex-col w-screen h-dvh overflow-hidden`}
-          >
-            <Header />
-            <MenuDrawer />
-            <div className='overflow-y-auto'>
-              <main className='bg-chalk relative '>{children}</main>
-              <Footer />
-            </div>
-            <Suspense fallback={null}>
-              <NavigationEvents />
-            </Suspense>
-          </body>
-        </html>
-      </ReCaptchaProvider>
-    </MenuDrawerContextProvider>
+    <html lang='en' className='overflow-x-hidden'>
+      <body
+        className={`${inter.className} flex flex-col w-screen h-dvh overflow-hidden`}
+      >
+        <MenuDrawerContextProvider>
+          <Header />
+          <MenuDrawer />
+          <div className='overflow-y-auto'>
+            <main className='bg-chalk relative '>{children}</main>
+            <Footer />
+          </div>
+          <Suspense fallback={null}>
+            <NavigationEvents />
+          </Suspense>
+        </MenuDrawerContextProvider>
+      </body>
+    </html>
   );
 }

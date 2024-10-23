@@ -1,6 +1,10 @@
 'use client';
 
-import { useReCaptcha } from 'next-recaptcha-v3';
+import { useState } from 'react';
+import {
+  GoogleReCaptchaProvider,
+  useGoogleReCaptcha,
+} from 'react-google-recaptcha-v3';
 import { SubmitHandler, useForm } from 'react-hook-form';
 
 type FormValues = {
@@ -26,8 +30,9 @@ export const ContactForm = () => {
     handleSubmit,
     formState: { errors },
   } = useForm<FormValues>();
+  const [error, setError] = useState('');
 
-  const { executeRecaptcha } = useReCaptcha();
+  const { executeRecaptcha } = useGoogleReCaptcha();
 
   const inputFields: InputField[] = [
     {
@@ -64,8 +69,12 @@ export const ContactForm = () => {
   const onSubmit: SubmitHandler<FormValues> = async (data, e) => {
     e?.preventDefault();
 
-    //review
-    const token = await executeRecaptcha('form_submit');
+    if (!executeRecaptcha) {
+      console.log('Recaptcha not available');
+      return;
+    }
+
+    const token = await executeRecaptcha('submit_form');
 
     const response = await fetch(
       `${process.env.NEXT_PUBLIC_HOST_URL}/contact-us/api/create-lead`,
@@ -74,15 +83,23 @@ export const ContactForm = () => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(data),
+        body: JSON.stringify({ ...data, token }),
       }
     );
 
+    // review
     const resJson = await response.json();
     if (resJson.error) {
-      alert('Error: ' + resJson.error);
+      setError('Something went wrong, please try again!');
     } else {
       alert('Lead created successfully!');
+      setError('');
+    }
+
+    if (response.ok) {
+      alert('Form submitted successfully');
+    } else {
+      alert('Failed to submit form');
     }
   };
 
@@ -110,6 +127,7 @@ export const ContactForm = () => {
         <button className='bg-mediumblue text-sm text-chalk hover:opacity-80 transition py-3 '>
           Submit
         </button>
+        {error && <p className='font-semibold text-sm text-red'>{error}</p>}
       </fieldset>
     </form>
   );
