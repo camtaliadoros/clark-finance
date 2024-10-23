@@ -121,23 +121,27 @@ export async function generateMetadata({
 }
 
 export async function generateStaticParams() {
-  const res = await fetch(
-    `${process.env.NEXT_PUBLIC_HOST_URL}/case-studies/api/fetchAllCaseStudiesSlugs`,
-    {
-      // next: { revalidate: 86400 },
-      cache: 'no-store',
-    }
-  );
+  const encodedCredentials = btoa(`${process.env.WP_CREDENTIALS}`);
 
-  if (!res.ok) {
-    throw new Error(`Failed to fetch slugs, received status: ${res.status}`);
+  try {
+    const response = await fetch(
+      `${process.env.WP_ROUTE}/case-study?_fields=slug`,
+      {
+        headers: {
+          Authorization: `Basic ${encodedCredentials}`,
+          'Content-Type': 'application/json',
+        },
+      }
+    );
+
+    const data = await response.json();
+
+    return data.map((article: { slug: string }) => ({
+      slug: article.slug,
+    }));
+  } catch (e) {
+    throw new Error('There was a problem retrieving the content: ' + e);
   }
-
-  const data = await res.json();
-
-  return data.map((article: { slug: string }) => ({
-    slug: article.slug,
-  }));
 }
 
 export default async function CaseStudyDetailPage({

@@ -57,23 +57,27 @@ const fetchArticleMetadata = async (slug: string) => {
 };
 
 export async function generateStaticParams() {
-  const res = await fetch(
-    `${process.env.NEXT_PUBLIC_HOST_URL}/news/api/fetchAllArticlesSlugs`,
-    {
-      // next: { revalidate: 86400 },
-      cache: 'no-store',
-    }
-  );
+  const encodedCredentials = btoa(`${process.env.WP_CREDENTIALS}`);
 
-  if (!res.ok) {
-    throw new Error(`Failed to fetch slugs, received status: ${res.status}`);
+  try {
+    const response = await fetch(
+      `${process.env.WP_ROUTE}/article?_fields=slug`,
+      {
+        headers: {
+          Authorization: `Basic ${encodedCredentials}`,
+          'Content-Type': 'application/json',
+        },
+      }
+    );
+
+    const data = await response.json();
+
+    return data.map((article: { slug: string }) => ({
+      slug: article.slug,
+    }));
+  } catch (e) {
+    console.log(e);
   }
-
-  const data = await res.json();
-
-  return data.map((article: { slug: string }) => ({
-    slug: article.slug,
-  }));
 }
 
 export async function generateMetadata({
