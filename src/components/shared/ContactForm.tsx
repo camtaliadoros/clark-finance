@@ -91,14 +91,12 @@ export const ContactForm = () => {
 
     // review
     const resJson = await response.json();
+
     if (resJson.error) {
-      alert('Error: ' + resJson.error);
       setLoading(false);
       setSuccessMessage('');
       setError('Something went wrong, please try again!');
     } else {
-      alert('Lead created successfully!');
-      console.log('submitted');
       setError('');
       setSuccessMessage(
         "Thank you for getting in touch, we'll be in touch shortly!"

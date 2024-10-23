@@ -6,10 +6,8 @@ import MenuDrawerContextProvider from '../contexts/MenuContextProvider';
 import './globals.css';
 
 import { NavigationEvents } from '@/components/NavigationEvents';
-import { Suspense } from 'react';
-import { GoogleReCaptchaProvider } from 'react-google-recaptcha-v3';
+import React, { Suspense } from 'react';
 import { MenuDrawer } from '../components/MenuDrawer';
-import React, { createContext } from 'react';
 
 const inter = Inter({ subsets: ['latin'] });
 
