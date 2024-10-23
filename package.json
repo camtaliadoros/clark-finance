@@ -21,6 +21,7 @@
     "react-dom": "^18",
     "react-google-recaptcha-v3": "^1.10.1",
     "react-hook-form": "^7.52.2",
+    "react-spinners": "^0.14.1",
     "sanitize-html": "^2.13.0",
     "swiper": "^11.1.14"
   },

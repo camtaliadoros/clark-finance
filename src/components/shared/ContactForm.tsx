@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { useGoogleReCaptcha } from 'react-google-recaptcha-v3';
 import { SubmitHandler, useForm } from 'react-hook-form';
+import ClipLoader from 'react-spinners/ClipLoader';
 
 type FormValues = {
   firstName: string;
@@ -29,6 +30,7 @@ export const ContactForm = () => {
   } = useForm<FormValues>();
   const [error, setError] = useState('');
   const [successMessage, setSuccessMessage] = useState('');
+  const [loading, setLoading] = useState(false);
 
   const { executeRecaptcha } = useGoogleReCaptcha();
 
@@ -67,6 +69,8 @@ export const ContactForm = () => {
   const onSubmit: SubmitHandler<FormValues> = async (data, e) => {
     e?.preventDefault();
 
+    setLoading(true);
+
     if (!executeRecaptcha) {
       console.log('Recaptcha not available');
       return;
@@ -89,14 +93,17 @@ export const ContactForm = () => {
     const resJson = await response.json();
     if (resJson.error) {
       alert('Error: ' + resJson.error);
+      setLoading(false);
       setSuccessMessage('');
       setError('Something went wrong, please try again!');
     } else {
       alert('Lead created successfully!');
+      console.log('submitted');
       setError('');
       setSuccessMessage(
         "Thank you for getting in touch, we'll be in touch shortly!"
       );
+      setLoading(false);
     }
   };
 
@@ -121,8 +128,11 @@ export const ContactForm = () => {
           </div>
         ))}
 
-        <button className='bg-mediumblue text-sm text-chalk hover:opacity-80 transition py-3 '>
-          Submit
+        <button
+          className='bg-mediumblue text-sm text-chalk hover:opacity-80 transition py-3 disabled:bg-mediumgrey'
+          disabled={loading}
+        >
+          {loading ? <ClipLoader color='#F8F9FA' size={15} /> : 'Submit'}
         </button>
         {successMessage && (
           <p className='font-semibold text-sm text-green'>{successMessage}</p>
