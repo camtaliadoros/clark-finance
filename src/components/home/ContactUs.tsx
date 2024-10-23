@@ -1,5 +1,5 @@
 import { Button } from '../shared/Button';
-import { ContactForm } from '../shared/ContactForm';
+import { ContactUsFormWrapper } from '../shared/ContactUsFormWrapper';
 import { EmailWithIcon } from '../shared/EmailWithIcon';
 import { PhoneNumberWithIcon } from '../shared/PhoneNumberWithIcon';
 import { Section } from '../shared/Section';
@@ -58,7 +58,7 @@ export const ContactUs = async ({ colourScheme }: ContactUsProps) => {
         id='contact-us'
         className='flex flex-col md:grid md:grid-cols-2 items-start space-y-12 md:space-y-0 gap-12'
       >
-        <ContactForm />
+        <ContactUsFormWrapper />
         <div className='flex flex-col items-start gap-6 '>
           <Button
             title={content.book_appointment_label.title}

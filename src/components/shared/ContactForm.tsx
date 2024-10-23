@@ -1,6 +1,6 @@
 'use client';
-
-import { useReCaptcha } from 'next-recaptcha-v3';
+import { useState } from 'react';
+import { useGoogleReCaptcha } from 'react-google-recaptcha-v3';
 import { SubmitHandler, useForm } from 'react-hook-form';
 
 type FormValues = {
@@ -27,7 +27,10 @@ export const ContactForm = () => {
     formState: { errors },
   } = useForm<FormValues>();
 
-  const { executeRecaptcha } = useReCaptcha();
+  const [error, setError] = useState('');
+  const [successMessage, setSuccessMessage] = useState('');
+
+  const { executeRecaptcha } = useGoogleReCaptcha();
 
   const inputFields: InputField[] = [
     {
@@ -64,8 +67,13 @@ export const ContactForm = () => {
   const onSubmit: SubmitHandler<FormValues> = async (data, e) => {
     e?.preventDefault();
 
+    if (!executeRecaptcha) {
+      console.log('Recaptcha not available');
+      return;
+    }
+
     //review
-    const token = await executeRecaptcha('form_submit');
+    const token = await executeRecaptcha('submit_form');
 
     const response = await fetch(
       `${process.env.NEXT_PUBLIC_HOST_URL}/contact-us/api/create-lead`,
@@ -74,15 +82,21 @@ export const ContactForm = () => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(data),
+        body: JSON.stringify({ ...data, token }),
       }
     );
 
     const resJson = await response.json();
     if (resJson.error) {
       alert('Error: ' + resJson.error);
+      setSuccessMessage('');
+      setError('Something went wrong, please try again!');
     } else {
       alert('Lead created successfully!');
+      setError('');
+      setSuccessMessage(
+        "Thank you for getting in touch, we'll be in touch shortly!"
+      );
     }
   };
 
@@ -110,6 +124,10 @@ export const ContactForm = () => {
         <button className='bg-mediumblue text-sm text-chalk hover:opacity-80 transition py-3 '>
           Submit
         </button>
+        {error && <p className='text-sm font-semibold text-red'>{error}</p>}
+        {successMessage && (
+          <p className='text-sm font-semibold text-green'>{successMessage}</p>
+        )}
       </fieldset>
     </form>
   );
