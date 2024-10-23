@@ -31,6 +31,7 @@ export const ContactForm = () => {
     formState: { errors },
   } = useForm<FormValues>();
   const [error, setError] = useState('');
+  const [successMessage, setSuccessMessage] = useState('');
 
   const { executeRecaptcha } = useGoogleReCaptcha();
 
@@ -91,15 +92,12 @@ export const ContactForm = () => {
     const resJson = await response.json();
     if (resJson.error) {
       setError('Something went wrong, please try again!');
+      setSuccessMessage('');
     } else {
-      alert('Lead created successfully!');
       setError('');
-    }
-
-    if (response.ok) {
-      alert('Form submitted successfully');
-    } else {
-      alert('Failed to submit form');
+      setSuccessMessage(
+        "Thank you for your message, we'll be in touch shortly"
+      );
     }
   };
 
@@ -127,6 +125,9 @@ export const ContactForm = () => {
         <button className='bg-mediumblue text-sm text-chalk hover:opacity-80 transition py-3 '>
           Submit
         </button>
+        {successMessage && (
+          <p className='font-semibold text-sm text-green'>{successMessage}</p>
+        )}
         {error && <p className='font-semibold text-sm text-red'>{error}</p>}
       </fieldset>
     </form>
