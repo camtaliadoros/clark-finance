@@ -1,6 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { promises as fs } from 'fs';
-import { error } from 'console';
 
 export async function POST(req: NextRequest) {
   const { firstName, lastName, email, phoneNumber, message, token } =
