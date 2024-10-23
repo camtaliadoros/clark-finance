@@ -56,7 +56,6 @@ const fetchArticleMetadata = async (slug: string) => {
   return res.json();
 };
 
-// `generateStaticParams` is used for generating static paths in the new app directory
 export async function generateStaticParams() {
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_HOST_URL}/news/api/fetchAllArticlesSlugs`,
