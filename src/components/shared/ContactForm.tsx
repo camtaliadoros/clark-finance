@@ -1,6 +1,15 @@
 'use client';
+<<<<<<< HEAD
 import { useState } from 'react';
 import { useGoogleReCaptcha } from 'react-google-recaptcha-v3';
+=======
+
+import { useState } from 'react';
+import {
+  GoogleReCaptchaProvider,
+  useGoogleReCaptcha,
+} from 'react-google-recaptcha-v3';
+>>>>>>> 1eebb576b5acf80327f3cf4e3ebb2de6c06607d8
 import { SubmitHandler, useForm } from 'react-hook-form';
 
 type FormValues = {
@@ -26,10 +35,15 @@ export const ContactForm = () => {
     handleSubmit,
     formState: { errors },
   } = useForm<FormValues>();
-
   const [error, setError] = useState('');
   const [successMessage, setSuccessMessage] = useState('');
 
+<<<<<<< HEAD
+  const [error, setError] = useState('');
+  const [successMessage, setSuccessMessage] = useState('');
+
+=======
+>>>>>>> 1eebb576b5acf80327f3cf4e3ebb2de6c06607d8
   const { executeRecaptcha } = useGoogleReCaptcha();
 
   const inputFields: InputField[] = [
@@ -72,7 +86,10 @@ export const ContactForm = () => {
       return;
     }
 
+<<<<<<< HEAD
     //review
+=======
+>>>>>>> 1eebb576b5acf80327f3cf4e3ebb2de6c06607d8
     const token = await executeRecaptcha('submit_form');
 
     const response = await fetch(
@@ -86,8 +103,10 @@ export const ContactForm = () => {
       }
     );
 
+    // review
     const resJson = await response.json();
     if (resJson.error) {
+<<<<<<< HEAD
       alert('Error: ' + resJson.error);
       setSuccessMessage('');
       setError('Something went wrong, please try again!');
@@ -96,6 +115,14 @@ export const ContactForm = () => {
       setError('');
       setSuccessMessage(
         "Thank you for getting in touch, we'll be in touch shortly!"
+=======
+      setError('Something went wrong, please try again!');
+      setSuccessMessage('');
+    } else {
+      setError('');
+      setSuccessMessage(
+        "Thank you for your message, we'll be in touch shortly"
+>>>>>>> 1eebb576b5acf80327f3cf4e3ebb2de6c06607d8
       );
     }
   };
@@ -124,10 +151,17 @@ export const ContactForm = () => {
         <button className='bg-mediumblue text-sm text-chalk hover:opacity-80 transition py-3 '>
           Submit
         </button>
+<<<<<<< HEAD
         {error && <p className='text-sm font-semibold text-red'>{error}</p>}
         {successMessage && (
           <p className='text-sm font-semibold text-green'>{successMessage}</p>
         )}
+=======
+        {successMessage && (
+          <p className='font-semibold text-sm text-green'>{successMessage}</p>
+        )}
+        {error && <p className='font-semibold text-sm text-red'>{error}</p>}
+>>>>>>> 1eebb576b5acf80327f3cf4e3ebb2de6c06607d8
       </fieldset>
     </form>
   );
