@@ -26,7 +26,13 @@ type ArticleParams = {
 
 const fetchArticle = async (slug: string) => {
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_HOST_URL}/news/api/fetchArticle?slug=${slug}`
+    `${process.env.NEXT_PUBLIC_HOST_URL}/news/api/fetchArticle?slug=${slug}`,
+    {
+      // next: {
+      //   revalidate: 86400,
+      // },
+      cache: 'no-store',
+    }
   );
   if (!res.ok) {
     throw new Error('Failed to fetch article data');
@@ -36,7 +42,13 @@ const fetchArticle = async (slug: string) => {
 
 const fetchArticleMetadata = async (slug: string) => {
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_HOST_URL}/news/api/fetchArticleMetadata?slug=${slug}`
+    `${process.env.NEXT_PUBLIC_HOST_URL}/news/api/fetchArticleMetadata?slug=${slug}`,
+    {
+      // next: {
+      //   revalidate: 86400,
+      // },
+      cache: 'no-store',
+    }
   );
   if (!res.ok) {
     throw new Error('Failed to fetch article metadata');
@@ -47,8 +59,13 @@ const fetchArticleMetadata = async (slug: string) => {
 // `generateStaticParams` is used for generating static paths in the new app directory
 export async function generateStaticParams() {
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_HOST_URL}/news/api/fetchAllArticleSlugs`
+    `${process.env.NEXT_PUBLIC_HOST_URL}/news/api/fetchAllArticlesSlugs`
   );
+
+  if (!res.ok) {
+    throw new Error(`Failed to fetch slugs, received status: ${res.status}`);
+  }
+
   const data = await res.json();
 
   return data.map((article: { slug: string }) => ({
@@ -56,7 +73,6 @@ export async function generateStaticParams() {
   }));
 }
 
-// This function replaces getStaticProps and fetches data directly in the component
 export async function generateMetadata({
   params,
 }: {
@@ -137,9 +153,13 @@ export default async function ArticlePage({
   const { slug } = params;
 
   const data = await fetchArticle(slug);
+
   const content: ArticleData = data[0];
 
-  const image: ImageType = await fetchFeaturedImage(content.acf.featured_image);
+  const image: ImageType = content.acf.featured_image
+    ? await fetchFeaturedImage(content.acf.featured_image)
+    : null;
+
   const contentBody = convertWysywyg(content.acf.article_body);
 
   const date = new Date(content.date);

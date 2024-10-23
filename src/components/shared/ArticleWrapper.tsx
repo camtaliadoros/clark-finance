@@ -3,7 +3,7 @@ import { Section } from './Section';
 
 type ArticleWrapperProps = {
   children: React.ReactNode;
-  imageUrl: string;
+  imageUrl: string | null;
   title: string;
   pageLinkCard1: 'services' | 'contactUs' | 'caseStudies' | 'insights';
   pageLinkCard2: 'services' | 'contactUs' | 'caseStudies' | 'insights';
@@ -21,7 +21,7 @@ export const ArticleWrapper = ({
       <div
         className=' relative flex justify-center items-center bg-cover bg-fixed bg-center'
         style={{
-          backgroundImage: `url(${imageUrl})`,
+          backgroundImage: imageUrl ? `url(${imageUrl})` : 'null',
         }}
       >
         <div className='absolute inset-0 bg-navy opacity-50'></div>
