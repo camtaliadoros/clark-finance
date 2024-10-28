@@ -298,7 +298,7 @@ export default async function Service({ params }: PageProps) {
         )}
 
         {content.benefits_block_is_available && (
-          <div className='bg-chequered-bg bg-cover  bg-bottom grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 justify-center gap-12 px-44 py-24'>
+          <div className='bg-chequered-bg bg-cover  bg-bottom grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 justify-center gap-12 px-4 md:px-44 pb-24'>
             {benefitsArr.map((content, i) => (
               <BenefitCard content={content} key={i} colourScheme='light' />
             ))}
@@ -306,7 +306,7 @@ export default async function Service({ params }: PageProps) {
         )}
 
         {textBlock1 && (
-          <div className='bg-lightgrey1 w-screen flex justify-center py-16'>
+          <div className='bg-lightgrey1 w-screen flex justify-center pb-16 p-8'>
             <div
               className='text-ash lg:w-1/2 lg:text-left'
               dangerouslySetInnerHTML={{ __html: textBlock1 }}
@@ -323,9 +323,9 @@ export default async function Service({ params }: PageProps) {
           />
         )}
         {textBlock2 && (
-          <div className='bg-building-detail-2 bg-cover bg-fixed w-screen flex justify-center py-16'>
+          <div className='bg-building-detail-2 bg-cover bg-fixed w-screen flex justify-center pb-16'>
             <div
-              className='text-chalk lg:w-1/2 lg:text-left [&>*]:text-chalk [&>p]:mb-4'
+              className='text-chalk lg:w-1/2 lg:text-left [&>*]:text-chalk [&>p]:mb-4 p-8'
               dangerouslySetInnerHTML={{ __html: textBlock2 }}
             />
           </div>
