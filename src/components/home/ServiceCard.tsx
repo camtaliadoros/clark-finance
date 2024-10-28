@@ -22,7 +22,7 @@ export const ServiceCard = ({
       prefetch={true}
     >
       <div className='bg-lightgrey1 relative px-4 py-6 h-full space-y-4 rounded-br-[120px] z-10 transition-all group-hover:bg-lightgrey2 group-hover:rounded-br-[140px] '>
-        <h2 className='font-semibold text-lg 2xl:text-2xl h-1/3 w-4/5 leading-tight '>
+        <h2 className='font-semibold text-lg 2xl:text-xl 2xl:h-2/5 2xl:leading-none h-1/3 w-4/5 leading-tight '>
           {title}
         </h2>
         <hr
@@ -39,7 +39,7 @@ export const ServiceCard = ({
             }[order]
           } `}
         />
-        <p className='w-2/3 font-light'>{excerpt}</p>
+        <p className='w-2/3 font-light 2xl:text-base '>{excerpt}</p>
       </div>
       <div
         className={`absolute top-0 left-0 ${
