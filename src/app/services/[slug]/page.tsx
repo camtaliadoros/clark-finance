@@ -287,7 +287,7 @@ export default async function Service({ params }: PageProps) {
           </Link>
         )}
       </div>
-      <Section classes='flex flex-col items-center' type='wide'>
+      <div className='flex flex-col items-center py-0'>
         {content.image_text_block_1_image && (
           <ImageTextBlock
             image={content.image_text_block_1_image}
@@ -298,7 +298,7 @@ export default async function Service({ params }: PageProps) {
         )}
 
         {content.benefits_block_is_available && (
-          <div className='bg-chequered-bg bg-cover  bg-bottom flex flex-wrap justify-center gap-12 pb-24 p-1 md:p-0'>
+          <div className='bg-chequered-bg bg-cover  bg-bottom grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 justify-center gap-12 px-44 py-24'>
             {benefitsArr.map((content, i) => (
               <BenefitCard content={content} key={i} colourScheme='light' />
             ))}
@@ -339,7 +339,7 @@ export default async function Service({ params }: PageProps) {
             background={true}
           />
         )}
-      </Section>
+      </div>
 
       {content.q1 && <QAWrapper pageContent={content} />}
       {lendersContent && (
