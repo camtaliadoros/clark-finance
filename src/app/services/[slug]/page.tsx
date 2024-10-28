@@ -36,9 +36,10 @@ const fetchPageContent = async (slug: string) => {
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_HOST_URL}/services/api/fetchServicePageContent?slug=${slug}`,
     {
-      next: {
-        revalidate: 86400,
-      },
+      // next: {
+      //   revalidate: 86400,
+      // },
+      cache: 'no-store',
     }
   );
 
@@ -286,13 +287,13 @@ export default async function Service({ params }: PageProps) {
           </Link>
         )}
       </div>
-      <Section classes='flex flex-col items-center gap-24' type='wide'>
+      <Section classes='flex flex-col items-center' type='wide'>
         {content.image_text_block_1_image && (
           <ImageTextBlock
             image={content.image_text_block_1_image}
             title={content.image_text_block_1_title}
             text={content.image_text_block_1_content}
-            position={content.image_text_block_1_image_position}
+            position='Left'
           />
         )}
 
@@ -305,31 +306,37 @@ export default async function Service({ params }: PageProps) {
         )}
 
         {textBlock1 && (
-          <div
-            className='text-ash lg:w-1/2 lg:text-left'
-            dangerouslySetInnerHTML={{ __html: textBlock1 }}
-          />
+          <div className='bg-lightgrey1 w-screen flex justify-center py-16'>
+            <div
+              className='text-ash lg:w-1/2 lg:text-left'
+              dangerouslySetInnerHTML={{ __html: textBlock1 }}
+            />
+          </div>
         )}
         {content.image_text_block_2_content && (
           <ImageTextBlock
             image={content.image_text_block_2_image}
             title={content.image_text_block_2_title}
             text={content.image_text_block_2_content}
-            position={content.image_text_block_2_image_position}
+            position='Right'
+            background={true}
           />
         )}
         {textBlock2 && (
-          <div
-            className='text-ash lg:w-1/2 lg:text-left'
-            dangerouslySetInnerHTML={{ __html: textBlock2 }}
-          />
+          <div className='bg-building-detail-2 bg-cover bg-fixed w-screen flex justify-center py-16'>
+            <div
+              className='text-chalk lg:w-1/2 lg:text-left [&>*]:text-chalk [&>p]:mb-4'
+              dangerouslySetInnerHTML={{ __html: textBlock2 }}
+            />
+          </div>
         )}
         {content.image_text_block_3_image && (
           <ImageTextBlock
             image={content.image_text_block_3_image}
             title={content.image_text_block_3_title}
             text={content.image_text_block_3_content}
-            position={content.image_text_block_3_image_position}
+            position='Left'
+            background={true}
           />
         )}
       </Section>
