@@ -26,8 +26,8 @@ export const ImageTextBlock = async ({
       {background && (
         <Image
           src='/images/lines.png'
-          width={800}
-          height={800}
+          width={400}
+          height={400}
           alt=''
           className={`absolute max-w-fit max-h-fit z-0  opacity-20 md:opacity-50 ${
             position === 'Right'
