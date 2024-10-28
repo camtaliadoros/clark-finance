@@ -306,7 +306,7 @@ export default async function Service({ params }: PageProps) {
         )}
 
         {textBlock1 && (
-          <div className='bg-lightgrey1 w-screen flex justify-center pb-16 p-8'>
+          <div className='bg-lightgrey1 w-screen flex justify-center pb-16 p-8 relative z-10'>
             <div
               className='text-ash lg:w-1/2 lg:text-left'
               dangerouslySetInnerHTML={{ __html: textBlock1 }}
@@ -323,9 +323,9 @@ export default async function Service({ params }: PageProps) {
           />
         )}
         {textBlock2 && (
-          <div className='bg-building-detail-2 bg-cover bg-fixed w-screen flex justify-center pb-16'>
+          <div className='relative z-10 bg-building-detail-2 bg-cover bg-fixed w-screen flex justify-center pb-16'>
             <div
-              className='text-chalk lg:w-1/2 lg:text-left [&>*]:text-chalk [&>p]:mb-4 p-8'
+              className='text-chalk lg:w-1/2 lg:text-left [&>*]:text-chalk [&>p]:mb-8 p-8 relative z-10'
               dangerouslySetInnerHTML={{ __html: textBlock2 }}
             />
           </div>

@@ -31,8 +31,8 @@ export const ImageTextBlock = async ({
           alt=''
           className={`absolute max-w-fit max-h-fit z-0  opacity-20 md:opacity-50 ${
             position === 'Right'
-              ? '-rotate-90 right-0 bottom-0'
-              : 'top-0 rotate-90'
+              ? '-rotate-90 right-0 -bottom-5'
+              : '-top-5 rotate-90'
           }`}
         />
       )}
