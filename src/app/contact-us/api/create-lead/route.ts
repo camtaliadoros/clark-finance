@@ -62,6 +62,8 @@ export async function POST(req: NextRequest) {
             Last_Name: lastName,
             Email: email,
             Phone: phoneNumber,
+            Description: message,
+            Lead_Source: 'Website Form',
           },
         ],
       };
