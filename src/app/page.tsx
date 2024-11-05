@@ -122,7 +122,7 @@ export default async function Home() {
         bodyContent={content.about_us_content}
         aboutUsButton={content.about_us_cta}
       />
-      <CaseStudiesSection bgColour='light' />
+      {/* <CaseStudiesSection bgColour='light' /> */}
       <Reviews />
     </>
   );
