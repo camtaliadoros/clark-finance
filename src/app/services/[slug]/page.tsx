@@ -325,7 +325,7 @@ export default async function Service({ params }: PageProps) {
         {textBlock2 && (
           <div className='relative z-10 bg-building-detail-2 bg-cover bg-fixed w-screen flex justify-center pb-16'>
             <div
-              className='text-chalk lg:w-1/2 lg:text-left [&>*]:text-chalk [&>p]:mb-8 p-8 relative z-10'
+              className='text-chalk lg:w-1/2 lg:text-left text-sm [&>*]:text-chalk [&>p]:text-sm [&>p]:mb-8 p-8 relative z-10'
               dangerouslySetInnerHTML={{ __html: textBlock2 }}
             />
           </div>

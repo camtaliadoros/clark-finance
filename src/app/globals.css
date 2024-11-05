@@ -50,12 +50,16 @@ h1 {
 
 h2 {
   color: #1a8bd1;
-  font-size: 24px;
+  font-size: 22px;
 }
 
 h3 {
   font-size: 20px;
   color: #232426;
+}
+
+h4 {
+  font-size: 16px;
 }
 
 h5 {
@@ -69,10 +73,6 @@ p {
   color: #232426;
   margin-bottom: 0.5em;
 }
-
-/* p:last-of-type {
-  margin-bottom: 3rem;
-} */
 
 p > a {
   margin-bottom: 0.5em;

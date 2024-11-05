@@ -33,7 +33,7 @@ export const BenefitCard = async ({
         <h5
           className={`${
             colourScheme === 'light' ? 'text-ash' : 'text-chalk'
-          } font-semibold text-2xl 2xl:text-3xl`}
+          } font-semibold text-xl 2xl:text-2xl`}
         >
           {content.title}
         </h5>
