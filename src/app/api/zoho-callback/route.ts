@@ -1,6 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { writeFileSync } from 'fs';
+
 import dotenv from 'dotenv';
+import { db } from '@/util/firebaseAdmin';
+import { doc, setDoc, Timestamp } from 'firebase/firestore';
 
 dotenv.config();
 
@@ -45,12 +47,11 @@ export async function GET(req: NextRequest) {
 
     const { access_token, refresh_token } = tokenData;
 
-    // Write the tokens to .env (For example purposes)
-    writeFileSync(
-      '.env',
-      `ZOHO_ACCESS_TOKEN=${access_token}\nZOHO_REFRESH_TOKEN=${refresh_token}`,
-      { flag: 'a' }
-    );
+    await setDoc(doc(db, 'tokens', 'zohoTokens'), {
+      access_token,
+      refresh_token,
+      last_updated: Timestamp.fromDate(new Date()),
+    });
 
     return NextResponse.json({ message: 'Authorization successful' });
   } catch (error) {
