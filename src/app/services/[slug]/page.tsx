@@ -2,6 +2,7 @@ import { ContactUs } from '@/components/home/ContactUs';
 import { QAWrapper } from '@/components/services/QAWrapper';
 import { BenefitCard } from '@/components/shared/BenefitCard';
 import { Button } from '@/components/shared/Button';
+import { ContactForm } from '@/components/shared/ContactForm';
 import { ImageTextBlock } from '@/components/shared/ImageTextBlock';
 import { Section } from '@/components/shared/Section';
 import { SectionTitle } from '@/components/shared/SectionTitle';
@@ -164,6 +165,7 @@ export default async function Service({ params }: PageProps) {
 
   const content: ServicePageContent = data[0].acf;
 
+  console.log(content);
   const bgImage: ImageType = await fetchFeaturedImage(
     content.page_title_background_image
   );
@@ -288,14 +290,41 @@ export default async function Service({ params }: PageProps) {
         )}
       </div>
       <div className='flex flex-col items-center py-0'>
-        {content.image_text_block_1_image && (
-          <ImageTextBlock
-            image={content.image_text_block_1_image}
-            title={content.image_text_block_1_title}
-            text={content.image_text_block_1_content}
-            position='Left'
-          />
-        )}
+        <div className='flex'>
+          <div className='w-3/4'>
+            {content.available_1 && (
+              <ImageTextBlock
+                image={content.image_text_block_1_image}
+                title={content.image_text_block_1_title}
+                text={content.image_text_block_1_content}
+                position='Left'
+              />
+            )}
+            {content.make_two_column_field_available && (
+              <div className='grid grid-cols-2 gap-16 px-16 py-24'>
+                <div dangerouslySetInnerHTML={{ __html: content.column_1 }} />
+                <div dangerouslySetInnerHTML={{ __html: content.column_2 }} />
+              </div>
+            )}
+          </div>
+          <div
+            className={`m-4 p-8 w-1/4 ${
+              {
+                1: 'bg-green',
+                2: 'bg-yellow',
+                3: 'bg-orange',
+                4: 'bg-purple',
+                5: 'bg-magenta',
+                6: 'bg-navy',
+                7: 'bg-red',
+                8: 'bg-bluegrey',
+              }[content.service_card.homepage_order]
+            }`}
+          >
+            <h2 className='text-chalk'>Request a callback</h2>
+            <ContactForm buttonColour='light' />
+          </div>
+        </div>
 
         {content.benefits_block_is_available && (
           <div className='bg-chequered-bg bg-cover  bg-bottom grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 justify-center gap-12 px-4 md:px-44 pb-24'>
@@ -313,7 +342,7 @@ export default async function Service({ params }: PageProps) {
             />
           </div>
         )}
-        {content.image_text_block_2_content && (
+        {content.available_2 && (
           <ImageTextBlock
             image={content.image_text_block_2_image}
             title={content.image_text_block_2_title}
@@ -330,7 +359,7 @@ export default async function Service({ params }: PageProps) {
             />
           </div>
         )}
-        {content.image_text_block_3_image && (
+        {content.available_3 && (
           <ImageTextBlock
             image={content.image_text_block_3_image}
             title={content.image_text_block_3_title}

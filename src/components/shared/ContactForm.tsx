@@ -13,6 +13,10 @@ type FormValues = {
   message: string;
 };
 
+type ContactFormProps = {
+  buttonColour: 'light' | 'dark';
+};
+
 type FieldId = 'message' | 'firstName' | 'lastName' | 'email' | 'phoneNumber';
 
 interface InputField {
@@ -22,7 +26,7 @@ interface InputField {
   requiredError?: string;
 }
 
-export const ContactForm = () => {
+export const ContactForm = ({ buttonColour }: ContactFormProps) => {
   const {
     register,
     handleSubmit,
@@ -127,7 +131,11 @@ export const ContactForm = () => {
         ))}
 
         <button
-          className='bg-mediumblue text-sm text-chalk hover:opacity-80 transition py-3 disabled:bg-mediumgrey'
+          className={`${
+            buttonColour === 'light'
+              ? 'bg-chalk bg-opacity-30 hover:bg-opacity-50 text-ash'
+              : 'bg-mediumblue text-chalk'
+          } text-sm  hover:opacity-80 transition py-3 disabled:bg-mediumgrey`}
           disabled={loading}
         >
           {loading ? <ClipLoader color='#F8F9FA' size={15} /> : 'Submit'}

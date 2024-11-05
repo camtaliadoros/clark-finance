@@ -94,6 +94,21 @@ li {
   font-size: 12px;
 }
 
+.custom-bullet {
+  list-style-type: none;
+  position: relative;
+  padding-left: 1.25rem; /* Add space for custom bullet */
+}
+
+.custom-bullet::before {
+  content: '•';
+  color: #4f46e5; /* Tailwind color code for indigo-600 */
+  font-size: 1.5rem; /* Adjust size */
+  position: absolute;
+  left: 0;
+  top: 0.15rem; /* Adjust vertical position */
+}
+
 a:hover {
   text-decoration: none;
 }

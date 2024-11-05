@@ -19,6 +19,8 @@ export type Service = {
 
 export type ServicePageContent = {
   available_1: boolean;
+  available_2: boolean;
+  available_3: boolean;
   image_text_block_1_title: string;
   image_text_block_1_content: string;
   image_text_block_1_image: number;
@@ -62,6 +64,9 @@ export type ServicePageContent = {
   lenders: string;
   benefits_block_is_available: boolean;
   benefits_block: BenefitsBlock;
+  make_two_column_field_available: boolean;
+  column_1: string;
+  column_2: string;
 };
 
 export type BenefitsBlock = {
