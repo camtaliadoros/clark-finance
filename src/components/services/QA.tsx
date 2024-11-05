@@ -27,13 +27,13 @@ export const QA = ({ question, answer }: QAProps) => {
         className='flex w-full border-b py-4 border-chalk items-center space-x-6'
         onClick={handleClick}
       >
-        <h5 className='text-chalk text-left font-semibold  w-full mb-0 text-base 2xl:text-2xl'>
+        <h5 className='text-chalk text-left font-semibold  w-full mb-0 text-sm 2xl:text-xl'>
           {question}
         </h5>
         <FontAwesomeIcon
           icon={faChevronDown}
           size='sm'
-          className={`text-chalk text-base ${
+          className={`text-chalk text-sm ${
             isOpen ? 'rotate-180' : 'rotate-0'
           } transition duration-300 2xl:text-2xl`}
         />
@@ -48,7 +48,7 @@ export const QA = ({ question, answer }: QAProps) => {
         }}
       >
         <div
-          className='text-chalk m-8 text-sm [&>p]:text-chalk 2xl:text-xl '
+          className='text-chalk m-8 [&>p]:text-sm [&>p]:text-chalk 2xl:text-xl '
           dangerouslySetInnerHTML={{ __html: sanitisedContent }}
         />
       </div>

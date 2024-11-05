@@ -24,8 +24,8 @@ export const SectionTitle = ({
       <h2
         className={`${
           alignment === 'centred'
-            ? 'text-4xl 2xl:text-5xl'
-            : 'text-2xl 2xl:text-3xl'
+            ? 'text-3xl 2xl:text-4xl'
+            : 'text-xl 2xl:text-2xl'
         } ${textColour === 'ash' ? 'text-ash' : 'text-chalk'} text-center`}
       >
         {title}

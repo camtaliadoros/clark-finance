@@ -50,11 +50,11 @@ h1 {
 
 h2 {
   color: #1a8bd1;
-  font-size: 28px;
+  font-size: 24px;
 }
 
 h3 {
-  font-size: 24px;
+  font-size: 20px;
   color: #232426;
 }
 
@@ -91,6 +91,7 @@ ul {
 li {
   list-style: disc inside;
   margin-bottom: 0.5em;
+  font-size: 12px;
 }
 
 a:hover {
@@ -107,7 +108,7 @@ a:hover {
   }
 
   p {
-    font-size: 16px;
+    font-size: 14px;
   }
 }
 
@@ -117,7 +118,7 @@ a:hover {
   }
 
   h2 {
-    font-size: 42px;
+    font-size: 30px;
   }
 
   h3 {
