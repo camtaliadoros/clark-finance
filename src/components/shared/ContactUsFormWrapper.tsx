@@ -7,7 +7,7 @@ export const ContactUsFormWrapper = () => {
     <GoogleReCaptchaProvider
       reCaptchaKey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY as string}
     >
-      <ContactForm />
+      <ContactForm buttonColour='dark' />
     </GoogleReCaptchaProvider>
   );
 };

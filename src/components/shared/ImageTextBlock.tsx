@@ -22,7 +22,7 @@ export const ImageTextBlock = async ({
   const sanitisedText = convertWysywyg(text);
 
   return (
-    <div className='w-screen relative py-24'>
+    <div className='relative py-24 flex justify-center'>
       {background && (
         <Image
           src='/images/lines.png'
@@ -37,7 +37,7 @@ export const ImageTextBlock = async ({
         />
       )}
       <div
-        className={`relative flex flex-col lg:flex-row gap-16 w-full lg:px-48 items-start ${
+        className={`relative flex flex-col lg:flex-row gap-16 w-full lg:w-3/4 items-start justify-center ${
           position === 'Right' ? 'lg:flex-row-reverse' : 'flex-row'
         } z-10 pb-24`}
       >

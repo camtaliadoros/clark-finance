@@ -133,7 +133,7 @@ export const ContactForm = ({ buttonColour }: ContactFormProps) => {
         <button
           className={`${
             buttonColour === 'light'
-              ? 'bg-chalk bg-opacity-30 hover:bg-opacity-50 text-ash'
+              ? 'bg-chalk bg-opacity-60 hover:bg-opacity-80 text-ash'
               : 'bg-mediumblue text-chalk'
           } text-sm  hover:opacity-80 transition py-3 disabled:bg-mediumgrey`}
           disabled={loading}

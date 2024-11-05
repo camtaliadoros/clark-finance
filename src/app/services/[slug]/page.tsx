@@ -291,7 +291,7 @@ export default async function Service({ params }: PageProps) {
       </div>
       <div className='flex flex-col items-center py-0'>
         <div className='flex'>
-          <div className='w-3/4'>
+          <div className='lg:w-3/4 w-full flex justify-center items-center'>
             {content.available_1 && (
               <ImageTextBlock
                 image={content.image_text_block_1_image}
@@ -301,14 +301,14 @@ export default async function Service({ params }: PageProps) {
               />
             )}
             {content.make_two_column_field_available && (
-              <div className='grid grid-cols-2 gap-16 px-16 py-24'>
+              <div className='grid  grid-cols-1 md:grid-cols-2 gap-16 px-16 py-24'>
                 <div dangerouslySetInnerHTML={{ __html: content.column_1 }} />
                 <div dangerouslySetInnerHTML={{ __html: content.column_2 }} />
               </div>
             )}
           </div>
           <div
-            className={`m-4 p-8 w-1/4 ${
+            className={`h-fit m-4 p-8 w-1/4 rounded-md hidden lg:block ${
               {
                 1: 'bg-green',
                 2: 'bg-yellow',
