@@ -165,7 +165,6 @@ export default async function Service({ params }: PageProps) {
 
   const content: ServicePageContent = data[0].acf;
 
-  console.log(content);
   const bgImage: ImageType = await fetchFeaturedImage(
     content.page_title_background_image
   );
