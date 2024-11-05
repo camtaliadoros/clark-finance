@@ -1,8 +1,10 @@
+import { db } from '@/util/firebaseAdmin';
+import { doc, getDoc, setDoc, Timestamp } from 'firebase/firestore';
 import { promises as fs } from 'fs';
 import { NextRequest, NextResponse } from 'next/server';
 
 export async function POST(req: NextRequest) {
-  const { firstName, lastName, email, phoneNumber, message, token } =
+  const { firstName, lastName, email, phoneNumber, message, recapthaToken } =
     await req.json();
 
   // Verify the reCAPTCHA token
@@ -13,22 +15,35 @@ export async function POST(req: NextRequest) {
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded',
       },
-      body: `secret=${process.env.RECAPTCHA_SECRET_KEY}&response=${token}`,
+      body: `secret=${process.env.RECAPTCHA_SECRET_KEY}&response=${recapthaToken}`,
     }
   );
 
   const recaptchaData = await recaptchaResponse.json();
 
   if (recaptchaData.success && recaptchaData.score > 0.5) {
-    require('dotenv').config(); // Load environment variables from .env file
-    const fs = require('fs').promises;
-    let accessToken = process.env.ZOHO_ACCESS_TOKEN;
+    const zohoTokenRef = doc(db, 'tokens', 'zohoTokens');
+    const docSnap = await getDoc(zohoTokenRef);
+
+    let zohoTokenData;
+    let accessToken: string;
+    let refreshToken;
+
+    if (docSnap.exists()) {
+      zohoTokenData = docSnap.data();
+      accessToken = zohoTokenData.access_token;
+      refreshToken = zohoTokenData.refresh_token;
+    } else {
+      return NextResponse.json({
+        error: 'Could not retrieve Zoho Access Token',
+      });
+    }
 
     // Function to refresh token if expired
     const refreshAccessToken = async () => {
       const clientId = process.env.ZOHO_CLIENT_ID;
       const clientSecret = process.env.ZOHO_CLIENT_SECRET;
-      const refreshToken = process.env.ZOHO_REFRESH_TOKEN;
+
       const body = new URLSearchParams({
         grant_type: 'refresh_token',
         client_id: clientId || '',
@@ -49,7 +64,12 @@ export async function POST(req: NextRequest) {
         throw new Error(tokenData.error);
       }
       // Update stored tokens
-      await updateEnv('ZOHO_ACCESS_TOKEN', tokenData.access_token); // Update the access token
+
+      await setDoc(doc(db, 'tokens', 'zohoTokens'), {
+        access_token: accessToken,
+        last_updated: Timestamp.fromDate(new Date()),
+      });
+
       return tokenData.access_token;
     };
 

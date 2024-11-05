@@ -76,7 +76,7 @@ export const ContactForm = () => {
       return;
     }
 
-    const token = await executeRecaptcha('submit_form');
+    const recapthaToken = await executeRecaptcha('submit_form');
 
     const response = await fetch(
       `${process.env.NEXT_PUBLIC_HOST_URL}/contact-us/api/create-lead`,
@@ -85,7 +85,7 @@ export const ContactForm = () => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ ...data, token }),
+        body: JSON.stringify({ ...data, recapthaToken }),
       }
     );
 
