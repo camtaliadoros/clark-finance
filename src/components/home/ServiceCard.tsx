@@ -39,7 +39,7 @@ export const ServiceCard = ({
             }[order]
           } `}
         />
-        <p className='w-2/3 font-light 2xl:text-base '>{excerpt}</p>
+        <p className='w-2/3 font-light text-base 2xl:text-base '>{excerpt}</p>
       </div>
       <div
         className={`absolute top-0 left-0 ${
