@@ -30,7 +30,7 @@ const config: Config = {
         lightgrey1: '#F4F4F4',
         lightgrey2: '#F0F0F0',
         mediumgrey: '#828282',
-        bluegrey: '#3B5252',
+        teal: '#22A6A6',
       },
       fontFamily: {
         sourceSans: ['Source Sans', 'sans-serif'],

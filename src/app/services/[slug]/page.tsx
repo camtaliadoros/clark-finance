@@ -216,7 +216,7 @@ export default async function Service({ params }: PageProps) {
               5: 'bg-magenta',
               6: 'bg-navy',
               7: 'bg-red',
-              8: 'bg-bluegrey',
+              8: 'bg-teal',
             }[content.service_card.homepage_order]
           } bg-opacity-50`}
         ></div>
@@ -251,7 +251,7 @@ export default async function Service({ params }: PageProps) {
                 5: 'bg-magenta',
                 6: 'bg-navy',
                 7: 'bg-red',
-                8: 'bg-bluegrey',
+                8: 'bg-teal',
               }[content.service_card.homepage_order]
             } hover:bg-opacity-80 transition text-chalk font-semibold text-sm 2xl:text-lg`}
             href='#qa'
@@ -276,7 +276,7 @@ export default async function Service({ params }: PageProps) {
                 5: 'bg-magenta',
                 6: 'bg-navy',
                 7: 'bg-red',
-                8: 'bg-bluegrey',
+                8: 'bg-teal',
               }[content.service_card.homepage_order]
             } hover:bg-opacity-80 transition text-chalk font-semibold text-sm 2xl:text-lg`}
           >
@@ -316,7 +316,7 @@ export default async function Service({ params }: PageProps) {
                 5: 'bg-magenta',
                 6: 'bg-navy',
                 7: 'bg-red',
-                8: 'bg-bluegrey',
+                8: 'bg-teal',
               }[content.service_card.homepage_order]
             }`}
           >

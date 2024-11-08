@@ -35,7 +35,7 @@ export const ServiceCard = ({
               5: 'border-magenta',
               6: 'border-navy',
               7: 'border-red',
-              8: 'border-bluegrey',
+              8: 'border-teal',
             }[order]
           } `}
         />
@@ -51,7 +51,7 @@ export const ServiceCard = ({
             5: 'bg-magenta',
             6: 'bg-navy',
             7: 'bg-red',
-            8: 'bg-bluegrey',
+            8: 'bg-teal',
           }[order]
         } h-full w-full flex justify-end items-end `}
       >
