@@ -288,7 +288,23 @@ export default async function Service({ params }: PageProps) {
           </Link>
         )}
       </div>
-      <div className='flex flex-col items-center py-0'>
+      <div
+        className='flex flex-col items-center py-0 dynamic-content'
+        style={
+          {
+            '--page-colour': {
+              1: '#33A477',
+              2: '#FFC844',
+              3: '#F2582A',
+              4: '#765298',
+              5: '#C4558C',
+              6: '#001F3F',
+              7: '#BC2D1E',
+              8: '#22A6A6',
+            }[content.service_card.homepage_order],
+          } as any
+        }
+      >
         <div className='flex'>
           <div className='lg:w-3/4 w-full flex flex-col justify-center items-center'>
             {content.make_two_column_field_available && (

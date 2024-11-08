@@ -54,6 +54,17 @@ const config: Config = {
       transitionProperty: {
         'max-height': 'max-height',
       },
+      fontSize: {
+        'responsive-sm': 'clamp(0.75rem,0.875rem,1rem)',
+        'responsive-base': 'clamp(0.875rem, 1rem, 1.125rem)',
+        'responsive-lg': 'clamp(1rem, 1.125rem, 1.25rem)',
+        'responsive-xl': 'clamp(1.125rem, 1.25rem, 1.5rem)',
+        'responsive-2xl': 'clamp(1.25rem, 1.5rem, 1.875rem)',
+        'responsive-3xl': 'clamp(1.5rem, 1.875rem, 2.25rem)',
+        'responsive-4xl': 'clamp(1.875rem, 2.25rem, 3rem)',
+        'responsive-5xl': 'clamp(2.25rem, 3rem, 3.75rem)',
+        'responsive-6xl': 'clamp(3rem, 3.75rem, 4.5rem)',
+      },
     },
   },
   plugins: [],

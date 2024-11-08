@@ -44,32 +44,32 @@ h6 {
 }
 
 h1 {
-  font-size: 36px;
+  font-size: clamp(1.5rem, 2.25rem, 3.25rem);
   color: #232426;
 }
 
 h2 {
   color: #1a8bd1;
-  font-size: 22px;
+  font-size: clamp(1.125rem, 1.5rem, 2rem);
 }
 
 h3 {
-  font-size: 20px;
+  font-size: clamp(1rem, 1.25rem, 1.5rem);
   color: #232426;
 }
 
 h4 {
-  font-size: 16px;
+  font-size: clamp(0.875rem, 1rem, 1.25rem);
 }
 
 h5 {
-  font-size: 16px;
+  font-size: clamp(0.875rem, 1rem, 1.25rem);
   margin-bottom: 0.75rem;
   color: #232426;
 }
 
 p {
-  font-size: 14px;
+  font-size: clamp(0.75rem, 0.875rem, 1.125rem);
   color: #232426;
   margin-bottom: 0.5em;
 }
@@ -91,22 +91,7 @@ ul {
 li {
   list-style: disc inside;
   margin-bottom: 0.5em;
-  font-size: 12px;
-}
-
-.custom-bullet {
-  list-style-type: none;
-  position: relative;
-  padding-left: 1.25rem; /* Add space for custom bullet */
-}
-
-.custom-bullet::before {
-  content: '•';
-  color: #4f46e5; /* Tailwind color code for indigo-600 */
-  font-size: 1.5rem; /* Adjust size */
-  position: absolute;
-  left: 0;
-  top: 0.15rem; /* Adjust vertical position */
+  font-size: clamp(0.75rem, 0.875rem, 1.125rem);
 }
 
 a:hover {
@@ -115,42 +100,6 @@ a:hover {
 
 .bg-hero-image {
   height: 24rem;
-}
-
-@media screen and (min-width: 768px) {
-  h5 {
-    font-size: 18px;
-  }
-
-  p {
-    font-size: 14px;
-  }
-}
-
-@media screen and (min-width: 1536px) {
-  h1 {
-    font-size: 52px;
-  }
-
-  h2 {
-    font-size: 30px;
-  }
-
-  h3 {
-    font-size: 36px;
-  }
-
-  h5 {
-    font-size: 28px;
-  }
-
-  p {
-    font-size: 24px;
-  }
-
-  li {
-    font-size: 20px;
-  }
 }
 
 a.link {
@@ -261,4 +210,8 @@ a.link {
   top: 9px;
   width: 0%;
   left: 50%;
+}
+
+.dynamic-content li::marker {
+  color: var(--page-colour);
 }
