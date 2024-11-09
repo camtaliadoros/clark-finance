@@ -4,7 +4,7 @@ import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import MenuDrawerContextProvider from '../contexts/MenuContextProvider';
 import './globals.css';
-
+import { GoogleAnalytics } from '@next/third-parties/google';
 import { NavigationEvents } from '@/components/NavigationEvents';
 import React, { Suspense } from 'react';
 import { MenuDrawer } from '../components/MenuDrawer';
@@ -41,6 +41,7 @@ export default function RootLayout({
           </Suspense>
         </MenuDrawerContextProvider>
       </body>
+      <GoogleAnalytics gaId='G-HFJJXT10RV' />
     </html>
   );
 }
