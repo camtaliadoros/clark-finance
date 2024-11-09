@@ -124,7 +124,7 @@ export default async function DecisionInPrinciplePage() {
 
   const content: DecisionInPrincipleContent = data.acf;
 
-  // Organise 'Why Choose Us' Items into an array
+  // Organise 'Required Docs' Items into an array
 
   const requiredDocumentsItems: RequiredDocsItem[] = [];
 
@@ -143,7 +143,7 @@ export default async function DecisionInPrinciplePage() {
     <>
       <Section
         type='narrow'
-        classes='bg-houses bg-cover bg-bottom bg-fixed flex flex-col items-center'
+        classes='bg-houses bg-cover bg-bottom bg-fixed flex flex-col items-center h-full'
       >
         <SectionTitle
           title={content.page_title}
@@ -152,25 +152,22 @@ export default async function DecisionInPrinciplePage() {
           alignment='centred'
           subheading={content.subheading}
         />
-        <div className='flex flex-col md:flex-row md:justify-between md:items-center my-16  mb-24 md:mb-32 space-y-8'>
-          <Button
-            colour='chalk'
-            title={content.apply_link.title}
-            url={content.apply_link.url}
-            target={content.apply_link.target}
-          />
-          <div className='flex flex-col md:w-1/3 md:items-end space-y-4'>
-            <h4 className='text-chalk text-2xl text-right'>
-              Speak to our Experts today to run through your application
-            </h4>
-            <PhoneNumberWithIcon
-              colour='light'
-              size='lg'
-              hideOnMobile={false}
-            />
-          </div>
+      </Section>
+      <div className='flex flex-col px-36 py-8 md:flex-row md:justify-between md:items-center space-y-8 bg-darkblue'>
+        <Button
+          colour='chalk'
+          title={content.apply_link.title}
+          url={content.apply_link.url}
+          target={content.apply_link.target}
+        />
+        <div className='flex flex-col md:w-1/3 md:items-end space-y-4'>
+          <h4 className='text-chalk text-2xl text-right'>
+            Speak to our Experts today to run through your application
+          </h4>
+          <PhoneNumberWithIcon colour='light' size='lg' hideOnMobile={false} />
         </div>
-
+      </div>
+      <Section type='narrow' classes='flex justify-center bg-lightgrey2'>
         <div className='bg-chalk flex flex-col items-center space-y-8 p-8 md:p-16  rounded-md w-full lg:w-4/5 '>
           <h2 className='font-semibold text-ash mb-12 text-2xl md:text-4xl'>
             {content.docs_required_text}
@@ -182,7 +179,7 @@ export default async function DecisionInPrinciplePage() {
           </div>
         </div>
       </Section>
-      <ContactUs colourScheme='light' />
+      <ContactUs colourScheme='dark' />
     </>
   );
 }

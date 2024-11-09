@@ -31,7 +31,7 @@ export const SectionTitle = ({
         {title}
       </h2>
       <hr className={`border-${lineColour} border-t-2 w-20`} />
-      {subheading && <h3>{subheading}</h3>}
+      {subheading && <h3 className='text-chalk'>{subheading}</h3>}
     </div>
   );
 };
