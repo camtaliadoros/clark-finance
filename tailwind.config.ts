@@ -53,6 +53,7 @@ const config: Config = {
       },
       transitionProperty: {
         'max-height': 'max-height',
+        'max-width': 'max-width',
       },
       fontSize: {
         'responsive-sm': 'clamp(0.75rem,0.875rem,1rem)',
