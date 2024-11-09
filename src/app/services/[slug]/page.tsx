@@ -289,7 +289,7 @@ export default async function Service({ params }: PageProps) {
         )}
       </div>
       <div
-        className='flex flex-col items-center py-0 dynamic-content'
+        className='flex flex-col items-center py-0'
         style={
           {
             '--page-colour': {
@@ -308,7 +308,7 @@ export default async function Service({ params }: PageProps) {
         <div className='flex'>
           <div className='lg:w-3/4 w-full flex flex-col justify-center items-center'>
             {content.make_two_column_field_available && (
-              <div className='grid  grid-cols-1 md:grid-cols-2 gap-16 px-16 py-24'>
+              <div className='grid  grid-cols-1 md:grid-cols-2 gap-16 px-16 py-24 dynamic-content'>
                 <div dangerouslySetInnerHTML={{ __html: content.column_1 }} />
                 <div dangerouslySetInnerHTML={{ __html: content.column_2 }} />
               </div>
@@ -352,7 +352,7 @@ export default async function Service({ params }: PageProps) {
         {textBlock1 && (
           <div className='bg-lightgrey1 w-screen flex justify-center pb-16 p-8 relative z-10'>
             <div
-              className='text-ash lg:w-1/2 lg:text-left'
+              className='text-ash lg:w-1/2 lg:text-left dynamic-content'
               dangerouslySetInnerHTML={{ __html: textBlock1 }}
             />
           </div>
@@ -369,7 +369,7 @@ export default async function Service({ params }: PageProps) {
         {textBlock2 && (
           <div className='relative z-10 bg-building-detail-2 bg-cover bg-fixed w-screen flex justify-center pb-16'>
             <div
-              className='text-chalk lg:w-1/2 lg:text-left text-sm [&>*]:text-chalk [&>p]:text-sm [&>p]:mb-8 p-8 relative z-10'
+              className='text-chalk lg:w-1/2 lg:text-left text-sm [&>*]:text-chalk [&>p]:text-sm [&>p]:mb-8 p-8 relative z-10 dynamic-content'
               dangerouslySetInnerHTML={{ __html: textBlock2 }}
             />
           </div>
@@ -399,7 +399,7 @@ export default async function Service({ params }: PageProps) {
           />
           <div
             id='lenders'
-            className='flex flex-row flex-wrap gap-8 justify-center'
+            className='flex flex-row flex-wrap gap-8 justify-center dynamic-content'
             dangerouslySetInnerHTML={{ __html: lendersContent }}
           />
         </Section>

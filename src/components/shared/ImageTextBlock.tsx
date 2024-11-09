@@ -63,7 +63,7 @@ export const ImageTextBlock = async ({
           <div
             className={`${
               position === 'Right' ? 'lg:text-right' : 'text-left'
-            } 'text-ash [&>p]:text-sm'`}
+            } text-ash [&>p]:text-sm dynamic-content`}
             dangerouslySetInnerHTML={{ __html: sanitisedText }}
           />
         </div>
