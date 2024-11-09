@@ -22,12 +22,10 @@ async function fetchPageContent() {
 
   const resJson = await res.json();
 
-  const data = resJson.acf;
-
   if (!res.ok) {
     throw new Error('Failed to fetch data');
   }
-  return data;
+  return resJson;
 }
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -97,7 +95,9 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function Services() {
-  const content: ServicesPageContent = await fetchPageContent();
+  const res = await fetchPageContent();
+
+  const content: ServicesPageContent = res.acf;
 
   return (
     <>
