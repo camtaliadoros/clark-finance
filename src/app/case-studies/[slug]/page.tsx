@@ -5,7 +5,6 @@ import { Section } from '@/components/shared/Section';
 import {
   CaseStudyContent,
   GraphItem,
-  ImageType,
   MetadataProps,
   YoastHeadJson,
 } from '@/util/models';
@@ -152,7 +151,7 @@ export default async function CaseStudyDetailPage({
   const data = await fetchCaseStudy(params.slug);
 
   const content: CaseStudyContent = data[0]?.acf;
-  const image: ImageType = await fetchFeaturedImage(content.featured_image);
+  const image = await fetchFeaturedImage(content.featured_image);
 
   const theRequirementContent = convertWysywyg(content.the_requirement);
   const theInterestingStuffContent = convertWysywyg(
@@ -179,7 +178,7 @@ export default async function CaseStudyDetailPage({
   return (
     <>
       <ArticleWrapper
-        imageUrl={image.source_url}
+        imageUrl={image.source}
         title={content.case_study_title}
         pageLinkCard1='services'
         pageLinkCard2='contactUs'

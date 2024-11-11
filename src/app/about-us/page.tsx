@@ -2,12 +2,7 @@ import { ContactUs } from '@/components/home/ContactUs';
 import { BenefitCard } from '@/components/shared/BenefitCard';
 import { Section } from '@/components/shared/Section';
 import { SectionTitle } from '@/components/shared/SectionTitle';
-import {
-  BenefitItem,
-  GraphItem,
-  ImageType,
-  YoastHeadJson,
-} from '@/util/models';
+import { BenefitItem, GraphItem, YoastHeadJson } from '@/util/models';
 import {
   convertWysywyg,
   fetchFeaturedImage,

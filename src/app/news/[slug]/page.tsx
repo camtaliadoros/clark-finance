@@ -2,12 +2,7 @@ import { ArticleWrapper } from '@/components/shared/ArticleWrapper';
 import { Button } from '@/components/shared/Button';
 import { FeaturedArticlesSection } from '@/components/shared/FeaturedArticlesSection';
 import { Section } from '@/components/shared/Section';
-import {
-  ArticleContentType,
-  GraphItem,
-  ImageType,
-  YoastHeadJson,
-} from '@/util/models';
+import { ArticleContentType, GraphItem, YoastHeadJson } from '@/util/models';
 import {
   convertWysywyg,
   fetchFeaturedImage,
@@ -163,7 +158,7 @@ export default async function ArticlePage({
 
   const content: ArticleData = data[0];
 
-  const image: ImageType = content.acf.featured_image
+  const image = content.acf.featured_image
     ? await fetchFeaturedImage(content.acf.featured_image)
     : null;
 
@@ -196,7 +191,7 @@ export default async function ArticlePage({
     <>
       <ArticleWrapper
         title={content.acf.title}
-        imageUrl={image.source_url}
+        imageUrl={image?.source}
         pageLinkCard1='contactUs'
         pageLinkCard2='services'
       >

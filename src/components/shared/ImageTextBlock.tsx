@@ -1,7 +1,5 @@
-import { ImageType } from '@/util/models';
-import { Section } from './Section';
-import Image from 'next/image';
 import { convertWysywyg, fetchFeaturedImage } from '@/util/utilFunctions';
+import Image from 'next/image';
 
 type ImageTextBlockProps = {
   image: number;

@@ -1,4 +1,4 @@
-import { BenefitItem, ImageType } from '@/util/models';
+import { BenefitItem } from '@/util/models';
 import { fetchFeaturedImage } from '@/util/utilFunctions';
 import Image from 'next/image';
 

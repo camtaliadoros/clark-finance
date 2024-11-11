@@ -1,6 +1,5 @@
-import { CaseStudyFeatureContent, ImageType } from '@/util/models';
+import { CaseStudyFeatureContent } from '@/util/models';
 import { fetchFeaturedImage } from '@/util/utilFunctions';
-import Link from 'next/link';
 import { ClickableImage } from './ClickableImage';
 import { FeaturedCardsContentWrapper } from './FeaturedCardsContentWrapper';
 

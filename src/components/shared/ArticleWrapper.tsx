@@ -3,7 +3,7 @@ import { Section } from './Section';
 
 type ArticleWrapperProps = {
   children: React.ReactNode;
-  imageUrl: string | null;
+  imageUrl: string | undefined;
   title: string;
   pageLinkCard1: 'services' | 'contactUs' | 'caseStudies' | 'insights';
   pageLinkCard2: 'services' | 'contactUs' | 'caseStudies' | 'insights';

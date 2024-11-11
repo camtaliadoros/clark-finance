@@ -10,7 +10,6 @@ import {
   BenefitItem,
   BenefitsBlock,
   GraphItem,
-  ImageType,
   MetadataProps,
   ServicePageContent,
   YoastHeadJson,
