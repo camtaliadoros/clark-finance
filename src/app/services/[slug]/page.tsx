@@ -242,7 +242,7 @@ export default async function Service({ params }: PageProps) {
           } bg-opacity-50`}
         ></div>
 
-        <div className='flex flex-col bg-black bg-opacity-50 md:backdrop-blur-sm h-full py-24 px-8 w-full lg:w-1/2 gap-8 z-10 '>
+        <div className='flex flex-col bg-black bg-opacity-50 md:backdrop-blur-sm h-full py-16 px-6 w-full lg:w-1/2 gap-8 z-10 '>
           <div className='flex flex-col'>
             <h1 className='text-chalk mb-8'>{content.page_title}</h1>
 
@@ -329,7 +329,7 @@ export default async function Service({ params }: PageProps) {
         <div className='flex'>
           <div className='lg:w-3/4 w-full flex flex-col justify-center items-center'>
             {content.make_two_column_field_available && (
-              <div className='grid  grid-cols-1 md:grid-cols-2 gap-16 px-16 py-24 dynamic-content'>
+              <div className='grid  grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 lg:gap-16 px-4 md:px-8 lg:px-16 py-12 md:py-16 lg:py-24 dynamic-content'>
                 <div dangerouslySetInnerHTML={{ __html: content.column_1 }} />
                 <div dangerouslySetInnerHTML={{ __html: content.column_2 }} />
               </div>

@@ -45,7 +45,7 @@ export const ContactUs = async ({ colourScheme }: ContactUsProps) => {
       type='narrow'
       classes={`${
         colourScheme === 'light' ? 'bg-chequered-bg' : 'bg-building-detail'
-      } bg-cover bg-bottom space-y-12`}
+      } bg-cover bg-bottom space-y-12 py-8 lg:py-20 `}
     >
       <SectionTitle
         title={content.contact_section_title}
