@@ -162,16 +162,16 @@ export default async function AboutUs() {
 
   return (
     <>
-      <Section type='narrow'>
+      <Section type='narrow' classes='mb-8'>
         <SectionTitle
           title={content.page_title}
           subheading={content.subheading}
           textColour='ash'
           lineColour='mediumblue'
           alignment='centred'
-          classes='mb-16'
+          classes='py-8 '
         />
-        <div className='flex flex-col items-center lg:m-24 gap-12 md:gap-24 md:flex-row '>
+        <div className='flex flex-col items-center gap-6 md:gap-8 lg:gap-12  md:flex-row lg:pl-30'>
           <Image
             src={featuredImage.source_url}
             alt={featuredImage.alt_text}
@@ -182,12 +182,15 @@ export default async function AboutUs() {
           />
 
           <div
-            className='md:w-2/3 text-sm 2xl:text-xl'
+            className='md:w-2/3 text-sm 2xl:text-lg'
             dangerouslySetInnerHTML={{ __html: bodyContent }}
           ></div>
         </div>
       </Section>
-      <Section type='wide' classes='bg-building-detail bg-cover'>
+      <Section
+        type='wide'
+        classes='bg-building-detail bg-cover py-8 lg:py-16 lg:px-16'
+      >
         <SectionTitle
           title={content.why_choose_us_title}
           textColour='chalk'
@@ -198,7 +201,7 @@ export default async function AboutUs() {
         <h4 className='text-chalk my-4 2xl:my-12 text-center text-lg 2xl:text-2xl font-semibold'>
           {content.why_choose_us_subheading}
         </h4>
-        <div className='grid grid-cols-2 md:grid-cols-3 justify-center gap-12 '>
+        <div className='grid md:grid-cols-2 lg:grid-cols-3 justify-center gap-4 lg:gap-8 '>
           {whyChooseUsItems.map((content, i) => (
             <BenefitCard content={content} key={i} colourScheme='dark' />
           ))}
