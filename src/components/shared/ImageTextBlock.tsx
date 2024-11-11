@@ -18,7 +18,7 @@ export const ImageTextBlock = async ({
   title,
   background,
 }: ImageTextBlockProps) => {
-  const imageData: ImageType = await fetchFeaturedImage(image);
+  const imageData = await fetchFeaturedImage(image);
   const sanitisedText = convertWysywyg(text);
 
   return (
@@ -42,12 +42,11 @@ export const ImageTextBlock = async ({
         } z-10 pb-24`}
       >
         <Image
-          src={imageData.source_url}
-          alt=''
+          src={imageData.source}
+          alt={imageData.altText}
           width={500}
           height={500}
           className='w-full lg:w-1/2'
-          unoptimized
         />
 
         <div className='flex flex-col lg:w-1/2 space-y-8 px-8 lg:px-0'>

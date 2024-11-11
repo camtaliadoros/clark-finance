@@ -176,7 +176,6 @@ export default async function AboutUs() {
             className='md:w-1/3'
             width={350}
             height={200}
-            unoptimized
           />
 
           <div
