@@ -167,7 +167,7 @@ export default async function DecisionInPrinciplePage() {
           <PhoneNumberWithIcon colour='light' size='lg' hideOnMobile={false} />
         </div>
       </div>
-      <Section type='narrow' classes='flex justify-center bg-lightgrey2'>
+      <Section type='narrow' classes='flex justify-center bg-lightgrey2 py-8'>
         <div className='bg-chalk flex flex-col items-center space-y-8 p-8 md:p-16  rounded-md w-full lg:w-4/5 '>
           <h2 className='font-semibold text-ash mb-12 text-2xl md:text-4xl'>
             {content.docs_required_text}
