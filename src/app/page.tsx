@@ -115,7 +115,7 @@ export default async function Home() {
         cta1={content.cta_1}
         cta2={content.cta_2}
       />
-      <ServiceCards classes='bg-chalk' />
+      <ServiceCards classes='bg-chalk pt-28' />
       <ContactUs colourScheme='light' />
       <WhyClarkFinance
         sectionTitle={content.why_clark_finance_section_title}

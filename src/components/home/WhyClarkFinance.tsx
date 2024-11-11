@@ -31,7 +31,7 @@ export const WhyClarkFinance = ({
   return (
     <Section
       type='narrow'
-      classes='bg-building-detail bg-cover flex items-start gap-12 md:py-40 flex flex-col md:flex-row '
+      classes='bg-building-detail bg-cover flex items-start gap-12 py-8 md:py-24 flex flex-col md:flex-row '
     >
       <div className='w-full md:w-1/2 flex flex-col md:flex-row md:justify-end justify-start items-end md:items-start relative gap-16'>
         <Image

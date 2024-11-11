@@ -37,8 +37,8 @@ export const ServiceCards = async ({ classes }: PageProps) => {
   );
 
   return (
-    <Section type='wide' classes={`${classes}  py-0`}>
-      <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3 -mt-48'>
+    <Section type='wide' classes={`${classes} `}>
+      <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3 -mt-64'>
         {services.map((service) => (
           <ServiceCard
             key={service.acf.service_card.homepage_order}
