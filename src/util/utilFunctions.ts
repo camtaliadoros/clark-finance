@@ -1,3 +1,5 @@
+import { ImageType } from './models';
+
 export const convertWysywyg = (rawContent: string) => {
   // const convertedContent = rawContent.replace(/(?:\r\n|\r|\n)/g, '<br />');
 
@@ -21,7 +23,45 @@ export const fetchFeaturedImage = async (imageId: number) => {
   if (!res.ok) {
     throw new Error('Failed to fetch data');
   }
-  return res.json();
+
+  const imageData: ImageType = await res.json();
+
+  const encodedCredentials = btoa(`${process.env.WP_CREDENTIALS}`);
+
+  const response = await fetch(imageData.source_url, {
+    headers: {
+      Authorization: `Basic ${encodedCredentials}`,
+      'Content-Type': 'application/json',
+    },
+  });
+  if (!response.ok) throw new Error('Failed to fetch image');
+
+  const arrayBuffer = await response.arrayBuffer();
+  const base64 = btoa(
+    new Uint8Array(arrayBuffer).reduce(
+      (data, byte) => data + String.fromCharCode(byte),
+      ''
+    )
+  );
+
+  // If svg the mime type should be 'svg+xml', if png, 'image/png'
+  // (Obviously doesn't scale to other image types)
+  let mimeType;
+
+  if (imageData.source_url.endsWith('.svg')) {
+    mimeType = 'svg+xml';
+  } else if (imageData.source_url.endsWith('.png')) {
+    mimeType = 'image/png';
+  } else if (imageData.source_url.endsWith('.jpg')) {
+    mimeType = 'image/jpeg';
+  }
+
+  const image = {
+    altText: imageData.alt_text,
+    source: `data:image/${mimeType};base64,${base64}`,
+  };
+
+  return image;
 };
 
 export const fetchMenuItems = async () => {

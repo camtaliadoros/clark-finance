@@ -165,30 +165,7 @@ export default async function Service({ params }: PageProps) {
 
   const content: ServicePageContent = data[0].acf;
 
-  const bgImageData: ImageType = await fetchFeaturedImage(
-    content.page_title_background_image
-  );
-
-  const encodedCredentials = btoa(`${process.env.WP_CREDENTIALS}`);
-
-  const response = await fetch(bgImageData.source_url, {
-    headers: {
-      Authorization: `Basic ${encodedCredentials}`,
-      'Content-Type': 'application/json',
-    },
-  });
-  if (!response.ok) throw new Error('Failed to fetch image');
-
-  // const blob = await response.blob();
-  // const imageUrl = URL.createObjectURL(blob);
-
-  const arrayBuffer = await response.arrayBuffer();
-  const base64 = btoa(
-    new Uint8Array(arrayBuffer).reduce(
-      (data, byte) => data + String.fromCharCode(byte),
-      ''
-    )
-  );
+  const bgImage = await fetchFeaturedImage(content.page_title_background_image);
 
   const whyClarkFinanceText = convertWysywyg(content.why_clark_finance);
 
@@ -224,7 +201,7 @@ export default async function Service({ params }: PageProps) {
       <div
         className='relative flex md:px-24 items-center bg-cover bg-center bg-fixed'
         style={{
-          backgroundImage: `url('data:image/png;base64,${base64}')`,
+          backgroundImage: `url("${bgImage.source}")`,
         }}
       >
         <div

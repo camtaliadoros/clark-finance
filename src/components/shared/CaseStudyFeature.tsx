@@ -15,14 +15,11 @@ export const CaseStudyFeature = async ({
   content,
   colourScheme,
 }: CaseStudyFeatureProps) => {
-  const image: ImageType = await fetchFeaturedImage(content.featured_image);
+  const image = await fetchFeaturedImage(content.featured_image);
 
   return (
     <div className='justify-self-center space-y-4'>
-      <ClickableImage
-        slug={`/case-studies/${slug}`}
-        imageUrl={image.source_url}
-      />
+      <ClickableImage slug={`/case-studies/${slug}`} imageUrl={image.source} />
       <FeaturedCardsContentWrapper>
         <div className='space-y-1 2xl:space-y-4 '>
           <h6

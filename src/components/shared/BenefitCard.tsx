@@ -11,7 +11,7 @@ export const BenefitCard = async ({
   content,
   colourScheme,
 }: BenefitCardProps) => {
-  const image: ImageType = await fetchFeaturedImage(content.icon);
+  const image = await fetchFeaturedImage(content.icon);
 
   return (
     <div
@@ -22,8 +22,8 @@ export const BenefitCard = async ({
       } rounded-sm p-6 lg:p-12 gap-2 lg:gap-8`}
     >
       <Image
-        src={image.source_url}
-        alt={image.alt_text}
+        src={image.source}
+        alt={image.altText}
         width={120}
         height={120}
         className={`${colourScheme === 'light' ? '' : 'filter invert'}`}

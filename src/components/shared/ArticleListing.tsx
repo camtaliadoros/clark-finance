@@ -19,9 +19,10 @@ export const fetchArticlesByPage = async (pageNumber: number) => {
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_HOST_URL}/news/api/fetchAllArticles?page=${pageNumber}&per_page=6`,
     {
-      next: {
-        revalidate: 86400,
-      },
+      // next: {
+      //   revalidate: 86400,
+      // },
+      cache: 'no-store',
     }
   );
   if (!res.ok) {
@@ -37,9 +38,10 @@ export async function fetchCaseStudiesByPage(
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_HOST_URL}/case-studies/api/fetchAllCaseStudies?page=${pageNumber}&items=${items}`,
     {
-      next: {
-        revalidate: 86400,
-      },
+      // next: {
+      //   revalidate: 86400,
+      // },
+      cache: 'no-store',
     }
   );
   if (!res.ok) {

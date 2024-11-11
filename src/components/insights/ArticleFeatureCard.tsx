@@ -13,9 +13,7 @@ export const ArticleFeatureCard = async ({
   articleData,
   colourScheme,
 }: ArticleFeatureCardProps) => {
-  const image: ImageType = await fetchFeaturedImage(
-    articleData.acf.featured_image
-  );
+  const image = await fetchFeaturedImage(articleData.acf.featured_image);
 
   const date = new Date(articleData.date);
 
@@ -29,7 +27,7 @@ export const ArticleFeatureCard = async ({
     <div className='flex flex-col items-center '>
       <ClickableImage
         slug={`/news/${articleData.slug}`}
-        imageUrl={image.source_url}
+        imageUrl={image.source}
       />
       <FeaturedCardsContentWrapper>
         <div>

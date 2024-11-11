@@ -8,7 +8,7 @@ export async function GET(req: NextRequest) {
   const encodedCredentials = btoa(`${process.env.WP_CREDENTIALS}`);
 
   const response = await fetch(
-    `${process.env.WP_ROUTE}/case-study?page=${currentPage}&per_page=${itemsPerPage}&_fields=acf.case_study_title,acf.case_study_excerpt,acf.loan_value,acf.location.acf.featured_image,slug,link`,
+    `${process.env.WP_ROUTE}/case-study?page=${currentPage}&per_page=${itemsPerPage}&_fields=acf.case_study_title,acf.case_study_excerpt,acf.loan_value,acf.location,acf.featured_image,slug,link`,
     {
       headers: {
         Authorization: `Basic ${encodedCredentials}`,

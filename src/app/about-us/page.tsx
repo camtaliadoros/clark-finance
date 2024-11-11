@@ -135,9 +135,7 @@ export default async function AboutUs() {
 
   const bodyContent = convertWysywyg(content.about_us_content);
 
-  const featuredImage: ImageType = await fetchFeaturedImage(
-    content.about_us_image
-  );
+  const featuredImage = await fetchFeaturedImage(content.about_us_image);
 
   // Organise 'Why Choose Us' Items into an array
 
@@ -173,8 +171,8 @@ export default async function AboutUs() {
         />
         <div className='flex flex-col items-center gap-6 md:gap-8 lg:gap-12  md:flex-row lg:pl-30'>
           <Image
-            src={featuredImage.source_url}
-            alt={featuredImage.alt_text}
+            src={featuredImage.source}
+            alt={featuredImage.altText}
             className='md:w-1/3'
             width={350}
             height={200}
