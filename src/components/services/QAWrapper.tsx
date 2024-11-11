@@ -84,7 +84,7 @@ export const QAWrapper = ({ pageContent }: QAProps) => {
   return (
     <Section
       type='wide'
-      classes='bg-mediumblue flex flex-col items-center space-y-16'
+      classes='bg-mediumblue flex flex-col items-center space-y-16 py-8 md:py-12 lg:py-16'
       sectionId='#qa'
     >
       <SectionTitle

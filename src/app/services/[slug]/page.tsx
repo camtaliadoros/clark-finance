@@ -259,7 +259,7 @@ export default async function Service({ params }: PageProps) {
           </div>
         </div>
       </div>
-      <div className='flex w-screen md:w-fit'>
+      <div className='flex w-screen md:w-fit mb-4'>
         {content.q1 && (
           <Link
             prefetch={true}
@@ -327,9 +327,9 @@ export default async function Service({ params }: PageProps) {
         }
       >
         <div className='flex'>
-          <div className='lg:w-3/4 w-full flex flex-col justify-center items-center'>
+          <div className='lg:w-3/4 w-full flex flex-col  items-center'>
             {content.make_two_column_field_available && (
-              <div className='grid  grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 lg:gap-16 px-4 md:px-8 lg:px-16 py-12 md:py-16 lg:py-24 dynamic-content'>
+              <div className='grid  grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 lg:gap-16 px-4 md:px-8 lg:px-16 pb-8  dynamic-content'>
                 <div dangerouslySetInnerHTML={{ __html: content.column_1 }} />
                 <div dangerouslySetInnerHTML={{ __html: content.column_2 }} />
               </div>
@@ -363,7 +363,7 @@ export default async function Service({ params }: PageProps) {
         </div>
 
         {content.benefits_block_is_available && (
-          <div className='bg-chequered-bg bg-cover  bg-bottom grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 justify-center gap-12 px-4 md:px-44 pb-24'>
+          <div className='bg-chequered-bg bg-cover  bg-bottom grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 justify-center gap-4 md:gap-8 lg:gap-12 px-4 lg:px-44 pb-8 lg:pb-24'>
             {benefitsArr.map((content, i) => (
               <BenefitCard content={content} key={i} colourScheme='light' />
             ))}
@@ -371,7 +371,7 @@ export default async function Service({ params }: PageProps) {
         )}
 
         {textBlock1 && (
-          <div className='bg-lightgrey1 w-screen flex justify-center pb-16 p-8 relative z-10'>
+          <div className='bg-lightgrey1 w-screen flex justify-center px-4 py-8 relative z-10'>
             <div
               className='text-ash lg:w-1/2 lg:text-left dynamic-content'
               dangerouslySetInnerHTML={{ __html: textBlock1 }}
@@ -388,9 +388,9 @@ export default async function Service({ params }: PageProps) {
           />
         )}
         {textBlock2 && (
-          <div className='relative z-10 bg-building-detail-2 bg-cover bg-fixed w-screen flex justify-center pb-16'>
+          <div className='relative z-10 bg-building-detail-2 bg-cover bg-fixed w-screen flex justify-center px-4 py-8 md:pb-12 lg:pb-16'>
             <div
-              className='text-chalk lg:w-1/2 lg:text-left text-sm [&>*]:text-chalk [&>p]:text-sm [&>p]:mb-8 [&_h3]:text-chalk p-8 relative z-10 dynamic-content'
+              className='text-chalk lg:w-1/2 lg:text-left text-sm [&>*]:text-chalk [&>p]:text-sm [&>p]:mb-8 [&_h3]:text-chalk  relative z-10 dynamic-content'
               dangerouslySetInnerHTML={{ __html: textBlock2 }}
             />
           </div>
