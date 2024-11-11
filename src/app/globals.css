@@ -70,7 +70,7 @@ h5 {
 }
 
 p {
-  font-size: 0.875rem;
+  font-size: 1rem;
   color: #232426;
   margin-bottom: 0.5em;
 }
@@ -92,7 +92,7 @@ ul {
 li {
   list-style: disc inside;
   margin-bottom: 0.5em;
-  font-size: 0.875rem;
+  font-size: 1;
 }
 
 a:hover {
