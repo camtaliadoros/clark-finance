@@ -43,10 +43,10 @@ export const Footer = async () => {
               0204 518 2215
             </a>
             <a
-              href='mailto:info@clark.finance'
+              href='mailto:info@clarkfinance.co.uk'
               className='text-chalk text-sm 2xl:text-lg w-fit'
             >
-              info@clark.finance
+              info@clarkfinance.co.uk
             </a>
             <p className='text-chalk text-sm 2xl:text-lg'>
               Clark Finance, Bedford Heights, Brickhill Drive, Bedford MK41 7PH

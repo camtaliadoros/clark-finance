@@ -10,7 +10,7 @@ export const EmailWithIcon = ({ colour, hideOnMobile }: EmailWithIconProps) => {
   return (
     <a
       className='inline-flex items-center space-x-1 link mb-0'
-      href='mailto:info@clark.finance'
+      href='mailto:info@clarkfinance.co.uk'
     >
       <FontAwesomeIcon
         icon={faEnvelope}
@@ -24,7 +24,7 @@ export const EmailWithIcon = ({ colour, hideOnMobile }: EmailWithIconProps) => {
           hideOnMobile ? 'hidden' : 'block'
         }  md:block`}
       >
-        info@clark.finance
+        info@clarkfinance.co.uk
       </p>
     </a>
   );
