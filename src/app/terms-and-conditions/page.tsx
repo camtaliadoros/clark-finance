@@ -100,7 +100,7 @@ export default async function TermsAndConditions() {
   const bodyContent = convertWysywyg(content.content);
 
   return (
-    <Section type='narrow'>
+    <Section type='narrow' classes='px-4 py-8 space-y-8'>
       <SectionTitle
         title={content.page_title}
         lineColour='mediumblue'
@@ -109,7 +109,7 @@ export default async function TermsAndConditions() {
         subheading={content.subheading}
       />
       <div
-        className='text-ash text-center mx-36 my-12'
+        className='text-ash text-left md:text-center dynamic-content'
         dangerouslySetInnerHTML={{ __html: bodyContent }}
       ></div>
     </Section>
