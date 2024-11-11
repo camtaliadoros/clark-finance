@@ -104,7 +104,7 @@ export default async function CreditSearchPage() {
   return (
     <Section
       type='narrow'
-      classes='bg-chequered-bg bg-cover bg-bottom flex flex-col items-center'
+      classes='bg-chequered-bg bg-cover bg-bottom flex flex-col items-center py-8'
     >
       <SectionTitle
         title={content.page_title}
@@ -114,7 +114,7 @@ export default async function CreditSearchPage() {
         subheading={content.subheading}
       />
       <div
-        className='md:w-2/3 my-16'
+        className='md:w-2/3 mb-8'
         dangerouslySetInnerHTML={{ __html: bodyContent }}
       />
       <Button
