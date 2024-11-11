@@ -110,7 +110,7 @@ export default async function CaseStudiesHome({
     <>
       <Section
         type='narrow'
-        classes='bg-chequered-bg bg-cover bg-fixed bg-bottom space-y-16 flex flex-col items-center px-4 py-8'
+        classes='bg-chequered-bg bg-cover bg-fixed bg-bottom flex flex-col items-center px-4 py-8'
       >
         <SectionTitle
           title={pageContent.page_title}

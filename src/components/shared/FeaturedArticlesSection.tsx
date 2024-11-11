@@ -38,7 +38,7 @@ export const FeaturedArticlesSection = async ({
       type='wide'
       classes={`${
         bgColour === 'dark' ? 'bg-navy' : 'bg-chalk'
-      } space-y-2 flex flex-col items-center px-4 py-8`}
+      } space-y-2 flex flex-col items-center px-4 py-8 lg:py-16`}
     >
       <SectionTitle
         title='Insights'

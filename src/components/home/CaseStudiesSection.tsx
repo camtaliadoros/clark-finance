@@ -34,7 +34,7 @@ export const CaseStudiesSection = async ({
       type='narrow'
       classes={`${
         bgColour === 'dark' ? 'bg-building-detail' : 'bg-chalk'
-      } bg-cover space-y-16 flex flex-col items-center`}
+      } bg-cover space-y-16 flex flex-col items-center px-4 py-8 lg:py-16`}
     >
       <SectionTitle
         title='Case Studies'
