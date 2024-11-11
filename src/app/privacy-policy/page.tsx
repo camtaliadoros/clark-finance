@@ -100,7 +100,7 @@ export default async function PrivacyPolicy() {
   const bodyContent = convertWysywyg(content.content);
 
   return (
-    <Section type='narrow'>
+    <Section type='narrow' classes='py-8'>
       <SectionTitle
         title={content.page_title}
         lineColour='mediumblue'
@@ -109,7 +109,7 @@ export default async function PrivacyPolicy() {
         subheading={content.subheading}
       />
       <div
-        className='text-ash text-center md:mx-20 lg:mx-36 my-12'
+        className='text-ash text-left md:text-center md:mx-20 lg:mx-36 my-12'
         dangerouslySetInnerHTML={{ __html: bodyContent }}
       ></div>
     </Section>
