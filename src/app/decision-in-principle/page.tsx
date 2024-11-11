@@ -153,7 +153,7 @@ export default async function DecisionInPrinciplePage() {
           subheading={content.subheading}
         />
       </Section>
-      <div className='flex flex-col px-36 py-8 md:flex-row md:justify-between md:items-center space-y-8 bg-darkblue'>
+      <div className='flex flex-col px-8 lg:px-36 py-8 md:flex-row md:justify-between md:items-center space-y-8 bg-darkblue'>
         <Button
           colour='chalk'
           title={content.apply_link.title}
