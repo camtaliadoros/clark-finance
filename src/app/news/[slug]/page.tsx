@@ -208,7 +208,7 @@ export default async function ArticlePage({
         </h2>
         <div
           dangerouslySetInnerHTML={{ __html: contentBody }}
-          className='2xl:text-2xl'
+          className='2xl:text-2xl dynamic-content'
         />
       </ArticleWrapper>
       <FeaturedArticlesSection bgColour='dark' />

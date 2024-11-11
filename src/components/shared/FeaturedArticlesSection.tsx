@@ -38,14 +38,14 @@ export const FeaturedArticlesSection = async ({
       type='wide'
       classes={`${
         bgColour === 'dark' ? 'bg-navy' : 'bg-chalk'
-      } space-y-2 flex flex-col items-center`}
+      } space-y-2 flex flex-col items-center px-4 py-8`}
     >
       <SectionTitle
         title='Insights'
         lineColour='mediumblue'
         textColour={`${bgColour === 'dark' ? 'chalk' : 'ash'}`}
         alignment='centred'
-        classes='2xl:mb-12'
+        classes='mb-8 2xl:mb-12'
       />
       <div className='flex flex-col items-center  space-y-12 md:space-y-0 md:grid md:grid-cols-2 md:grid-rows-1 lg:grid-cols-3 md:items-start w-full'>
         {featuredContent.map((articleData) => (
