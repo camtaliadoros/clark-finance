@@ -106,7 +106,7 @@ export default async function ContactUsPage() {
       <ContactUs colourScheme='light' />
       <Section
         type='narrow'
-        classes='flex flex-col gap-8 bg-building-detail bg-cover'
+        classes='flex flex-col gap-8 bg-building-detail bg-cover px-4 py-8'
       >
         <h2 className='text-chalk text-xl 2xl:text-3xl'>
           {content.complaints_title}
