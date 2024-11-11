@@ -28,7 +28,8 @@ h5,
 h6,
 p,
 a,
-button {
+button,
+li {
   font-family: 'Source Sans';
   line-height: 1.2em;
 }
