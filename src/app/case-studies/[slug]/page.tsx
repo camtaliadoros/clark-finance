@@ -146,7 +146,7 @@ export async function generateMetadata({
 export default async function CaseStudyDetailPage({
   params,
 }: {
-  params: CaseStudyParams;
+  params: Promise<CaseStudyParams>;
 }) {
   const data = await fetchCaseStudy(params.slug);
 
