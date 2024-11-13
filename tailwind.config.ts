@@ -31,6 +31,7 @@ const config: Config = {
         lightgrey2: '#F0F0F0',
         mediumgrey: '#828282',
         teal: '#22A6A6',
+        aqua: '#39CCCC',
       },
       fontFamily: {
         sourceSans: ['Source Sans', 'sans-serif'],

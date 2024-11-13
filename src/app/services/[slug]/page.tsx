@@ -211,7 +211,7 @@ export default async function Service({ params }: PageProps) {
               3: 'bg-orange',
               4: 'bg-purple',
               5: 'bg-magenta',
-              6: 'bg-navy',
+              6: 'bg-mediumblue',
               7: 'bg-red',
               8: 'bg-teal',
             }[content.service_card.homepage_order]
@@ -246,7 +246,7 @@ export default async function Service({ params }: PageProps) {
                 3: 'bg-orange',
                 4: 'bg-purple',
                 5: 'bg-magenta',
-                6: 'bg-navy',
+                6: 'bg-mediumblue',
                 7: 'bg-red',
                 8: 'bg-teal',
               }[content.service_card.homepage_order]
@@ -271,7 +271,7 @@ export default async function Service({ params }: PageProps) {
                 3: 'bg-orange',
                 4: 'bg-purple',
                 5: 'bg-magenta',
-                6: 'bg-navy',
+                6: 'bg-mediumblue',
                 7: 'bg-red',
                 8: 'bg-teal',
               }[content.service_card.homepage_order]
@@ -327,7 +327,7 @@ export default async function Service({ params }: PageProps) {
                 3: 'bg-orange',
                 4: 'bg-purple',
                 5: 'bg-magenta',
-                6: 'bg-navy',
+                6: 'bg-mediumblue',
                 7: 'bg-red',
                 8: 'bg-teal',
               }[content.service_card.homepage_order]
@@ -339,7 +339,7 @@ export default async function Service({ params }: PageProps) {
         </div>
 
         {content.benefits_block_is_available && (
-          <div className='bg-chequered-bg bg-cover  bg-bottom grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 justify-center gap-4 md:gap-8 lg:gap-12 px-4 lg:px-44 pb-8 lg:pb-24'>
+          <div className='bg-chequered-bg bg-cover  bg-bottom grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 justify-center gap-4 md:gap-6 lg:gap-8 px-4 lg:px-16 xl:px-36 pb-8 lg:pb-24'>
             {benefitsArr.map((content, i) => (
               <BenefitCard content={content} key={i} colourScheme='light' />
             ))}

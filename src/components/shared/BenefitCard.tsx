@@ -19,14 +19,16 @@ export const BenefitCard = async ({
         colourScheme === 'light'
           ? 'bg-lightgrey2'
           : 'bg-lightblue bg-opacity-25'
-      } rounded-sm p-6 lg:p-12 gap-2 lg:gap-8`}
+      } rounded-sm p-6 lg:p-6 gap-2 lg:gap-4`}
     >
       <Image
         src={image.source}
         alt={image.altText}
         width={120}
         height={120}
-        className={`${colourScheme === 'light' ? '' : 'filter invert'}`}
+        className={`justify-self-center w-8 ${
+          colourScheme === 'light' ? '' : 'filter invert'
+        }`}
       />
       <div className='col-span-4 flex flex-col'>
         <h5

@@ -33,7 +33,7 @@ export const ServiceCard = ({
               3: 'border-orange',
               4: 'border-purple',
               5: 'border-magenta',
-              6: 'border-navy',
+              6: 'border-mediumblue',
               7: 'border-red',
               8: 'border-teal',
             }[order]
@@ -49,7 +49,7 @@ export const ServiceCard = ({
             3: 'bg-orange',
             4: 'bg-purple',
             5: 'bg-magenta',
-            6: 'bg-navy',
+            6: 'bg-mediumblue',
             7: 'bg-red',
             8: 'bg-teal',
           }[order]

@@ -25,7 +25,7 @@ export const ServiceTab = ({ service, activePageSlug }: ServiceTabProps) => {
               3: 'bg-orange',
               4: 'bg-purple',
               5: 'bg-magenta',
-              6: 'bg-navy',
+              6: 'bg-mediumblue',
               7: 'bg-red',
               8: 'bg-teal',
             }[service.order]
@@ -37,7 +37,7 @@ export const ServiceTab = ({ service, activePageSlug }: ServiceTabProps) => {
           3: 'border-b-orange',
           4: 'border-b-purple',
           5: 'border-b-magenta',
-          6: 'border-b-navy',
+          6: 'border-b-mediumblue',
           7: 'border-b-red',
           8: 'border-b-teal',
         }[service.order]
@@ -48,7 +48,7 @@ export const ServiceTab = ({ service, activePageSlug }: ServiceTabProps) => {
           3: 'hover:bg-orange',
           4: 'hover:bg-purple',
           5: 'hover:bg-magenta',
-          6: 'hover:bg-navy',
+          6: 'hover:bg-mediumblue',
           7: 'hover:bg-red',
           8: 'hover:bg-teal',
         }[service.order]
