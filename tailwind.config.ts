@@ -42,10 +42,10 @@ const config: Config = {
           "linear-gradient(180deg, rgba(0,31,63,0) 0%, rgba(0,31,63,0) 60%, rgba(0,31,63) 100%), linear-gradient(270deg, rgba(0,31,63,0.2) 0%, rgba(0,31,63,0.6) 80%,rgba(0,31,63,0.6) 100%), linear-gradient(180deg, rgba(0,31,63,0) 70%, rgba(0,31,63,0.9) 80%, rgba(0,31,63,1) 100%), url('/images/home-banner-raw.webp')",
         'chequered-bg': "url('/images/chequered-bg.png')",
         'chequered-flipped': "url('/images/chequered-bg-flipped.png')",
-        'building-detail': "url('/images/building-detail-bg.png')",
+        'building-detail': "url('/images/building-detail-bg.webp')",
         houses:
           "linear-gradient(180deg, rgba(0,31,63,0) 0%, rgba(0,31,63,0) 60%, rgba(0,31,63) 100%), linear-gradient(270deg, rgba(0,31,63,0.2) 0%, rgba(0,31,63,0.6) 80%,rgba(0,31,63,0.6) 100%), url('/images/houses.png')",
-        'building-detail-2': "url('/images/building-detail-2.png')",
+        'building-detail-2': "url('/images/building-detail-2.webp')",
       },
       borderRadius: {
         'br-120': '120px',
