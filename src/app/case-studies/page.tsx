@@ -15,10 +15,9 @@ async function fetchPageContent() {
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_HOST_URL}/case-studies/api/fetchPageContent`,
     {
-      // next: {
-      //   revalidate: 86400,
-      // },
-      cache: 'no-store',
+      next: {
+        revalidate: 86400,
+      },
     }
   );
   if (!res.ok) {
