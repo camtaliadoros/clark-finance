@@ -3,7 +3,7 @@
 import { MenuDrawerContext } from '@/contexts/MenuContextProvider';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { useContext, useRef } from 'react';
+import { useContext } from 'react';
 
 export const SubMenu = () => {
   const { menuItems } = useContext(MenuDrawerContext);
