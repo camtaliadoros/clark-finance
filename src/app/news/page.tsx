@@ -109,7 +109,7 @@ export default async function InsightsPage({
     <>
       <Section
         type='narrow'
-        classes='flex flex-col items-center justify-center bg-chequered-bg bg-cover bg-bottom bg-fixed px-4 py-8'
+        classes='flex flex-col items-center justify-center bg-chequered-bg bg-cover bg-bottom lg:bg-fixed px-4 py-8'
       >
         <SectionTitle
           title={content.page_title}

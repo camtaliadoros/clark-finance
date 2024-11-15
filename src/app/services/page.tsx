@@ -101,7 +101,7 @@ export default async function Services() {
   return (
     <>
       <div
-        className='space-y-4 mb-0 pb-0 bg-hero-image bg-top bg-cover bg-fixed flex flex-col items-center py-32'
+        className='space-y-4 mb-0 pb-0 bg-hero-image bg-top bg-cover lg:bg-fixed flex flex-col items-center py-32'
         style={{ height: '24rem' }}
       >
         <SectionTitle

@@ -197,7 +197,7 @@ export default async function Service({ params }: PageProps) {
   return (
     <>
       <div
-        className='relative flex md:px-24 items-center bg-cover bg-center bg-fixed'
+        className='relative flex md:px-24 items-center bg-cover bg-center lg:bg-fixed'
         style={{
           backgroundImage: `url("${bgImage.source}")`,
         }}

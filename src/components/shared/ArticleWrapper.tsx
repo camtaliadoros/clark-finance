@@ -19,7 +19,7 @@ export const ArticleWrapper = ({
   return (
     <>
       <div
-        className=' relative flex justify-center items-center bg-cover bg-fixed bg-center'
+        className=' relative flex justify-center items-center bg-cover lg:bg-fixed bg-center'
         style={{
           backgroundImage: imageUrl ? `url(${imageUrl})` : 'null',
         }}

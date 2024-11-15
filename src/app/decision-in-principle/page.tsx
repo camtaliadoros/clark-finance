@@ -142,7 +142,7 @@ export default async function DecisionInPrinciplePage() {
     <>
       <Section
         type='narrow'
-        classes='bg-houses bg-cover bg-bottom bg-fixed flex flex-col items-center h-full py-16 lg:py-48'
+        classes='bg-houses bg-cover bg-bottom lg:bg-fixed flex flex-col items-center h-full py-16 lg:py-48'
       >
         <SectionTitle
           title={content.page_title}
