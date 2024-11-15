@@ -221,11 +221,11 @@ export default async function Service({ params }: PageProps) {
           <div className='flex flex-col'>
             <h1 className='text-chalk mb-8'>{content.page_title}</h1>
 
-            <h2 className='font-semibold text-xl text-chalk'>
+            <h2 className='font-semibold text-lg text-chalk'>
               {content.subheading}
             </h2>
             <div
-              className='text-chalk 2xl:text-xl'
+              className='text-chalk text-sm 2xl:text-lg'
               dangerouslySetInnerHTML={{ __html: whyClarkFinanceText }}
             />
           </div>
