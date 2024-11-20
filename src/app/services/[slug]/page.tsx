@@ -217,7 +217,7 @@ export default async function Service({ params }: PageProps) {
           } bg-opacity-50`}
         ></div>
 
-        <div className='flex flex-col bg-black bg-opacity-50 md:backdrop-blur-sm h-full py-16 px-6 w-full lg:w-1/2 gap-8 z-10 '>
+        <div className='flex flex-col bg-black bg-opacity-50 md:backdrop-blur-sm h-full py-12 px-6 w-full lg:w-1/2  z-10 '>
           <div className='flex flex-col'>
             <h1 className='text-chalk mb-8'>{content.page_title}</h1>
 
@@ -229,7 +229,7 @@ export default async function Service({ params }: PageProps) {
               dangerouslySetInnerHTML={{ __html: whyClarkFinanceText }}
             />
           </div>
-          <div className='flex gap-8 '>
+          <div className='flex '>
             <Button url='#contact-us' title='Get in touch' colour='chalk' />
           </div>
         </div>
