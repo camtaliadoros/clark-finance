@@ -126,17 +126,3 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: 'reCAPTCHA failed' });
   }
 }
-
-async function updateEnv(key: string, value: string) {
-  const envPath = './.env'; // Path to your .env file
-  const data = await fs.readFile(envPath, 'utf8');
-
-  // Update the value for the given key
-  const newData = data.replace(
-    new RegExp(`^${key}=.*`, 'm'),
-    `${key}=${value}`
-  );
-
-  // Write the updated content back to .env
-  await fs.writeFile(envPath, newData, 'utf8');
-}
