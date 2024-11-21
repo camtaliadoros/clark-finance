@@ -42,7 +42,7 @@ export const ReviewCard = ({ content }: ReviewCardProps) => {
                 key={i}
                 className={`${
                   i < content.rating ? 'text-yellow' : 'text-mediumgrey'
-                } 2xl:text-xl`}
+                } w-3 h-auto text-base 2xl:text-xl`}
               />
             ))}
           </div>
