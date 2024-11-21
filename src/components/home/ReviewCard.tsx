@@ -46,7 +46,7 @@ export const ReviewCard = ({ content }: ReviewCardProps) => {
               />
             ))}
           </div>
-          <p className='text-mediumgrey text-xs 2xl:text-lg mb-0'>
+          <p className='text-mediumgrey text-xs 2xl:text-base mb-0'>
             {content.relative_time_description}
           </p>
         </div>

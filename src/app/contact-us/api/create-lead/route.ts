@@ -1,6 +1,5 @@
 import { db } from '@/util/firebaseAdmin';
 import { doc, getDoc, setDoc, Timestamp } from 'firebase/firestore';
-import { promises as fs } from 'fs';
 import { NextRequest, NextResponse } from 'next/server';
 
 export async function POST(req: NextRequest) {

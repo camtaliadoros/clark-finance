@@ -334,9 +334,7 @@ export default async function Service({ params }: PageProps) {
             }`}
           >
             <h2 className='text-chalk'>Request a callback</h2>
-            <ContactUsFormWrapper>
-              <ContactForm buttonColour='light' />
-            </ContactUsFormWrapper>
+            <ContactUsFormWrapper />
           </div>
         </div>
 
