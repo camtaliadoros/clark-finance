@@ -47,10 +47,13 @@ export async function GET(req: NextRequest) {
 
     const { access_token, refresh_token } = tokenData;
 
-    await setDoc(doc(db, 'tokens', 'zohoTokens'), {
+    await setDoc(doc(db, 'tokens', 'accessToken'), {
       access_token,
-      refresh_token,
       last_updated: Timestamp.fromDate(new Date()),
+    });
+
+    await setDoc(doc(db, 'tokens', 'refreshToken'), {
+      refresh_token,
     });
 
     return NextResponse.json({ message: 'Authorization successful' });

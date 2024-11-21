@@ -21,20 +21,30 @@ export async function POST(req: NextRequest) {
   const recaptchaData = await recaptchaResponse.json();
 
   if (recaptchaData.success && recaptchaData.score > 0.5) {
-    const zohoTokenRef = doc(db, 'tokens', 'zohoTokens');
-    const docSnap = await getDoc(zohoTokenRef);
+    const zohoAccessTokenRef = doc(db, 'tokens', 'accessToken');
+    const accessTokenDocSnap = await getDoc(zohoAccessTokenRef);
 
-    let zohoTokenData;
     let accessToken: string;
     let refreshToken;
 
-    if (docSnap.exists()) {
-      zohoTokenData = docSnap.data();
+    if (accessTokenDocSnap.exists()) {
+      const zohoTokenData = accessTokenDocSnap.data();
       accessToken = zohoTokenData.access_token;
-      refreshToken = zohoTokenData.refresh_token;
     } else {
       return NextResponse.json({
         error: 'Could not retrieve Zoho Access Token',
+      });
+    }
+
+    const zohoRefreshTokenRef = doc(db, 'tokens', 'accessToken');
+    const refreshTokenDocSnap = await getDoc(zohoRefreshTokenRef);
+
+    if (refreshTokenDocSnap.exists()) {
+      const zohoTokenData = refreshTokenDocSnap.data();
+      refreshToken = zohoTokenData.refresh_token;
+    } else {
+      return NextResponse.json({
+        error: 'Could not retrieve Zoho Refresh Token',
       });
     }
 
@@ -64,7 +74,7 @@ export async function POST(req: NextRequest) {
       }
       // Update stored tokens
 
-      await setDoc(doc(db, 'tokens', 'zohoTokens'), {
+      await setDoc(doc(db, 'tokens', 'accessToken'), {
         access_token: accessToken,
         last_updated: Timestamp.fromDate(new Date()),
       });
