@@ -141,9 +141,23 @@ export const ContactForm = ({ buttonColour }: ContactFormProps) => {
           {loading ? <ClipLoader color='#F8F9FA' size={15} /> : 'Submit'}
         </button>
         {successMessage && (
-          <p className='font-semibold text-sm text-green'>{successMessage}</p>
+          <p
+            className={`font-semibold text-sm ${
+              buttonColour === 'light' ? 'text-chalk' : 'text-green'
+            }`}
+          >
+            {successMessage}
+          </p>
         )}
-        {error && <p className='font-semibold text-sm text-red'>{error}</p>}
+        {error && (
+          <p
+            className={`font-semibold text-sm ${
+              buttonColour === 'light' ? 'text-chalk' : 'text-red'
+            } text-red`}
+          >
+            {error}
+          </p>
+        )}
       </fieldset>
     </form>
   );

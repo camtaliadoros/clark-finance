@@ -59,7 +59,9 @@ export const ContactUs = async ({ colourScheme }: ContactUsProps) => {
         id='contact-us'
         className='flex flex-col md:grid md:grid-cols-2 items-start space-y-12 md:space-y-0 gap-12'
       >
-        <ContactUsFormWrapper />
+        <ContactUsFormWrapper>
+          <ContactForm buttonColour='dark' />
+        </ContactUsFormWrapper>
 
         <div className='flex flex-col items-start gap-6 '>
           <Button
