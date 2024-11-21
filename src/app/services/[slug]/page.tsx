@@ -3,6 +3,7 @@ import { QAWrapper } from '@/components/services/QAWrapper';
 import { BenefitCard } from '@/components/shared/BenefitCard';
 import { Button } from '@/components/shared/Button';
 import { ContactForm } from '@/components/shared/ContactForm';
+import { ContactUsFormWrapper } from '@/components/shared/ContactUsFormWrapper';
 import { ImageTextBlock } from '@/components/shared/ImageTextBlock';
 import { Section } from '@/components/shared/Section';
 import { SectionTitle } from '@/components/shared/SectionTitle';
@@ -333,7 +334,9 @@ export default async function Service({ params }: PageProps) {
             }`}
           >
             <h2 className='text-chalk'>Request a callback</h2>
-            <ContactForm buttonColour='light' />
+            <ContactUsFormWrapper>
+              <ContactForm buttonColour='light' />
+            </ContactUsFormWrapper>
           </div>
         </div>
 
