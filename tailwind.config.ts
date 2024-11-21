@@ -67,6 +67,9 @@ const config: Config = {
         'responsive-5xl': 'clamp(2.25rem, 3rem, 3.75rem)',
         'responsive-6xl': 'clamp(3rem, 3.75rem, 4.5rem)',
       },
+      lineClamp: {
+        7: '7',
+      },
     },
   },
   plugins: [],
