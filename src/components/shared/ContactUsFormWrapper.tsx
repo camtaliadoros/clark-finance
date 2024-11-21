@@ -1,5 +1,6 @@
 'use client';
 import { GoogleReCaptchaProvider } from 'react-google-recaptcha-v3';
+import { ContactForm } from './ContactForm';
 
 export const ContactUsFormWrapper = ({
   children,

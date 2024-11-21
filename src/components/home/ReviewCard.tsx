@@ -38,7 +38,7 @@ export const ReviewCard = ({ content }: ReviewCardProps) => {
             {ratingArr.map((el, i) => (
               <FontAwesomeIcon
                 icon={faStar}
-                size='1x'
+                size='sm'
                 key={i}
                 className={`${
                   i < content.rating ? 'text-yellow' : 'text-mediumgrey'
