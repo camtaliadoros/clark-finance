@@ -48,9 +48,6 @@ export const Footer = async () => {
             >
               info@clarkfinance.co.uk
             </a>
-            <p className='text-chalk text-sm 2xl:text-lg'>
-              Clark Finance, Bedford Heights, Brickhill Drive, Bedford MK41 7PH
-            </p>
           </div>
           <div className='flex flex-col space-y-4'>
             {sortedPages.map((page) => (
