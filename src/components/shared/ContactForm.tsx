@@ -114,12 +114,21 @@ export const ContactForm = ({ buttonColour }: ContactFormProps) => {
       <fieldset className='flex flex-col space-y-4  *:placeholder:text-mediumgrey *:placeholder:text-sm'>
         {inputFields.map((field) => (
           <div key={field.id} className='flex flex-col'>
-            <input
-              {...register(field.id, { required: field.requiredError })}
-              placeholder={field.placeholder}
-              type={field.type}
-              className='p-3'
-            />
+            {field.type === 'textarea' ? (
+              <textarea
+                {...register(field.id, { required: field.requiredError })}
+                placeholder={field.placeholder}
+                className='p-3 resize-none'
+                rows={3}
+              />
+            ) : (
+              <input
+                {...register(field.id, { required: field.requiredError })}
+                placeholder={field.placeholder}
+                type={field.type}
+                className='p-3'
+              />
+            )}
             {errors[field.id] && (
               <p className='text-sm text-red pt-1'>
                 {errors[field.id]?.message
