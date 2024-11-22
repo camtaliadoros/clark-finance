@@ -14,7 +14,7 @@ export const Section = ({
   return (
     <section
       className={` ${
-        type === 'wide' ? 'px-4 2xl:px-60' : ' px-4 md:px-16 xl:px-36 2xl:px-96'
+        type === 'wide' ? 'px-4 2xl:px-60' : ' px-4 md:px-16 xl:px-36 2xl:px-60'
       }  relative z-10 bg-chalk ${classes}`}
       id={sectionId}
     >
