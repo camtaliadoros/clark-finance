@@ -36,7 +36,7 @@ export async function POST(req: NextRequest) {
       });
     }
 
-    const zohoRefreshTokenRef = doc(db, 'tokens', 'accessToken');
+    const zohoRefreshTokenRef = doc(db, 'tokens', 'refreshToken');
     const refreshTokenDocSnap = await getDoc(zohoRefreshTokenRef);
 
     if (refreshTokenDocSnap.exists()) {
