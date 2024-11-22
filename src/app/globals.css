@@ -221,6 +221,10 @@ a.link {
   color: var(--page-colour);
 }
 
+.dynamic-content.text-chalk li::marker {
+  color: #f8f9fa;
+}
+
 .dynamic-content {
   h1,
   h2,
