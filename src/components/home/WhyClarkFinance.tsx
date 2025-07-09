@@ -28,6 +28,8 @@ export const WhyClarkFinance = ({
   // Sanitise URLs
   const sanitisedURL = sanitiseURL(aboutUsButton.url);
 
+  console.log(listContent);
+
   return (
     <Section
       type='narrow'
@@ -66,7 +68,10 @@ export const WhyClarkFinance = ({
                 height={15}
                 alt='check icon'
               />
-              <p className='text-chalk text-lg 2xl:text-xl mb-0'>{item}</p>
+              <p
+                className='text-chalk text-lg 2xl:text-xl mb-0'
+                dangerouslySetInnerHTML={{ __html: item }}
+              />
             </li>
           ))}
         </ul>
