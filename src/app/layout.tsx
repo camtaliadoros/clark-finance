@@ -8,6 +8,8 @@ import { GoogleAnalytics } from '@next/third-parties/google';
 import { NavigationEvents } from '@/components/NavigationEvents';
 import React, { Suspense } from 'react';
 import { MenuDrawer } from '../components/MenuDrawer';
+// Validate environment variables at startup
+import '@/util/validateEnv';
 
 const inter = Inter({ subsets: ['latin'] });
 
