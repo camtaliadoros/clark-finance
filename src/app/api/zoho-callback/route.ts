@@ -4,10 +4,34 @@ import dotenv from 'dotenv';
 import { db } from '@/util/firebaseAdmin';
 import { Timestamp } from 'firebase-admin/firestore';
 import { fetchWithTimeout } from '@/util/fetchWithTimeout';
+import { rateLimit, getClientIp, rateLimitPresets } from '@/util/rateLimit';
 
 dotenv.config();
 
 export async function GET(req: NextRequest) {
+  // Rate limiting: 10 requests per 15 minutes per IP (for OAuth callback)
+  const clientIp = getClientIp(req);
+  const rateLimitResult = rateLimit(clientIp, {
+    windowMs: 15 * 60 * 1000,
+    maxRequests: 10,
+  });
+
+  if (!rateLimitResult.success) {
+    const retryAfter = Math.ceil((rateLimitResult.resetTime - Date.now()) / 1000);
+    return NextResponse.json(
+      { 
+        error: 'Too many requests. Please try again later.',
+        retryAfter,
+      },
+      { 
+        status: 429,
+        headers: {
+          'Retry-After': retryAfter.toString(),
+        },
+      }
+    );
+  }
+
   const { searchParams } = new URL(req.url);
   const code = searchParams.get('code');
 

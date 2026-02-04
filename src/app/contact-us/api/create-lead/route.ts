@@ -3,6 +3,7 @@ import { Timestamp } from 'firebase-admin/firestore';
 import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
 import { fetchWithTimeout } from '@/util/fetchWithTimeout';
+import { rateLimit, getClientIp, rateLimitPresets } from '@/util/rateLimit';
 
 // Validation schema for create lead request
 const createLeadSchema = z.object({
@@ -40,6 +41,29 @@ const createLeadSchema = z.object({
 });
 
 export async function POST(req: NextRequest) {
+  // Rate limiting: 5 requests per 15 minutes per IP
+  const clientIp = getClientIp(req);
+  const rateLimitResult = rateLimit(clientIp, rateLimitPresets.strict);
+
+  if (!rateLimitResult.success) {
+    const retryAfter = Math.ceil((rateLimitResult.resetTime - Date.now()) / 1000);
+    return NextResponse.json(
+      { 
+        error: 'Too many requests. Please try again later.',
+        retryAfter,
+      },
+      { 
+        status: 429,
+        headers: {
+          'Retry-After': retryAfter.toString(),
+          'X-RateLimit-Limit': '5',
+          'X-RateLimit-Remaining': '0',
+          'X-RateLimit-Reset': new Date(rateLimitResult.resetTime).toISOString(),
+        },
+      }
+    );
+  }
+
   try {
     // Parse and validate request body
     const body = await req.json();
@@ -194,7 +218,14 @@ export async function POST(req: NextRequest) {
           return NextResponse.json(retryData, { status: 200 });
         }
         const data = await response.json();
-        return NextResponse.json(data, { status: 200 });
+        return NextResponse.json(data, { 
+          status: 200,
+          headers: {
+            'X-RateLimit-Limit': '5',
+            'X-RateLimit-Remaining': rateLimitResult.remaining.toString(),
+            'X-RateLimit-Reset': new Date(rateLimitResult.resetTime).toISOString(),
+          },
+        });
       } catch (error) {
         console.error('Error creating lead:', error);
         // Check if it's a timeout error
