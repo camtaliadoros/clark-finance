@@ -5,6 +5,13 @@
 [build.environment]
   NODE_VERSION = "20"
 
+# Request body size limits
+# Netlify default: 6MB for serverless functions
+# Application-level limits (enforced in code):
+# - Form submissions: 200KB
+# - General API requests: 100KB
+# These limits are enforced in src/util/requestSizeLimit.ts
+
 # Production branch settings
 [context.production]
   command = "npm run build"

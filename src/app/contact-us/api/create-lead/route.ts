@@ -4,6 +4,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
 import { fetchWithTimeout } from '@/util/fetchWithTimeout';
 import { rateLimit, getClientIp, rateLimitPresets } from '@/util/rateLimit';
+import { parseJsonWithSizeLimit, MAX_FORM_BODY_SIZE } from '@/util/requestSizeLimit';
 
 // Validation schema for create lead request
 const createLeadSchema = z.object({
@@ -65,8 +66,13 @@ export async function POST(req: NextRequest) {
   }
 
   try {
-    // Parse and validate request body
-    const body = await req.json();
+    // Parse and validate request body with size limit (200KB for forms)
+    const bodyParseResult = await parseJsonWithSizeLimit(req, MAX_FORM_BODY_SIZE);
+    if (!bodyParseResult.success) {
+      return bodyParseResult.error;
+    }
+    const body = bodyParseResult.data;
+    
     const validationResult = createLeadSchema.safeParse(body);
 
     if (!validationResult.success) {
