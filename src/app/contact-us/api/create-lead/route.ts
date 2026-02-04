@@ -2,6 +2,7 @@ import { db } from '@/util/firebaseAdmin';
 import { Timestamp } from 'firebase-admin/firestore';
 import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
+import { fetchWithTimeout } from '@/util/fetchWithTimeout';
 
 // Validation schema for create lead request
 const createLeadSchema = z.object({
@@ -60,16 +61,28 @@ export async function POST(req: NextRequest) {
     const { firstName, lastName, email, phoneNumber, message, recapthaToken } = validationResult.data;
 
     // Verify the reCAPTCHA token
-    const recaptchaResponse = await fetch(
-      `https://www.google.com/recaptcha/api/siteverify`,
-      {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/x-www-form-urlencoded',
-        },
-        body: `secret=${process.env.RECAPTCHA_SECRET_KEY}&response=${recapthaToken}`,
+    let recaptchaResponse;
+    try {
+      recaptchaResponse = await fetchWithTimeout(
+        `https://www.google.com/recaptcha/api/siteverify`,
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+          },
+          body: `secret=${process.env.RECAPTCHA_SECRET_KEY}&response=${recapthaToken}`,
+          timeout: 5000, // 5 seconds for reCAPTCHA
+        }
+      );
+    } catch (error) {
+      if (error instanceof Error && error.message.includes('timeout')) {
+        return NextResponse.json(
+          { error: 'reCAPTCHA verification timeout' },
+          { status: 504 }
+        );
       }
-    );
+      throw error;
+    }
 
     const recaptchaData = await recaptchaResponse.json();
 
@@ -113,12 +126,13 @@ export async function POST(req: NextRequest) {
         refresh_token: refreshToken || '',
       });
       const tokenUrl = 'https://accounts.zoho.eu/oauth/v2/token';
-      const tokenResponse = await fetch(tokenUrl, {
+      const tokenResponse = await fetchWithTimeout(tokenUrl, {
         method: 'POST',
         body,
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded',
         },
+        timeout: 10000, // 10 seconds for token refresh
       });
       const tokenData = await tokenResponse.json();
 
@@ -150,13 +164,14 @@ export async function POST(req: NextRequest) {
             },
           ],
         };
-        const response = await fetch(zohoApiUrl, {
+        const response = await fetchWithTimeout(zohoApiUrl, {
           method: 'POST',
           headers: {
             Authorization: `Zoho-oauthtoken ${accessToken}`,
             'Content-Type': 'application/json',
           },
           body: JSON.stringify(leadData),
+          timeout: 15000, // 15 seconds for Zoho API calls
         });
 
         // If access token is expired, refresh it and retry
@@ -164,13 +179,14 @@ export async function POST(req: NextRequest) {
           accessToken = await refreshAccessToken();
 
           // Retry the request with the new access token
-          const retryResponse = await fetch(zohoApiUrl, {
+          const retryResponse = await fetchWithTimeout(zohoApiUrl, {
             method: 'POST',
             headers: {
               Authorization: `Zoho-oauthtoken ${accessToken}`,
               'Content-Type': 'application/json',
             },
             body: JSON.stringify(leadData),
+            timeout: 15000, // 15 seconds for Zoho API calls
           });
 
           const retryData = await retryResponse.json();
@@ -181,6 +197,13 @@ export async function POST(req: NextRequest) {
         return NextResponse.json(data, { status: 200 });
       } catch (error) {
         console.error('Error creating lead:', error);
+        // Check if it's a timeout error
+        if (error instanceof Error && error.message.includes('timeout')) {
+          return NextResponse.json(
+            { error: 'Request timeout - please try again' },
+            { status: 504 }
+          );
+        }
         return NextResponse.json(
           { error: 'Failed to create lead' },
           { status: 500 }

@@ -3,6 +3,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import dotenv from 'dotenv';
 import { db } from '@/util/firebaseAdmin';
 import { Timestamp } from 'firebase-admin/firestore';
+import { fetchWithTimeout } from '@/util/fetchWithTimeout';
 
 dotenv.config();
 
@@ -31,12 +32,13 @@ export async function GET(req: NextRequest) {
   });
 
   try {
-    const tokenResponse = await fetch(tokenUrl, {
+    const tokenResponse = await fetchWithTimeout(tokenUrl, {
       method: 'POST',
       body,
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded',
       },
+      timeout: 10000, // 10 seconds for token exchange
     });
 
     const tokenData = await tokenResponse.json();
@@ -63,6 +65,13 @@ export async function GET(req: NextRequest) {
     return NextResponse.json({ message: 'Authorization successful' });
   } catch (error) {
     console.error('Error in token exchange:', error);
+    // Check if it's a timeout error
+    if (error instanceof Error && error.message.includes('timeout')) {
+      return NextResponse.json(
+        { error: 'Token exchange timeout' },
+        { status: 504 }
+      );
+    }
     return NextResponse.json(
       { error: 'Token exchange failed' },
       { status: 500 }

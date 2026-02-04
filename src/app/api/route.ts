@@ -1,16 +1,18 @@
 import { NextResponse } from 'next/server';
+import { fetchWithTimeout } from '@/util/fetchWithTimeout';
 
 export async function GET() {
   const encodedCredentials = btoa(`${process.env.WP_CREDENTIALS}`);
 
   try {
-    const response = await fetch(
+    const response = await fetchWithTimeout(
       `${process.env.WP_ROUTE}/pages/7?_fields=acf,yoast_head_json`,
       {
         headers: {
           Authorization: `Basic ${encodedCredentials}`,
           'Content-Type': 'application/json',
         },
+        timeout: 15000, // 15 seconds for WordPress API
       }
     );
 
@@ -26,6 +28,13 @@ export async function GET() {
     return NextResponse.json(data);
   } catch (error) {
     console.error('Error retrieving content:', error);
+    // Check if it's a timeout error
+    if (error instanceof Error && error.message.includes('timeout')) {
+      return NextResponse.json(
+        { error: 'Request timeout - please try again' },
+        { status: 504 }
+      );
+    }
     return NextResponse.json(
       { error: 'Failed to retrieve content' },
       { status: 500 }
