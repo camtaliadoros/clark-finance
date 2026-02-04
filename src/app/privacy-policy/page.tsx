@@ -11,14 +11,14 @@ type TcsPageContent = {
 };
 
 async function fetchPrivacyPolicyPageContent() {
-  const res = await fetch(
-    `${process.env.NEXT_PUBLIC_HOST_URL}/privacy-policy/api`,
-    {
-      next: {
-        revalidate: 86400,
-      },
-    }
-  );
+  const baseUrl = process.env.NEXT_PUBLIC_HOST_URL || '';
+  const apiUrl = baseUrl ? `${baseUrl}/privacy-policy/api` : '/privacy-policy/api';
+  
+  const res = await fetch(apiUrl, {
+    next: {
+      revalidate: 86400,
+    },
+  });
   if (!res.ok) {
     throw new Error('Failed to fetch data');
   }

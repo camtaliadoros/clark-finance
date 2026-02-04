@@ -34,14 +34,16 @@ type Params = {
 };
 
 const fetchPageContent = async (slug: string) => {
-  const res = await fetch(
-    `${process.env.NEXT_PUBLIC_HOST_URL}/services/api/fetchServicePageContent?slug=${slug}`,
-    {
-      next: {
-        revalidate: 86400,
-      },
-    }
-  );
+  const baseUrl = process.env.NEXT_PUBLIC_HOST_URL || '';
+  const apiUrl = baseUrl 
+    ? `${baseUrl}/services/api/fetchServicePageContent?slug=${slug}` 
+    : `/services/api/fetchServicePageContent?slug=${slug}`;
+  
+  const res = await fetch(apiUrl, {
+    next: {
+      revalidate: 86400,
+    },
+  });
 
   if (!res.ok) {
     throw new Error('Failed to fetch data');
@@ -50,15 +52,16 @@ const fetchPageContent = async (slug: string) => {
 };
 
 const fetchServiceMetadata = async (slug: string) => {
-  const res = await fetch(
-    `${process.env.NEXT_PUBLIC_HOST_URL}/services/api/fetchServiceMetadata?slug=${slug}`,
+  const baseUrl = process.env.NEXT_PUBLIC_HOST_URL || '';
+  const apiUrl = baseUrl 
+    ? `${baseUrl}/services/api/fetchServiceMetadata?slug=${slug}` 
+    : `/services/api/fetchServiceMetadata?slug=${slug}`;
 
-    {
-      next: {
-        revalidate: 86400,
-      },
-    }
-  );
+  const res = await fetch(apiUrl, {
+    next: {
+      revalidate: 86400,
+    },
+  });
   if (!res.ok) {
     throw new Error('Failed to fetch data');
   }

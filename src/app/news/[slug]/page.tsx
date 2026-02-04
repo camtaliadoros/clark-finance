@@ -20,14 +20,16 @@ type ArticleParams = {
 };
 
 const fetchArticle = async (slug: string) => {
-  const res = await fetch(
-    `${process.env.NEXT_PUBLIC_HOST_URL}/news/api/fetchArticle?slug=${slug}`,
-    {
-      next: {
-        revalidate: 86400,
-      },
-    }
-  );
+  const baseUrl = process.env.NEXT_PUBLIC_HOST_URL || '';
+  const apiUrl = baseUrl 
+    ? `${baseUrl}/news/api/fetchArticle?slug=${slug}` 
+    : `/news/api/fetchArticle?slug=${slug}`;
+  
+  const res = await fetch(apiUrl, {
+    next: {
+      revalidate: 86400,
+    },
+  });
   if (!res.ok) {
     throw new Error('Failed to fetch article data');
   }
@@ -35,14 +37,16 @@ const fetchArticle = async (slug: string) => {
 };
 
 const fetchArticleMetadata = async (slug: string) => {
-  const res = await fetch(
-    `${process.env.NEXT_PUBLIC_HOST_URL}/news/api/fetchArticleMetadata?slug=${slug}`,
-    {
-      next: {
-        revalidate: 86400,
-      },
-    }
-  );
+  const baseUrl = process.env.NEXT_PUBLIC_HOST_URL || '';
+  const apiUrl = baseUrl 
+    ? `${baseUrl}/news/api/fetchArticleMetadata?slug=${slug}` 
+    : `/news/api/fetchArticleMetadata?slug=${slug}`;
+  
+  const res = await fetch(apiUrl, {
+    next: {
+      revalidate: 86400,
+    },
+  });
   if (!res.ok) {
     throw new Error('Failed to fetch article metadata');
   }

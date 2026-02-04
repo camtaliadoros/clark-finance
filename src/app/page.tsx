@@ -21,7 +21,10 @@ type HomeContent = {
 };
 
 async function fetchHomePageContent() {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_HOST_URL}/api`, {
+  const baseUrl = process.env.NEXT_PUBLIC_HOST_URL || '';
+  const apiUrl = baseUrl ? `${baseUrl}/api` : '/api';
+  
+  const res = await fetch(apiUrl, {
     next: {
       revalidate: 86400,
     },
@@ -34,7 +37,9 @@ async function fetchHomePageContent() {
 }
 
 export async function generateMetadata(): Promise<Metadata> {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_HOST_URL}/api`);
+  const baseUrl = process.env.NEXT_PUBLIC_HOST_URL || '';
+  const apiUrl = baseUrl ? `${baseUrl}/api` : '/api';
+  const res = await fetch(apiUrl);
 
   const data = await res.json();
 

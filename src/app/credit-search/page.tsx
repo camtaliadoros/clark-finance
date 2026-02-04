@@ -13,14 +13,14 @@ type CreditSearchContent = {
 };
 
 async function fetchCreditSearchContent() {
-  const res = await fetch(
-    `${process.env.NEXT_PUBLIC_HOST_URL}/credit-search/api`,
-    {
-      next: {
-        revalidate: 86400,
-      },
-    }
-  );
+  const baseUrl = process.env.NEXT_PUBLIC_HOST_URL || '';
+  const apiUrl = baseUrl ? `${baseUrl}/credit-search/api` : '/credit-search/api';
+  
+  const res = await fetch(apiUrl, {
+    next: {
+      revalidate: 86400,
+    },
+  });
   if (!res.ok) {
     throw new Error('Failed to fetch data');
   }

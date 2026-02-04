@@ -20,14 +20,16 @@ type CaseStudyParams = {
 };
 
 const fetchCaseStudy = async (slug: string) => {
-  const res = await fetch(
-    `${process.env.NEXT_PUBLIC_HOST_URL}/case-studies/api/fetchCaseStudy?slug=${slug}`,
-    {
-      next: {
-        revalidate: 86400,
-      },
-    }
-  );
+  const baseUrl = process.env.NEXT_PUBLIC_HOST_URL || '';
+  const apiUrl = baseUrl 
+    ? `${baseUrl}/case-studies/api/fetchCaseStudy?slug=${slug}` 
+    : `/case-studies/api/fetchCaseStudy?slug=${slug}`;
+  
+  const res = await fetch(apiUrl, {
+    next: {
+      revalidate: 86400,
+    },
+  });
   if (!res.ok) {
     throw new Error('Failed to fetch data');
   }
@@ -35,14 +37,16 @@ const fetchCaseStudy = async (slug: string) => {
 };
 
 const fetchCaseStudyMetadata = async (slug: string) => {
-  const res = await fetch(
-    `${process.env.NEXT_PUBLIC_HOST_URL}/case-studies/api/fetchCaseStudyMetadata?slug=${slug}`,
-    {
-      next: {
-        revalidate: 86400,
-      },
-    }
-  );
+  const baseUrl = process.env.NEXT_PUBLIC_HOST_URL || '';
+  const apiUrl = baseUrl 
+    ? `${baseUrl}/case-studies/api/fetchCaseStudyMetadata?slug=${slug}` 
+    : `/case-studies/api/fetchCaseStudyMetadata?slug=${slug}`;
+  
+  const res = await fetch(apiUrl, {
+    next: {
+      revalidate: 86400,
+    },
+  });
   if (!res.ok) {
     throw new Error('Failed to fetch data');
   }

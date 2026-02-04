@@ -12,14 +12,14 @@ type ContactUsPageContent = {
 };
 
 async function fetchContactUsPageContent() {
-  const res = await fetch(
-    `${process.env.NEXT_PUBLIC_HOST_URL}/contact-us/api`,
-    {
-      next: {
-        revalidate: 86400,
-      },
-    }
-  );
+  const baseUrl = process.env.NEXT_PUBLIC_HOST_URL || '';
+  const apiUrl = baseUrl ? `${baseUrl}/contact-us/api` : '/contact-us/api';
+  
+  const res = await fetch(apiUrl, {
+    next: {
+      revalidate: 86400,
+    },
+  });
   if (!res.ok) {
     throw new Error('Failed to fetch data');
   }
@@ -27,7 +27,9 @@ async function fetchContactUsPageContent() {
 }
 
 export async function generateMetadata(): Promise<Metadata> {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_HOST_URL}/contact-us/api`);
+  const baseUrl = process.env.NEXT_PUBLIC_HOST_URL || '';
+  const apiUrl = baseUrl ? `${baseUrl}/contact-us/api` : '/contact-us/api';
+  const res = await fetch(apiUrl);
 
   const data = await res.json();
 

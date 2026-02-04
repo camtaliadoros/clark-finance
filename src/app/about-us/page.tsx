@@ -45,7 +45,10 @@ type AboutUsPageContent = {
 };
 
 async function fetchAboutUsPageContent() {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_HOST_URL}/about-us/api`, {
+  const baseUrl = process.env.NEXT_PUBLIC_HOST_URL || '';
+  const apiUrl = baseUrl ? `${baseUrl}/about-us/api` : '/about-us/api';
+  
+  const res = await fetch(apiUrl, {
     next: {
       revalidate: 86400,
     },

@@ -1,5 +1,22 @@
 import { ImageType } from './models';
 
+/**
+ * Get the base URL for API calls.
+ * During build time, uses relative URLs for internal API routes.
+ * During runtime, uses the NEXT_PUBLIC_HOST_URL environment variable.
+ */
+export const getApiBaseUrl = (): string => {
+  // During build time (static generation), use relative URLs
+  // This allows Next.js to call internal API routes directly
+  if (typeof window === 'undefined' && !process.env.NEXT_PUBLIC_HOST_URL) {
+    // Build time - use relative URL or construct from process
+    return '';
+  }
+  
+  // Runtime - use environment variable or fallback to relative
+  return process.env.NEXT_PUBLIC_HOST_URL || '';
+};
+
 export const convertWysywyg = (rawContent: string) => {
   // const convertedContent = rawContent.replace(/(?:\r\n|\r|\n)/g, '<br />');
 
@@ -12,14 +29,16 @@ export const convertWysywyg = (rawContent: string) => {
 };
 
 export const fetchFeaturedImage = async (imageId: number) => {
-  const res = await fetch(
-    `${process.env.NEXT_PUBLIC_HOST_URL}/api/fetchImage?id=${imageId}`,
-    {
-      next: {
-        revalidate: 86400,
-      },
-    }
-  );
+  const baseUrl = process.env.NEXT_PUBLIC_HOST_URL || '';
+  const apiUrl = baseUrl 
+    ? `${baseUrl}/api/fetchImage?id=${imageId}` 
+    : `/api/fetchImage?id=${imageId}`;
+  
+  const res = await fetch(apiUrl, {
+    next: {
+      revalidate: 86400,
+    },
+  });
   if (!res.ok) {
     throw new Error('Failed to fetch data');
   }
@@ -65,14 +84,14 @@ export const fetchFeaturedImage = async (imageId: number) => {
 };
 
 export const fetchMenuItems = async () => {
-  const res = await fetch(
-    `${process.env.NEXT_PUBLIC_HOST_URL}/api/fetchPages`,
-    {
-      next: {
-        revalidate: 86400,
-      },
-    }
-  );
+  const baseUrl = process.env.NEXT_PUBLIC_HOST_URL || '';
+  const apiUrl = baseUrl ? `${baseUrl}/api/fetchPages` : '/api/fetchPages';
+  
+  const res = await fetch(apiUrl, {
+    next: {
+      revalidate: 86400,
+    },
+  });
   if (!res.ok) {
     throw new Error('Failed to fetch data');
   }

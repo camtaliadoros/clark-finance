@@ -38,14 +38,14 @@ export type RequiredDocsItem = {
 };
 
 async function fetchDecisionInPrinciplePageContent() {
-  const res = await fetch(
-    `${process.env.NEXT_PUBLIC_HOST_URL}/decision-in-principle/api`,
-    {
-      next: {
-        revalidate: 86400,
-      },
-    }
-  );
+  const baseUrl = process.env.NEXT_PUBLIC_HOST_URL || '';
+  const apiUrl = baseUrl ? `${baseUrl}/decision-in-principle/api` : '/decision-in-principle/api';
+  
+  const res = await fetch(apiUrl, {
+    next: {
+      revalidate: 86400,
+    },
+  });
   if (!res.ok) {
     throw new Error('Failed to fetch data');
   }

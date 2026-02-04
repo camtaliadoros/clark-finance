@@ -10,14 +10,14 @@ type ServicesPageContent = {
 };
 
 async function fetchPageContent() {
-  const res = await fetch(
-    `${process.env.NEXT_PUBLIC_HOST_URL}/services/api/fetchPageContent`,
-    {
-      next: {
-        revalidate: 86400,
-      },
-    }
-  );
+  const baseUrl = process.env.NEXT_PUBLIC_HOST_URL || '';
+  const apiUrl = baseUrl ? `${baseUrl}/services/api/fetchPageContent` : '/services/api/fetchPageContent';
+  
+  const res = await fetch(apiUrl, {
+    next: {
+      revalidate: 86400,
+    },
+  });
 
   const resJson = await res.json();
 
