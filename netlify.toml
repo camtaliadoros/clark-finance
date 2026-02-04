@@ -1,0 +1,18 @@
+[build]
+  command = "npm run build"
+  publish = ".next"
+
+[build.environment]
+  NODE_VERSION = "20"
+
+# Production branch settings
+[context.production]
+  command = "npm run build"
+
+# Staging branch settings  
+[context.staging]
+  command = "npm run build"
+
+# Branch deploy settings
+[context.branch-deploy]
+  command = "npm run build"
