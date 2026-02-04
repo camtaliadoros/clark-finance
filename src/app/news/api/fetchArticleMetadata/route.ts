@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { cacheStrategies } from '@/util/cacheHeaders';
+import { validateSlug } from '@/util/validateParams';
 
 export async function GET(req: NextRequest) {
   const encodedCredentials = btoa(`${process.env.WP_CREDENTIALS}`);
@@ -7,16 +8,17 @@ export async function GET(req: NextRequest) {
   const { searchParams } = new URL(req.url);
   const slug = searchParams.get('slug');
 
-  if (!slug) {
+  const validatedSlug = validateSlug(slug);
+  if (!validatedSlug) {
     return NextResponse.json(
-      { error: 'Slug parameter is required' },
+      { error: 'Invalid slug parameter' },
       { status: 400 }
     );
   }
 
   try {
     const response = await fetch(
-      `${process.env.WP_ROUTE}/article?slug=${slug}&_fields=yoast_head_json`,
+      `${process.env.WP_ROUTE}/article?slug=${validatedSlug}&_fields=yoast_head_json`,
       {
         headers: {
           Authorization: `Basic ${encodedCredentials}`,

@@ -1,13 +1,15 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { cacheStrategies } from '@/util/cacheHeaders';
+import { validateSlug } from '@/util/validateParams';
 
 export async function GET(req: NextRequest) {
   const { searchParams } = new URL(req.url);
   const slug = searchParams.get('slug');
 
-  if (!slug) {
+  const validatedSlug = validateSlug(slug);
+  if (!validatedSlug) {
     return NextResponse.json(
-      { error: 'Slug parameter is required' },
+      { error: 'Invalid slug parameter' },
       { status: 400 }
     );
   }
@@ -16,7 +18,7 @@ export async function GET(req: NextRequest) {
 
   try {
     const response = await fetch(
-      `${process.env.WP_ROUTE}/case-study?slug=${slug}&_fields=acf.case_study_title,acf.loan_value,acf.location,acf.the_requirement,acf.the_interesting_stuff,acf.how_we_helped,acf.featured_image`,
+      `${process.env.WP_ROUTE}/case-study?slug=${validatedSlug}&_fields=acf.case_study_title,acf.loan_value,acf.location,acf.the_requirement,acf.the_interesting_stuff,acf.how_we_helped,acf.featured_image`,
       {
         headers: {
           Authorization: `Basic ${encodedCredentials}`,
