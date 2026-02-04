@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import { fetchWithTimeout } from '@/util/fetchWithTimeout';
+import { cacheStrategies } from '@/util/cacheHeaders';
 
 export async function GET() {
   const encodedCredentials = btoa(`${process.env.WP_CREDENTIALS}`);
@@ -25,7 +26,11 @@ export async function GET() {
     }
 
     const data = await response.json();
-    return NextResponse.json(data);
+    return NextResponse.json(data, {
+      headers: {
+        'Cache-Control': cacheStrategies.staticPage(),
+      },
+    });
   } catch (error) {
     console.error('Error retrieving content:', error);
     // Check if it's a timeout error

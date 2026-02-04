@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { validatePagination } from '@/util/validateParams';
+import { cacheStrategies } from '@/util/cacheHeaders';
 
 export async function GET(req: NextRequest) {
   const encodedCredentials = btoa(`${process.env.WP_CREDENTIALS}`);
@@ -44,7 +45,11 @@ export async function GET(req: NextRequest) {
       totalPages: totalPages,
     };
 
-    return NextResponse.json(articlesData);
+    return NextResponse.json(articlesData, {
+      headers: {
+        'Cache-Control': cacheStrategies.paginatedList(),
+      },
+    });
   } catch (error) {
     console.error('Error retrieving articles:', error);
     return NextResponse.json(

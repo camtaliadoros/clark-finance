@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { validatePagination } from '@/util/validateParams';
+import { cacheStrategies } from '@/util/cacheHeaders';
 
 export async function GET(req: NextRequest) {
   const { searchParams } = new URL(req.url);
@@ -44,7 +45,11 @@ export async function GET(req: NextRequest) {
       totalPages: totalPages,
     };
 
-    return NextResponse.json(caseStudiesData);
+    return NextResponse.json(caseStudiesData, {
+      headers: {
+        'Cache-Control': cacheStrategies.paginatedList(),
+      },
+    });
   } catch (error) {
     console.error('Error retrieving case studies:', error);
     return NextResponse.json(

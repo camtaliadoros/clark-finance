@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { cacheStrategies } from '@/util/cacheHeaders';
 
 export async function GET(req: NextRequest) {
   const encodedCredentials = btoa(`${process.env.WP_CREDENTIALS}`);
@@ -33,7 +34,11 @@ export async function GET(req: NextRequest) {
     }
 
     const data = await response.json();
-    return NextResponse.json(data);
+    return NextResponse.json(data, {
+      headers: {
+        'Cache-Control': cacheStrategies.metadata(),
+      },
+    });
   } catch (error) {
     console.error('Error retrieving service metadata:', error);
     return NextResponse.json(
