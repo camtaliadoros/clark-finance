@@ -5,6 +5,7 @@ import { z } from 'zod';
 import { fetchWithTimeout } from '@/util/fetchWithTimeout';
 import { rateLimit, getClientIp, rateLimitPresets } from '@/util/rateLimit';
 import { parseJsonWithSizeLimit, MAX_FORM_BODY_SIZE } from '@/util/requestSizeLimit';
+import { validateOrigin } from '@/util/validateOrigin';
 
 // Validation schema for create lead request
 const createLeadSchema = z.object({
@@ -42,6 +43,12 @@ const createLeadSchema = z.object({
 });
 
 export async function POST(req: NextRequest) {
+  // Origin validation: Ensure request comes from authorized origin
+  const originCheck = validateOrigin(req);
+  if (!originCheck.isValid && originCheck.errorResponse) {
+    return originCheck.errorResponse;
+  }
+
   // Rate limiting: 5 requests per 15 minutes per IP
   const clientIp = getClientIp(req);
   const rateLimitResult = rateLimit(clientIp, rateLimitPresets.strict);
