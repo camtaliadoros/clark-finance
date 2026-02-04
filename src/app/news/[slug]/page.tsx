@@ -8,7 +8,9 @@ import {
   fetchFeaturedImage,
   replaceWpURL,
 } from '@/util/utilFunctions';
+import { validateSlug } from '@/util/validateParams';
 import { Metadata } from 'next';
+import { notFound } from 'next/navigation';
 
 type ArticleData = {
   date: string;
@@ -82,7 +84,16 @@ export async function generateMetadata({
 }: {
   params: ArticleParams;
 }): Promise<Metadata> {
-  const slug = params.slug;
+  // Validate slug parameter
+  const validatedSlug = validateSlug(params.slug);
+  if (!validatedSlug) {
+    return {
+      title: 'Article Not Found',
+      description: 'The requested article could not be found.',
+    };
+  }
+
+  const slug = validatedSlug;
 
   const res = await fetchArticleMetadata(slug);
 
@@ -154,7 +165,13 @@ export default async function ArticlePage({
 }: {
   params: ArticleParams;
 }) {
-  const { slug } = params;
+  // Validate slug parameter
+  const validatedSlug = validateSlug(params.slug);
+  if (!validatedSlug) {
+    notFound();
+  }
+
+  const slug = validatedSlug;
 
   const data = await fetchArticle(slug);
 

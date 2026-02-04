@@ -1,15 +1,25 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { validatePagination } from '@/util/validateParams';
 
 export async function GET(req: NextRequest) {
   const { searchParams } = new URL(req.url);
   const currentPage = searchParams.get('page');
   const itemsPerPage = searchParams.get('items');
 
+  // Validate pagination parameters
+  const pagination = validatePagination(currentPage, itemsPerPage, 100);
+  if (!pagination) {
+    return NextResponse.json(
+      { error: 'Invalid pagination parameters' },
+      { status: 400 }
+    );
+  }
+
   const encodedCredentials = btoa(`${process.env.WP_CREDENTIALS}`);
 
   try {
     const response = await fetch(
-      `${process.env.WP_ROUTE}/case-study?page=${currentPage}&per_page=${itemsPerPage}&_fields=acf.case_study_title,acf.case_study_excerpt,acf.loan_value,acf.location,acf.featured_image,slug,link`,
+      `${process.env.WP_ROUTE}/case-study?page=${pagination.page}&per_page=${pagination.perPage}&_fields=acf.case_study_title,acf.case_study_excerpt,acf.loan_value,acf.location,acf.featured_image,slug,link`,
       {
         headers: {
           Authorization: `Basic ${encodedCredentials}`,

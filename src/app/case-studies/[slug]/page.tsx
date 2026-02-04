@@ -13,7 +13,9 @@ import {
   fetchFeaturedImage,
   replaceWpURL,
 } from '@/util/utilFunctions';
+import { validateSlug } from '@/util/validateParams';
 import { Metadata } from 'next';
+import { notFound } from 'next/navigation';
 
 type CaseStudyParams = {
   slug: string;
@@ -56,7 +58,16 @@ const fetchCaseStudyMetadata = async (slug: string) => {
 export async function generateMetadata({
   params,
 }: MetadataProps): Promise<Metadata> {
-  const slug = params.slug;
+  // Validate slug parameter
+  const validatedSlug = validateSlug(params.slug);
+  if (!validatedSlug) {
+    return {
+      title: 'Case Study Not Found',
+      description: 'The requested case study could not be found.',
+    };
+  }
+
+  const slug = validatedSlug;
 
   const res = await fetchCaseStudyMetadata(slug);
 
@@ -152,7 +163,13 @@ export default async function CaseStudyDetailPage({
 }: {
   params: CaseStudyParams;
 }) {
-  const data = await fetchCaseStudy(params.slug);
+  // Validate slug parameter
+  const validatedSlug = validateSlug(params.slug);
+  if (!validatedSlug) {
+    notFound();
+  }
+
+  const data = await fetchCaseStudy(validatedSlug);
 
   const content: CaseStudyContent = data[0]?.acf;
   const image = await fetchFeaturedImage(content.featured_image);

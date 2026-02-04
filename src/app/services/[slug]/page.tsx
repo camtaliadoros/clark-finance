@@ -20,10 +20,12 @@ import {
   fetchFeaturedImage,
   replaceWpURL,
 } from '@/util/utilFunctions';
+import { validateSlug } from '@/util/validateParams';
 import { faArrowAltCircleDown } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Metadata } from 'next';
 import Link from 'next/link';
+import { notFound } from 'next/navigation';
 
 type PageProps = {
   params: Params;
@@ -71,7 +73,16 @@ const fetchServiceMetadata = async (slug: string) => {
 export async function generateMetadata({
   params,
 }: MetadataProps): Promise<Metadata> {
-  const slug = params.slug;
+  // Validate slug parameter
+  const validatedSlug = validateSlug(params.slug);
+  if (!validatedSlug) {
+    return {
+      title: 'Service Not Found',
+      description: 'The requested service could not be found.',
+    };
+  }
+
+  const slug = validatedSlug;
 
   const res = await fetchServiceMetadata(slug);
 
@@ -163,7 +174,13 @@ export async function generateMetadata({
 // }
 
 export default async function Service({ params }: PageProps) {
-  const data = await fetchPageContent(params.slug);
+  // Validate slug parameter
+  const validatedSlug = validateSlug(params.slug);
+  if (!validatedSlug) {
+    notFound();
+  }
+
+  const data = await fetchPageContent(validatedSlug);
 
   const content: ServicePageContent = data[0].acf;
 

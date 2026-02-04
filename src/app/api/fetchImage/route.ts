@@ -1,12 +1,13 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { isValidId } from '@/util/validateParams';
 
 export async function GET(req: NextRequest) {
   const { searchParams } = new URL(req.url);
   const imageId = searchParams.get('id');
 
-  if (!imageId) {
+  if (!imageId || !isValidId(imageId)) {
     return NextResponse.json(
-      { error: 'Image ID is required' },
+      { error: 'Invalid image ID' },
       { status: 400 }
     );
   }
