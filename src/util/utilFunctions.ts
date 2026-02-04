@@ -17,15 +17,16 @@ export const getApiBaseUrl = (): string => {
   return process.env.NEXT_PUBLIC_HOST_URL || '';
 };
 
-export const convertWysywyg = (rawContent: string) => {
-  // const convertedContent = rawContent.replace(/(?:\r\n|\r|\n)/g, '<br />');
+import { sanitizeWysiwygContent } from './sanitizeHtml';
 
-  const covertedLinks = rawContent.replace(
-    'https://clarkfinance.wordifysites.com',
-    ''
-  );
-
-  return covertedLinks;
+/**
+ * Converts and sanitizes WYSIWYG content from WordPress
+ * This function sanitizes HTML to prevent XSS attacks while preserving safe formatting
+ * @param rawContent - Raw HTML content from WordPress
+ * @returns Sanitized HTML string safe for use with dangerouslySetInnerHTML
+ */
+export const convertWysywyg = (rawContent: string): string => {
+  return sanitizeWysiwygContent(rawContent);
 };
 
 export const fetchFeaturedImage = async (imageId: number) => {
