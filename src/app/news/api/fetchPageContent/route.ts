@@ -1,16 +1,34 @@
+import { NextResponse } from 'next/server';
+
 export async function GET() {
   const encodedCredentials = btoa(`${process.env.WP_CREDENTIALS}`);
 
-  const response = await fetch(
-    `${process.env.WP_ROUTE}/pages/229?_fields=acf.page_title,acf.subheading,yoast_head_json`,
-    {
-      headers: {
-        Authorization: `Basic ${encodedCredentials}`,
-        'Content-Type': 'application/json',
-      },
-    }
-  );
-  const data = await response.json();
+  try {
+    const response = await fetch(
+      `${process.env.WP_ROUTE}/pages/229?_fields=acf.page_title,acf.subheading,yoast_head_json`,
+      {
+        headers: {
+          Authorization: `Basic ${encodedCredentials}`,
+          'Content-Type': 'application/json',
+        },
+      }
+    );
 
-  return Response.json(data);
+    if (!response.ok) {
+      console.error('Failed to fetch content from WordPress:', response.status, response.statusText);
+      return NextResponse.json(
+        { error: 'Failed to retrieve content' },
+        { status: response.status || 500 }
+      );
+    }
+
+    const data = await response.json();
+    return NextResponse.json(data);
+  } catch (error) {
+    console.error('Error retrieving content:', error);
+    return NextResponse.json(
+      { error: 'Failed to retrieve content' },
+      { status: 500 }
+    );
+  }
 }

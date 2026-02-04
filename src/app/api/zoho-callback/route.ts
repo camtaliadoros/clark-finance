@@ -42,7 +42,11 @@ export async function GET(req: NextRequest) {
     const tokenData = await tokenResponse.json();
 
     if (tokenData.error) {
-      return NextResponse.json({ error: tokenData.error }, { status: 400 });
+      console.error('Zoho token exchange error:', tokenData.error);
+      return NextResponse.json(
+        { error: 'Authorization failed' },
+        { status: 400 }
+      );
     }
 
     const { access_token, refresh_token } = tokenData;
@@ -58,6 +62,7 @@ export async function GET(req: NextRequest) {
 
     return NextResponse.json({ message: 'Authorization successful' });
   } catch (error) {
+    console.error('Error in token exchange:', error);
     return NextResponse.json(
       { error: 'Token exchange failed' },
       { status: 500 }

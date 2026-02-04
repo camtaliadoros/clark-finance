@@ -1,3 +1,5 @@
+import { NextResponse } from 'next/server';
+
 export async function GET() {
   const encodedCredentials = btoa(`${process.env.WP_CREDENTIALS}`);
 
@@ -11,6 +13,15 @@ export async function GET() {
         },
       }
     );
+
+    if (!response.ok) {
+      console.error('Failed to fetch case studies from WordPress:', response.status, response.statusText);
+      return NextResponse.json(
+        { error: 'Failed to retrieve case studies' },
+        { status: response.status || 500 }
+      );
+    }
+
     const data = await response.json();
 
     const contentRes = await fetch(
@@ -23,6 +34,14 @@ export async function GET() {
       }
     );
 
+    if (!contentRes.ok) {
+      console.error('Failed to fetch case studies page content from WordPress:', contentRes.status, contentRes.statusText);
+      return NextResponse.json(
+        { error: 'Failed to retrieve case studies page content' },
+        { status: contentRes.status || 500 }
+      );
+    }
+
     const contentData = await contentRes.json();
 
     const caseStudiesPageData = {
@@ -30,8 +49,12 @@ export async function GET() {
       caseStudiesData: data,
     };
 
-    return Response.json(caseStudiesPageData);
-  } catch (e) {
-    throw new Error('There was a problem retrieving the content: ' + e);
+    return NextResponse.json(caseStudiesPageData);
+  } catch (error) {
+    console.error('Error retrieving case studies:', error);
+    return NextResponse.json(
+      { error: 'Failed to retrieve case studies' },
+      { status: 500 }
+    );
   }
 }

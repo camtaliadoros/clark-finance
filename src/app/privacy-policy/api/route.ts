@@ -1,3 +1,5 @@
+import { NextResponse } from 'next/server';
+
 export async function GET() {
   const encodedCredentials = btoa(`${process.env.WP_CREDENTIALS}`);
 
@@ -11,9 +13,22 @@ export async function GET() {
         },
       }
     );
+
+    if (!response.ok) {
+      console.error('Failed to fetch content from WordPress:', response.status, response.statusText);
+      return NextResponse.json(
+        { error: 'Failed to retrieve content' },
+        { status: response.status || 500 }
+      );
+    }
+
     const data = await response.json();
-    return Response.json(data);
-  } catch (e) {
-    throw new Error('There was a problem retrieving the content: ' + e);
+    return NextResponse.json(data);
+  } catch (error) {
+    console.error('Error retrieving content:', error);
+    return NextResponse.json(
+      { error: 'Failed to retrieve content' },
+      { status: 500 }
+    );
   }
 }

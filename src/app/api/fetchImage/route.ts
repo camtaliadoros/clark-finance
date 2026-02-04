@@ -1,8 +1,15 @@
-import { NextRequest } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 
 export async function GET(req: NextRequest) {
   const { searchParams } = new URL(req.url);
   const imageId = searchParams.get('id');
+
+  if (!imageId) {
+    return NextResponse.json(
+      { error: 'Image ID is required' },
+      { status: 400 }
+    );
+  }
 
   const encodedCredentials = btoa(`${process.env.WP_CREDENTIALS}`);
 
@@ -16,10 +23,22 @@ export async function GET(req: NextRequest) {
         },
       }
     );
-    const data = await response.json();
 
-    return Response.json(data);
-  } catch (e) {
-    throw new Error('There was a problem retrieving the content: ' + e);
+    if (!response.ok) {
+      console.error('Failed to fetch image from WordPress:', response.status, response.statusText);
+      return NextResponse.json(
+        { error: 'Failed to retrieve image' },
+        { status: response.status || 500 }
+      );
+    }
+
+    const data = await response.json();
+    return NextResponse.json(data);
+  } catch (error) {
+    console.error('Error retrieving image:', error);
+    return NextResponse.json(
+      { error: 'Failed to retrieve image' },
+      { status: 500 }
+    );
   }
 }

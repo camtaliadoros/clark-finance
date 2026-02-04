@@ -1,10 +1,17 @@
-import { NextRequest } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 
 export async function GET(req: NextRequest) {
   const encodedCredentials = btoa(`${process.env.WP_CREDENTIALS}`);
 
   const { searchParams } = new URL(req.url);
   const slug = searchParams.get('slug');
+
+  if (!slug) {
+    return NextResponse.json(
+      { error: 'Slug parameter is required' },
+      { status: 400 }
+    );
+  }
 
   try {
     const response = await fetch(
@@ -16,10 +23,22 @@ export async function GET(req: NextRequest) {
         },
       }
     );
-    const data = await response.json();
 
-    return Response.json(data);
-  } catch (e) {
-    throw new Error('There was a problem retrieving the content: ' + e);
+    if (!response.ok) {
+      console.error('Failed to fetch case study metadata from WordPress:', response.status, response.statusText);
+      return NextResponse.json(
+        { error: 'Failed to retrieve case study metadata' },
+        { status: response.status || 500 }
+      );
+    }
+
+    const data = await response.json();
+    return NextResponse.json(data);
+  } catch (error) {
+    console.error('Error retrieving case study metadata:', error);
+    return NextResponse.json(
+      { error: 'Failed to retrieve case study metadata' },
+      { status: 500 }
+    );
   }
 }

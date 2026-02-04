@@ -1,3 +1,5 @@
+import { NextResponse } from 'next/server';
+
 export async function GET() {
   const encodedCredentials = btoa(`${process.env.WP_CREDENTIALS}`);
 
@@ -12,10 +14,21 @@ export async function GET() {
       }
     );
 
-    const data = await response.json();
+    if (!response.ok) {
+      console.error('Failed to fetch case study slugs from WordPress:', response.status, response.statusText);
+      return NextResponse.json(
+        { error: 'Failed to retrieve case study slugs' },
+        { status: response.status || 500 }
+      );
+    }
 
-    return Response.json(data);
-  } catch (e) {
-    throw new Error('There was a problem retrieving the content: ' + e);
+    const data = await response.json();
+    return NextResponse.json(data);
+  } catch (error) {
+    console.error('Error retrieving case study slugs:', error);
+    return NextResponse.json(
+      { error: 'Failed to retrieve case study slugs' },
+      { status: 500 }
+    );
   }
 }

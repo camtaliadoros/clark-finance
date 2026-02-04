@@ -1,4 +1,4 @@
-import { NextRequest } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 
 export async function GET(req: NextRequest) {
   const { searchParams } = new URL(req.url);
@@ -7,24 +7,39 @@ export async function GET(req: NextRequest) {
 
   const encodedCredentials = btoa(`${process.env.WP_CREDENTIALS}`);
 
-  const response = await fetch(
-    `${process.env.WP_ROUTE}/case-study?page=${currentPage}&per_page=${itemsPerPage}&_fields=acf.case_study_title,acf.case_study_excerpt,acf.loan_value,acf.location,acf.featured_image,slug,link`,
-    {
-      headers: {
-        Authorization: `Basic ${encodedCredentials}`,
-        'Content-Type': 'application/json',
-      },
+  try {
+    const response = await fetch(
+      `${process.env.WP_ROUTE}/case-study?page=${currentPage}&per_page=${itemsPerPage}&_fields=acf.case_study_title,acf.case_study_excerpt,acf.loan_value,acf.location,acf.featured_image,slug,link`,
+      {
+        headers: {
+          Authorization: `Basic ${encodedCredentials}`,
+          'Content-Type': 'application/json',
+        },
+      }
+    );
+
+    if (!response.ok) {
+      console.error('Failed to fetch case studies from WordPress:', response.status, response.statusText);
+      return NextResponse.json(
+        { error: 'Failed to retrieve case studies' },
+        { status: response.status || 500 }
+      );
     }
-  );
 
-  const data = await response.json();
+    const data = await response.json();
+    const totalPages = response.headers.get('X-WP-TotalPages');
 
-  const totalPages = response.headers.get('X-WP-TotalPages');
+    const caseStudiesData = {
+      pageData: data,
+      totalPages: totalPages,
+    };
 
-  const caseStudiesData = {
-    pageData: data,
-    totalPages: totalPages,
-  };
-
-  return Response.json(caseStudiesData);
+    return NextResponse.json(caseStudiesData);
+  } catch (error) {
+    console.error('Error retrieving case studies:', error);
+    return NextResponse.json(
+      { error: 'Failed to retrieve case studies' },
+      { status: 500 }
+    );
+  }
 }
