@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 
 import dotenv from 'dotenv';
 import { db } from '@/util/firebaseAdmin';
-import { doc, setDoc, Timestamp } from 'firebase/firestore';
+import { Timestamp } from 'firebase-admin/firestore';
 
 dotenv.config();
 
@@ -47,12 +47,12 @@ export async function GET(req: NextRequest) {
 
     const { access_token, refresh_token } = tokenData;
 
-    await setDoc(doc(db, 'tokens', 'accessToken'), {
+    await db.doc('tokens/accessToken').set({
       access_token,
       last_updated: Timestamp.fromDate(new Date()),
     });
 
-    await setDoc(doc(db, 'tokens', 'refreshToken'), {
+    await db.doc('tokens/refreshToken').set({
       refresh_token,
     });
 
