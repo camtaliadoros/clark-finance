@@ -88,7 +88,7 @@ export const Footer = async () => {
       <div className='bg-darkblue p-4 md:px-10 md:py-2'>
         <p className='text-sm text-chalk font-bold'>
            &quot;Clark Finance&quot; is a trademark of Richard Clark all rights
-          reserved © 2026
+          reserved © 2026 hi
         </p>
       </div>
     </footer>
