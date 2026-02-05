@@ -15,22 +15,61 @@ type PageContent = {
 };
 
 async function fetchPageContent() {
+  // During build time, fetch directly from WordPress
+  // At runtime, we can use the internal API route
   const baseUrl = process.env.NEXT_PUBLIC_HOST_URL || '';
-  const apiUrl = baseUrl ? `${baseUrl}/news/api/fetchPageContent` : '/news/api/fetchPageContent';
   
-  const res = await fetch(apiUrl, {
-    next: {
-      revalidate: 86400,
-    },
-  });
-  if (!res.ok) {
-    throw new Error('Failed to fetch data');
+  // If we have a base URL (runtime), use internal API route
+  // Otherwise (build time), fetch directly from WordPress
+  if (baseUrl) {
+    const apiUrl = `${baseUrl}/news/api/fetchPageContent`;
+    const res = await fetch(apiUrl, {
+      next: {
+        revalidate: 86400,
+      },
+    });
+    if (!res.ok) {
+      throw new Error(`Failed to fetch data: ${res.status} ${res.statusText}`);
+    }
+    const data = await res.json();
+    if (data.error) {
+      throw new Error(`API error: ${data.error}`);
+    }
+    return data;
   }
-  return res.json();
+  
+  // Build time: fetch directly from WordPress
+  const encodedCredentials = btoa(`${process.env.WP_CREDENTIALS}`);
+  const response = await fetch(
+    `${process.env.WP_ROUTE}/pages/229?_fields=acf.page_title,acf.subheading,yoast_head_json`,
+    {
+      headers: {
+        Authorization: `Basic ${encodedCredentials}`,
+        'Content-Type': 'application/json',
+      },
+      next: {
+        revalidate: 86400,
+      },
+    }
+  );
+  
+  if (!response.ok) {
+    throw new Error(`Failed to fetch from WordPress: ${response.status} ${response.statusText}`);
+  }
+  
+  return response.json();
 }
 
 export async function generateMetadata(): Promise<Metadata> {
   const res = await fetchPageContent();
+
+  // Validate that metadata exists
+  if (!res || !res.yoast_head_json) {
+    return {
+      title: 'News & Insights',
+      description: 'Read our latest news and insights',
+    };
+  }
 
   const metadata: YoastHeadJson = res.yoast_head_json;
 
@@ -103,6 +142,11 @@ export default async function InsightsPage({
   };
 }) {
   const res = await fetchPageContent();
+
+  // Validate that acf data exists
+  if (!res || !res.acf) {
+    throw new Error('Failed to fetch news page content: Invalid response structure');
+  }
 
   const content: PageContent = res.acf;
 
