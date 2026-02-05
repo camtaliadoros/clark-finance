@@ -51,31 +51,30 @@ async function fetchHomePageContent() {
 export async function generateMetadata(): Promise<Metadata> {
   // Fetch directly from WordPress - only fetch metadata fields to minimize payload
   const encodedCredentials = btoa(`${process.env.WP_CREDENTIALS}`);
-  try {
-    const response = await fetch(
-      `${process.env.WP_ROUTE}/pages/7?_fields=yoast_head_json`,
-      {
-        headers: {
-          Authorization: `Basic ${encodedCredentials}`,
-          'Content-Type': 'application/json',
-        },
-        // Use shorter cache for metadata to improve response time
-        next: {
-          revalidate: 3600, // 1 hour instead of 24 hours for faster updates
-        },
-      }
-    );
-    
-    if (!response.ok) {
-      // Fallback metadata if WordPress is unavailable
-      return {
-        title: 'Clark Finance',
-        description: 'Mortgage & Loan Specialists',
-      };
+  const response = await fetch(
+    `${process.env.WP_ROUTE}/pages/7?_fields=yoast_head_json`,
+    {
+      headers: {
+        Authorization: `Basic ${encodedCredentials}`,
+        'Content-Type': 'application/json',
+      },
+      // Use shorter cache for metadata to improve response time
+      next: {
+        revalidate: 3600, // 1 hour instead of 24 hours for faster updates
+      },
     }
-    
-    const data = await response.json();
-    const metadata: YoastHeadJson = data.yoast_head_json;
+  );
+  
+  if (!response.ok) {
+    // Fallback metadata if WordPress is unavailable
+    return {
+      title: 'Clark Finance',
+      description: 'Mortgage & Loan Specialists',
+    };
+  }
+  
+  const data = await response.json();
+  const metadata: YoastHeadJson = data.yoast_head_json;
 
   const title = metadata.title;
   const description = metadata.schema['@graph'].find(
