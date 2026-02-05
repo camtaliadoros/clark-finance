@@ -17,8 +17,9 @@ import { validateSlug } from '@/util/validateParams';
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 
-// Enable ISR with 24-hour revalidation
-export const revalidate = 86400;
+// Force dynamic rendering - fetch at request time instead of build time
+// This prevents build failures if WordPress API is unavailable during build
+export const dynamic = 'force-dynamic';
 
 type CaseStudyParams = {
   slug: string;

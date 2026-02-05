@@ -8,8 +8,9 @@ import { ButtonContentFields, GraphItem, YoastHeadJson } from '@/util/models';
 import { replaceWpURL } from '@/util/utilFunctions';
 import { Metadata } from 'next/types';
 
-// Enable ISR with 24-hour revalidation
-export const revalidate = 86400;
+// Force dynamic rendering - fetch at request time instead of build time
+// This prevents build failures if WordPress API is unavailable during build
+export const dynamic = 'force-dynamic';
 
 type HomeContent = {
   contact_section_title: string;

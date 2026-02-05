@@ -11,8 +11,9 @@ import {
 import { Metadata } from 'next';
 import Image from 'next/image';
 
-// Enable ISR with 24-hour revalidation
-export const revalidate = 86400;
+// Force dynamic rendering - fetch at request time instead of build time
+// This prevents build failures if WordPress API is unavailable during build
+export const dynamic = 'force-dynamic';
 
 type AboutUsPageContent = {
   page_title: string;
