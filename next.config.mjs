@@ -1,5 +1,13 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  // Enable compression
+  compress: true,
+  // Optimize production builds
+  swcMinify: true,
+  // Reduce JavaScript bundle size
+  experimental: {
+    optimizePackageImports: ['@fortawesome/free-solid-svg-icons', '@fortawesome/react-fontawesome'],
+  },
   images: {
     remotePatterns: [
       {

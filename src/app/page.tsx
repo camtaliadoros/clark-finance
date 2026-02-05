@@ -48,12 +48,30 @@ async function fetchHomePageContent() {
 }
 
 export async function generateMetadata(): Promise<Metadata> {
-  const baseUrl = process.env.NEXT_PUBLIC_HOST_URL || '';
-  const apiUrl = baseUrl ? `${baseUrl}/api` : '/api';
-  const res = await fetch(apiUrl);
-
-  const data = await res.json();
-
+  // Fetch directly from WordPress to avoid extra API call latency
+  const encodedCredentials = btoa(`${process.env.WP_CREDENTIALS}`);
+  const response = await fetch(
+    `${process.env.WP_ROUTE}/pages/7?_fields=yoast_head_json`,
+    {
+      headers: {
+        Authorization: `Basic ${encodedCredentials}`,
+        'Content-Type': 'application/json',
+      },
+      next: {
+        revalidate: 86400,
+      },
+    }
+  );
+  
+  if (!response.ok) {
+    // Fallback metadata if WordPress is unavailable
+    return {
+      title: 'Clark Finance',
+      description: 'Mortgage & Loan Specialists',
+    };
+  }
+  
+  const data = await response.json();
   const metadata: YoastHeadJson = data.yoast_head_json;
 
   const title = metadata.title;
