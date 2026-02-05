@@ -11,6 +11,9 @@ import {
 import { Metadata } from 'next';
 import Image from 'next/image';
 
+// Enable ISR with 24-hour revalidation
+export const revalidate = 86400;
+
 type AboutUsPageContent = {
   page_title: string;
   subheading: string;

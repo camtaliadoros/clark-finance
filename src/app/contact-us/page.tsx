@@ -1,10 +1,11 @@
-'use-client';
-
 import { ContactUs } from '@/components/home/ContactUs';
 import { Section } from '@/components/shared/Section';
 import { GraphItem, YoastHeadJson } from '@/util/models';
 import { convertWysywyg, replaceWpURL } from '@/util/utilFunctions';
 import { Metadata } from 'next';
+
+// Enable ISR with 24-hour revalidation
+export const revalidate = 86400;
 
 type ContactUsPageContent = {
   complaints_title: string;

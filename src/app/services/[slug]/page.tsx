@@ -27,6 +27,9 @@ import { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 
+// Enable ISR with 24-hour revalidation
+export const revalidate = 86400;
+
 type PageProps = {
   params: Params;
 };

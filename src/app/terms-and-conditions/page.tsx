@@ -4,6 +4,9 @@ import { GraphItem, YoastHeadJson } from '@/util/models';
 import { convertWysywyg, replaceWpURL } from '@/util/utilFunctions';
 import { Metadata } from 'next';
 
+// Enable ISR with 24-hour revalidation
+export const revalidate = 86400;
+
 type TcsPageContent = {
   page_title: string;
   subheading: string | undefined;

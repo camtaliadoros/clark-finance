@@ -12,6 +12,9 @@ import { validateSlug } from '@/util/validateParams';
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 
+// Enable ISR with 24-hour revalidation
+export const revalidate = 86400;
+
 type ArticleData = {
   date: string;
   acf: ArticleContentType;
