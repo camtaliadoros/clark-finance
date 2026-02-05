@@ -1,21 +1,13 @@
 import { CaseStudiesSection } from '@/components/home/CaseStudiesSection';
+import { ContactUs } from '@/components/home/ContactUs';
 import { HeroBanner } from '@/components/home/HeroBanner';
+import { Reviews } from '@/components/home/Reviews';
 import { ServiceCards } from '@/components/home/ServiceCards';
 import { WhyClarkFinance } from '@/components/home/WhyClarkFinance';
 import { ButtonContentFields, GraphItem, YoastHeadJson } from '@/util/models';
 import { replaceWpURL } from '@/util/utilFunctions';
 import { Metadata } from 'next/types';
-import dynamic from 'next/dynamic';
 import { Suspense } from 'react';
-
-// Lazy load below-the-fold components to reduce initial bundle size
-const ContactUs = dynamic(() => import('@/components/home/ContactUs').then(mod => ({ default: mod.ContactUs })), {
-  loading: () => <div className="min-h-[400px]" />,
-});
-
-const Reviews = dynamic(() => import('@/components/home/Reviews').then(mod => ({ default: mod.Reviews })), {
-  loading: () => <div className="min-h-[400px]" />,
-});
 
 // Force dynamic rendering - fetch at request time instead of build time
 // This prevents build failures if WordPress API is unavailable during build
