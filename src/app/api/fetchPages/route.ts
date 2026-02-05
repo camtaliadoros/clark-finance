@@ -1,6 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { cacheStrategies } from '@/util/cacheHeaders';
 
+// Force dynamic rendering for API routes
+export const dynamic = 'force-dynamic';
+
 export async function GET(req: NextRequest) {
   // Get the origin from the request to allow CORS for same-origin and trusted domains
   const origin = req.headers.get('origin');

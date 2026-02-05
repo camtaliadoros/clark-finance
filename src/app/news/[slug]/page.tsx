@@ -82,10 +82,11 @@ const fetchArticleMetadata = async (slug: string) => {
 export async function generateMetadata({
   params,
 }: {
-  params: ArticleParams;
+  params: Promise<ArticleParams>;
 }): Promise<Metadata> {
   // Validate slug parameter
-  const validatedSlug = validateSlug(params.slug);
+  const { slug } = await params;
+  const validatedSlug = validateSlug(slug);
   if (!validatedSlug) {
     return {
       title: 'Article Not Found',
@@ -93,9 +94,7 @@ export async function generateMetadata({
     };
   }
 
-  const slug = validatedSlug;
-
-  const res = await fetchArticleMetadata(slug);
+  const res = await fetchArticleMetadata(validatedSlug);
 
   const metadata: YoastHeadJson = res[0].yoast_head_json;
 
@@ -163,17 +162,16 @@ export async function generateMetadata({
 export default async function ArticlePage({
   params,
 }: {
-  params: ArticleParams;
+  params: Promise<ArticleParams>;
 }) {
   // Validate slug parameter
-  const validatedSlug = validateSlug(params.slug);
+  const { slug } = await params;
+  const validatedSlug = validateSlug(slug);
   if (!validatedSlug) {
     notFound();
   }
 
-  const slug = validatedSlug;
-
-  const data = await fetchArticle(slug);
+  const data = await fetchArticle(validatedSlug);
 
   const content: ArticleData = data[0];
 

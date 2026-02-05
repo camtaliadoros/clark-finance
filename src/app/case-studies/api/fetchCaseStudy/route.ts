@@ -2,6 +2,9 @@ import { NextRequest, NextResponse } from 'next/server';
 import { cacheStrategies } from '@/util/cacheHeaders';
 import { validateSlug } from '@/util/validateParams';
 
+// Force dynamic rendering for API routes
+export const dynamic = 'force-dynamic';
+
 export async function GET(req: NextRequest) {
   const { searchParams } = new URL(req.url);
   const slug = searchParams.get('slug');

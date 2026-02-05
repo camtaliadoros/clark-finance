@@ -2,6 +2,9 @@ import { NextRequest, NextResponse } from 'next/server';
 import { validatePagination } from '@/util/validateParams';
 import { cacheStrategies } from '@/util/cacheHeaders';
 
+// Force dynamic rendering for API routes
+export const dynamic = 'force-dynamic';
+
 export async function GET(req: NextRequest) {
   const { searchParams } = new URL(req.url);
   const currentPage = searchParams.get('page');

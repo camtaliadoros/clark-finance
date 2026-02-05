@@ -1,6 +1,9 @@
 import { NextResponse } from 'next/server';
 import { cacheStrategies } from '@/util/cacheHeaders';
 
+// Force dynamic rendering for API routes
+export const dynamic = 'force-dynamic';
+
 export async function GET() {
   const encodedCredentials = btoa(`${process.env.WP_CREDENTIALS}`);
 

@@ -42,6 +42,9 @@ const createLeadSchema = z.object({
     .min(1, 'reCAPTCHA token is required'),
 });
 
+// Force dynamic rendering for API routes
+export const dynamic = 'force-dynamic';
+
 export async function POST(req: NextRequest) {
   // Origin validation: Ensure request comes from authorized origin
   const originCheck = validateOrigin(req);

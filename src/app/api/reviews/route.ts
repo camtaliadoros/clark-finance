@@ -1,6 +1,9 @@
 import { NextResponse } from 'next/server';
 import { fetchWithTimeout } from '@/util/fetchWithTimeout';
 
+// Force dynamic rendering for API routes
+export const dynamic = 'force-dynamic';
+
 export async function GET() {
   try {
     const response = await fetchWithTimeout(

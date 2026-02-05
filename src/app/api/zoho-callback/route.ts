@@ -8,6 +8,9 @@ import { rateLimit, getClientIp, rateLimitPresets } from '@/util/rateLimit';
 
 dotenv.config();
 
+// Force dynamic rendering for API routes
+export const dynamic = 'force-dynamic';
+
 export async function GET(req: NextRequest) {
   // Rate limiting: 10 requests per 15 minutes per IP (for OAuth callback)
   const clientIp = getClientIp(req);

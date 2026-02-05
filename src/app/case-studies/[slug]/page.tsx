@@ -57,9 +57,12 @@ const fetchCaseStudyMetadata = async (slug: string) => {
 
 export async function generateMetadata({
   params,
-}: MetadataProps): Promise<Metadata> {
+}: {
+  params: Promise<MetadataProps['params']>;
+}): Promise<Metadata> {
   // Validate slug parameter
-  const validatedSlug = validateSlug(params.slug);
+  const { slug } = await params;
+  const validatedSlug = validateSlug(slug);
   if (!validatedSlug) {
     return {
       title: 'Case Study Not Found',
@@ -67,9 +70,7 @@ export async function generateMetadata({
     };
   }
 
-  const slug = validatedSlug;
-
-  const res = await fetchCaseStudyMetadata(slug);
+  const res = await fetchCaseStudyMetadata(validatedSlug);
 
   const metadata: YoastHeadJson = res[0].yoast_head_json;
 
@@ -161,10 +162,11 @@ export async function generateMetadata({
 export default async function CaseStudyDetailPage({
   params,
 }: {
-  params: CaseStudyParams;
+  params: Promise<CaseStudyParams>;
 }) {
   // Validate slug parameter
-  const validatedSlug = validateSlug(params.slug);
+  const { slug } = await params;
+  const validatedSlug = validateSlug(slug);
   if (!validatedSlug) {
     notFound();
   }

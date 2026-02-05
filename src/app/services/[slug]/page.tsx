@@ -72,9 +72,12 @@ const fetchServiceMetadata = async (slug: string) => {
 
 export async function generateMetadata({
   params,
-}: MetadataProps): Promise<Metadata> {
+}: {
+  params: Promise<MetadataProps['params']>;
+}): Promise<Metadata> {
   // Validate slug parameter
-  const validatedSlug = validateSlug(params.slug);
+  const { slug } = await params;
+  const validatedSlug = validateSlug(slug);
   if (!validatedSlug) {
     return {
       title: 'Service Not Found',
@@ -82,9 +85,7 @@ export async function generateMetadata({
     };
   }
 
-  const slug = validatedSlug;
-
-  const res = await fetchServiceMetadata(slug);
+  const res = await fetchServiceMetadata(validatedSlug);
 
   const metadata: YoastHeadJson = res[0].yoast_head_json;
 
@@ -173,9 +174,12 @@ export async function generateMetadata({
 //   }
 // }
 
-export default async function Service({ params }: PageProps) {
+export default async function Service({ params }: {
+  params: Promise<PageProps['params']>;
+}) {
   // Validate slug parameter
-  const validatedSlug = validateSlug(params.slug);
+  const { slug } = await params;
+  const validatedSlug = validateSlug(slug);
   if (!validatedSlug) {
     notFound();
   }

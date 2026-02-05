@@ -1,6 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { validateSlug } from '@/util/validateParams';
 
+// Force dynamic rendering for API routes
+export const dynamic = 'force-dynamic';
+
 export async function GET(req: NextRequest) {
   const encodedCredentials = btoa(`${process.env.WP_CREDENTIALS}`);
 
