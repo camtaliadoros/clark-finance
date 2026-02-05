@@ -30,7 +30,7 @@ export const ReviewCard = ({ content }: ReviewCardProps) => {
             className='rounded w-6 h-6 2xl:h-10 2xl:w-10'
           />
         ) : null}
-        <h5>{content.author_name}</h5>
+        <p className='mb-0'>{content.author_name}</p>
       </div>
       <div className='flex flex-col gap-2 h-full'>
         <div className='flex gap-2 items-center'>

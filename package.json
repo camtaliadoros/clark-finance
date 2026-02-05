@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "lighthouse": "lighthouse https://staging--clark-finance.netlify.app/ --output=html --output-path=./lighthouse-report.html --view"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.6.0",

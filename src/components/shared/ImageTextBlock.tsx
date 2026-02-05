@@ -32,6 +32,7 @@ export const ImageTextBlock = async ({
               ? '-rotate-90 right-0 -bottom-5'
               : '-top-5 rotate-90'
           }`}
+          loading='lazy'
         />
       )}
       <div
@@ -45,6 +46,8 @@ export const ImageTextBlock = async ({
           width={500}
           height={500}
           className='w-full lg:w-1/2'
+          loading='lazy'
+          sizes='(max-width: 1024px) 100vw, 50vw'
         />
 
         <div className='flex flex-col lg:w-1/2 space-y-8 px-8 lg:px-0'>

@@ -27,9 +27,9 @@ export const QA = ({ question, answer }: QAProps) => {
         className='flex w-full border-b py-4 border-chalk items-center space-x-6'
         onClick={handleClick}
       >
-        <h5 className='text-chalk text-left font-semibold  w-full mb-0 text-sm 2xl:text-xl'>
+        <span className='text-chalk text-left font-semibold  w-full mb-0 text-sm 2xl:text-xl'>
           {question}
-        </h5>
+        </span>
         <FontAwesomeIcon
           icon={faChevronDown}
           size='sm'

@@ -29,6 +29,7 @@ export const BenefitCard = async ({
         className={`justify-self-center w-8 ${
           colourScheme === 'light' ? '' : 'filter invert'
         }`}
+        loading='lazy'
       />
       <div className='col-span-4 flex flex-col'>
         <h5

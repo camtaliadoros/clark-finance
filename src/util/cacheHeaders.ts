@@ -29,18 +29,18 @@ export function getCacheControlHeader(options: CacheOptions = {}): string {
  * Cache strategies for different content types
  */
 export const cacheStrategies = {
-  // Static page content - cache for 1 hour, serve stale for 24 hours
-  staticPage: () => getCacheControlHeader({ maxAge: 3600, staleWhileRevalidate: 86400 }),
+  // Static page content - cache for 4 hours, serve stale for 7 days
+  staticPage: () => getCacheControlHeader({ maxAge: 14400, staleWhileRevalidate: 604800 }),
 
-  // Dynamic content (articles, case studies) - cache for 30 minutes, serve stale for 1 hour
-  dynamicContent: () => getCacheControlHeader({ maxAge: 1800, staleWhileRevalidate: 3600 }),
+  // Dynamic content (articles, case studies) - cache for 1 hour, serve stale for 24 hours
+  dynamicContent: () => getCacheControlHeader({ maxAge: 3600, staleWhileRevalidate: 86400 }),
 
-  // List content with pagination - cache for 5 minutes, serve stale for 30 minutes
-  paginatedList: () => getCacheControlHeader({ maxAge: 300, staleWhileRevalidate: 1800 }),
+  // List content with pagination - cache for 15 minutes, serve stale for 1 hour
+  paginatedList: () => getCacheControlHeader({ maxAge: 900, staleWhileRevalidate: 3600 }),
 
-  // Metadata - cache for 1 hour, serve stale for 24 hours
-  metadata: () => getCacheControlHeader({ maxAge: 3600, staleWhileRevalidate: 86400 }),
+  // Metadata - cache for 4 hours, serve stale for 7 days
+  metadata: () => getCacheControlHeader({ maxAge: 14400, staleWhileRevalidate: 604800 }),
 
-  // Service cards/menu items - cache for 1 hour, serve stale for 24 hours
-  navigation: () => getCacheControlHeader({ maxAge: 3600, staleWhileRevalidate: 86400 }),
+  // Service cards/menu items - cache for 4 hours, serve stale for 7 days
+  navigation: () => getCacheControlHeader({ maxAge: 14400, staleWhileRevalidate: 604800 }),
 };

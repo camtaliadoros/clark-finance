@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { isValidId } from '@/util/validateParams';
+import { cacheStrategies } from '@/util/cacheHeaders';
 
 // Force dynamic rendering for API routes
 export const dynamic = 'force-dynamic';
@@ -37,7 +38,11 @@ export async function GET(req: NextRequest) {
     }
 
     const data = await response.json();
-    return NextResponse.json(data);
+    return NextResponse.json(data, {
+      headers: {
+        'Cache-Control': cacheStrategies.staticPage(),
+      },
+    });
   } catch (error) {
     console.error('Error retrieving image:', error);
     return NextResponse.json(

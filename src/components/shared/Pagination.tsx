@@ -51,7 +51,7 @@ export const Pagination = ({ totalPages }: PaginationProps) => {
           className='text-mediumblue '
         />
       </button>
-      <h5 className='mb-0 text-mediumblue'>{currentPage}</h5>
+      <span className='mb-0 text-mediumblue' aria-label={`Page ${currentPage}`}>{currentPage}</span>
       <button
         onClick={handleShowMore}
         disabled={currentPage.toString() === totalPages.toString()}

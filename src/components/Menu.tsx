@@ -12,6 +12,8 @@ export const Menu = () => {
       <button
         className={`nav-icon relative ${isOpen ? 'open' : null} z-50`}
         onClick={() => setIsOpen?.((prevState) => !prevState)}
+        aria-label={isOpen ? 'Close navigation menu' : 'Open navigation menu'}
+        aria-expanded={isOpen}
       >
         <span></span>
         <span></span>

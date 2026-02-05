@@ -228,9 +228,9 @@ export default async function ArticlePage({
         pageLinkCard1='contactUs'
         pageLinkCard2='services'
       >
-        <h5 className='font-normal text-mediumgrey text-base 2xl:text-xl'>
+        <time className='font-normal text-mediumgrey text-base 2xl:text-xl block' dateTime={content.date}>
           {formatedDate}
-        </h5>
+        </time>
         <h2 className='text-ash text-2xl 2xl:text-3xl font-semibold'>
           {content.acf.headline}
         </h2>

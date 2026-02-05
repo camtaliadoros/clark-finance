@@ -11,6 +11,7 @@ export const EmailWithIcon = ({ colour, hideOnMobile }: EmailWithIconProps) => {
     <a
       className='inline-flex items-center space-x-1 link mb-0'
       href='mailto:info@clarkfinance.co.uk'
+      aria-label='Email us at info@clarkfinance.co.uk'
     >
       <FontAwesomeIcon
         icon={faEnvelope}
