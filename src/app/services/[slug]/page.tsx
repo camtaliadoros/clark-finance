@@ -39,38 +39,49 @@ type Params = {
 };
 
 const fetchPageContent = async (slug: string) => {
-  const baseUrl = process.env.NEXT_PUBLIC_HOST_URL || '';
-  const apiUrl = baseUrl 
-    ? `${baseUrl}/services/api/fetchServicePageContent?slug=${slug}` 
-    : `/services/api/fetchServicePageContent?slug=${slug}`;
+  // Always fetch directly from WordPress in server components
+  const encodedCredentials = btoa(`${process.env.WP_CREDENTIALS}`);
+  const response = await fetch(
+    `${process.env.WP_ROUTE}/pages?slug=${slug}&_fields=acf,slug,link`,
+    {
+      headers: {
+        Authorization: `Basic ${encodedCredentials}`,
+        'Content-Type': 'application/json',
+      },
+      next: {
+        revalidate: 86400,
+      },
+    }
+  );
   
-  const res = await fetch(apiUrl, {
-    next: {
-      revalidate: 86400,
-    },
-  });
-
-  if (!res.ok) {
-    throw new Error('Failed to fetch data');
+  if (!response.ok) {
+    throw new Error(`Failed to fetch from WordPress: ${response.status} ${response.statusText}`);
   }
-  return res.json();
+  
+  return response.json();
 };
 
 const fetchServiceMetadata = async (slug: string) => {
-  const baseUrl = process.env.NEXT_PUBLIC_HOST_URL || '';
-  const apiUrl = baseUrl 
-    ? `${baseUrl}/services/api/fetchServiceMetadata?slug=${slug}` 
-    : `/services/api/fetchServiceMetadata?slug=${slug}`;
-
-  const res = await fetch(apiUrl, {
-    next: {
-      revalidate: 86400,
-    },
-  });
-  if (!res.ok) {
-    throw new Error('Failed to fetch data');
+  // Always fetch directly from WordPress in server components
+  const encodedCredentials = btoa(`${process.env.WP_CREDENTIALS}`);
+  const response = await fetch(
+    `${process.env.WP_ROUTE}/pages?slug=${slug}&_fields=yoast_head_json`,
+    {
+      headers: {
+        Authorization: `Basic ${encodedCredentials}`,
+        'Content-Type': 'application/json',
+      },
+      next: {
+        revalidate: 86400,
+      },
+    }
+  );
+  
+  if (!response.ok) {
+    throw new Error(`Failed to fetch from WordPress: ${response.status} ${response.statusText}`);
   }
-  return res.json();
+  
+  return response.json();
 };
 
 export async function generateMetadata({

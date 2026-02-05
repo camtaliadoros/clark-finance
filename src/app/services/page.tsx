@@ -13,30 +13,7 @@ type ServicesPageContent = {
 };
 
 async function fetchPageContent() {
-  // During build time, fetch directly from WordPress
-  // At runtime, we can use the internal API route
-  const baseUrl = process.env.NEXT_PUBLIC_HOST_URL || '';
-  
-  // If we have a base URL (runtime), use internal API route
-  // Otherwise (build time), fetch directly from WordPress
-  if (baseUrl) {
-    const apiUrl = `${baseUrl}/services/api/fetchPageContent`;
-    const res = await fetch(apiUrl, {
-      next: {
-        revalidate: 86400,
-      },
-    });
-    if (!res.ok) {
-      throw new Error(`Failed to fetch data: ${res.status} ${res.statusText}`);
-    }
-    const resJson = await res.json();
-    if (resJson.error) {
-      throw new Error(`API error: ${resJson.error}`);
-    }
-    return resJson;
-  }
-  
-  // Build time: fetch directly from WordPress
+  // Always fetch directly from WordPress in server components
   const encodedCredentials = btoa(`${process.env.WP_CREDENTIALS}`);
   const response = await fetch(
     `${process.env.WP_ROUTE}/pages/249?_fields=acf,yoast_head_json`,

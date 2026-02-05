@@ -25,37 +25,49 @@ type CaseStudyParams = {
 };
 
 const fetchCaseStudy = async (slug: string) => {
-  const baseUrl = process.env.NEXT_PUBLIC_HOST_URL || '';
-  const apiUrl = baseUrl 
-    ? `${baseUrl}/case-studies/api/fetchCaseStudy?slug=${slug}` 
-    : `/case-studies/api/fetchCaseStudy?slug=${slug}`;
+  // Always fetch directly from WordPress in server components
+  const encodedCredentials = btoa(`${process.env.WP_CREDENTIALS}`);
+  const response = await fetch(
+    `${process.env.WP_ROUTE}/case-study?slug=${slug}&_fields=acf.case_study_title,acf.loan_value,acf.location,acf.the_requirement,acf.the_interesting_stuff,acf.how_we_helped,acf.featured_image`,
+    {
+      headers: {
+        Authorization: `Basic ${encodedCredentials}`,
+        'Content-Type': 'application/json',
+      },
+      next: {
+        revalidate: 86400,
+      },
+    }
+  );
   
-  const res = await fetch(apiUrl, {
-    next: {
-      revalidate: 86400,
-    },
-  });
-  if (!res.ok) {
-    throw new Error('Failed to fetch data');
+  if (!response.ok) {
+    throw new Error(`Failed to fetch from WordPress: ${response.status} ${response.statusText}`);
   }
-  return res.json();
+  
+  return response.json();
 };
 
 const fetchCaseStudyMetadata = async (slug: string) => {
-  const baseUrl = process.env.NEXT_PUBLIC_HOST_URL || '';
-  const apiUrl = baseUrl 
-    ? `${baseUrl}/case-studies/api/fetchCaseStudyMetadata?slug=${slug}` 
-    : `/case-studies/api/fetchCaseStudyMetadata?slug=${slug}`;
+  // Always fetch directly from WordPress in server components
+  const encodedCredentials = btoa(`${process.env.WP_CREDENTIALS}`);
+  const response = await fetch(
+    `${process.env.WP_ROUTE}/case-study?slug=${slug}&_fields=yoast_head_json`,
+    {
+      headers: {
+        Authorization: `Basic ${encodedCredentials}`,
+        'Content-Type': 'application/json',
+      },
+      next: {
+        revalidate: 86400,
+      },
+    }
+  );
   
-  const res = await fetch(apiUrl, {
-    next: {
-      revalidate: 86400,
-    },
-  });
-  if (!res.ok) {
-    throw new Error('Failed to fetch data');
+  if (!response.ok) {
+    throw new Error(`Failed to fetch from WordPress: ${response.status} ${response.statusText}`);
   }
-  return res.json();
+  
+  return response.json();
 };
 
 export async function generateMetadata({

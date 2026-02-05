@@ -15,30 +15,11 @@ type CaseStudiesPageContent = {
 };
 
 async function fetchPageContent() {
-  // During build time, fetch directly from WordPress
-  // At runtime, we can use the internal API route
-  const baseUrl = process.env.NEXT_PUBLIC_HOST_URL || '';
-  
-  // If we have a base URL (runtime), use internal API route
-  // Otherwise (build time), fetch directly from WordPress
-  if (baseUrl) {
-    const apiUrl = `${baseUrl}/case-studies/api/fetchPageContent`;
-    const res = await fetch(apiUrl, {
-      next: {
-        revalidate: 86400,
-      },
-    });
-    if (!res.ok) {
-      throw new Error(`Failed to fetch data: ${res.status} ${res.statusText}`);
-    }
-    const data = await res.json();
-    if (data.error) {
-      throw new Error(`API error: ${data.error}`);
-    }
-    return data;
+  // Always fetch directly from WordPress in server components
+  if (!process.env.WP_CREDENTIALS || !process.env.WP_ROUTE) {
+    throw new Error('Missing WordPress credentials: WP_CREDENTIALS and WP_ROUTE must be set');
   }
   
-  // Build time: fetch directly from WordPress
   const encodedCredentials = btoa(`${process.env.WP_CREDENTIALS}`);
   const response = await fetch(
     `${process.env.WP_ROUTE}/pages/203?_fields=acf.page_title,acf.subheading,yoast_head_json`,
@@ -54,6 +35,9 @@ async function fetchPageContent() {
   );
   
   if (!response.ok) {
+    if (response.status === 401) {
+      throw new Error(`WordPress authentication failed (401). Check WP_CREDENTIALS format: should be "username:password"`);
+    }
     throw new Error(`Failed to fetch from WordPress: ${response.status} ${response.statusText}`);
   }
   

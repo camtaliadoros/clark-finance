@@ -25,37 +25,49 @@ type ArticleParams = {
 };
 
 const fetchArticle = async (slug: string) => {
-  const baseUrl = process.env.NEXT_PUBLIC_HOST_URL || '';
-  const apiUrl = baseUrl 
-    ? `${baseUrl}/news/api/fetchArticle?slug=${slug}` 
-    : `/news/api/fetchArticle?slug=${slug}`;
+  // Always fetch directly from WordPress in server components
+  const encodedCredentials = btoa(`${process.env.WP_CREDENTIALS}`);
+  const response = await fetch(
+    `${process.env.WP_ROUTE}/article?slug=${slug}&_fields=acf.title,acf.headline,acf.article_body,acf.featured_image,date`,
+    {
+      headers: {
+        Authorization: `Basic ${encodedCredentials}`,
+        'Content-Type': 'application/json',
+      },
+      next: {
+        revalidate: 86400,
+      },
+    }
+  );
   
-  const res = await fetch(apiUrl, {
-    next: {
-      revalidate: 86400,
-    },
-  });
-  if (!res.ok) {
-    throw new Error('Failed to fetch article data');
+  if (!response.ok) {
+    throw new Error(`Failed to fetch from WordPress: ${response.status} ${response.statusText}`);
   }
-  return res.json();
+  
+  return response.json();
 };
 
 const fetchArticleMetadata = async (slug: string) => {
-  const baseUrl = process.env.NEXT_PUBLIC_HOST_URL || '';
-  const apiUrl = baseUrl 
-    ? `${baseUrl}/news/api/fetchArticleMetadata?slug=${slug}` 
-    : `/news/api/fetchArticleMetadata?slug=${slug}`;
+  // Always fetch directly from WordPress in server components
+  const encodedCredentials = btoa(`${process.env.WP_CREDENTIALS}`);
+  const response = await fetch(
+    `${process.env.WP_ROUTE}/article?slug=${slug}&_fields=yoast_head_json`,
+    {
+      headers: {
+        Authorization: `Basic ${encodedCredentials}`,
+        'Content-Type': 'application/json',
+      },
+      next: {
+        revalidate: 86400,
+      },
+    }
+  );
   
-  const res = await fetch(apiUrl, {
-    next: {
-      revalidate: 86400,
-    },
-  });
-  if (!res.ok) {
-    throw new Error('Failed to fetch article metadata');
+  if (!response.ok) {
+    throw new Error(`Failed to fetch from WordPress: ${response.status} ${response.statusText}`);
   }
-  return res.json();
+  
+  return response.json();
 };
 
 // export async function generateStaticParams() {
