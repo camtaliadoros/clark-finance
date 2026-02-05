@@ -1,3 +1,4 @@
+import { getApiBaseUrl } from '@/util/utilFunctions';
 import { ArticleFeatureCard } from '../insights/ArticleFeatureCard';
 import { ArticleDataType } from './ArticleListing';
 import { Button } from './Button';
@@ -10,8 +11,12 @@ type Response = {
 };
 
 async function fetchAllArticles() {
-  const res = await fetch(
-    `${process.env.NEXT_PUBLIC_HOST_URL}/news/api/fetchAllArticles?page=1&per_page=3`,
+  const baseUrl = getApiBaseUrl();
+  const apiUrl = baseUrl 
+    ? `${baseUrl}/news/api/fetchAllArticles?page=1&per_page=3` 
+    : '/news/api/fetchAllArticles?page=1&per_page=3';
+  
+  const res = await fetch(apiUrl,
     {
       next: {
         revalidate: 86400,

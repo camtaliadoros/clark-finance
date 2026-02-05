@@ -1,12 +1,17 @@
 import { CaseStudyFeatureTypes } from '@/util/models';
+import { getApiBaseUrl } from '@/util/utilFunctions';
 import { Button } from '../shared/Button';
 import { CaseStudyFeature } from '../shared/CaseStudyFeature';
 import { Section } from '../shared/Section';
 import { SectionTitle } from '../shared/SectionTitle';
 
 async function fetchAllCaseStudies() {
-  const res = await fetch(
-    `${process.env.NEXT_PUBLIC_HOST_URL}/case-studies/api/fetchAllCaseStudies?page=1&items=3`,
+  const baseUrl = getApiBaseUrl();
+  const apiUrl = baseUrl 
+    ? `${baseUrl}/case-studies/api/fetchAllCaseStudies?page=1&items=3` 
+    : '/case-studies/api/fetchAllCaseStudies?page=1&items=3';
+  
+  const res = await fetch(apiUrl,
     {
       next: {
         revalidate: 86400,

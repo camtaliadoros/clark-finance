@@ -2,19 +2,23 @@ import { ImageType } from './models';
 
 /**
  * Get the base URL for API calls.
- * During build time, uses relative URLs for internal API routes.
- * During runtime, uses the NEXT_PUBLIC_HOST_URL environment variable.
+ * For client-side code, always returns empty string (relative URLs).
+ * For server-side code, uses NEXT_PUBLIC_HOST_URL if available, otherwise relative URLs.
  */
 export const getApiBaseUrl = (): string => {
-  // During build time (static generation), use relative URLs
-  // This allows Next.js to call internal API routes directly
-  if (typeof window === 'undefined' && !process.env.NEXT_PUBLIC_HOST_URL) {
-    // Build time - use relative URL or construct from process
+  // Client-side: always use relative URLs (same origin, no CORS issues)
+  if (typeof window !== 'undefined') {
     return '';
   }
   
-  // Runtime - use environment variable or fallback to relative
-  return process.env.NEXT_PUBLIC_HOST_URL || '';
+  // Server-side: use environment variable or relative URL
+  // During build time (static generation), use relative URLs
+  // This allows Next.js to call internal API routes directly
+  if (!process.env.NEXT_PUBLIC_HOST_URL) {
+    return '';
+  }
+  
+  return process.env.NEXT_PUBLIC_HOST_URL;
 };
 
 import { sanitizeWysiwygContent } from './sanitizeHtml';
@@ -85,8 +89,18 @@ export const fetchFeaturedImage = async (imageId: number) => {
 };
 
 export const fetchMenuItems = async () => {
-  const baseUrl = process.env.NEXT_PUBLIC_HOST_URL || '';
-  const apiUrl = baseUrl ? `${baseUrl}/api/fetchPages` : '/api/fetchPages';
+  // For client-side code, always use relative URLs (same origin)
+  // For server-side code, use NEXT_PUBLIC_HOST_URL if available, otherwise relative
+  let apiUrl: string;
+  
+  if (typeof window !== 'undefined') {
+    // Client-side: always use relative URL (same origin)
+    apiUrl = '/api/fetchPages';
+  } else {
+    // Server-side: use environment variable or relative URL
+    const baseUrl = process.env.NEXT_PUBLIC_HOST_URL || '';
+    apiUrl = baseUrl ? `${baseUrl}/api/fetchPages` : '/api/fetchPages';
+  }
   
   const res = await fetch(apiUrl, {
     next: {

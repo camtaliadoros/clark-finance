@@ -1,4 +1,5 @@
 import { Service } from '@/util/models';
+import { getApiBaseUrl } from '@/util/utilFunctions';
 import { ServiceTab } from './ServiceTab';
 
 type ServiceTabsProps = {
@@ -6,8 +7,12 @@ type ServiceTabsProps = {
 };
 
 const fetchAllServices = async () => {
-  const res = await fetch(
-    `${process.env.NEXT_PUBLIC_HOST_URL}/services/api/fetchAllServices`,
+  const baseUrl = getApiBaseUrl();
+  const apiUrl = baseUrl 
+    ? `${baseUrl}/services/api/fetchAllServices` 
+    : '/services/api/fetchAllServices';
+  
+  const res = await fetch(apiUrl,
     {
       next: {
         revalidate: 86400,

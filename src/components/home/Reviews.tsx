@@ -1,9 +1,13 @@
+import { getApiBaseUrl } from '@/util/utilFunctions';
 import { Section } from '../shared/Section';
 import { SectionTitle } from '../shared/SectionTitle';
 import { ReviewCard } from './ReviewCard';
 
 async function fetchReviews() {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_HOST_URL}/api/reviews`, {
+  const baseUrl = getApiBaseUrl();
+  const apiUrl = baseUrl ? `${baseUrl}/api/reviews` : '/api/reviews';
+  
+  const res = await fetch(apiUrl, {
     next: {
       revalidate: 86400,
     },

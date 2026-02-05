@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { useGoogleReCaptcha } from 'react-google-recaptcha-v3';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import ClipLoader from 'react-spinners/ClipLoader';
+import { getApiBaseUrl } from '@/util/utilFunctions';
 
 type FormValues = {
   firstName: string;
@@ -82,8 +83,12 @@ export const ContactForm = ({ buttonColour }: ContactFormProps) => {
 
     const recapthaToken = await executeRecaptcha('submit_form');
 
-    const response = await fetch(
-      `${process.env.NEXT_PUBLIC_HOST_URL}/contact-us/api/create-lead`,
+    const baseUrl = getApiBaseUrl();
+    const apiUrl = baseUrl 
+      ? `${baseUrl}/contact-us/api/create-lead` 
+      : '/contact-us/api/create-lead';
+
+    const response = await fetch(apiUrl,
       {
         method: 'POST',
         headers: {

@@ -1,3 +1,4 @@
+import { getApiBaseUrl } from '@/util/utilFunctions';
 import { Button } from '../shared/Button';
 import { ContactForm } from '../shared/ContactForm';
 import { ContactUsFormWrapper } from '../shared/ContactUsFormWrapper';
@@ -22,8 +23,12 @@ type ContactUsProps = {
 };
 
 async function fetchContactUsContent() {
-  const res = await fetch(
-    `${process.env.NEXT_PUBLIC_HOST_URL}/contact-us/api/fetchContactUsFormSection`,
+  const baseUrl = getApiBaseUrl();
+  const apiUrl = baseUrl 
+    ? `${baseUrl}/contact-us/api/fetchContactUsFormSection` 
+    : '/contact-us/api/fetchContactUsFormSection';
+  
+  const res = await fetch(apiUrl,
     {
       next: {
         revalidate: 86400,

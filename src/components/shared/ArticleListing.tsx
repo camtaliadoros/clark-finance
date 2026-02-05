@@ -1,4 +1,5 @@
 import { ArticleContentType, CaseStudyFeatureTypes } from '@/util/models';
+import { getApiBaseUrl } from '@/util/utilFunctions';
 import { ArticleFeatureCard } from '../insights/ArticleFeatureCard';
 import { CaseStudyFeature } from './CaseStudyFeature';
 import { FeaturedCardsWrapper } from './FeaturedCardsWrapper';
@@ -16,8 +17,12 @@ export type ArticleDataType = {
 };
 
 export const fetchArticlesByPage = async (pageNumber: number) => {
-  const res = await fetch(
-    `${process.env.NEXT_PUBLIC_HOST_URL}/news/api/fetchAllArticles?page=${pageNumber}&per_page=6`,
+  const baseUrl = getApiBaseUrl();
+  const apiUrl = baseUrl 
+    ? `${baseUrl}/news/api/fetchAllArticles?page=${pageNumber}&per_page=6` 
+    : `/news/api/fetchAllArticles?page=${pageNumber}&per_page=6`;
+  
+  const res = await fetch(apiUrl,
     {
       next: {
         revalidate: 86400,
@@ -34,8 +39,12 @@ export async function fetchCaseStudiesByPage(
   pageNumber: number,
   items: number
 ) {
-  const res = await fetch(
-    `${process.env.NEXT_PUBLIC_HOST_URL}/case-studies/api/fetchAllCaseStudies?page=${pageNumber}&items=${items}`,
+  const baseUrl = getApiBaseUrl();
+  const apiUrl = baseUrl 
+    ? `${baseUrl}/case-studies/api/fetchAllCaseStudies?page=${pageNumber}&items=${items}` 
+    : `/case-studies/api/fetchAllCaseStudies?page=${pageNumber}&items=${items}`;
+  
+  const res = await fetch(apiUrl,
     {
       next: {
         revalidate: 86400,

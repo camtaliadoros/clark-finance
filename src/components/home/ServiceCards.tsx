@@ -1,4 +1,5 @@
 import { ServicePageContent } from '@/util/models';
+import { getApiBaseUrl } from '@/util/utilFunctions';
 import { Section } from '../shared/Section';
 import { ServiceCard } from './ServiceCard';
 
@@ -13,8 +14,12 @@ type Service = {
 };
 
 async function fetchAllServices() {
-  const res = await fetch(
-    `${process.env.NEXT_PUBLIC_HOST_URL}/services/api/fetchServiceCards`,
+  const baseUrl = getApiBaseUrl();
+  const apiUrl = baseUrl 
+    ? `${baseUrl}/services/api/fetchServiceCards` 
+    : '/services/api/fetchServiceCards';
+  
+  const res = await fetch(apiUrl,
     {
       next: {
         revalidate: 86400,
