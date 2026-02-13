@@ -3,87 +3,89 @@ import { Timestamp } from 'firebase-admin/firestore';
 import { NextRequest, NextResponse } from 'next/server';
 
 export async function POST(req: NextRequest) {
-  const { firstName, lastName, email, phoneNumber, message, recapthaToken } =
-    await req.json();
+  try {
+    const { firstName, lastName, email, phoneNumber, message, recapthaToken } =
+      await req.json();
 
-  // Verify the reCAPTCHA token
-  const recaptchaResponse = await fetch(
-    `https://www.google.com/recaptcha/api/siteverify`,
-    {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
-      },
-      body: `secret=${process.env.RECAPTCHA_SECRET_KEY}&response=${recapthaToken}`,
-    }
-  );
-
-  const recaptchaData = await recaptchaResponse.json();
-
-  if (recaptchaData.success && recaptchaData.score > 0.5) {
-    const zohoAccessTokenRef = db.doc('tokens/accessToken');
-    const accessTokenDocSnap = await zohoAccessTokenRef.get();
-
-    let accessToken: string;
-    let refreshToken;
-
-    if (accessTokenDocSnap.exists) {
-      const zohoTokenData = accessTokenDocSnap.data();
-      accessToken = zohoTokenData?.access_token;
-    } else {
-      return NextResponse.json({
-        error: 'Could not retrieve Zoho Access Token',
-      });
-    }
-
-    const zohoRefreshTokenRef = db.doc('tokens/refreshToken');
-    const refreshTokenDocSnap = await zohoRefreshTokenRef.get();
-
-    if (refreshTokenDocSnap.exists) {
-      const zohoTokenData = refreshTokenDocSnap.data();
-      refreshToken = zohoTokenData?.refresh_token;
-    } else {
-      return NextResponse.json({
-        error: 'Could not retrieve Zoho Refresh Token',
-      });
-    }
-
-    // Function to refresh token if expired
-    const refreshAccessToken = async () => {
-      const clientId = process.env.ZOHO_CLIENT_ID;
-      const clientSecret = process.env.ZOHO_CLIENT_SECRET;
-
-      const body = new URLSearchParams({
-        grant_type: 'refresh_token',
-        client_id: clientId || '',
-        client_secret: clientSecret || '',
-        refresh_token: refreshToken || '',
-      });
-      const tokenUrl = 'https://accounts.zoho.eu/oauth/v2/token';
-      const tokenResponse = await fetch(tokenUrl, {
+    // Verify the reCAPTCHA token
+    const recaptchaResponse = await fetch(
+      `https://www.google.com/recaptcha/api/siteverify`,
+      {
         method: 'POST',
-        body,
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded',
         },
-      });
-      const tokenData = await tokenResponse.json();
-
-      if (tokenData.error) {
-        throw new Error(tokenData.error);
+        body: `secret=${process.env.RECAPTCHA_SECRET_KEY}&response=${recapthaToken}`,
       }
-      // Update stored tokens with the NEW token from response
-      const newAccessToken = tokenData.access_token;
+    );
 
-      await db.doc('tokens/accessToken').set({
-        access_token: newAccessToken,
-        last_updated: Timestamp.fromDate(new Date()),
-      });
+    const recaptchaData = await recaptchaResponse.json();
 
-      return newAccessToken;
-    };
+    if (recaptchaData.success && recaptchaData.score > 0.5) {
+      const zohoAccessTokenRef = db.doc('tokens/accessToken');
+      const accessTokenDocSnap = await zohoAccessTokenRef.get();
 
-    try {
+      let accessToken: string;
+      let refreshToken;
+
+      if (accessTokenDocSnap.exists) {
+        const zohoTokenData = accessTokenDocSnap.data();
+        accessToken = zohoTokenData?.access_token;
+      } else {
+        return NextResponse.json(
+          { error: 'Could not retrieve Zoho Access Token' },
+          { status: 500 }
+        );
+      }
+
+      const zohoRefreshTokenRef = db.doc('tokens/refreshToken');
+      const refreshTokenDocSnap = await zohoRefreshTokenRef.get();
+
+      if (refreshTokenDocSnap.exists) {
+        const zohoTokenData = refreshTokenDocSnap.data();
+        refreshToken = zohoTokenData?.refresh_token;
+      } else {
+        return NextResponse.json(
+          { error: 'Could not retrieve Zoho Refresh Token' },
+          { status: 500 }
+        );
+      }
+
+      // Function to refresh token if expired
+      const refreshAccessToken = async () => {
+        const clientId = process.env.ZOHO_CLIENT_ID;
+        const clientSecret = process.env.ZOHO_CLIENT_SECRET;
+
+        const body = new URLSearchParams({
+          grant_type: 'refresh_token',
+          client_id: clientId || '',
+          client_secret: clientSecret || '',
+          refresh_token: refreshToken || '',
+        });
+        const tokenUrl = 'https://accounts.zoho.eu/oauth/v2/token';
+        const tokenResponse = await fetch(tokenUrl, {
+          method: 'POST',
+          body,
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+          },
+        });
+        const tokenData = await tokenResponse.json();
+
+        if (tokenData.error) {
+          throw new Error(tokenData.error);
+        }
+        // Update stored tokens with the NEW token from response
+        const newAccessToken = tokenData.access_token;
+
+        await db.doc('tokens/accessToken').set({
+          access_token: newAccessToken,
+          last_updated: Timestamp.fromDate(new Date()),
+        });
+
+        return newAccessToken;
+      };
+
       const zohoApiUrl = 'https://www.zohoapis.eu/crm/v5/Leads';
       const leadData = {
         data: [
@@ -126,13 +128,17 @@ export async function POST(req: NextRequest) {
       }
       const data = await response.json();
       return NextResponse.json(data, { status: 200 });
-    } catch (error) {
+    } else {
       return NextResponse.json(
-        { error: 'Failed to create lead' },
-        { status: 500 }
+        { error: 'reCAPTCHA failed' },
+        { status: 400 }
       );
     }
-  } else {
-    return NextResponse.json({ error: 'reCAPTCHA failed' });
+  } catch (error) {
+    console.error('Error in create-lead:', error);
+    return NextResponse.json(
+      { error: 'Failed to create lead' },
+      { status: 500 }
+    );
   }
 }
