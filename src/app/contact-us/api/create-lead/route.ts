@@ -1,5 +1,5 @@
 import { db } from '@/util/firebaseAdmin';
-import { doc, getDoc, setDoc, Timestamp } from 'firebase/firestore';
+import { Timestamp } from 'firebase-admin/firestore';
 import { NextRequest, NextResponse } from 'next/server';
 
 export async function POST(req: NextRequest) {
@@ -21,27 +21,27 @@ export async function POST(req: NextRequest) {
   const recaptchaData = await recaptchaResponse.json();
 
   if (recaptchaData.success && recaptchaData.score > 0.5) {
-    const zohoAccessTokenRef = doc(db, 'tokens', 'accessToken');
-    const accessTokenDocSnap = await getDoc(zohoAccessTokenRef);
+    const zohoAccessTokenRef = db.doc('tokens/accessToken');
+    const accessTokenDocSnap = await zohoAccessTokenRef.get();
 
     let accessToken: string;
     let refreshToken;
 
-    if (accessTokenDocSnap.exists()) {
+    if (accessTokenDocSnap.exists) {
       const zohoTokenData = accessTokenDocSnap.data();
-      accessToken = zohoTokenData.access_token;
+      accessToken = zohoTokenData?.access_token;
     } else {
       return NextResponse.json({
         error: 'Could not retrieve Zoho Access Token',
       });
     }
 
-    const zohoRefreshTokenRef = doc(db, 'tokens', 'refreshToken');
-    const refreshTokenDocSnap = await getDoc(zohoRefreshTokenRef);
+    const zohoRefreshTokenRef = db.doc('tokens/refreshToken');
+    const refreshTokenDocSnap = await zohoRefreshTokenRef.get();
 
-    if (refreshTokenDocSnap.exists()) {
+    if (refreshTokenDocSnap.exists) {
       const zohoTokenData = refreshTokenDocSnap.data();
-      refreshToken = zohoTokenData.refresh_token;
+      refreshToken = zohoTokenData?.refresh_token;
     } else {
       return NextResponse.json({
         error: 'Could not retrieve Zoho Refresh Token',
@@ -72,14 +72,15 @@ export async function POST(req: NextRequest) {
       if (tokenData.error) {
         throw new Error(tokenData.error);
       }
-      // Update stored tokens
+      // Update stored tokens with the NEW token from response
+      const newAccessToken = tokenData.access_token;
 
-      await setDoc(doc(db, 'tokens', 'accessToken'), {
-        access_token: accessToken,
+      await db.doc('tokens/accessToken').set({
+        access_token: newAccessToken,
         last_updated: Timestamp.fromDate(new Date()),
       });
 
-      return tokenData.access_token;
+      return newAccessToken;
     };
 
     try {
