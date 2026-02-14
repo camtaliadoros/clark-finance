@@ -65,9 +65,15 @@ export const fetchFeaturedImage = async (imageId: number) => {
 };
 
 export const fetchMenuItems = async () => {
+  const encodedCredentials = btoa(`${process.env.WP_CREDENTIALS}`);
+
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_HOST_URL}/api/fetchPages`,
+    `${process.env.WP_ROUTE}/pages?per_page=30&_fields=slug,id,acf.menu_location,acf.menu_position,acf.service_card.homepage_order,acf.page_title,parent`,
     {
+      headers: {
+        Authorization: `Basic ${encodedCredentials}`,
+        'Content-Type': 'application/json',
+      },
       next: {
         revalidate: 86400,
       },

@@ -180,5 +180,5 @@ export type MetaLogo = {
 };
 
 export type MetadataProps = {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 };

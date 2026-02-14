@@ -1,3 +1,5 @@
+export const dynamic = 'force-dynamic';
+
 import { ArticleWrapper } from '@/components/shared/ArticleWrapper';
 import { Button } from '@/components/shared/Button';
 import { FeaturedArticlesSection } from '@/components/shared/FeaturedArticlesSection';
@@ -76,9 +78,9 @@ const fetchArticleMetadata = async (slug: string) => {
 export async function generateMetadata({
   params,
 }: {
-  params: ArticleParams;
+  params: Promise<ArticleParams>;
 }): Promise<Metadata> {
-  const slug = params.slug;
+  const { slug } = await params;
 
   const res = await fetchArticleMetadata(slug);
 
@@ -148,9 +150,9 @@ export async function generateMetadata({
 export default async function ArticlePage({
   params,
 }: {
-  params: ArticleParams;
+  params: Promise<ArticleParams>;
 }) {
-  const { slug } = params;
+  const { slug } = await params;
 
   const data = await fetchArticle(slug);
 

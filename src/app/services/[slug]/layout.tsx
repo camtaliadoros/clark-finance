@@ -1,9 +1,11 @@
+export const dynamic = 'force-dynamic';
+
 import { ServicesTabs } from '@/components/shared/ServicesTabs';
 import { Service, ServicePageContent } from '@/util/models';
 
 type ServiceDetailLayoutProps = {
   children: React.ReactNode;
-  params: ServiceParams;
+  params: Promise<ServiceParams>;
 };
 
 type ServiceParams = {
@@ -14,7 +16,8 @@ export default async function ServiceDetailLayout({
   children,
   params,
 }: ServiceDetailLayoutProps) {
-  const activePageSlug = params.slug;
+  const { slug } = await params;
+  const activePageSlug = slug;
 
   return (
     <>

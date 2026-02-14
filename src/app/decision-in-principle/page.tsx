@@ -1,3 +1,5 @@
+export const dynamic = 'force-dynamic';
+
 import { RequiredDocsItemCard } from '@/components/decisionInPrinciple/RequiredDocsCard';
 import { ContactUs } from '@/components/home/ContactUs';
 import { Button } from '@/components/shared/Button';

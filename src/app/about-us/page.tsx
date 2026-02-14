@@ -1,3 +1,5 @@
+export const dynamic = 'force-dynamic';
+
 import { ContactUs } from '@/components/home/ContactUs';
 import { BenefitCard } from '@/components/shared/BenefitCard';
 import { Section } from '@/components/shared/Section';

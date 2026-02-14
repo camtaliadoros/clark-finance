@@ -1,3 +1,5 @@
+export const dynamic = 'force-dynamic';
+
 export async function GET() {
   const encodedCredentials = btoa(`${process.env.WP_CREDENTIALS}`);
 

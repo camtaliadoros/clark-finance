@@ -1,3 +1,5 @@
+export const dynamic = 'force-dynamic';
+
 import { ContactUs } from '@/components/home/ContactUs';
 import { ArticleListing } from '@/components/shared/ArticleListing';
 import { Section } from '@/components/shared/Section';
@@ -95,11 +97,12 @@ export async function generateMetadata(): Promise<Metadata> {
 export default async function CaseStudiesHome({
   searchParams,
 }: {
-  searchParams?: {
+  searchParams?: Promise<{
     page?: string;
-  };
+  }>;
 }) {
-  const currentPage = Number(searchParams?.page) || 1;
+  const resolvedSearchParams = await searchParams;
+  const currentPage = Number(resolvedSearchParams?.page) || 1;
 
   const content = await fetchPageContent();
 

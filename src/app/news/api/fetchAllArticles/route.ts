@@ -1,5 +1,7 @@
 import { NextRequest } from 'next/server';
 
+export const dynamic = 'force-dynamic';
+
 export async function GET(req: NextRequest) {
   const encodedCredentials = btoa(`${process.env.WP_CREDENTIALS}`);
 

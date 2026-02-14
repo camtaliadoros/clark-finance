@@ -4,6 +4,8 @@ import dotenv from 'dotenv';
 import { db } from '@/util/firebaseAdmin';
 import { Timestamp } from 'firebase-admin/firestore';
 
+export const dynamic = 'force-dynamic';
+
 dotenv.config();
 
 export async function GET(req: NextRequest) {

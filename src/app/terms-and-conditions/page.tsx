@@ -1,3 +1,5 @@
+export const dynamic = 'force-dynamic';
+
 import { Section } from '@/components/shared/Section';
 import { SectionTitle } from '@/components/shared/SectionTitle';
 import { GraphItem, YoastHeadJson } from '@/util/models';

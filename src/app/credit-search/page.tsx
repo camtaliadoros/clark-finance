@@ -1,3 +1,5 @@
+export const dynamic = 'force-dynamic';
+
 import { Button } from '@/components/shared/Button';
 import { Section } from '@/components/shared/Section';
 import { SectionTitle } from '@/components/shared/SectionTitle';

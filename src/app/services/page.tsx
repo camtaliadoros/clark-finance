@@ -1,3 +1,5 @@
+export const dynamic = 'force-dynamic';
+
 import { ServiceCards } from '@/components/home/ServiceCards';
 import { SectionTitle } from '@/components/shared/SectionTitle';
 import { GraphItem, YoastHeadJson } from '@/util/models';

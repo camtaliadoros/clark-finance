@@ -1,3 +1,5 @@
+export const dynamic = 'force-dynamic';
+
 import { CaseStudiesSection } from '@/components/home/CaseStudiesSection';
 import { ArticleWrapper } from '@/components/shared/ArticleWrapper';
 import { Button } from '@/components/shared/Button';
@@ -52,7 +54,7 @@ const fetchCaseStudyMetadata = async (slug: string) => {
 export async function generateMetadata({
   params,
 }: MetadataProps): Promise<Metadata> {
-  const slug = params.slug;
+  const { slug } = await params;
 
   const res = await fetchCaseStudyMetadata(slug);
 
@@ -146,9 +148,10 @@ export async function generateMetadata({
 export default async function CaseStudyDetailPage({
   params,
 }: {
-  params: CaseStudyParams;
+  params: Promise<CaseStudyParams>;
 }) {
-  const data = await fetchCaseStudy(params.slug);
+  const { slug } = await params;
+  const data = await fetchCaseStudy(slug);
 
   const content: CaseStudyContent = data[0]?.acf;
   const image = await fetchFeaturedImage(content.featured_image);

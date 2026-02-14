@@ -2,6 +2,8 @@ import { db } from '@/util/firebaseAdmin';
 import { Timestamp } from 'firebase-admin/firestore';
 import { NextRequest, NextResponse } from 'next/server';
 
+export const dynamic = 'force-dynamic';
+
 export async function POST(req: NextRequest) {
   try {
     const { firstName, lastName, email, phoneNumber, message, recapthaToken } =

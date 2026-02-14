@@ -1,3 +1,5 @@
+export const dynamic = 'force-dynamic';
+
 import { ContactUs } from '@/components/home/ContactUs';
 import { QAWrapper } from '@/components/services/QAWrapper';
 import { BenefitCard } from '@/components/shared/BenefitCard';
@@ -26,7 +28,7 @@ import { Metadata } from 'next';
 import Link from 'next/link';
 
 type PageProps = {
-  params: Params;
+  params: Promise<Params>;
 };
 
 type Params = {
@@ -68,7 +70,7 @@ const fetchServiceMetadata = async (slug: string) => {
 export async function generateMetadata({
   params,
 }: MetadataProps): Promise<Metadata> {
-  const slug = params.slug;
+  const { slug } = await params;
 
   const res = await fetchServiceMetadata(slug);
 
@@ -160,7 +162,8 @@ export async function generateMetadata({
 // }
 
 export default async function Service({ params }: PageProps) {
-  const data = await fetchPageContent(params.slug);
+  const { slug } = await params;
+  const data = await fetchPageContent(slug);
 
   const content: ServicePageContent = data[0].acf;
 

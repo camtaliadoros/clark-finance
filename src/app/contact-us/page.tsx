@@ -1,4 +1,4 @@
-'use-client';
+export const dynamic = 'force-dynamic';
 
 import { ContactUs } from '@/components/home/ContactUs';
 import { Section } from '@/components/shared/Section';
