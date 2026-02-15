@@ -1,10 +1,30 @@
 import { Page } from '@/util/models';
-import { fetchMenuItems } from '@/util/utilFunctions';
 import Image from 'next/image';
 import Link from 'next/link';
 
+async function fetchFooterMenuItems(): Promise<Page[]> {
+  const encodedCredentials = btoa(`${process.env.WP_CREDENTIALS}`);
+
+  const response = await fetch(
+    `${process.env.WP_ROUTE}/pages?per_page=30&_fields=slug,id,acf.menu_location,acf.menu_position,acf.service_card.homepage_order,acf.page_title,parent`,
+    {
+      headers: {
+        Authorization: `Basic ${encodedCredentials}`,
+        'Content-Type': 'application/json',
+      },
+      next: { revalidate: 86400 },
+    }
+  );
+
+  if (!response.ok) {
+    throw new Error('Failed to fetch footer menu items');
+  }
+
+  return response.json();
+}
+
 export const Footer = async () => {
-  const data: Page[] = await fetchMenuItems();
+  const data: Page[] = await fetchFooterMenuItems();
 
   // Isolate parents pages
   const parentPages = data.filter((page) => page.parent === 0);
