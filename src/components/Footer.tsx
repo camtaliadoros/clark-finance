@@ -1,16 +1,36 @@
 import { Page } from '@/util/models';
-import { fetchMenuItems } from '@/util/utilFunctions';
 import Image from 'next/image';
 import Link from 'next/link';
 
+async function fetchFooterMenuItems(): Promise<Page[]> {
+  const encodedCredentials = btoa(`${process.env.WP_CREDENTIALS}`);
+
+  const response = await fetch(
+    `${process.env.WP_ROUTE}/pages?per_page=30&_fields=slug,id,acf.menu_location,acf.menu_position,acf.service_card.homepage_order,acf.page_title,parent`,
+    {
+      headers: {
+        Authorization: `Basic ${encodedCredentials}`,
+        'Content-Type': 'application/json',
+      },
+      next: { revalidate: 86400 },
+    }
+  );
+
+  if (!response.ok) {
+    throw new Error('Failed to fetch footer menu items');
+  }
+
+  return response.json();
+}
+
 export const Footer = async () => {
-  const data: Page[] = await fetchMenuItems();
+  const data: Page[] = await fetchFooterMenuItems();
 
   // Isolate parents pages
   const parentPages = data.filter((page) => page.parent === 0);
 
   const footerMenuPages = parentPages.filter((page) =>
-    page.acf.menu_location.includes('Footer Menu')
+    page.acf.menu_location.includes('Footer Menu'),
   );
 
   const sortedPages = footerMenuPages.sort((a, b) => {
@@ -63,11 +83,26 @@ export const Footer = async () => {
           </div>
         </div>
         <div className='space-y-6'>
-        <p className='text-sm text-chalk 2xl:text-lg'>
-          Clark Finance Ltd is Authorised and Regulated by the Financial Conduct Authority which is entered on the <a href='https://register.fca.org.uk/s/' target='_blank' rel='noopener noreferrer'>Financial Services Register</a> under reference 1045778. Not all services we offer are regulated by the FCA. The FCA does not regulate Business Buy to Let Mortgages and Commercial Mortgages to Limited Companies.
+          <p className='text-sm text-chalk 2xl:text-lg'>
+            Clark Finance Ltd is Authorised and Regulated by the Financial
+            Conduct Authority which is entered on the{' '}
+            <a
+              href='https://register.fca.org.uk/s/'
+              target='_blank'
+              rel='noopener noreferrer'
+            >
+              Financial Services Register
+            </a>{' '}
+            under reference 1045778. Not all services we offer are regulated by
+            the FCA. The FCA does not regulate Business Buy to Let Mortgages and
+            Commercial Mortgages to Limited Companies.
           </p>
           <p className='text-sm text-chalk 2xl:text-lg'>
-          The guidance and/or advice contained within this website is subject to the UK regulatory regime and is therefore primarily targeted at consumers based in the UK. There will be a fee for mortgage advice, the precise amount will depend upon your circumstances but we estimate that it will be £499.
+            The guidance and/or advice contained within this website is subject
+            to the UK regulatory regime and is therefore primarily targeted at
+            consumers based in the UK. There will be a fee for mortgage advice,
+            the precise amount will depend upon your circumstances but we
+            estimate that it will be £499.
           </p>
           <p className='text-sm font-bold text-chalk 2xl:text-lg'>
             Your property may be repossessed if you do not keep up repayments on

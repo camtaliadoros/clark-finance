@@ -5,7 +5,7 @@ export const convertWysywyg = (rawContent: string) => {
 
   const covertedLinks = rawContent.replace(
     'https://clarkfinance.wordifysites.com',
-    ''
+    '',
   );
 
   return covertedLinks;
@@ -18,7 +18,7 @@ export const fetchFeaturedImage = async (imageId: number) => {
       next: {
         revalidate: 86400,
       },
-    }
+    },
   );
   if (!res.ok) {
     throw new Error('Failed to fetch data');
@@ -40,8 +40,8 @@ export const fetchFeaturedImage = async (imageId: number) => {
   const base64 = btoa(
     new Uint8Array(arrayBuffer).reduce(
       (data, byte) => data + String.fromCharCode(byte),
-      ''
-    )
+      '',
+    ),
   );
 
   // If svg the mime type should be 'svg+xml', if png, 'image/png'
@@ -65,20 +65,7 @@ export const fetchFeaturedImage = async (imageId: number) => {
 };
 
 export const fetchMenuItems = async () => {
-  const encodedCredentials = btoa(`${process.env.WP_CREDENTIALS}`);
-
-  const res = await fetch(
-    `${process.env.WP_ROUTE}/pages?per_page=30&_fields=slug,id,acf.menu_location,acf.menu_position,acf.service_card.homepage_order,acf.page_title,parent`,
-    {
-      headers: {
-        Authorization: `Basic ${encodedCredentials}`,
-        'Content-Type': 'application/json',
-      },
-      next: {
-        revalidate: 86400,
-      },
-    }
-  );
+  const res = await fetch('/api/fetchPages');
   if (!res.ok) {
     throw new Error('Failed to fetch data');
   }
@@ -92,6 +79,6 @@ export const sanitiseURL = (url: string) => {
 export const replaceWpURL = (url: string) => {
   return url.replace(
     'https://clarkfinance.wordifysites.com',
-    `${process.env.NEXT_PUBLIC_HOST_URL}`
+    `${process.env.NEXT_PUBLIC_HOST_URL}`,
   );
 };
