@@ -92,7 +92,7 @@ ul {
 li {
   list-style: disc inside;
   margin-bottom: 0.5em;
-  font-size: 1;
+  font-size: 1rem;
 }
 
 a:hover {
