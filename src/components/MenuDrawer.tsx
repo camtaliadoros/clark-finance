@@ -28,32 +28,36 @@ export const MenuDrawer = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const data: MenuItem[] = await fetchMenuItems();
+      try {
+        const data: MenuItem[] = await fetchMenuItems();
 
-      const mainMenuPages = data.filter((page) =>
-        page.acf.menu_location.includes('Main Menu')
-      );
-
-      const menuPages = mainMenuPages.filter((page) => page.slug !== 'home');
-      const parentPages = menuPages.filter((page) => page.parent === 0);
-      const subPages = menuPages.filter((page) => page.parent !== 0);
-
-      const sortedParentPages = parentPages.toSorted((a, b) => {
-        return a.acf.menu_position - b.acf.menu_position;
-      });
-
-      const sortedSubPages = subPages.toSorted((a, b) => {
-        return (
-          a.acf.service_card.homepage_order - b.acf.service_card.homepage_order
+        const mainMenuPages = data.filter((page) =>
+          page.acf.menu_location.includes('Main Menu')
         );
-      });
 
-      const menuItems = {
-        mainPages: sortedParentPages,
-        servicePages: sortedSubPages,
-      };
+        const menuPages = mainMenuPages.filter((page) => page.slug !== 'home');
+        const parentPages = menuPages.filter((page) => page.parent === 0);
+        const subPages = menuPages.filter((page) => page.parent !== 0);
 
-      setMenuItems?.(menuItems);
+        const sortedParentPages = parentPages.toSorted((a, b) => {
+          return Number(a.acf.menu_position) - Number(b.acf.menu_position);
+        });
+
+        const sortedSubPages = subPages.toSorted((a, b) => {
+          return (
+            a.acf.service_card.homepage_order - b.acf.service_card.homepage_order
+          );
+        });
+
+        const menuItems = {
+          mainPages: sortedParentPages,
+          servicePages: sortedSubPages,
+        };
+
+        setMenuItems?.(menuItems);
+      } catch (error) {
+        console.error('Failed to fetch menu items:', error);
+      }
     };
 
     fetchData();
