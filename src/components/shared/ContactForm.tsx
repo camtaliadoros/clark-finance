@@ -77,6 +77,7 @@ export const ContactForm = ({ buttonColour }: ContactFormProps) => {
 
     if (!executeRecaptcha) {
       console.log('Recaptcha not available');
+      setLoading(false);
       return;
     }
 

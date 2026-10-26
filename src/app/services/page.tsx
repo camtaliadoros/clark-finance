@@ -3,8 +3,9 @@ export const dynamic = 'force-dynamic';
 import { ServiceCards } from '@/components/home/ServiceCards';
 import { SectionTitle } from '@/components/shared/SectionTitle';
 import { GraphItem, YoastHeadJson } from '@/util/models';
-import { replaceWpURL } from '@/util/utilFunctions';
+import { replaceWpURL, decodeEntities } from '@/util/utilFunctions';
 import { Metadata } from 'next';
+import { preload } from 'react-dom';
 
 type ServicesPageContent = {
   page_title: string;
@@ -35,9 +36,11 @@ export async function generateMetadata(): Promise<Metadata> {
   const metadata: YoastHeadJson = res.yoast_head_json;
 
   const title = metadata.title;
-  const description = metadata.schema['@graph'].find(
-    (item: GraphItem) => item['@type'] === 'WebSite'
-  )?.description;
+  const description = decodeEntities(
+    metadata.schema['@graph'].find(
+      (item: GraphItem) => item['@type'] === 'WebSite'
+    )?.description,
+  );
   const canonical = replaceWpURL(metadata.canonical);
   const robots = metadata.robots;
   const ogTitle = metadata.og_title;
@@ -99,6 +102,11 @@ export default async function Services() {
   const res = await fetchPageContent();
 
   const content: ServicesPageContent = res.acf;
+
+  preload('/images/home-banner-raw.webp', {
+    as: 'image',
+    fetchPriority: 'high',
+  });
 
   return (
     <>

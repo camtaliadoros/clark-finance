@@ -1,4 +1,5 @@
 import { ButtonContentFields } from '@/util/models';
+import { preload } from 'react-dom';
 import { Button } from '../shared/Button';
 
 type HeroBannerContent = {
@@ -14,6 +15,13 @@ export const HeroBanner = async ({
   cta1,
   cta2,
 }: HeroBannerContent) => {
+  // The hero is a CSS background, so preload it to make it discoverable
+  // from the HTML (it's the largest contentful paint element)
+  preload('/images/home-banner-raw.webp', {
+    as: 'image',
+    fetchPriority: 'high',
+  });
+
   return (
     <>
       <div className='w-full'>

@@ -7,7 +7,7 @@ import { Reviews } from '@/components/home/Reviews';
 import { ServiceCards } from '@/components/home/ServiceCards';
 import { WhyClarkFinance } from '@/components/home/WhyClarkFinance';
 import { ButtonContentFields, GraphItem, YoastHeadJson } from '@/util/models';
-import { replaceWpURL } from '@/util/utilFunctions';
+import { replaceWpURL, decodeEntities } from '@/util/utilFunctions';
 import { Metadata } from 'next/types';
 
 type HomeContent = {
@@ -43,9 +43,11 @@ export async function generateMetadata(): Promise<Metadata> {
   const metadata: YoastHeadJson = data.yoast_head_json;
 
   const title = metadata.title;
-  const description = metadata.schema['@graph'].find(
-    (item: GraphItem) => item['@type'] === 'WebSite'
-  )?.description;
+  const description = decodeEntities(
+    metadata.schema['@graph'].find(
+      (item: GraphItem) => item['@type'] === 'WebSite'
+    )?.description,
+  );
   const canonical = replaceWpURL(metadata.canonical);
   const robots = metadata.robots;
   const ogTitle = metadata.og_title;
