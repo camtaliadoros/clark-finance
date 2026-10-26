@@ -17,6 +17,8 @@ import {
   decodeEntities,
 } from '@/util/utilFunctions';
 import { Metadata } from 'next';
+import { notFound } from 'next/navigation';
+import { fetchCaseStudiesPageContent } from '../fetchCaseStudiesPageContent';
 
 type CaseStudyParams = {
   slug: string;
@@ -57,7 +59,11 @@ export async function generateMetadata({
 }: MetadataProps): Promise<Metadata> {
   const { slug } = await params;
 
+  await fetchCaseStudiesPageContent();
   const res = await fetchCaseStudyMetadata(slug);
+  if (!res[0]) {
+    notFound();
+  }
 
   const metadata: YoastHeadJson = res[0].yoast_head_json;
 
@@ -154,9 +160,13 @@ export default async function CaseStudyDetailPage({
   params: Promise<CaseStudyParams>;
 }) {
   const { slug } = await params;
+  await fetchCaseStudiesPageContent();
   const data = await fetchCaseStudy(slug);
+  if (!data[0]) {
+    notFound();
+  }
 
-  const content: CaseStudyContent = data[0]?.acf;
+  const content: CaseStudyContent = data[0].acf;
   const image = await fetchFeaturedImage(content.featured_image);
 
   const theRequirementContent = convertWysywyg(content.the_requirement);
