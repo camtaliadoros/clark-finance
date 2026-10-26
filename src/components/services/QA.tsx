@@ -12,12 +12,15 @@ type QAProps = {
 
 export const QA = ({ question, answer }: QAProps) => {
   const [isOpen, setIsOpen] = useState(false);
+  const [contentHeight, setContentHeight] = useState(0);
 
   const contentRef = useRef<ElementRef<'div'>>(null);
 
   const sanitisedContent = answer ? convertWysywyg(answer) : '';
 
   const handleClick = () => {
+    // Measure in the handler, as refs can't be read during render
+    setContentHeight(contentRef.current?.scrollHeight ?? 0);
     setIsOpen((prevState) => !prevState);
   };
 
@@ -43,7 +46,7 @@ export const QA = ({ question, answer }: QAProps) => {
         transition-all duration-300`}
         ref={contentRef}
         style={{
-          maxHeight: isOpen ? `${contentRef.current?.scrollHeight}px` : '0px',
+          maxHeight: isOpen ? `${contentHeight}px` : '0px',
           opacity: isOpen ? 1 : 0,
         }}
       >

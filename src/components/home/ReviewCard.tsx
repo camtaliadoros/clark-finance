@@ -6,7 +6,7 @@ type ReviewCardProps = {
   content: ReviewContent;
 };
 
-type ReviewContent = {
+export type ReviewContent = {
   author_name: string;
   profile_photo_url: string;
   rating: number;

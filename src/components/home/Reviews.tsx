@@ -1,6 +1,6 @@
 import { Section } from '../shared/Section';
 import { SectionTitle } from '../shared/SectionTitle';
-import { ReviewCard } from './ReviewCard';
+import { ReviewCard, type ReviewContent } from './ReviewCard';
 
 async function fetchReviews() {
   const res = await fetch(`${process.env.NEXT_PUBLIC_HOST_URL}/api/reviews`, {
@@ -14,29 +14,22 @@ async function fetchReviews() {
   return res.json();
 }
 
+// Pick up to `count` unique items at random (Fisher-Yates shuffle)
+function pickRandom<T>(items: T[], count: number): T[] {
+  const shuffled = [...items];
+  for (let i = shuffled.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+  }
+  return shuffled.slice(0, count);
+}
+
 export const Reviews = async () => {
   const reviewsData = await fetchReviews();
 
-  const reviews = reviewsData.result.reviews;
+  const reviews: ReviewContent[] = reviewsData.result.reviews;
 
-  const featuredReviews = [];
-
-  let indexes: number[] = [];
-
-  while (indexes.length < 3) {
-    // Choose an element index at random
-    const randomI = Math.floor(Math.random() * reviews.length);
-
-    // Check if index already been chosen
-    const iExists = indexes.find((i) => i === randomI);
-    if (!iExists) {
-      // Add index to indexes array
-      indexes.push(randomI);
-
-      // Add review to featured reviews array
-      featuredReviews.push(reviews[randomI]);
-    }
-  }
+  const featuredReviews = pickRandom(reviews, 3);
 
   return (
     <Section
