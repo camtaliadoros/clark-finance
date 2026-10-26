@@ -5,7 +5,7 @@ import { SectionTitle } from '@/components/shared/SectionTitle';
 import { GraphItem, YoastHeadJson } from '@/util/models';
 import { replaceWpURL, decodeEntities } from '@/util/utilFunctions';
 import { Metadata } from 'next';
-import { preload } from 'react-dom';
+import { Preload } from '@/components/shared/Preload';
 
 type ServicesPageContent = {
   page_title: string;
@@ -103,13 +103,13 @@ export default async function Services() {
 
   const content: ServicesPageContent = res.acf;
 
-  preload('/images/home-banner-raw.webp', {
-    as: 'image',
-    fetchPriority: 'high',
-  });
-
   return (
     <>
+      <Preload
+        href='/images/home-banner-raw.webp'
+        as='image'
+        fetchPriority='high'
+      />
       <div
         className='space-y-4 mb-0 pb-0 bg-hero-image bg-top bg-cover lg:bg-fixed flex flex-col items-center py-32'
         style={{ height: '24rem' }}

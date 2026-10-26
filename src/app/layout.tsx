@@ -7,8 +7,8 @@ import './globals.css';
 import { GoogleAnalytics } from '@next/third-parties/google';
 import { NavigationEvents } from '@/components/NavigationEvents';
 import React, { Suspense } from 'react';
-import { preload } from 'react-dom';
 import { MenuDrawer } from '../components/MenuDrawer';
+import { Preload } from '@/components/shared/Preload';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -25,17 +25,17 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  preload('/fonts/SourceSans3-VariableFont_wght.woff2', {
-    as: 'font',
-    type: 'font/woff2',
-    crossOrigin: 'anonymous',
-  });
-
   return (
     <html lang='en' className='overflow-x-hidden'>
       <body
         className={`${inter.className} flex flex-col w-screen h-dvh overflow-hidden`}
       >
+        <Preload
+          href='/fonts/SourceSans3-VariableFont_wght.woff2'
+          as='font'
+          type='font/woff2'
+          crossOrigin='anonymous'
+        />
         <MenuDrawerContextProvider>
           <Header />
           <MenuDrawer />

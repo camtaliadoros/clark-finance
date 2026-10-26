@@ -55,7 +55,7 @@ export const Footer = async () => {
             </p>
           </div>
           <div className='flex flex-col md:w-4/5 lg:w-1/2 space-y-3'>
-            <h5 className='text-chalk'>Contact Us</h5>
+            <p className='text-chalk font-bold'>Contact Us</p>
             <a
               href='tel:+442045182215'
               className='text-chalk text-sm w-fit 2xl:text-lg'
