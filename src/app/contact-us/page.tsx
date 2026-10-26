@@ -111,7 +111,7 @@ export default async function ContactUsPage() {
           {content.complaints_title}
         </h2>
         <div
-          className='text-chalk text-sm 2xl:text-xl'
+          className='text-chalk text-sm 2xl:text-xl [&>p]:text-chalk'
           dangerouslySetInnerHTML={{ __html: complaintsBody }}
         />
       </Section>
