@@ -7,29 +7,15 @@ import { SectionTitle } from '@/components/shared/SectionTitle';
 import { GraphItem, YoastHeadJson } from '@/util/models';
 import { replaceWpURL, decodeEntities } from '@/util/utilFunctions';
 import { Metadata } from 'next';
+import { fetchCaseStudiesPageContent } from './fetchCaseStudiesPageContent';
 
 type CaseStudiesPageContent = {
   page_title: string;
   subheading: string | undefined;
 };
 
-async function fetchPageContent() {
-  const res = await fetch(
-    `${process.env.NEXT_PUBLIC_HOST_URL}/case-studies/api/fetchPageContent`,
-    {
-      next: {
-        revalidate: 86400,
-      },
-    }
-  );
-  if (!res.ok) {
-    throw new Error('Failed to fetch data');
-  }
-  return res.json();
-}
-
 export async function generateMetadata(): Promise<Metadata> {
-  const res = await fetchPageContent();
+  const res = await fetchCaseStudiesPageContent();
 
   const metadata: YoastHeadJson = res.yoast_head_json;
 
@@ -106,7 +92,7 @@ export default async function CaseStudiesHome({
   const resolvedSearchParams = await searchParams;
   const currentPage = Number(resolvedSearchParams?.page) || 1;
 
-  const content = await fetchPageContent();
+  const content = await fetchCaseStudiesPageContent();
 
   const pageContent: CaseStudiesPageContent = content.acf;
 
