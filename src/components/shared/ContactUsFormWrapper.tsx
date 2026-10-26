@@ -1,32 +1,27 @@
 'use client';
-import { useState } from 'react';
-import { GoogleReCaptchaProvider } from 'react-google-recaptcha-v3';
+import { loadRecaptcha } from '@/util/recaptcha';
 
 export const ContactUsFormWrapper = ({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) => {
-  // Only load the reCAPTCHA script once the visitor interacts with the form,
-  // so it doesn't block the initial page load. The provider loads the script
-  // as soon as it receives a key.
-  const [isActive, setIsActive] = useState(false);
-  const activate = () => setIsActive(true);
+  // Start loading reCAPTCHA once the visitor interacts with the form, so it
+  // doesn't slow the initial page load but is ready by the time they submit
+  const preloadRecaptcha = () => {
+    loadRecaptcha().catch(() => {
+      // Retried on submit
+    });
+  };
 
   return (
     <div
       className='contents'
-      onFocusCapture={activate}
-      onPointerEnter={activate}
-      onTouchStart={activate}
+      onFocusCapture={preloadRecaptcha}
+      onPointerEnter={preloadRecaptcha}
+      onTouchStart={preloadRecaptcha}
     >
-      <GoogleReCaptchaProvider
-        reCaptchaKey={
-          isActive ? (process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY as string) : ''
-        }
-      >
-        {children}
-      </GoogleReCaptchaProvider>
+      {children}
     </div>
   );
 };

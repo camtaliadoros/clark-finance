@@ -1,7 +1,7 @@
 'use client';
 
+import { getRecaptchaToken } from '@/util/recaptcha';
 import { useState } from 'react';
-import { useGoogleReCaptcha } from 'react-google-recaptcha-v3';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import ClipLoader from 'react-spinners/ClipLoader';
 
@@ -35,8 +35,6 @@ export const ContactForm = ({ buttonColour }: ContactFormProps) => {
   const [error, setError] = useState('');
   const [successMessage, setSuccessMessage] = useState('');
   const [loading, setLoading] = useState(false);
-
-  const { executeRecaptcha } = useGoogleReCaptcha();
 
   const inputFields: InputField[] = [
     {
@@ -75,37 +73,37 @@ export const ContactForm = ({ buttonColour }: ContactFormProps) => {
 
     setLoading(true);
 
-    if (!executeRecaptcha) {
-      console.log('Recaptcha not available');
-      setLoading(false);
-      return;
-    }
+    // Any failure (reCAPTCHA, network, non-JSON response) shows the error
+    // message rather than leaving the spinner running
+    try {
+      const recapthaToken = await getRecaptchaToken('submit_form');
 
-    const recapthaToken = await executeRecaptcha('submit_form');
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_HOST_URL}/contact-us/api/create-lead`,
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ ...data, recapthaToken }),
+        }
+      );
 
-    const response = await fetch(
-      `${process.env.NEXT_PUBLIC_HOST_URL}/contact-us/api/create-lead`,
-      {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ ...data, recapthaToken }),
+      const resJson = await response.json();
+
+      if (!response.ok || resJson.error) {
+        throw new Error(resJson.error || `Request failed: ${response.status}`);
       }
-    );
 
-    // review
-    const resJson = await response.json();
-
-    if (resJson.error) {
-      setLoading(false);
-      setSuccessMessage('');
-      setError('Something went wrong, please try again!');
-    } else {
       setError('');
       setSuccessMessage(
         "Thank you for getting in touch, we'll be in touch shortly!"
       );
+    } catch (err) {
+      console.error('Contact form submission failed:', err);
+      setSuccessMessage('');
+      setError('Something went wrong, please try again!');
+    } finally {
       setLoading(false);
     }
   };
