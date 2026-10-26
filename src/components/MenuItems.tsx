@@ -1,11 +1,8 @@
 'use client';
 
 import { Page } from '@/util/models';
-import { faChevronDown } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { ElementRef, useRef, useState } from 'react';
 import { SubMenu } from './SubMenu';
 
 type MenuItemProps = {
@@ -18,15 +15,17 @@ export const MenuItem = ({ pageData }: MenuItemProps) => {
   if (pageData.slug === 'services') {
     return (
       <>
-        <button
+        <Link
+          href={`/${pageData.slug}`}
           className={`flex gap-2 items-center text-chalk text-2xl 2xl:text-3xl font-semibold no-underline hover:opacity-75 transition py-4 ${
             pathname === `/${pageData.slug}`
               ? 'text-yellow cursor-pointer pointer-events-none'
               : null
           }`}
+          prefetch={true}
         >
           {pageData.acf.page_title}
-        </button>
+        </Link>
 
         <div
           className={`bg-navy shrink-0 bg-opacity-50 w-full flex flex-col items-center justify-center  `}
