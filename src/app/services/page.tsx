@@ -3,8 +3,9 @@ export const dynamic = 'force-dynamic';
 import { ServiceCards } from '@/components/home/ServiceCards';
 import { SectionTitle } from '@/components/shared/SectionTitle';
 import { GraphItem, YoastHeadJson } from '@/util/models';
-import { replaceWpURL } from '@/util/utilFunctions';
+import { replaceWpURL, decodeEntities } from '@/util/utilFunctions';
 import { Metadata } from 'next';
+import { Preload } from '@/components/shared/Preload';
 
 type ServicesPageContent = {
   page_title: string;
@@ -35,9 +36,11 @@ export async function generateMetadata(): Promise<Metadata> {
   const metadata: YoastHeadJson = res.yoast_head_json;
 
   const title = metadata.title;
-  const description = metadata.schema['@graph'].find(
-    (item: GraphItem) => item['@type'] === 'WebSite'
-  )?.description;
+  const description = decodeEntities(
+    metadata.schema['@graph'].find(
+      (item: GraphItem) => item['@type'] === 'WebSite'
+    )?.description,
+  );
   const canonical = replaceWpURL(metadata.canonical);
   const robots = metadata.robots;
   const ogTitle = metadata.og_title;
@@ -102,6 +105,11 @@ export default async function Services() {
 
   return (
     <>
+      <Preload
+        href='/images/home-banner-raw.webp'
+        as='image'
+        fetchPriority='high'
+      />
       <div
         className='space-y-4 mb-0 pb-0 bg-hero-image bg-top bg-cover lg:bg-fixed flex flex-col items-center py-32'
         style={{ height: '24rem' }}

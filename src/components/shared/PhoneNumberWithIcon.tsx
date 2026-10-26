@@ -13,7 +13,11 @@ export const PhoneNumberWithIcon = ({
   hideOnMobile,
 }: PhoneNumberWithIconProps) => {
   return (
-    <a href='tel:+442045182215' className='flex items-center space-x-1 link '>
+    <a
+      href='tel:+442045182215'
+      className='flex items-center space-x-1 link '
+      aria-label='Call 02045 182 215'
+    >
       <FontAwesomeIcon
         icon={faPhone}
         size={'sm'}

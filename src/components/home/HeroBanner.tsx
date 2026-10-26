@@ -1,5 +1,6 @@
 import { ButtonContentFields } from '@/util/models';
 import { Button } from '../shared/Button';
+import { Preload } from '../shared/Preload';
 
 type HeroBannerContent = {
   title: string;
@@ -16,6 +17,13 @@ export const HeroBanner = async ({
 }: HeroBannerContent) => {
   return (
     <>
+      {/* The hero is a CSS background, so preload it to make it discoverable
+      from the HTML (it's the largest contentful paint element) */}
+      <Preload
+        href='/images/home-banner-raw.webp'
+        as='image'
+        fetchPriority='high'
+      />
       <div className='w-full'>
         <div
           className='bg-hero-image bg-bottom md:bg-center bg-cover lg:bg-fixed z-0  flex flex-col justify-center px-4 md:px-12 md:px-18 lg:px-24 2xl:px-60 space-y-1'

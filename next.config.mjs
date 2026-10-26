@@ -1,6 +1,9 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   serverExternalPackages: ['firebase-admin'],
+  // Render metadata in <head> for every visitor rather than streaming it into
+  // <body>, so crawlers and Lighthouse find the meta description
+  htmlLimitedBots: /.*/,
   images: {
     remotePatterns: [
       {

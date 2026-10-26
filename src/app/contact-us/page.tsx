@@ -3,7 +3,7 @@ export const dynamic = 'force-dynamic';
 import { ContactUs } from '@/components/home/ContactUs';
 import { Section } from '@/components/shared/Section';
 import { GraphItem, YoastHeadJson } from '@/util/models';
-import { convertWysywyg, replaceWpURL } from '@/util/utilFunctions';
+import { convertWysywyg, replaceWpURL, decodeEntities } from '@/util/utilFunctions';
 import { Metadata } from 'next';
 
 type ContactUsPageContent = {
@@ -34,9 +34,11 @@ export async function generateMetadata(): Promise<Metadata> {
   const metadata: YoastHeadJson = data.yoast_head_json;
 
   const title = metadata.title;
-  const description = metadata.schema['@graph'].find(
-    (item: GraphItem) => item['@type'] === 'WebSite'
-  )?.description;
+  const description = decodeEntities(
+    metadata.schema['@graph'].find(
+      (item: GraphItem) => item['@type'] === 'WebSite'
+    )?.description,
+  );
   const canonical = replaceWpURL(metadata.canonical);
   const robots = metadata.robots;
   const ogTitle = metadata.og_title;
@@ -111,7 +113,7 @@ export default async function ContactUsPage() {
           {content.complaints_title}
         </h2>
         <div
-          className='text-chalk text-sm 2xl:text-xl'
+          className='text-chalk text-sm 2xl:text-xl [&>p]:text-chalk'
           dangerouslySetInnerHTML={{ __html: complaintsBody }}
         />
       </Section>

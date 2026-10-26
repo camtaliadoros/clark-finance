@@ -82,3 +82,14 @@ export const replaceWpURL = (url: string) => {
     `${process.env.NEXT_PUBLIC_HOST_URL}`,
   );
 };
+
+// Yoast returns HTML-encoded strings, which Next.js would encode again in meta tags
+export const decodeEntities = (text?: string) => {
+  return text
+    ?.replace(/&#0?39;|&#8217;|&rsquo;/g, "'")
+    .replace(/&quot;|&#8220;|&#8221;/g, '"')
+    .replace(/&#8211;|&ndash;/g, '–')
+    .replace(/&lt;/g, '<')
+    .replace(/&gt;/g, '>')
+    .replace(/&amp;/g, '&');
+};

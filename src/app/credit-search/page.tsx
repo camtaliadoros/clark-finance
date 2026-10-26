@@ -4,7 +4,7 @@ import { Button } from '@/components/shared/Button';
 import { Section } from '@/components/shared/Section';
 import { SectionTitle } from '@/components/shared/SectionTitle';
 import { ButtonContentFields, GraphItem, YoastHeadJson } from '@/util/models';
-import { convertWysywyg, replaceWpURL } from '@/util/utilFunctions';
+import { convertWysywyg, replaceWpURL, decodeEntities } from '@/util/utilFunctions';
 import { Metadata } from 'next';
 
 type CreditSearchContent = {
@@ -35,9 +35,11 @@ export async function generateMetadata(): Promise<Metadata> {
   const metadata: YoastHeadJson = res.yoast_head_json;
 
   const title = metadata.title;
-  const description = metadata.schema['@graph'].find(
-    (item: GraphItem) => item['@type'] === 'WebSite'
-  )?.description;
+  const description = decodeEntities(
+    metadata.schema['@graph'].find(
+      (item: GraphItem) => item['@type'] === 'WebSite'
+    )?.description,
+  );
   const canonical = replaceWpURL(metadata.canonical);
   const robots = metadata.robots;
   const ogTitle = metadata.og_title;

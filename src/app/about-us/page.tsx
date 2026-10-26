@@ -9,6 +9,7 @@ import {
   convertWysywyg,
   fetchFeaturedImage,
   replaceWpURL,
+  decodeEntities,
 } from '@/util/utilFunctions';
 import { Metadata } from 'next';
 import Image from 'next/image';
@@ -64,9 +65,11 @@ export async function generateMetadata(): Promise<Metadata> {
   const metadata: YoastHeadJson = res.yoast_head_json;
 
   const title = metadata.title;
-  const description = metadata.schema['@graph'].find(
-    (item: GraphItem) => item['@type'] === 'WebSite'
-  )?.description;
+  const description = decodeEntities(
+    metadata.schema['@graph'].find(
+      (item: GraphItem) => item['@type'] === 'WebSite'
+    )?.description,
+  );
   const canonical = replaceWpURL(metadata.canonical);
   const robots = metadata.robots;
   const ogTitle = metadata.og_title;
